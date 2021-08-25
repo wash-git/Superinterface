@@ -1,0 +1,14 @@
+Superinterface é absolutamente surpreendente!
+Com a Superinterface, a cada momento você descobre uma novidade nova!
+Não deixe de trazer novos arquivos PDF para seu repositório!
+Instalar a Superinterface é super fácil! Esteja na pasta de instalação ("su_install").
+Verifique a pasta de logs da Superinterface....tudo ficará anotado lá!
+Super feliz por estar a Superinterface semdo trabalhada.  Já estava na hora!
+Verifique a pasta de quarentena do aplicativo: alguns arquivos PDF podem ter sido colocados lá para sua análise!
+No cron deve ser colocado a chamada ao vigilante para tratamento de novos arquivos PDF, de forma a estes arquivos poderem ser tratados e serem inseridos no acervo da Superinterface!
+Veja que legal: sempre testamos a integridade do arquivo PDF antes de incorporá-lo ao acervo!
+Os arquivos PDF são incorporados ao acervo da Superinterface em lotes.  Seja paciente, a cada ativação do script novo conjunto de arquivos são incorporados ao acervo!
+Os arquivos PDF podem ser incorporados ao acervo da Superintrface de duas maneiras: com os nomes originais ou renomeando-os e numerando-os. Conforme parametrização do sistema!
+A Superinterface faz geração de código PHP de forma automática. Verifique os códigos gerados na pasta "autophp".
+Faça como a Superinterface: use apenas Software Livre. O Software Livre é ético!!
+A Superinterface dispões de um painel de administração interativo.  Use o painel para subir arquivos PDF, administrar usuários, ter acesso a informações de status da aplicação e muito mais!

@@ -1,0 +1,84 @@
+/*
+ ##############........>>> FOLHA DE ESTILO DO CRIADOR DE INTERFACE Platuósh <<<........##############
+ */
+
+table.com_FK {
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+table, td, th {
+	border: 1px solid black;
+	border-collapse: collapse;
+	padding: 3px 10px 3px 10px;
+}
+
+.sem_FK {
+	background-color: silver;
+}
+
+.com_FK {
+	background-color: #FFA501;			/* laranjado; */
+}
+#mensagem {
+	border: 1px double white;
+	width: 100%;
+	height: 10%;
+	font-family: monospace;
+	font-size: xx-small;
+	padding: 5px;
+	background-color: #B1AC61;			/* blue; */
+	color: white;
+	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+	z-index: 1; /* Stay on top */
+	bottom: 0; /* Stay at the top */
+	left: 0;
+	overflow: auto;
+}
+#conteudo {
+	width: 92%;
+	height: 90%;
+	float: right;
+	padding: 5px;
+	overflow-y: scroll;
+	max-height: 85%;
+}
+
+
+#menu {
+	width: 7%;
+	height: 90%;
+	margin: 0;
+	padding: 0;
+	float: left;
+	background-color: #B1AC61;			/* #669999; */
+	color: #003300;
+	font-family: arial;
+	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+	z-index: 1; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: 0;
+	border-right: 1px solid gray;
+}
+.dir {
+	font-size: large;
+	padding: 3px;
+}
+p.titulo {
+	font-size: 140%;
+	padding: 1px;
+	font-weight: bold;
+	text-align: center;
+}
+p.subtitulo {
+	font-size: 100%;
+	padding: 1px;
+	font-weight: bold;
+	text-align: center;
+}
+
+caption{
+	font-weight: bold;
+	font-size: 120%;
+}
+/* ######################## */

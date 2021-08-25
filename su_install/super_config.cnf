@@ -1,0 +1,51 @@
+# --------------------------------------------------------------------------------------------------------------------------+
+#                                                                                                                           |
+#                                       SUPERINTERFACE: ARQUIVO DE CONFIGURAÇÃO                                             |
+#                                                                                                                           |
+# --------------------------------------------------------------------------------------------------------------------------+
+#	Parte 1: parametrizações
+CPBASE=""                              # base de dados da aplicação
+CPBASEUSER=""                          # usuário da base de dados
+CPBASEPASSW=""                         # password da base de dados
+CPUSARLEGADA=0                         # utilizar base dados legada (0 = não; 1 = sim)
+CPBASELEGADA=""                        # nome da base legada     (opcional, válido quando usar base legada = 1)
+CPBASELEGADAUSER=""                    # usuário da base legada  (opcional, válido quando usar base legada = 1)
+CPBASELEGADAPASSW=""                   # password da base legada (opcional, válido quando usar base legada = 1)
+CPNUMERARPDF=0                         # renomear arquivos PDF (0 = não; 1 = sim)
+CPMAX=100                              # tamanho máximo de nome arquivos PDF (válida quando renomear arquivos = sim)
+CPHTTPHOST="exemplo.com.br"            # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+                                       # exemplos:
+									   # observatorio.wash.net.br/superinterface
+									   # meudominio.com.br
+CPQPDFLOTE=3                           # quantidade máxima de arquivos PDF tratados a cada ativação do script do cron
+#
+#	Parte 2: variáveis do ambiente
+#	obs: tenha cuidado para alterar os parâmetros abaixo.  Só faça se estiver seguro
+CPUPLOADS="../su_pdfuploads"           # pasta com os novos arquivos de uploads PDF
+CPIMAGEM="../su_imagens"               # pasta do acervo dos arquivos que foram colocados na base mysql
+CPIMAGEMFONTE="../su_pdfiniciais"      # pasta com os arquivos iniciais PDF no momento da instalação do script
+CPTEMP="../su_work"                    # pasta de trabalho auxiliar para manipulação de arquivos PDF
+CPLOG_DIR="../su_logs"                 # pasta de logs
+CPQUARENTINE="../su_quarentine"        # pasta para guardar novos arquivos PDF repetidos (já estavam no acervo)
+CPAUTOPHP="../su_autophp"              # pasta para receber arquivos PHP a serem gerados automaticamente
+CPPADMIN="../su_admin"                 # pasta da administrativa da Superinterface
+CPINDICEPDF="super_indicepdf.txt"      # nome do arquivo para guardar último número de índice para nome arq. PDF 
+CPLOGSFILE="super_logshell.log"        # nome do arquivo de logs do script shell
+CPPHPFILE="super_config_php.cnf"       # nome do arquivo de configuração gerado para o PHP
+CPLOGSFILEGZ="super_logfile.tar"	   # nome base do arquivo compactado de logs
+CPNOMECIDADES="super_cidades_maiusculas.txt"    # nome do arquivo contendo o nomes das cidades (em letras maiúsculas)
+CPINSERECIDADES="super_cidades_insere.sql"      # nome do arquivo com comandos SQL de inserção de dados na tabela 'cidades'
+CPCRIATABELAS="super_cria_tabelas.sql" # nome do arquico com comandos SQL de criação de tabelas e inserts iniciais
+CPTABELASCRIADAS="super_tabelascriadas.html"	# nome do arquivo com a lista das tabelas criadas, e suas estruturas
+CPACENTO="acento"                      # extensão nome dos arquivos com conteúdo sem caracteres acentuados
+CPCONTRL="contrl"                      # extensão nome dos arquivos com conteúdo sem caracteres controles
+CPMAIUSCULA="maiuscula"                # extensão nome dos arquivos com conteúdo todo em caixa alta
+CPPERMSHELL="500"                      # permissão para os arquivos shell
+CPPERMPADRAO="750"                     # permissão padrão para pastas
+CPPERMFIXOS="440"                      # permissão para arquivos de cidades e criação de tabelas (imutáveis)
+CPPERMARQUI="640"                      # permissão padrão para arquivos
+CPPERMCONFIG="600"                     # permissão para arquivo de configuração desta aplicação
+CPCRON="cron"                          # flag para indicar ativação do script de tratamento de novos PDFs via cronjob
+CPROOT_UID=0                           # root ID
+CPNOMECOWSAY1="super_cowsay1.txt"      # nome do arquivo de mensagens cowsay utilizado no script instalação da Superinterface
+CPNOMENOVOS="super_novospdf.sh"        # nome do arquivo ativado pelo cron responsável por tratar os novos arquivos PDF

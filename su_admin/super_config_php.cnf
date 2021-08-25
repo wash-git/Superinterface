@@ -1,0 +1,21 @@
+<?php
+$banco_de_dados = "baseportlet";
+$username = "portlet";
+$pass = "Port2021#super";
+$httphost = "observatorio.wash.net.br/superinterface";
+$httpdominio = "";
+$banco = "baseportlet";
+$pastaimagens = "../su_imagens";
+$pastalogs = "../su_logs";
+$pastaquarentine = "../su_quarentine";
+$pastaadmin = "../su_admin";
+$arqlogs   = "super_logshell.log";
+$listatabelas = "super_tabelascriadas.html";
+$valorcookie = "a4047fb2aa29cb0c05056bd2d6b3c5aa6bf8be30";
+$sess_nome = "superinter2098";
+$pag_backoffice1 = 1;
+$pag_admin = 2;
+$pag_upload = 3;
+$pag_login = 4;
+?>
+

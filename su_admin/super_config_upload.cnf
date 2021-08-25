@@ -1,0 +1,10 @@
+<?php
+// *** Parâmetros de configuração para upload arquivos PDF ***
+$limitar_ext = "sim";  					// Limitar as extensões? (sim , nao)
+$extensoes_validas = array(".pdf");  	// array(".gif",".jpg",".jpeg",".bmp");
+$caminho_absoluto = "../su_pdfuploads"; // pasta onde os arquivos serão armazenados
+$limitar_tamanho = "sim"; 				// Limitar o tamanho do arquivo? (sim , nao)
+$tamanho_max = "2048000"; 	// 2MB 		// tamanho max do arquivo PDF (em bytes)
+$sobrescrever = "nao";		// sobrescrever se arquivo já existir? (sim ou nao)
+?>
+
