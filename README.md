@@ -1,0 +1,2 @@
+# Superinterface
+Automated CRUD generator
