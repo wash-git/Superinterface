@@ -1,0 +1,103 @@
+/*
+ ##############........>>> FOLHA DE ESTILO DAS PÁGINAS DE ADMINISTRAÇÃO DA SUPERINTERFACE <<<........##############
+ */
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	/* background-color: #FFA500; */
+	background-image: url("../su_icons/super_logowash.png"), url("../su_icons/super_papel.jpg");
+	background-repeat: no-repeat,no-repeat;
+	background-color: #fff;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td, th {
+	text-align: center;
+	padding: 10px 15px 10px 15px;
+	border: 1px solid black;
+}
+table {
+	align: center;
+}
+#table1 th {
+  background-color: #11BBB1;
+  color: white;
+}
+
+h2{
+	text-align: center;
+	color: #FFA500;  /* #017572; */
+}
+
+div.center	 {
+	text-align: center;
+}
+#table1 tr:nth-child(even) {background-color: #FFA500;}
+#table1 tr:hover {background-color:#DECECE;}
+
+hr.new1 {
+	border-top: 1px dotted red;
+	width: 70%;
+}
+img.middle {
+   vertical-align:middle;
+   padding: 10px;
+}
+
+div.resposta {
+	text-align: center;
+	font-size: 100%;
+}
+
+/* ------------------- */
+
+.container {
+  padding: 16px;
+}
+
+.form-signin {
+	max-width: 330px;
+	padding: 10px;
+	margin: 0 auto;
+	color: #017572;
+}
+
+.form-signin .form-signin-heading,
+.form-signin {
+	margin-bottom: 5px;
+	text-align: center;
+}
+
+.form-signin .form-control {
+	text-align: center;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+	width: 330px;
+}
+.form-signin fieldset {
+		background-color: #fff;
+		/* border-color:#017572; */
+		box-sizing: border-box;
+}
+
+.botaoEnviar{
+	width: 330px;
+	text-align: center;
+	padding: 10px 20px;
+	border: 1px solid #eee;
+	border-radius: 6px;
+	background-color: #FCC302;
+	font-size: 16px;
+}
+
+
+*/
+/* ######################## */
+
