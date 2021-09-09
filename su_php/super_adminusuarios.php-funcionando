@@ -1,0 +1,39 @@
+<?php
+include "../su_install/super_config_php.cnf";
+$identscript=$pag_admin;      // identificação do script de administração da Superinterface
+include "../su_install/super_valida_cookies.inc";
+?>
+<html>
+<head>
+<title>Administração de usuários</title>
+<link rel='stylesheet' href='../su_css/super_admin.css' type='text/css'>
+<meta charset='UTF-8'>
+</head>
+<body>
+<h2>Administração da Superinterface</h2>
+<table id="usuarios" class="center">
+<tr><th>Nome</th><th>Login</th><th>E-mail</th><th>Cidade</th><th>Estado</th><th>Privilégio</th><th>Ativo</th></tr>
+<?php
+$link = mysqli_connect("localhost",$username,$pass, $banco);
+// Check connection
+if (mysqli_connect_errno()) {
+  echo "Falha para conectar ao MySQL: " . mysqli_connect_error();
+  exit();
+}
+$result=mysqli_query($link, "SELECT * from su_usuarios ORDER BY nome ASC");
+if (mysqli_num_rows($result) > 0) {
+  // output data of each row
+  while($row = mysqli_fetch_assoc($result)) {
+	echo "<tr><td>". $row["nome"]. "</td><td>" .$row["username"]. "</td><td> " .$row["email"]."</td><td> " .$row["cidade"]. "</td><td>" .$row["estado"]. "</td><td>" .$row["privilegio"]. "</td><td>" .$row["ativo"].    "</td></tr>";
+  }
+  echo "<tr><td colspan=\"7\"><a href=\"super_adminusuarios_cria.php\" target=\"_self\">Criar Usuário</a></td></tr>";
+} else {
+  echo "0 resultados";
+}
+mysqli_close($link);
+?>
+</table>
+<div class="center"><a href="./super_admin.php">Voltar menu de Administração</a><br />
+<a href="../index.php">Giramundonics</a></div>
+</body></html>
+
