@@ -27,7 +27,7 @@ CPPINSTALL="su_install"					# nome da pasta de instalação
 MErr01="Não é permitido executar este script como usuário root"
 MErr02="Não foi possível substituir caracteres de controle dos nomes dos arquivos. Verifique se comando 'detox' está instalado"
 MErr03="Erro! Arquivo com nome das cidades não foi encontrado"
-MErr04="Erro! Arquivo com comandos SQL para popular tabela de 'cidades' não foi encontrado"
+MErr04="Erro! Arquivo com comandos SQL para popular tabela de 'su_cidades' não foi encontrado"
 MErr05="Erro! Não foi possível preparar pasta temporária de imagens de arquivos PDF: pasta temporária não pode ser limpa"
 MErr06="Erro! Não foi possível preparar pasta temporária de imagens de arquivos PDF: pasta temporária não pode ser criada"
 MErr07="Erro! Não foi possível se conectar com o banco de dados"
@@ -38,16 +38,16 @@ MErr11="Erro! Pasta de imagens de arquivos PDF não encontrada"
 MErr12="Não foi possível deixar os nomes dos arquivos em minúsculo"
 MErr13="Erro! Problemas na geração dos arquivos TXT"
 MErr14="Erro! Não foi possível gerar arquivo com as ocorrências dos nomes das cidades presentes nos arquivos TXT. Arquivos PDF deixados na pasta de quarentena"
-MErr15="Erro! Não foi possível gerar arquivo de instruções SQL para popular tabela documentos_cidades. Arquivos PDF deixados na pasta de quarentena"
+MErr15="Erro! Não foi possível gerar arquivo de instruções SQL para popular tabela su_docs_cidades. Arquivos PDF deixados na pasta de quarentena"
 MErr16="Erro! Problemas na geração dos arquivos JPG"
-MErr17="Erro! Não foi possível inserir informações nas tabelas: documentos, documentos_signatarios, documentos_instituicoes. Arquivos PDF deixados na pasta de quarentena"
+MErr17="Erro! Não foi possível inserir informações nas tabelas: su_documents, su_docs_signatarios, su_docs_instituicoes. Arquivos PDF deixados na pasta de quarentena"
 MErr18="Erro! Não foi possível criar pasta de quarentena para arquivos PDF"
 MErr19="Erro! Pasta de logs não existia e também não foi possível criá-la"
 MErr20="Erro! Arquivo de configuração desta aplicação não foi encontrado"
 MErr21="Erro! Problemas na cópia de arquivos PDF da pasta de upload para a pasta emporária de tratamento destes arquivos"
 MErr22="Erro! Problemas na criação do script de comandos SQL para inserção de informações na base de dados. Arquivos PDF deixados na pasta de quarentena"
 MErr23="Erro! Arquivo de logs não existe e não foi possível recriá-lo"
-MErr24="Erro! Não foi possível inserir informações na tabela documentos_cidades"
+MErr24="Erro! Não foi possível inserir informações na tabela su_docs_cidades"
 MErr25="Erro! É necessário instalar o aplicativo 'detox' (apt-get install detox)"
 MErr26="Erro! Não foi possível compactar arquivo de logs"
 Merr27="Erro! Script periódico de incorporação de arquivos PDF ao acervo da Superinterface só pode ser chamado a partir da pasta 'su_install'"
@@ -59,7 +59,7 @@ MInfo01="Bem vindo ao script de tratamento de novos arquivos PDF em: "
 MInfo02="Quantidade de arquivos na pasta de quarentena= "
 MInfo03="Sucesso. Criada pasta temporária para tratamento de arquivos PDF" 
 MInfo04="Sucesso. Geração de arquivo com instruções SQL realizada corretamente"
-MInfo05="Sucesso. Informações inseridas corretamente na tabela documentos_cidades"
+MInfo05="Sucesso. Informações inseridas corretamente na tabela su_docs_cidades"
 MInfo06="Aviso: pasta de logs não estava criada.  Criação foi realizada com sucesso"
 MInfo07="Sucesso. Conexão com o banco de dados foi realizada corretamente"
 MInfo08="Sucesso. Copiado os arquivos PDF para pasta temporária de tratamento de arquivos"
@@ -71,7 +71,7 @@ MInfo13="Gerando arquivos TXT.  Pode demorar um pouco dependendo da quantidade d
 MInfo14="Sucesso. Geração de arquivos TXT foi realizada corretamente"
 MInfo15="Gerando arquivo com ocorrências de nomes de cidades presentes nos arquivos TXT. Pode demorar um pouco. Espere...."
 MInfo16="Sucesso. Geração de arquivo de ocorrências de cidades foi realizada corretamente"
-MInfo17="Sucesso. Geração de arquivo com instruções SQL para popular tabela documentos_cidades foi realizada corretamente"
+MInfo17="Sucesso. Geração de arquivo com instruções SQL para popular tabela su_docs_cidades foi realizada corretamente"
 MInfo18="Gerando arquivos JPG.  Pode demorar um pouco dependendo da quantidade de arquivos PDF existentes. Espere...."
 MInfo19="Sucesso. Geração de arquivos JPG foi realizada corretamente"
 MInfo20="Quantidade de arquivos PDF a serem tratados= "
@@ -79,12 +79,12 @@ MInfo21="Quantidade de arquivos TXT gerados= "
 MInfo22="Quantidade de arquivos JPG gerados= "
 MInfo23="Quantidade de arquivos com conteúdos sem caracteres controle e em caixa alta= "
 MInfo24="Quantidade de entradas (linhas) no arquivo de ocorrências de cidades= "
-MInfo25="Sucesso. Informações inseridas corretamente nas tabelas do banco de dados: documentos, documentos_signatarios e documentos_instituicoes"
-MInfo26="Quantidade de registros na tabela 'documentos'= "
-MInfo27="Quantidade de registros na tabela 'documentos signatários'= "
-MInfo28="Quantidade de registros na tabela 'documentos instituições'= "
-MInfo29="Quantidade de registros na tabela 'cidades'= "
-MInfo30="Quantidade de registros na tabela 'documentos_cidades'= "
+MInfo25="Sucesso. Informações inseridas corretamente nas tabelas do banco de dados: su_documents, su_docs_signatarios e su_docs_instituicoes"
+MInfo26="Quantidade de registros na tabela 'su_documents'= "
+MInfo27="Quantidade de registros na tabela 'su_docs signatários'= "
+MInfo28="Quantidade de registros na tabela 'su_docs instituições'= "
+MInfo29="Quantidade de registros na tabela 'su_cidades'= "
+MInfo30="Quantidade de registros na tabela 'su_docs_cidades'= "
 MInfo31="Quantidade de tabelas existentes na base= "
 MInfo32="Sucesso. Fim do tratamento dos novos arquivos PDFs!"
 MInfo33="Arquivo já existia na pasta de quarentena. Suspendendo o tratamento deste arquivo:  "
@@ -266,7 +266,7 @@ function fInit () {
         exit
 	fi
     chmod $CPPERMFIXOS $CPPADMIN/$CPNOMECIDADES
-    #										verificar existência de arquivo com comandos SQL para inserção dados na tabela 'cidades'
+    #										verificar existência de arquivo com comandos SQL para inserção dados na tabela 'su_cidades'
     if [ ! -f $CPINSERECIDADES ]; then
 		fMens "$FInsuc" "$MErr04"
 		exit
@@ -495,8 +495,8 @@ function fParq () {
 		fMens "$FInsuc" "$MErr14"
 		exit
 	fi
-	#												gerar arquivo de instruções SQL para popular tabela documentos_cidades
-	cat $CPPADMIN/super_temp_tabela_ocorrencias_novospdf.txt | sed 's/txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA'/pdf/g' | awk 'BEGIN{FS=","}{gsub(/^ /,"",$1);print "insert into documentos_cidades (id_cidade, id_documento, ocorrencia) values ((select id_chave_cidade from cidades where cidade_sem_acentuacao=\""$1"\" limit 1),(select id_chave_documento from documentos where photo_filename_documento like \""$2"\" limit 1),"$3");"}' > $CPPADMIN/super_temp_executa_sql_das_ocorrencias_novospdf.sql
+	#												gerar arquivo de instruções SQL para popular tabela su_docs_cidades
+	cat $CPPADMIN/super_temp_tabela_ocorrencias_novospdf.txt | sed 's/txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA'/pdf/g' | awk 'BEGIN{FS=","}{gsub(/^ /,"",$1);print "insert into su_docs_cidades (id_cidade, id_documento, ocorrencia) values ((select id_chave_cidade from su_cidades where cidade_sem_acentuacao=\""$1"\" limit 1),(select id_chave_documento from su_documents where photo_filename_documento like \""$2"\" limit 1),"$3");"}' > $CPPADMIN/super_temp_executa_sql_das_ocorrencias_novospdf.sql
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr15"
 		mv -f $CPTEMP/*.pdf $CPQUARENTINE/.			# deixar os arquivos PDF na quarentena para posterior análise
@@ -537,7 +537,7 @@ function fParq () {
 #
 function fInse () {
 	#												inserir dados nas tabelas:
-	find $CPTEMP/*.pdf | grep -i pdf | sed $'s/\//\t\t /g' | awk '{guarda=$NF; printf "insert into documentos (photo_filename_documento, alt_foto_jpg, nome_documento) values (\"../su_imagens/"$NF"\",";gsub(/\.pdf/,"", $NF); printf "\"../su_imagens/"$NF"_pagina1.jpg\",\"" ; gsub(/-/," ",$NF); gsub(/_/," ",$NF); print $NF"\");"; out=""; print "insert into documentos_signatarios (id_signatario, id_documento) values ((select id_chave_registrado from registrados where nome_registrado like \"signatário indefinido\"),(select id_chave_documento from documentos where photo_filename_documento=\"../su_imagens/"guarda"\"));"; print "insert into documentos_instituicoes (id_instituicao, id_documento) values ((select id_chave_instituicao from instituicoes where nome_instituicao like \"Instituição Indefinida\"),(select id_chave_documento from documentos where photo_filename_documento=\"../su_imagens/"guarda"\"));"}' > $CPPADMIN/temp_super_documentos_novospdf.sql 	
+	find $CPTEMP/*.pdf | grep -i pdf | sed $'s/\//\t\t /g' | awk '{guarda=$NF; printf "insert into su_documents (photo_filename_documento, alt_foto_jpg, nome_documento) values (\"../su_imagens/"$NF"\",";gsub(/\.pdf/,"", $NF); printf "\"../su_imagens/"$NF"_pagina1.jpg\",\"" ; gsub(/-/," ",$NF); gsub(/_/," ",$NF); print $NF"\");"; out=""; print "insert into su_docs_signatarios (id_signatario, id_documento) values ((select id_chave_registrado from su_registrados where nome_registrado like \"signatário indefinido\"),(select id_chave_documento from su_documents where photo_filename_documento=\"../su_imagens/"guarda"\"));"; print "insert into su_docs_instituicoes (id_instituicao, id_documento) values ((select id_chave_instituicao from su_instituicoes where nome_instituicao like \"Instituição Indefinida\"),(select id_chave_documento from su_documents where photo_filename_documento=\"../su_imagens/"guarda"\"));"}' > $CPPADMIN/temp_super_documentos_novospdf.sql 	
 	if [ $? -eq 0 ]; then
 			fMens "$FSucss" "$MInfo04"
 	else
@@ -558,7 +558,7 @@ function fInse () {
 		exit
 	fi
 	#												inserir dados das ocorrências de nomes de cidades presentes nos arquivos
-	#												TXT na tabela documentos_cidades
+	#												TXT na tabela su_docs_cidades
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE 2>/dev/null < $CPPADMIN/super_temp_executa_sql_das_ocorrencias_novospdf.sql
    	if [ $? -eq 0 ]; then
    		fMens "$FSucss" "$MInfo05"
@@ -572,25 +572,15 @@ function fInse () {
 	fMens "$FInfo2" "$MInfo31"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
 	fMens "$FInfo2" "$MInfo26"
-	#su_info=$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos")
-	#echo $su_info
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos")"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_documents")"
 	fMens "$FInfo2" "$MInfo27"
-	#su_info=$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_signatarios")
-	#echo $su_info
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_signatarios") "
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_signatarios") "
 	fMens "$FInfo2" "$MInfo28"
-	#su_info=$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_instituicoes")
-	#echo $su_info
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_instituicoes")"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_instituicoes")"
 	fMens "$FInfo2" "$MInfo29"
-	#su_info=$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM cidades")
-	#echo $su_info
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM cidades") "
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_cidades") "
 	fMens "$FInfo2" "$MInfo30"
-	#su_info=$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_cidades")
-	#echo $su_info
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_cidades") "
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
 	fMens "$FInfo2" "$MInfo02"
 	fMens "$FInfo1" "$(ls -la $CPQUARENTINE/ | grep -e "^-" | wc -l)"
 	fMens "$FInfo2" "$MInfo45"

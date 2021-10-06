@@ -16,7 +16,7 @@ $database=$banco;
 $conn= new mysqli("localhost", $username, $pass, $database);
 
 
-$sql="select d.id_chave_documento as id, d.sigla as dsigla, d.data_doc as ddata, d.descricao as ddescricao, d.relevancia as drelevancia, d.photo_filename_documento as dpath, d.alt_foto_jpg as jpg, c.nome_cidade as ncidade, d.nome_documento as dnome, dc.ocorrencia as dcorrencia from cidades as c, documentos as d, documentos_cidades as dc where dc.id_documento=d.id_chave_documento and c.id_chave_cidade=dc.id_cidade and c.cidade_sem_acentuacao like '".$cidade_entrada."%' order by c.nome_cidade asc, dc.ocorrencia desc;";
+$sql="select d.id_chave_documento as id, d.sigla as dsigla, d.data_doc as ddata, d.descricao as ddescricao, d.relevancia as drelevancia, d.photo_filename_documento as dpath, d.alt_foto_jpg as jpg, c.nome_cidade as ncidade, d.nome_documento as dnome, dc.ocorrencia as dcorrencia from su_cidades as c, su_documents as d, su_docs_cidades as dc where dc.id_documento=d.id_chave_documento and c.id_chave_cidade=dc.id_cidade and c.cidade_sem_acentuacao like '".$cidade_entrada."%' group by id_chave_documento order by c.nome_cidade asc, dc.ocorrencia desc;";
 
 $result=$conn->query("$sql");
 
@@ -43,7 +43,7 @@ if ($result->num_rows>0)
 				$larg_botao="5%";
 				$jpg=$row["jpg"];
 				$signatario="";
-				$sql2="select r.nome_registrado as signatario from registrados as r, documentos as d,  documentos_signatarios as ds where d.id_chave_documento=ds.id_documento and r.id_chave_registrado=ds.id_signatario and id_documento='".$id."';";
+				$sql2="select r.nome_registrado as signatario from su_registrados as r, su_documents as d,  su_docs_signatarios as ds where d.id_chave_documento=ds.id_documento and r.id_chave_registrado=ds.id_signatario and id_documento='".$id."';";
 				$conta_2=0;
 				$result2=$conn->query("$sql2");
 				if ($result2->num_rows>0){
@@ -56,7 +56,7 @@ if ($result->num_rows>0)
 				} else {$signatario="sem dado";}
 
 				$instituicao="";
-				$sql2="select i.nome_instituicao as instituicao from instituicoes as i, documentos as d,  documentos_instituicoes as di where d.id_chave_documento=di.id_documento and i.id_chave_instituicao=di.id_instituicao and id_documento='".$id."';";
+				$sql2="select i.nome_instituicao as instituicao from su_instituicoes as i, su_documents as d,  su_docs_instituicoes as di where d.id_chave_documento=di.id_documento and i.id_chave_instituicao=di.id_instituicao and id_documento='".$id."';";
 				$conta_2=0;
 				$result2=$conn->query("$sql2");
 				if ($result2->num_rows>0){

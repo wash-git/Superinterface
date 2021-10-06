@@ -92,6 +92,8 @@ h2 {
 	border-right: 1px solid gray;
 	overflow-y: scroll;
 }
+ul.list-circle {list-style-type: circle;}
+
 p {
 	font-size: 1.3rem;
 	text-indent: 50px;

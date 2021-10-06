@@ -13,10 +13,10 @@ CPPINSTALL="su_install"		# nome da pasta de instalação
 #			                  						  MENSAGENS DO SCRIPT													|
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
-MErr01="Erro! Não foi possível preparar pasta de imagens de arquivos PDF"
+MErr01="Erro! Não foi possível preparar pasta para servir de acervo dos arquivos PDF"
 MErr02="Interrompendo a execução do script"
 MErr03="Erro! Não foi possível criar pasta de imagens de arquivos PDF"
-#MErr04=""
+#MErr04="Erro! Não foi possível criar os usuários administrativos da Superinterface"
 MErr05="Erro! Não é permitido executar este script como usuário root"
 MErr06="Erro! Não foi possível gerar arquivo auxiliar de nomes de cidades do Brasil"
 MErr07="Erro! Não foi possível criar arquivo para guardar índice de numeração dos nomes dos arquivos PDF"
@@ -26,18 +26,18 @@ MErr10="Erro! Houve problemas no script de geração automática de código PHP"
 MErr11="Erro! Não foi possível criar usuário/senha do administrador" 
 MErr12="Erro! Não foi possível limpar as tabelas do banco de dados"
 MErr13="Erro! Não foi possível criar tabelas no banco de dados"
-MErr14="Erro! Não foi possível inserir informações na tabela 'cidades'"
+MErr14="Erro! Não foi possível inserir informações na tabela 'su_cidades'"
 MErr15="Erro! Não foi possível apagar alguns arquivos antigos"
 MErr16="Erro! Não foi possível se conectar com a base de dados legada"
-MErr17="Erro! Não foi possível inserir conjunto inicial de nomes das instituições na base de dados"
+MErr17="Erro! Não foi possível criar as tabelas da aplicação e inserir seus dados"
 #MErr18=""
 MErr19="Erro! Não foi possível preparar pasta de temporários: a pasta não pode ser criada"
 MErr20="Erro! Pasta Administrativa não foi encontrada"
 MErr21="Erro! Não foi possível inserir conjunto inicial de nomes próprios de brasileiros na base de dados"
 MErr22="Erro! Não foi possível inserir conjunto inicial de nomes de cidades do Brasil na base de dados"
 MErr23="Erro! Não foi encontrado o arquivo de configuração"
-MErr24="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela de 'cidades'"
-MErr25="Erro! Não foi encontrado o arquivo com comandos SQL para criação das tabelas"
+MErr24="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela de 'su_cidades'"
+MErr25="Erro! Não foi encontrado o arquivo com comandos SQL para criação das tabelas da Superinterface"
 MErr26="Erro! Não foi possível preparar as pastas necessárias à aplicação Superinterface"
 MErr27="Erro! Não foi possível preparar pasta de logs: a pasta não pode ser criada"
 #MErr28=""
@@ -48,39 +48,39 @@ MErr32="Erro! É necessário ter instalado o aplicativo 'detox' (apt-get install
 MErr33="Erro! Não foi possível gerar o arquivo de configuração para as rotinas PHP"
 #MErr34=""
 MErr35="Erro! Não foi possível criar pasta para arquivos PHP que viriam a ser automaticamente gerados"
-MErr36="Erro! Para instalar a Superinterface, primeiro vá para a pasta 'su_install'"
+MErr36="Erro! Para instalar a Superinterface é obrigatório estar na pasta 'su_install'"
 #
 MInfo01="Preparando as pastas"
-MInfo02="Sucesso! Criada pasta de imagens dos arquivos PDF"
+MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
 MInfo03="Sucesso! Pasta administrativa preparada"
 MInfo04="Geração automática de código PHP:"
 MInfo05="Verifique os códigos PHP gerados automaticamente na pasta: "
 MInfo06="Sucesso! Criada pasta de uploads para novos arquivos PDF"
-MInfo07="Qual o nome do usuário do banco de dados legado? "
+#MInfo07=""
 MInfo08="Iniciando a instalação"
 MInfo09="Sucesso! Conexão com o banco de dados foi realizada corretamente"
 MInfo10="Verifique o log da instalação da Superinterface através do arquivo: "
-MInfo11="Verifique a estrutura das tabelas existentes através da URL: "
+MInfo11="Verifique as estruturas das tabelas criadas através da opção 'Tabelas' da interface administrativa"
 MInfo12="Sucesso! Criado usuário/senha da interface de administração da Superinterface"
 #MInfo13=""
-#MInfo14=""
-#MInfo15=""
+MInfo14="Sucesso! Tabelas adicionais da aplicação do usuário foram criadas, e informações fornecidas foram inseridas"
+MInfo15="Atenção: não foi encontrado arquivo para criação tabelas da aplicação do usuário. Continuando a instalar a Superinterface"
 MInfo16="Sucesso! Possíveis tabelas remanescentes no banco de dados foram eliminadas"
 MInfo17="Sucesso! Tabelas do banco de dados (re)criadas, e informações inseridas corretamente"
 MInfo18="Quantidade de tabelas geradas= "
-MInfo19="Sucesso! Informações inseridas corretamente na tabela 'cidades'"
-MInfo20="Quantidade de registros na tabela 'cidades'= "
+MInfo19="Sucesso! Informações inseridas corretamente na tabela 'su_cidades'"
+MInfo20="Quantidade de registros na tabela 'su_cidades'= "
 #MInfo21=""
-MInfo22="Quantidade de registros na tabela 'documentos'= "
-MInfo23="Qual a senha do banco de dados legado? "
-MInfo24="Quantidade de registros na tabela 'documentos signatários'= "
-MInfo25="Quantidade de registros na tabela 'documentos instituições'= "
+MInfo22="Quantidade de registros na tabela 'su_documents'= "
+#MInfo23=""
+MInfo24="Quantidade de registros na tabela 'su_docs_signatários'= "
+MInfo25="Quantidade de registros na tabela 'su_docs_instituicoes'= "
 MInfo26="super_install.sh"
-MInfo27="Sucesso! Conexão com o banco de dados legado foi realizada corretamente"
+#MInfo27=""
 MInfo28="Sucesso! Conjunto inicial de nomes de instituições, nomes de pessoas e de cidades inseridas na base de dados"
-MInfo29="Quantidade de registros na tabela 'instituicoes'= "
-MInfo30="Quantidade de registros na tabela 'nomes_de_cidades'= "
-MInfo31="Quantidade de registros na tabela 'names_do_brasil'= "
+MInfo29="Quantidade de registros na tabela 'su_instituicoes'= "
+MInfo30="Quantidade de registros na tabela 'su_nomes_cidades'= "
+MInfo31="Quantidade de registros na tabela 'su_names_brasil'= "
 MInfo32="Sucesso! Criada pasta de quarentena"
 MInfo33="Sucesso! Criada pasta de arquivos temporários"
 #MInfo34=""
@@ -89,7 +89,7 @@ MInfo33="Sucesso! Criada pasta de arquivos temporários"
 #MInfo37=""
 #MInfo38=""
 #MInfo39=""
-MInfo40="Quantidade de registros na tabela 'documentos_cidades'= "
+MInfo40="Quantidade de registros na tabela 'su_docs_cidades'= "
 MInfo41="Bem vind@ ao script de instalação da Superinterface em:   "
 #MInfo42=""
 MInfo43="Parabéns!!!   A instalação da Superinterface foi um sucesso!"
@@ -100,7 +100,7 @@ MInfo47="Alerta: notamos a falta do aplicativo cowsay. Ele não é obrigatório.
 MInfo48="Alerta: notamos a falta do aplicativo figlet. Ele não é obrigatório. Dica: assim que possível, instalar o figlet  (apt-get install figlet)"
 #MInfo49=""
 MInfo50="Nenhum arquivo PDF será tratado nesta instalação. A incorporação dos arquivos PDF ao acervo da Superinterface estará a cargo do script ativado via cron"
-MInfo51="Sucesso! Criada pasta para os arquivos PHP a serem gerados automaticamente"
+MInfo51="Sucesso! Criada pasta para guardar os arquivos PHP gerados automaticamente nesta instalação"
 #
 FInfor=0	# saída normal: new line ao final, sem tratamento de cor
 FInfo1=1	# saída normal: new line ao final, sem tratamento de cor e sem ..... (sem pontinhos ilustrativos)
@@ -266,9 +266,11 @@ function fInit () {
 		fMens "$FInsuc" "$MErr25"
 		exit
 	fi
-	chmod $CPPERMFIXOS	$CPCRIATABELAS		# definir permissão para o arquivo SQL
+	#										definir permissão para os arquivos SQL
+	# chmod $CPPERMFIXOS	$CPCRIAUSERS		
+	chmod $CPPERMFIXOS	$CPCRIATABELAS		
 	#										verificar existência de arquivo com comandos SQL para inserção de dados 
-	#										na tabela 'cidades'
+	#										na tabela 'su_cidades'
 	if [ ! -f $CPINSERECIDADES ]; then
 		fMens "$FInsuc" "$MErr24"
 		exit
@@ -383,6 +385,14 @@ function fTabelas () {
 	fMens "$FSucss" "$MInfo16"
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SET FOREIGN_KEY_CHECKS = 1"
 	#				criar as tabelas da base de dados
+	#mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPCRIAUSERS"
+	#if [ $? -eq 0 ]; then
+	#	fMens "$FSucss" "$MInfo13"
+	#else
+	#	fMens "$FInsuc" "$MErr04"
+ 	#	exit
+	#fi
+	#				criar tabelas da Superinterface e inserir dados
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPCRIATABELAS"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo17"
@@ -390,8 +400,20 @@ function fTabelas () {
 		fMens "$FInsuc" "$MErr13"
  		exit
 	fi
-	#
-	#				inserir dados na tabela 'cidades'
+	#				verificar se existe arquivo SQL da aplicação
+	if [ -f $CPTABAPLICACAO ]; then
+		#			criar tabelas da aplicação e inserir seus dados
+		mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPTABAPLICACAO"
+		if [ $? -eq 0 ]; then
+			fMens "$FSucss" "$MInfo14"
+		else
+			fMens "$FInsuc" "$MErr17"
+ 			exit
+		fi
+	else
+		fMens "$FInfor" "$MInfo15"
+	fi
+	#				inserir dados na tabela 'su_cidades'
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSERECIDADES"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo19"
@@ -403,49 +425,28 @@ function fTabelas () {
 	fMens "$FInfo2" "$MInfo18"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
 	fMens "$FInfo2" "$MInfo22"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos")"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_documents")"
 	fMens "$FInfo2" "$MInfo24"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_signatarios") "
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_signatarios") "
 	fMens "$FInfo2" "$MInfo25"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_instituicoes")"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_instituicoes")"
 	fMens "$FInfo2" "$MInfo20"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM cidades") "
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_cidades") "
 	fMens "$FInfo2" "$MInfo40"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM documentos_cidades") "
-#	fMens "$FInfo2" "$MInfo29"
-#	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM instituicoes')" 
-#	fMens "$FInfo2" "$MInfo31"
-#	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM names_do_brasil')"
-#	fMens "$FInfo2" "$MInfo30"
-#	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM nomes_de_cidades')"
-#	mysqldump --user=$CPBASELEGADAUSER --password=$CPBASELEGADAPASSW $CPBASELEGADA instituicoes | mysql --user=$CPBASEUSER --password=$CPBASEPASSW $CPBASE 2>/dev/null
-#	mysqldump --user=$CPBASELEGADAUSER --password=$CPBASELEGADAPASSW $CPBASELEGADA instituicoes --result-file=dump_instituicoes.sql
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "super_insere_instituicoes.sql"
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr17"
- 		exit
-	fi
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
 	#
-
-	#
-	#	mysqldump --user=$CPBASELEGADAUSER --password=$CPBASELEGADAPASSW $CPBASELEGADA names_do_brasil | mysql --user=$CPBASEUSER --password=$CPBASEPASSW $CPBASE 2>/dev/null
-	#	mysqldump --user=$CPBASELEGADAUSER --password=$CPBASELEGADAPASSW $CPBASELEGADA names_do_brasil --result_file=dump_names_do_brasil.sql
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "super_insere_names_do_brasil.sql"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr21"
  		exit
 	fi
-	#	mysqldump --user=$CPBASELEGADAUSER --password=$CPBASELEGADAPASSW $CPBASELEGADA nomes_de_cidades | mysql --user=$CPBASEUSER --password=$CPBASEPASSW $CPBASE 2>/dev/null
-	#	mysqldump --user=$CPBASELEGADAUSER --password=$CPBASELEGADAPASSW $CPBASELEGADA nomes_de_cidades --result_file=dump_nomes_de_cidades.sql
-	#	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "super_insere_nomes_de_cidades.sql"
-	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO nomes_de_cidades(nome_cidade) SELECT nome_cidade FROM cidades"
+	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO su_nomes_cidades(nome_cidade) SELECT nome_cidade FROM su_cidades"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr22"
  		exit
 	fi
-	#nomes=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from nomes_de_cidades'  | sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:]);
 	rm -rf  $CPPADMIN/$CPNOMECIDADES
-	mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from nomes_de_cidades' |  sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:] > $CPPADMIN/$CPNOMECIDADES
+	mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from su_nomes_cidades' |  sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:] > $CPPADMIN/$CPNOMECIDADES
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr06"
  		exit
@@ -453,11 +454,11 @@ function fTabelas () {
 	#				resumo
 	fMens "$FSucss" "$MInfo28"
 	fMens "$FInfo2" "$MInfo29"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM instituicoes')" 
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_instituicoes')" 
 	fMens "$FInfo2" "$MInfo31"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM names_do_brasil')"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_names_brasil')"
 	fMens "$FInfo2" "$MInfo30"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM nomes_de_cidades')"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_nomes_cidades')"
 }	# fim da rotina de preparação de tabelas
 #
 # --------------------------------------------------------------------------------------------------------------------------+
@@ -503,7 +504,7 @@ fi
 fMens	"$FSucs2"	"$MInfo43"
 fMens	"$FInfo2"	"$MInfo10" ; fMens	"$FInfo1"	"$CPLOG_DIR/$CPLOGSFILE"
 fMens	"$FInfo2"	"$MInfo05" ; fMens	"$FInfo1"	"$CPAUTOPHP"
-fMens	"$FInfo2"	"$MInfo11" ; fMens	"$FInfo1"	"$CPHTTPHOST/$(basename $CPLOG_DIR)/$CPTABELASCRIADAS"
+fMens	"$FInfor"	"$MInfo11"
 
 fMens	"$FInfor"	"$MInfo46:  $(date '+%d-%m-%Y as  %H:%M:%S')"
 exit	0

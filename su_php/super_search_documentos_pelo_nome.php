@@ -15,7 +15,7 @@ $database=$banco;
 $conn= new mysqli("localhost", $username, $pass, $database);
 
 
-$sql="select d.id_chave_documento as id, d.sigla as dsigla, d.data_doc as ddata, d.nome_documento as dnome, d.descricao as ddescricao, d.relevancia as drelevancia, d.photo_filename_documento as dpath, d.alt_foto_jpg as jpg from documentos as d where nome_documento like '".$nome."%'  order by ddata;";
+$sql="select d.id_chave_documento as id, d.sigla as dsigla, d.data_doc as ddata, d.nome_documento as dnome, d.descricao as ddescricao, d.relevancia as drelevancia, d.photo_filename_documento as dpath, d.alt_foto_jpg as jpg from su_documents as d where nome_documento like '".$nome."%'  order by ddata;";
 $result=$conn->query("$sql");
 
 if ($result->num_rows>0)
@@ -39,7 +39,7 @@ if ($result->num_rows>0)
 				$larg_botao="5%";
 				$jpg=$row["jpg"];
 				$signatario="";
-				$sql2="select r.nome_registrado as signatario from registrados as r, documentos as d,  documentos_signatarios as ds where d.id_chave_documento=ds.id_documento and r.id_chave_registrado=ds.id_signatario and id_documento='".$id."';";
+				$sql2="select r.nome_registrado as signatario from su_registrados as r, su_documents as d,  su_docs_signatarios as ds where d.id_chave_documento=ds.id_documento and r.id_chave_registrado=ds.id_signatario and id_documento='".$id."';";
 				$conta_2=0;
 				$result2=$conn->query("$sql2");
 				if ($result2->num_rows>0){
@@ -52,7 +52,7 @@ if ($result->num_rows>0)
 				} else {$signatario="sem dado";}
 
 				$instituicao="";
-				$sql2="select i.nome_instituicao as instituicao from instituicoes as i, documentos as d,  documentos_instituicoes as di where d.id_chave_documento=di.id_documento and i.id_chave_instituicao=di.id_instituicao and id_documento='".$id."';";
+				$sql2="select i.nome_instituicao as instituicao from su_instituicoes as i, su_documents as d,  su_docs_instituicoes as di where d.id_chave_documento=di.id_documento and i.id_chave_instituicao=di.id_instituicao and id_documento='".$id."';";
 				$conta_2=0;
 				$result2=$conn->query("$sql2");
 				if ($result2->num_rows>0){

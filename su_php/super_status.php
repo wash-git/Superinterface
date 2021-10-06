@@ -79,25 +79,25 @@ if ($result = mysqli_query($link, "SELECT nome from su_usuarios")){
 else{
 	$num_usuarios = "-";
 }
-if ($result = mysqli_query($link, "SELECT nome_documento from documentos")){
+if ($result = mysqli_query($link, "SELECT nome_documento from su_documents")){
 	$num_documentos = mysqli_num_rows($result);
 }
 else{
 	$num_documentos = "-";
 }
-if ($result = mysqli_query($link, "SELECT nome_cidade from cidades")){
+if ($result = mysqli_query($link, "SELECT nome_cidade from su_cidades")){
 	$num_cidades = mysqli_num_rows($result);
 }
 else{
 	$num_cidades = "-";
 }
-if ($result = mysqli_query($link, "SELECT nome_instituicao from instituicoes")){
+if ($result = mysqli_query($link, "SELECT nome_instituicao from su_instituicoes")){
 	$num_instituicoes = mysqli_num_rows($result);
 }
 else{
 	$num_instituicoes = "-";
 }
-if ($result = mysqli_query($link, "SELECT first_sem_acento from names_do_brasil")){
+if ($result = mysqli_query($link, "SELECT first_sem_acento from su_names_brasil")){
 	$num_nomes = mysqli_num_rows($result);
 }
 else{

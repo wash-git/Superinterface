@@ -50,7 +50,7 @@ $mensagens = array (
 		"Mens28" => "Gerando código para função Cria_auto_apaga_php",
 		"Mens29" => "Gerando código para função Cria_auto_alterar_php",
 		"Mens30" => "Gerando código para função Cria_auto_ler_php",
-		"Mens31" => "Erro ao tentar deletar tabelas_de_ligacao",
+		"Mens31" => "Erro ao tentar deletar su_tabelas_ligacao",
 		"Mens32" => "Erro na montagem das tabelas",
 		"Mens33" => "Cria TXT para inserção dos dados (Este botão não está implementado - criação ocorre automaticamente)",
 		"Mens34" => "Gerando código para função Cria_Insercao_N_to_N",
@@ -1064,7 +1064,7 @@ function Insere_tabelas_de_ligacao($fs_join,$banco, $tabela, $campos, $fks_table
 			$nome1=$row["nome1"];
 		}
 	}  else {$nome1= "nao achou o campo comecando com nome_1";}
-	$sql_insert='insert into tabelas_de_ligacao (
+	$sql_insert='insert into su_tabelas_ligacao (
 												nome_tabela_de_ligacao           ,
 												campo_externo1_tabela_de_ligacao ,
 												campo_externo2_tabela_de_ligacao ,
@@ -1093,7 +1093,7 @@ function Insere_tabelas_de_ligacao($fs_join,$banco, $tabela, $campos, $fks_table
 /* ######################## >>>>   FUNÇÃO 13: Cria_join_view   <<<<< ########################                       */
 // objetivo:
 // nota: esta funcao cria dois views de tabelas com 2 FKs. Os 2 views têm ordem invertida. Para facilitar eu simplesmente reaproveitei código... invertendo a SQL
-// além disso (2021_04_16) esta função passou a preencher a tabela "tabelas_de_ligacao" da base de dados.
+// além disso (2021_04_16) esta função passou a preencher a tabela "su_tabelas_ligacao" da base de dados.
 function Cria_join_view($fs_join,$banco, $tabela, $campos, $fks_table, $fks_campos){
 	global $arqconfig;
 	global $mensagens;
@@ -1769,7 +1769,7 @@ input_inserivel.addEventListener(\'keydown\', function(e){e.target.style.backgro
 }
 
 ativa_alterados();
-if (\''.$tabela.'\'==\'documentos\'){percorre_ponto_insercao();}
+if (\''.$tabela.'\'==\'su_documents\'){percorre_ponto_insercao();}
 
 function disable_niveis(){
 var x = document.getElementsByTagName(\'INPUT\');
@@ -2365,7 +2365,7 @@ $sql_tabelas_de_ligacao="select
 												tabela_externa2                  ,
 												campo_name_tabela_externa2		 , 
 												campo_id_tabela_externa2         
-						from tabelas_de_ligacao;";
+						from su_tabelas_ligacao;";
 
 $result_tl=$conn->query("$sql_tabelas_de_ligacao");
 if ($result_tl->num_rows>0) {
@@ -2706,7 +2706,7 @@ echo "
 </td>
 ";
 
-} // fim do while que percorre a tabela tabelas_de_ligacao
+} // fim do while que percorre a tabela su_tabelas_ligacao
 } // fim do if que verifica se o result foi > 0
 echo "</tr><table><div>";
 
@@ -3387,7 +3387,7 @@ function Cria_Entrada_Para_Aldir_Blanc($fs){
 		<link rel=\'stylesheet\' href=\'../su_css/super_cria_entrada.css\' type=\'text/css\'>
 	</head>
 <body onload=\'
-painel_escolha_fk(`ponto_de_insercao`,`documentos`,`id_curador`);
+painel_escolha_fk(`ponto_de_insercao`,`su_documents`,`id_curador`);
 \'>
 <h1 id=\'cabeca\'>Entrada para o Backoffice da Lei Aldir Blanc - Potlatch</h1>
 <div id=\'ponto_de_insercao\'></div>
@@ -3713,7 +3713,7 @@ require_once "'.$arqconfig.'";
 $identscript=$pag_backoffice1;      // identificação do script super_backoffice.php
 require_once "../su_admin/super_config_includes.php";
 
-// esse backoffice sintético é exclusivo para a entrada de dados no banco de dados da aldir blanc. Ele assume que existe um campo id_curador na tabela documentos e usa o nome do usuário como chave de busca, para que o usuário veja apenas os registros que estão associados a ele.
+// esse backoffice sintético é exclusivo para a entrada de dados no banco de dados da aldir blanc. Ele assume que existe um campo id_curador na tabela su_documents e usa o nome do usuário como chave de busca, para que o usuário veja apenas os registros que estão associados a ele.
 $banco_de_dados=$banco;
 $limitador_registros=50;
 if(isset($_GET[\'id_usuario\'])){
@@ -3737,7 +3737,7 @@ echo "
 ";
 
 // o trecho abaixo foi retirado porque nessa versão do super_backoffice_aldir_blanc_por_id, o id vem da porta de entrada 
-//$sql_id_usuario=\'select id_chave_registrado from registrados where nome_registrado like "\'.$usuario.\'%" \';
+//$sql_id_usuario=\'select id_chave_registrado from su_registrados where nome_registrado like "\'.$usuario.\'%" \';
 //
 //$result_id_usuario=$conn->query($sql_id_usuario);
 //if ($result_id_usuario->num_rows>0) {
@@ -3747,7 +3747,7 @@ echo "
 //	}
 //} else {echo \'Usuário não encontrado\';}
 
-$sql_schema=\'SELECT nome_tabela, descricao_tabela FROM tabelas_para_o_usuario;\'; 
+$sql_schema=\'SELECT nome_tabela, descricao_tabela FROM su_tabelas_para_usuario;\'; 
 
 $result_schema=$conn->query($sql_schema);
 if ($result_schema->num_rows>0) {
@@ -3755,7 +3755,7 @@ if ($result_schema->num_rows>0) {
     {
 		$nome_tabela=$row_schema[\'nome_tabela\'];
 		$descricao_tabela=$row_schema[\'descricao_tabela\'];
-		if ($nome_tabela==\'documentos\'){
+		if ($nome_tabela==\'su_documents\'){
 				echo \'<tr><td>\'.$nome_tabela.\'</td><td>\'.$descricao_tabela.\'</td><td><input type="button" value="\'.$nome_tabela.\'" onclick="Abre_insere(`super_insere_\'.$nome_tabela.\'.php?offset=0&limit=\'.$limitador_registros.\'&campo_busca=id_curador&valor_busca=\'.$id_usuario.\'`);" ></td></tr>\';
 										}
 		else {
@@ -3811,7 +3811,7 @@ require_once "'.$arqconfig.'";
 $identscript=$pag_backoffice1;      // identificação do script super_backoffice.php
 require_once "../su_admin/super_config_includes.php";
 
-// esse backoffice sintético é exclusivo para a entrada de dados no banco de dados da aldir blanc. Ele assume que existe um campo id_curador na tabela documentos e usa o nome do usuário como chave de busca, para que o usuário veja apenas os registros que estão associados a ele.
+// esse backoffice sintético é exclusivo para a entrada de dados no banco de dados da aldir blanc. Ele assume que existe um campo id_curador na tabela su_documents e usa o nome do usuário como chave de busca, para que o usuário veja apenas os registros que estão associados a ele.
 
 $limitador_registros=50;
 if(isset($_GET[\'usuario\'])){
@@ -3835,7 +3835,7 @@ echo \'
 </tr>
 \';
 
-$sql_id_usuario=\'select id_chave_registrado from registrados where nome_registrado like "\'.$usuario.\'%" \';
+$sql_id_usuario=\'select id_chave_registrado from su_registrados where nome_registrado like "\'.$usuario.\'%" \';
 
 $result_id_usuario=$conn->query($sql_id_usuario);
 if ($result_id_usuario->num_rows>0) {
@@ -3845,7 +3845,7 @@ if ($result_id_usuario->num_rows>0) {
 	}
 } else {echo \'Usuário não encontrado\';}
 
-$sql_schema=\'SELECT nome_tabela, descricao_tabela FROM tabelas_para_o_usuario;\'; 
+$sql_schema=\'SELECT nome_tabela, descricao_tabela FROM su_tabelas_para_usuario;\'; 
 
 $result_schema=$conn->query($sql_schema);
 if ($result_schema->num_rows>0) {
@@ -3853,7 +3853,7 @@ if ($result_schema->num_rows>0) {
     {
 		$nome_tabela=$row_schema[\'nome_tabela\'];
 		$descricao_tabela=$row_schema[\'descricao_tabela\'];
-		if ($nome_tabela==\'documentos\' && strlen($usuario)>0){
+		if ($nome_tabela==\'su_documents\' && strlen($usuario)>0){
 				echo \'<tr><td>\'.$nome_tabela.\'</td><td>\'.$descricao_tabela.\'</td><td><input type="button" value="\'.$nome_tabela.\'" onclick="Abre_insere(`super_insere_\'.$nome_tabela.\'.php?offset=0&limit=\'.$limitador_registros.\'&campo_busca=id_curador&valor_busca=\'.$id_usuario.\'`);" ></td></tr>\';
 										}
 		else {
@@ -4106,7 +4106,7 @@ Cria_Entrada_Para_Aldir_Blanc($fs_4);
 Cabecalio_main($fs);
 $conn= new mysqli("localhost", $username, $pass, $database);
 
-$sql_delete="delete from tabelas_de_ligacao;";  // precisa limpar essa tabela toda vez
+$sql_delete="delete from su_tabelas_ligacao;";  // precisa limpar essa tabela toda vez
 if ( $conn->query($sql_delete) !== true){
 		throw new Exception ($mensagens['Mens31']);
 }
