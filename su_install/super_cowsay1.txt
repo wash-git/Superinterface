@@ -1,14 +1,19 @@
-Superinterface é absolutamente surpreendente!
-Com a Superinterface, a cada momento você descobre uma novidade nova!
-Não deixe de trazer novos arquivos PDF para seu repositório!
-Instalar a Superinterface é super fácil! Esteja na pasta de instalação ("su_install").
-Verifique a pasta de logs da Superinterface....tudo ficará anotado lá!
-Super feliz por estar a Superinterface semdo trabalhada.  Já estava na hora!
-Verifique a pasta de quarentena do aplicativo: alguns arquivos PDF podem ter sido colocados lá para sua análise!
-No cron deve ser colocado a chamada ao vigilante para tratamento de novos arquivos PDF, de forma a estes arquivos poderem ser tratados e serem inseridos no acervo da Superinterface!
+Superinterface é absolutamente surpreendente! Ela é super fácil de utilizar e com muitos recursos. Não deixe de explorar todas as suas potencialidades.
+Com a Superinterface, a cada momento você descobre uma novidade nova! Explore as diversas possibilidades de gestão e visualização de seu acervo de arquivos.
+Não deixe de trazer novos arquivos .PDF para a Superinterface. Mas não só PDFs, pois a Superinterface aceita diversos outros tipos de arquivos. Vai ser uma experiência incrível!
+Não deixe de trazer novos arquivos .DOCX para a Superinterface. Após esse arquivo ser incorporado ao acervo, ele estará disponível na pasta "primitivos" para seu acompanhamento.
+Não deixe de trazer novos arquivos .DOC para a Superinterface. Esse tipo de arquivo oriundo do mundo proprietário também é aceito na Superinterface. Com o Giramundonics a viusalização rápida e inteligente de seus arquivos é realizada de forma muito fácil.
+Não deixe de trazer novos arquivos .RTF para a Superinterface. Arquivos RTF, e de muitos outros formatos, são aceitos pela Superinterface. Crie seu acervo de arquivos na Superinterface e visualize-os através do Giramundonics de maneira muito rápida e fácil.
+Não deixe de trazer novos arquivos .ODT para a Superinterface. O formato ODT é livre e aberto, baseado em XML, que não exige nenhum pagamento de licença para ser utilizado. É muito legal!
+Não deixe de trazer novos arquivos .TXT para a Superinterface.  Como é bom trabalhar com arquivos leves do tipo TXT. lembre-se de que a  Superinterface aceita diversos formatos de arquivos.
+Instale e reinstale a Superinterface de maneira muito fácil! Basta estar na pasta de instalação ("su_install") e mandar executar o script de instalação. Só isso, e tudo estará funcionando em 30 segundos.
+Verifique sempre a pasta de logs da Superinterface....tudo ficará anotado lá! Assim você pode acompanhar tudo que acontece com seu acervo de arquivos na Superinterface.
+Super feliz por você estar utilizando a Superinterface.  Já estava na hora de curtir as facilidades da ferramenta! Explore suas facilidades.
+Verifique sempre a pasta de quarentena: alguns arquivos podem ter sido colocados lá devido algum problema de consistência no momento da incorporação do arquivo ao acervo. Faça essa verificação periodicamente!
+No cron deve ser colocado a chamada ao vigilante para realizar o tratamento de novos arquivos. Assim, estes arquivos serão tratados dentro de intervalos definidos no cron e em seguida inseridos no acervo da Superinterface!
 Veja que legal: sempre testamos a integridade do arquivo PDF antes de incorporá-lo ao acervo!
-Os arquivos PDF são incorporados ao acervo da Superinterface em lotes.  Seja paciente, a cada ativação do script novo conjunto de arquivos são incorporados ao acervo!
-Os arquivos PDF podem ser incorporados ao acervo da Superintrface de duas maneiras: com os nomes originais ou renomeando-os e numerando-os. Conforme parametrização do sistema!
-A Superinterface faz geração de código PHP de forma automática. Verifique os códigos gerados na pasta "autophp".
-Faça como a Superinterface: use apenas Software Livre. O Software Livre é ético!!
-A Superinterface dispões de um painel de administração interativo.  Use o painel para subir arquivos PDF, administrar usuários, ter acesso a informações de status da aplicação e muito mais!
+Os arquivos são incorporados ao acervo da Superinterface em lotes.  Seja paciente, a cada ativação do vigilante (programado através do cron) um novo conjunto de arquivos são incorporados ao acervo!  Acompanhe todo esse trabalho através do arquivo de logs da Superinterface.
+Os arquivos podem ser incorporados ao acervo da Superintrface de duas maneiras: com os nomes originais ou renomeando-os e numerando-os. Conforme parametrização do sistema!  Escolha a maneira mais adequada para sua aplicação.
+A Superinterface faz geração de código PHP de forma automática. Comprove os códigos gerados na pasta "/su_autophp".
+Faça como a Superinterface: use apenas Software Livre. O Software Livre é ético!! É bom!! É liberdade!!
+A Superinterface dispõe de um painel de administração interativo.  Use o painel para subir arquivos, administrar usuários, ter acesso a informações de status da aplicação e muito mais!

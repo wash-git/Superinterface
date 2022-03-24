@@ -8,7 +8,6 @@ CPBASE=""                              # base de dados da aplicação
 CPBASEUSER=""                          # usuário da base de dados
 CPBASEPASSW=""                         # password da base de dados
 CPNUMERARPDF=0                         # renomear arquivos PDF (0 = não; 1 = sim)
-CPMAX=100                              # tamanho máximo de nome arquivos PDF (válida quando renomear arquivos = sim)
 CPHTTPHOST=""                          # Host name $_SERVER['HTTP_HOST'] + pasta raiz
                                        # exemplos:
 									   # observatorio.wash.net.br/superinterface
@@ -17,11 +16,13 @@ CPQPDFLOTE=3                           # quantidade máxima de arquivos PDF trat
 #
 #	Parte 2: variáveis do ambiente
 #	obs: tenha cuidado para alterar os parâmetros abaixo.  Só faça se estiver seguro
-CPUPLOADS="../su_pdfuploads"           # pasta com os novos arquivos de uploads PDF
+CPMAX=100                              # tamanho máximo de nome arquivos PDF (válida quando renomear arquivos = sim)
+CPUPLOADS="../su_uploads"              # pasta com os novos arquivos de uploads
 CPIMAGEM="../su_imagens"               # pasta do acervo dos arquivos que foram colocados na base mysql
 CPTEMP="../su_work"                    # pasta de trabalho auxiliar para manipulação de arquivos PDF
 CPLOG_DIR="../su_logs"                 # pasta de logs
 CPQUARENTINE="../su_quarentine"        # pasta para guardar novos arquivos PDF repetidos (já estavam no acervo)
+CPPRIMITIVO="../su_primitivos"         # pasta para guardar arquivos originais não PDF já tratados
 CPAUTOPHP="../su_autophp"              # pasta para receber arquivos PHP a serem gerados automaticamente
 CPPADMIN="../su_admin"                 # pasta da administrativa da Superinterface
 CPINDICEPDF="super_indicepdf.txt"      # nome do arquivo para guardar último número de índice para nome arq. PDF 

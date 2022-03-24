@@ -9,7 +9,7 @@
 </head>
 <body onload="lista_h2()">
 <div id="menu">
-Conteúdo
+Superinterface:
 </div>
 
 <div id="conteudo">
@@ -30,8 +30,7 @@ Este projeto é mais uma iniciativa do <a href="http://wash.net.br" target="_bla
 <br \><br \>Seja Bem Vind@, e aproveite!!
 </div>
 </td></tr></table>
-<p></p>
-<h2 id="consideracoes_iniciais">Considerações Iniciais sobre a Superinterface</h2>
+<h2 id="consideracoes_iniciais">Considerações Iniciais</h2>
 A solução Superinterface constitui de um sistema formado de três blocos distintos:
 <dl>
 <dt>Blocos Superinterface:</dt>
@@ -74,10 +73,10 @@ Os dados estão organizados por documento e, sempre que possível, geo-localizad
 
 Destas 3 abordagens, a mais madura é a primeira e já vem sendo usada amplamente para gerar parte dos metadados da plataforma Superinterface.
 
-<h2 id="instalacao">Instalação da Superinterface</h2>
+<h2 id="instalacao">Instalação</h2>
 Para realizar a instalação da Superinterface, proceda da seguinte forma:
 <ol>
-<li><h3>Preparação do Ambiente</h3>
+<li><h3 id="preparacao_ambiente">Preparação do Ambiente</h3>
 <ol style="list-style-type:lower-alpha">
 <li>Sistema Operacional, linguagens e outros aspectos gerais:</li>
 GNU/LINUX-Debian 9 ou superior<br />
@@ -146,7 +145,7 @@ Observações:
 </pre>
 </ul></li>
 <p></p>
-<li>Instalar Mariadb:</li>
+<li>Instalar Mariadb</li>
 #apt-get install mariadb-server php-mysql
 <p></p>
 Criar o banco de dados, usuário e permissões:<br />
@@ -156,6 +155,11 @@ MariaDB [(none)]&gt; GRANT ALL PRIVILEGES ON nome_bd.* TO 'usuario_bd'@'localhos
 MariaDB [(none)]&gt; flush privileges;<br />
 <p></p>
 Obs: limite os privilégios do usuário do banco conforme exemplificado nestes comandos.<p></p>
+<li>Instalar unoconv</li>
+# apt-get install unoconv python3-uno libreoffice-core libreoffice-common libreoffice-calc- libreoffice-draw- libreoffice-math- libreoffice-impress- x11-xserver-utils- xdg-utils-
+<p></p>
+Obs: no comando acima, algumas bibliotecas tiveram inibidas suas instalações por não se fazer necessárias a esta aplicação, já que mão utilizaremos o LibreOffice no módulo gráfico.  Para uma instalação numa máquina com interface gráfica e uso do LibreOffice, instalar o unoconv sem a necessidade de inibições (apt-get install unoconv).
+<p></p>
 <li>Instalar também:</li>
 # apt-get install figlet cowsay detox imagemagick php-imagick php-common poppler-utils qpdf<br />
 No ambiente Debian/linux, pode ainda se fazer necessário a criação de um link simbólico:
@@ -167,7 +171,7 @@ Inserir no arquivo  /etc/ImageMagick-6/policy.xml, se ainda não existir esta li
 </ol></li>
 <p></p><br />
 
-<li><h3>Preparação dos scripts da aplicação</h3>
+<li><h3 id="preparacao_scripts">Preparação dos Scripts</h3>
 <ol style="list-style-type:lower-alpha">
 <li>Todo código está disponível no GitHub, bastando baixar a <a href="https://github.com/wash-git/Superinterface">última release da aplicação Superinterface</a></li>.
 <li>Evite fazer a instalação da aplicação como usuário root. Deve-se realizar todas instalação do código da aplicação Superinterface como um usuário normal, sem prerrogativas de administrador.</li>
@@ -200,7 +204,7 @@ http://exemplo.br/su_docs/super_documentacao.php<br />
 <li>Na pasta su_install, alterar as propriedades dos seguintes arquivos conforme mostrado abaixo:</li>
 <pre>
 $  chmod 600 super_config.cnf
-$  chmod 750 super_installsuperinterface.sh
+$  chmod 750 super_install.sh
 $  chmod 750 super_novospdf.sh
 </pre>
 <p></p>
@@ -247,36 +251,32 @@ drwxr-----  web1 web1  su_work
 </pre>
 <dl>
   <dt>Observações</dt>
-  <dd><strong>* su_admin:</strong> pasta dos arquivos php que implementa o portal de administração da Superinterface.</dd>
+  <dd><strong>* su_admin:</strong> pasta com os arquivos de controle das funções de administração da Superinterface.</dd>
   <dd><strong>* su_autophp:</strong> pasta que contém os arquivos PHP e HTML gerados automaticamente pela SuperInterface</dd>
   <dd><strong>* su_css:</strong> pasta com os arquivos de estilos da Superinterface.</dd>
   <dd><strong>* su_docs:</strong> pasta com os arquivos relativos a documentação da Superinterface.</dd>
   <dd><strong>* su_exemplos_tabelas:</strong> pasta com exemplos de arquivos SQL que podem ser instalados em conjunto com as tabelas padrão da Superinterface.</dd>
   <dd><strong>* su_icons:</strong> pasta com imagens utilizadas em páginas da Superinterface.</dd>
-  <dd><strong>* su_logs:</strong> pasta com os logs de todas as operações da solução sobre o acervo, desde o processo de instalação, informações sobre as atividades de agregação de novos arquivos PDF ao acervo, e possíveis mensagens de erro durante o funcionamento da aplicação.</dd>
+  <dd><strong>* su_logs:</strong> pasta com os logs de todas as operações da solução, desde o momento da instalação até o presente momento. A pasta também será utilizada para guardar arquivos temporários necessários ao funcionamento da aplicação.</dd>
   <dd><strong>* su_imagens:</strong> pasta onde estarão guardados os arquivos PDF pertencentes ao acervo da Superinterface, juntamente com sua imagem jpg, versão texto puro e outras versões necessárias.</dd>
-  <dd><strong>* su_install:</strong> pasta com a configuração e demais arquivos necessários à instalação da Superinterface, além de arquivos bash necessários ao seu funcionamento.</dd> 
+  <dd><strong>* su_install:</strong> pasta com os arquivos de configuração, arquivos SQL com informações iniciais de preenchimento de tabelas e outros arquivos necessários à instalação da Superinterface, além dos scripts shell necessários ao seu funcionamento.</dd> 
   <dd><strong>* su_pdfuploads:</strong> pasta para onde serão direcionados os arquivos PDF após seu upload pelo usuário, com objetivo de fazer incorporações ao acervo da aplicação Superinterface.  A execução deste processo de incorporação de novos documentos PDF ao acervo estará sob responsabilidade do vigilante (ativado pelo cron).</dd>
-  <dd><strong>* su_php:</strong> pasta com arquivos PHP necessários ao funcionamento da Superinterface.</dd> 
+  <dd><strong>* su_php:</strong> pasta com arquivos PHP referente as funções de administração da Superinterface.</dd>
+  <dd><strong>* su_primitivo:</strong> pasta onde serão guardados os arquivos originais não PDF que forem submitidos ao acerco da aplicação</dd> 
   <dd><strong>* su_quarentine:</strong> pasta para onde serão destinados os arquivos PDF que apresentarem problemas para serem incorporados ao acervo, ou quando  houver a tentativa de incorporação de arquivo que já pertença ao acervo.</dd>
   <dd><strong>* su_work:</strong> pasta auxiliar para tratamento dos arquivos PDF disponibilizados pelo usuário.</dd> 
   <dd>* Neste momento, já se pode verificar as páginas iniciais da aplicação funcionando:
-  <ul>
-	<li>Portal de Administração: http://exemplo.br/su_php/super_admin.php</li>
-	<li>Giramundonics (com acervo ainda vazio): http://exemplo.br/index.php</li>
-	<li>Documentação: http://exemplo.br/su_docs/super_documentacao.php</li>
 	<ul class="list-circle">
-	<li>obs: no momento da instalação, o usuário e senha para acesso ao Portal de Administração é "admin" e "admin", respectivamente.  É aconselhável, por segurança, trocar estas credenciais logo no primeiro acesso à aplicação Superinterface.</li>
-	</ul>
+	<li>obs: no momento da instalação, as credenciais "usuário/senha" de acesso ao Portal de Administração é "admin/admin", respectivamente.  É aconselhável, por segurança, trocar estas credenciais logo no primeiro acesso à aplicação Superinterface.</li>
   </ul></dd>
 </dl>
 <p></p></li>
 <li>Reinstalar a Superinterface<br />
-A Superinterface pode ser reinstalada a qualquer momento sem quaisquer problemas.  Basta executar novamente o comando:
+A Superinterface pode ser reinstalada a qualquer momento sem maiores burocracias.  Lembrando que toda base de dados será apagada. Para isso, basta executar novamente o comando:
 <pre>
 su_install$ ./super_install.sh
 </pre>
-Este procedimento limpa as tabelas existentes na base, recria as tabelas e executa o script de instalação da mesma forma como fora executado da primeira vez.
+Este procedimento limpa as tabelas existentes na base, recria as tabelas e executa o script de instalação da mesma forma como fora executado na primeira vez.
 </li>
 </ol>
 </li>
@@ -284,12 +284,13 @@ Este procedimento limpa as tabelas existentes na base, recria as tabelas e execu
 <p></p>
 <p></p>
 <h2 id="manual_usuario">Manual do Usuário</h2>
-Após instalação da solução, existem três possibilidades ao usuário:
-<ul>
-<li>Giramundonics:  disponível na raiz do virtual host criado (http://exemplo.br)</li>
-<li>Painel de Administração: disponível em http://exemplo.br/su_php/super_admin.php</li>
-<li>Documentação: http://exemplo.br/super_documentacao.php</li>
-</ul>
+Após instalação da solução, existem três possibilidades ao usuário (considerando a instalação na URL www.exemplo.br):
+<table>
+<tr><th>Função</th><th style="width:70%">URL</th></tr>
+<tr><td>Giramundonics</td><td>http://www.exemplo.br</td></tr>
+<tr><td>Painel de Administração</td><td>http://www.exemplo.br/su_php/super_admin.php</td></tr>
+<tr><td>Documentação</td><td>http://www.exemplo.br/su_docs/super_documentacao.php</td></tr>
+</table>
 Inicialmente, o visualizador Giramundonics não mostrará nenhum arquivo, já que na instalação da Superinterface nenhum arquivo PDF é incorporado ao acervo.
 O acesso ao painel de administração se faz através das credenciais admin/admin. Ao abrir o painel, o usuário terá um menu com as seguintes opções:
 <pre>
@@ -314,11 +315,12 @@ Esta facilidade tem uma limitação de tamanho de arquivo por dois fatores: pela
 <script>
 function lista_h2(){
 var i;
-x=document.getElementsByTagName("H2");
+$x=document.querySelectorAll('h2,h3');
+//$x=document.getElementsByTagName("H2");
 menuzinho=document.getElementById("menu");
 menuzinho.innerHTML=menuzinho.innerHTML+"<br><br>";
-for (i=0; i<x.length; i++){
-menuzinho.innerHTML=menuzinho.innerHTML+"<br><a class='lista_de_conteudo' href='#"+x[i].id+"'>"+x[i].innerHTML+"</a><br>";
+for (i=0; i<$x.length; i++){
+menuzinho.innerHTML=menuzinho.innerHTML+"<br><a class='lista_de_conteudo' href='#"+$x[i].id+"'>"+$x[i].innerHTML+"</a><br>";
 
 }
 }

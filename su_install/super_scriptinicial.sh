@@ -30,7 +30,7 @@ MErr14="Erro! Não foi possível inserir informações na tabela 'su_cidades'"
 MErr15="Erro! Não foi possível apagar alguns arquivos antigos"
 MErr16="Erro! Não foi possível se conectar com a base de dados legada"
 MErr17="Erro! Não foi possível criar as tabelas da aplicação e inserir seus dados"
-#MErr18=""
+MErr18="Erro! Não foi possível preparar pasta de arquivos originais não PDF: a pasta não pode ser criada"
 MErr19="Erro! Não foi possível preparar pasta de temporários: a pasta não pode ser criada"
 MErr20="Erro! Pasta Administrativa não foi encontrada"
 MErr21="Erro! Não foi possível inserir conjunto inicial de nomes próprios de brasileiros na base de dados"
@@ -40,10 +40,10 @@ MErr24="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela
 MErr25="Erro! Não foi encontrado o arquivo com comandos SQL para criação das tabelas da Superinterface"
 MErr26="Erro! Não foi possível preparar as pastas necessárias à aplicação Superinterface"
 MErr27="Erro! Não foi possível preparar pasta de logs: a pasta não pode ser criada"
-#MErr28=""
+MErr28="Erro! É necessário ter instalado o aplicativo 'unoconv', conforme manual de instalação"
 MErr29="Erro! Não foi possível preparar pasta de quarentena: a pasta não pode ser criada"
-MErr30="Erro! Não foi possível preparar pasta de upload para novos arquivos PDF"
-MErr31="Erro! Não foi possível criar pasta de uploads para novos arquivos PDF"
+MErr30="Erro! Não foi possível preparar pasta de upload para novos arquivos"
+MErr31="Erro! Não foi possível criar pasta de uploads para novos arquivos"
 MErr32="Erro! É necessário ter instalado o aplicativo 'detox' (apt-get install detox)"
 MErr33="Erro! Não foi possível gerar o arquivo de configuração para as rotinas PHP"
 #MErr34=""
@@ -55,7 +55,7 @@ MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
 MInfo03="Sucesso! Pasta administrativa preparada"
 MInfo04="Geração automática de código PHP:"
 MInfo05="Verifique os códigos PHP gerados automaticamente na pasta: "
-MInfo06="Sucesso! Criada pasta de uploads para novos arquivos PDF"
+MInfo06="Sucesso! Criada pasta de uploads para novos arquivos"
 #MInfo07=""
 MInfo08="Iniciando a instalação"
 MInfo09="Sucesso! Conexão com o banco de dados foi realizada corretamente"
@@ -76,7 +76,7 @@ MInfo22="Quantidade de registros na tabela 'su_documents'= "
 MInfo24="Quantidade de registros na tabela 'su_docs_signatários'= "
 MInfo25="Quantidade de registros na tabela 'su_docs_instituicoes'= "
 MInfo26="super_install.sh"
-#MInfo27=""
+MInfo27="Sucesso! Criada pasta de arquivos orginais não PDF"
 MInfo28="Sucesso! Conjunto inicial de nomes de instituições, nomes de pessoas e de cidades inseridas na base de dados"
 MInfo29="Quantidade de registros na tabela 'su_instituicoes'= "
 MInfo30="Quantidade de registros na tabela 'su_nomes_cidades'= "
@@ -197,8 +197,8 @@ function fInit () {
  		exit
 	fi
 #
-	# limpar pastas: logs, arquivos do acervo, uploads PDF, temporários, quarentena, autoPHP
-	rm -rf {$CPLOG_DIR,$CPIMAGEM,$CPUPLOADS,$CPTEMP,$CPQUARENTINE,$CPAUTOPHP}  2>/dev/null
+	# limpar pastas: logs, arquivos do acervo, uploads, temporários, quarentena, primitivo, autoPHP
+	rm -rf {$CPLOG_DIR,$CPIMAGEM,$CPUPLOADS,$CPTEMP,$CPQUARENTINE,$CPPRIMITIVO,$CPAUTOPHP}  2>/dev/null
 	if [ $? -ne 0 ]; then
  		fMens "$FInsu1" "$MErr26"
  		exit
@@ -209,6 +209,15 @@ function fInit () {
  		exit
 	fi
 	chmod $CPPERMPADRAO $CPLOG_DIR			# definir permissão para pasta de logs
+	#                                       verificar se aplicativo unoconv está instalado
+	#                                       (necessário para conversão .docx -> .pdf)
+	if [ -n "$(dpkg --get-selections | grep unoconv | sed '/deinstall/d')" ]; then
+	:
+	else
+		fMens "$FInsuc" "$MErr28"
+		exit
+	fi
+	#         
 	#										verificar se aplicativo detox está instalado
 	if [ -n "$(dpkg --get-selections | grep detox | sed '/deinstall/d')" ]; then
 		:
@@ -291,13 +300,13 @@ function fInit () {
 		fMens "$FSucss" "$MInfo02"
 	fi
 	chmod $CPPERMPADRAO $CPIMAGEM			# definir permissão para pasta de arquivos da aplicação
-	#										preparar pasta para novos arquivos PDF
+	#										preparar pasta para novos uoloads de arquivos
 	rm -rf $CPUPLOADS 2>/dev/null
 	if [ $? -ne 0 ]; then
  		fMens "$FInsuc" "$MErr30"
  		exit
 	fi
-	mkdir $CPUPLOADS						# criar pasta para colocação de novos arquivos PDF
+	mkdir $CPUPLOADS						# criar pasta para colocação de uploads de novos arquivos
 	if [ $? -ne 0 ]; then
  		fMens "$FInsuc" "$MErr31"
  		exit
@@ -305,6 +314,7 @@ function fInit () {
 		fMens "$FSucss" "$MInfo06"
 	fi
 	chmod $CPPERMPADRAO $CPUPLOADS			# definir permissão para pasta de novos arqivos PDF
+
 	#										preparar pasta de temporários
 	mkdir $CPTEMP							# criar pasta de trabalho (arquivos temporários)
 	if [ $? -ne 0 ]; then
@@ -314,6 +324,16 @@ function fInit () {
 		fMens "$FSucss" "$MInfo33"
 	fi
 	chmod $CPPERMPADRAO $CPTEMP				# definir permissão para pasta de trabalho 
+
+	#										preparar pasta de primitivos (arquivos não PDF já preparados)
+	mkdir $CPPRIMITIVO						# criar pasta de primitivos
+	if [ $? -ne 0 ]; then
+ 		fMens "$FInsuc" "$MErr18"
+ 		exit
+	else
+		fMens "$FSucss" "$MInfo27"
+	fi
+	chmod $CPPERMPADRAO $CPPRIMITIVO		# definir permissão para pasta de arquivos não PDF já preparados
 	#										preparar pasta de quarentena
 	mkdir $CPQUARENTINE						# criar pasta de quarentena
 	if [ $? -ne 0 ]; then
@@ -338,7 +358,7 @@ function fInit () {
 	fi
 	chmod $CPPERMPADRAO $CPPADMIN			# definir permissão para pasta administrativa da Superinterface
 											#criar arquivo para guardar índice de numeração nos nomes dos arquivos PDF
-	echo 0 > $CPPADMIN/$CPINDICEPDF
+	echo 100 > $CPPADMIN/$CPINDICEPDF
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr07"
 		exit
