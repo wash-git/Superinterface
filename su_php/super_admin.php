@@ -22,10 +22,12 @@ $menu = array(
 		array(SUMENSP016,"../su_autophp/super_backoffice.php","_blank"," | "),
 		array(SUMENSP076,"./super_listaracervo.php","_self"," | "),
 		array(SUMENSP015,"./super_adminquarentine.php","_self"," | "),
+		array(SUMENSP099,"./super_listarprimitivos.php","self"," | "),
 		array(SUMENSP014,"./super_adminusuarios.php","_self"," | "),
 		array(SUMENSP074,"./super_tabelas.php","_self"," | "),
 		array(SUMENSP070,"./super_logs.php","_self"," | "),
-		array(SUMENSP048,"./super_status.php","_self","")
+		array(SUMENSP048,"./super_status.php","_self"," | "),
+		array(SUMENSP103,"../su_docs/super_documentacao.php","_blank","")
 );
 suPrintMenu2($menu);
 suPrintRodape(SUMENSP013,"./super_logout.php");

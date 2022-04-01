@@ -12,8 +12,14 @@ require_once "../su_admin/super_config_includes.php";
 <body>
 <?php
 suPrintCabecalho(SUMENSP047);
-#echo session_status();
-#exit;
+function transforma_tam($valor){
+	$valor = log($valor) / log(1024);
+	$suffix = array("", "k", "M", "G", "T")[floor($valor)];
+	$valor= pow(1024, $valor - floor($valor));
+	$valor=round($valor,1);
+	$valor=$valor.$suffix;
+	return $valor;
+}
 // 						Verifica espaço total em disco
 $bytes = disk_total_space("/"); 
 $Type = array("", "K", "M", "G", "T", "peta", "exa", "zetta", "yotta");
@@ -140,13 +146,15 @@ echo "<tr><td>".SUMENSP082."</td><td>".$espaco_dtotal."</td></tr>";			# Espaço 
 echo "<tr><td>".SUMENSP083."</td><td>".$espaco_dfree."</td></tr>";			# Espaço livre em disco
 echo "<tr><td>".SUMENSP084."</td><td>".$upload_max_size."</td></tr>";		# Tamanho max uploads
 echo "<tr><td>".SUMENSP085."</td><td>".$post_max_size."</td></tr>";			# Tamanho max grupo de uploads
+echo "<tr><td>".SUMENSP104."</td><td>".transforma_tam($tamanho_max)."</td></tr>";			# Tamanho max uploads parâmetro Superinterface
 echo "<tr><td>".SUMENSP086."</td><td>".$banco."</td></tr>";					# Nome da base do acervo
-echo "<tr><td>".SUMENSP087."</td><td>".$espaco_pdf."</td></tr>";			# Pasta de arquivos do Acervo
 echo "<tr><td>".SUMENSP088."</td><td>".$tam_base."</td></tr>";				# Tamanho da base
+echo "<tr><td>".SUMENSP090."</td><td>".$num_documentos."</td></tr>";		# Acervo (Num. arquivos)
+echo "<tr><td>".SUMENSP087."</td><td>".$espaco_pdf."</td></tr>";			# Pasta de arquivos do Acervo
+echo "<tr><td>".SUMENSP009."</td><td>".$num_quarentine."</td></tr>";		# Núm. arquivos em quarentena
+echo "<tr><td>".SUMENSP105."</td><td>".$lote."</td></tr>";					# Lote de arquivos que podem ser tratados
 echo "<tr><td>".SUMENSP089."</td><td>".$num_tables."</td></tr>";			# Tabelas
 echo "<tr><td>".SUMENSP014."</td><td>".$num_usuarios."</td></tr>";			# Número usuários
-echo "<tr><td>".SUMENSP090."</td><td>".$num_documentos."</td></tr>";		# Acervo (Num. arquivo PDF)
-echo "<tr><td>".SUMENSP009."</td><td>".$num_quarentine."</td></tr>";		# Núm. arquivos em quarentena
 echo "<tr><td>".SUMENSP091."</td><td>".$num_cidades."</td></tr>";			# Núm. cidades
 echo "<tr><td>".SUMENSP092."</td><td>".$num_instituicoes."</td></tr>";		# Núm. instituições
 echo "<tr><td>".SUMENSP093."</td><td>".$num_nomes."</td></tr>";				# Nomes brasileiros

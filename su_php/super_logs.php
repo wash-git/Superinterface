@@ -20,14 +20,16 @@ $menu = array(
 		array(SUMENSP006,"./super_admin.php","_self","")
 );
 suPrintMenu2($menu);
+/*
 #$conteudo=`tail -n 20 ../su_logs/super_logshell.log`;
-#print ($conteudo);
-
-$output = shell_exec('tail -n 70 ../su_logs/super_logshell.log ');
-//											retirando os comandos de cores do shell script
+#$output = shell_exec('tail -n 70 ../su_logs/super_logshell.log ');
+//										retirando os comandos de cores do shell script
 $output = str_replace('[33m', '', $output);
 $output = str_replace('[34m', '', $output);
 $output = str_replace('[97m', '', $output);
+*/
+
+$output = "<div class=\"content_logs\"><iframe src=\"../su_logs/super_logshell.html\" id=\"Iframe_logs\" title=\"iframe_log\"></iframe></div>";
 echo "<pre>$output</pre>";					// enviar para a tela o log da aplicação
 suPrintRodape2(SUMENSP071,"./super_logs.php",SUMENSP006,"./super_admin.php");
 ?>

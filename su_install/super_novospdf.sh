@@ -16,7 +16,6 @@ flock -n 312 || exit 1	# o script será desbloqueado quando ele for encerrado.
 # --------------------------------------------------------------------------------------------------------------------------+
 CPCONFIG="super_config.cnf"				# arquivo de configuração
 CPROOT_UID=0							# root ID
-declare -r CPPINSTALL="su_install"		# nome da pasta de instalação
 # 										outras variáveis
 declare -r su_mimeTxt="text/plain"
 declare -r su_mimeRtf="text/rtf"
@@ -36,30 +35,30 @@ MErr01="Não é permitido executar este script como usuário root"
 MErr02="Não foi possível substituir caracteres de controle dos nomes dos arquivos. Verifique se comando 'detox' está instalado"
 MErr03="Erro! Arquivo com nome das cidades não foi encontrado"
 MErr04="Erro! Arquivo com comandos SQL para popular tabela de 'su_cidades' não foi encontrado"
-MErr05="Erro! Não foi possível preparar pasta temporária de imagens de arquivos PDF: pasta temporária não pode ser limpa"
-MErr06="Erro! Não foi possível preparar pasta temporária de imagens de arquivos PDF: pasta temporária não pode ser criada"
+MErr05="Erro! Não foi possível preparar pasta de trabalho temporária: pasta não pode ser limpa"
+MErr06="Erro! Não foi possível preparar pasta de trabalho temporária: pasta não pode ser criada"
 MErr07="Erro! Não foi possível se conectar com o banco de dados"
 MErr08="Erro! Não foi possível mover este arquivo da pasta de uploads para início de seu tratamento: "
-MErr09="Erro! Pasta para upload de arquivos não criada" 
+MErr09="Erro! Pasta para upload de arquivos inexistente" 
 MErr10="Interrompendo a execução do script"
-MErr11="Erro! Pasta de imagens de arquivos PDF não encontrada"
+MErr11="Erro! Pasta para guardar os arquivos do acervo não foi encontrada"
 MErr12="Não foi possível deixar os nomes dos arquivos em minúsculo.  Transferindo arquivo(s) do lote para quarentena"
 MErr13="Erro! Problemas na geração do script para criação de arquivos TXT. Transferindo arquivo(s) do lote para quarentena"
 MErr14="Erro! Não foi possível gerar arquivo com as ocorrências dos nomes das cidades. Transferindo arquivo(s) do lote para quarentena"
 MErr15="Erro! Não foi possível gerar arquivo de instruções SQL para popular tabela su_docs_cidades. Transferindo arquivo(s) do lote para quarentena"
 MErr16="Erro! Problema na execução do script de geração de arquivos TXT. Transferindo arquivo(s) do lote para quarentena"
 MErr17="Erro! Não foi possível inserir informações nas tabelas: su_documents, su_docs_signatarios, su_docs_instituicoes. Transferindo arquivos do lote para quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
-MErr18="Erro! Não foi possível criar pasta de quarentena para arquivos PDF"
-MErr19="Erro! Pasta de logs não existia e também não foi possível criá-la"
+MErr18="Erro! Não foi possível criar pasta de quarentena"
+MErr19="Erro! Pasta de logs não existe"
 MErr20="Erro! Arquivo de configuração desta aplicação não foi encontrado"
-MErr21="Erro! Problemas na cópia de arquivos PDF da pasta de upload para a pasta emporária de tratamento destes arquivos"
+MErr21="Erro! Problemas na cópia de arquivos da pasta de upload para a pasta emporária de tratamento destes arquivos"
 MErr22="Erro! Problemas na criação do arquivo de comandos SQL para popular tabelas. Transferindo arquivo(s) do lote para quarentena"
 MErr23="Erro! Arquivo de logs não existe e não foi possível recriá-lo"
 MErr24="Erro! Não foi possível inserir informações na tabela su_docs_cidades. Transferindo arquivos do lote para a quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
-MErr25="Erro! É necessário instalar o aplicativo 'detox' (apt-get install detox)"
+MErr25="Erro! É necessário instalar o aplicativo 'detox' conforme manual de instalação"
 MErr26="Erro! Não foi possível compactar arquivo de logs"
-Merr27="Erro! Script periódico de incorporação de arquivos PDF ao acervo da Superinterface só pode ser chamado a partir da pasta 'su_install'"
-MErr28="Erro! Arquivo que guarda a numeração dos nomes dos arquivos PDF não foi encontrado. Transferindo arquivo(s) do lote para quarentena"
+Merr27="Erro! Script periódico de incorporação de arquivos ao acervo da Superinterface só pode ser executado a partir da pasta 'su_install'"
+MErr28="Erro! Arquivo que guarda a numeração dos nomes dos arquivos do acervo não foi encontrado. Transferindo arquivo(s) do lote para quarentena"
 MErr29="Erro! Índice encontrado para renomear nome dos arquivos não é um valor numérico. Transferindo arquivo(s) do lote para quarentena"
 MErr30="Erro! É necessário instalar o aplicativo 'unoconv' conforme manual de instalação"
 MErr31="Erro! Pasta para upload de arquivos DOC, DOCX não criada" 
@@ -80,11 +79,12 @@ MErr45="Erro! Não foi possível atualizar o arquivo que guarda a numeração do
 MErr46="Erro! Não foi possível gerar JPG da primeira página do PDF.  Transferindo arquivo(s) do lote para quarentena"
 MErr47="Erro! Problemas na criação do arquivo TXT sem acento. Transferindo arquivo(s) do lote para quarentena"
 MErr48="Erro! Problemas na preparação de arquivo TXT sem caracteres de controle. Transferindo arquivo(s) do lote para quarentena"
+MErr49="Erro! É necessário instalar o aplicativo 'aha' conforme manual de instalação"
 #
 #	mensagens de informação
-MInfo01="Bem vindo ao script de tratamento de novos arquivos PDF em: "
+MInfo01="Bem vindo ao script de tratamento de novos arquivos do acervo em: "
 MInfo02="Quantidade de arquivos na pasta de quarentena= "
-MInfo03="Sucesso. Criada pasta temporária para tratamento de arquivos PDF" 
+MInfo03="Sucesso. Criada pasta temporária para tratamento de arquivos" 
 MInfo04="Sucesso. Geração de arquivo com instruções SQL para popular diversas tabelas do acervo foi realizada corretamente"
 MInfo05="Sucesso. Informações inseridas corretamente na tabela su_docs_cidades"
 MInfo06="Aviso: pasta de logs não estava criada.  Criação foi realizada com sucesso"
@@ -113,19 +113,19 @@ MInfo28="Quantidade de registros na tabela 'su_docs instituições'= "
 MInfo29="Quantidade de registros na tabela 'su_cidades'= "
 MInfo30="Quantidade de registros na tabela 'su_docs_cidades'= "
 MInfo31="Quantidade de tabelas existentes na base= "
-MInfo32="Sucesso. Fim do tratamento dos novos arquivos PDFs!"
+MInfo32="Sucesso. Fim do tratamento dos novos arquivos submetidos ao acervo!"
 MInfo33="Arquivo já existia na pasta de quarentena. Suspendendo o tratamento deste arquivo: "
 MInfo34="Movendo este arquivo para pasta de quarentena pois ele já existe no repositório: "
 MInfo35="Detectado arquivo novo, a ser incluído no repositório:  "
 MInfo36="Aviso: estranho! Pasta de quarentena não encontrada no ambiente.  Fizemos sua recriação com sucesso"
-MInfo37="Aviso: estranho! A pasta de logs não existia no ambiente. Fizemos a sua recriação"
+#MInfo37=""
 MInfo38="Término do tratamento para este lote de arquivos"
-MInfo39="Aviso: estranho! O arquivo de logs não existia.  Fizamos sua recriação"
-MInfo40="Alerta: notamos a falta do aplicativo cowsay. Mas ele não é obrigatório. Dica: assim que possível, instalar o cowsay  (apt-get install cowsay)"
-MInfo41="Alerta: notamos a falta do aplicativo figlet. Mas ele não é obrigatório. Dica: assim que possível, instalar o figlet  (apt-get install figlet)"
+MInfo39="Aviso: estranho! O arquivo de logs não existia.  Fizemos sua recriação"
+MInfo40="Aviso: notamos a falta do aplicativo cowsay. Mas ele não é obrigatório. Dica: assim que possível, instalar o cowsay conforme manual de instalação"
+MInfo41="Aviso: notamos a falta do aplicativo figlet. Mas ele não é obrigatório. Dica: assim que possível, instalar o figlet conforme manual de instalação"
 MInfo42="Data:"
 MInfo43="Iniciando o tratamento dos novos arquivos"
-MInfo44=".....Testando acesso ao arquivo de logs"
+MInfo44=".....Arquivo de log não encontrado. Testando acesso ao arquivo de logs para recriá-lo"
 MInfo45="Quantidade de arquivos restantes na pasta de uploads= "
 MInfo46="Sucesso. Arquivo de logs compactado em: "
 MInfo47="Movendo arquivo para pasta de quarentena pois ele apresentou problemas na sua estrutura:  "
@@ -168,58 +168,58 @@ MCor02="\e[33m"         # cor amarela, quando for imprimir mensagens na tela
 function fMens () {								# função para enviar mensagem, das seguintes formas:
 	case $1 in
 			$FInfor)							# com line feed ao final, cor default
-				echo -e ".....$2" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -e ".....$2" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FInfo1)
-				echo -e "$2" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -e "$2" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FInfo2)							# sem line feed, cor default
-				echo -n ".....$2" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -n ".....$2" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FSucs3)							# sem line feed, cor azul
-				echo -ne "\e[34m.....$2\e[97m" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -ne "\e[34m.....$2\e[97m" | tee -a "$CPPLOG"/"$CPALOG"
             	;;
 			$FSucss)							# com line feed ao final. cor azul
-        		echo -e "\e[34m.....$2\e[97m" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+        		echo -e "\e[34m.....$2\e[97m" | tee -a "$CPPLOG"/"$CPALOG"
             	;;
 			$FSucs2)							# com lines feed antes e depois, cor azul
-				echo -e "\n\e[34m.....$2\e[97m" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -e "\n\e[34m.....$2\e[97m" | tee -a "$CPPLOG"/"$CPALOG"
             	;;
 			$FInsuc)							# com line feed depois, aviso de interrupção do script, cor vermelha
-				echo -e  "\e[31m.....$2" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
-            	echo -e ".....$MErr10\e[97m" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"	# mens. interrompendo script
+				echo -e  "\e[31m.....$2" | tee -a "$CPPLOG"/"$CPALOG"
+            	echo -e ".....$MErr10\e[97m" | tee -a "$CPPLOG"/"$CPALOG"	# mens. interrompendo script
             	;;
 			$FInsu1)
 				echo -e  "\n\e[31m.....$2"
 				echo -e ".....$MErr10\e[97m"	# mens. interrompendo script
 				;;
 			$FInsu2)							# sem line feed ao final, cor vermelha
-				echo -ne "\e[31m.....$2" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -ne "\e[31m.....$2" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FInsu3)							# com line feed ao final, cor vermelha, ao final volta cor default
-				echo -e "\e[31m$2\e[97m"  | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -e "\e[31m$2\e[97m"  | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FInsu4)							# cor vermelha
-				echo -e  "\e[31m.....$2\e[97m" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				echo -e  "\e[31m.....$2\e[97m" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FCowsa)
-				shuf -n 1 $2 | cowsay -p -W 50 | tee -aa "$CPLOG_DIR"/"$CPLOGSFILE"
-#				shuf -n 1 $2 | cowsay -p -W 50 | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				shuf -n 1 $2 | cowsay -p -W 50 | tee -aa "$CPPLOG"/"$CPALOG"
+#				shuf -n 1 $2 | cowsay -p -W 50 | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FLinha)
 				printf '=%.0s' {1..100}
-				printf '=%.0s' {1..100} >> $CPLOG_DIR/$CPLOGSFILE
-				echo -e "\n\n" | tee -a "$CPLOG_DIR"/"$CPLOGSFILE"
+				printf '=%.0s' {1..100} >> $CPPLOG/$CPALOG
+				echo -e "\n\n" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FFighl)
 				figlet -f standard -k -t -c -p -w 120  "
 --------------
 Superinterface
---------------" | tee -aa "$CPLOG_DIR"/"$CPLOGSFILE"
+--------------" | tee -aa "$CPPLOG"/"$CPALOG"
 				;;
 			*)
-        		echo "\e[31m.....OOOooops!\e[97m" | tee -aa "$CPLOG_DIR"/"$CPLOGSFILE"
-            	echo $1 | tee -aa "$CPLOG_DIR"/"$CPLOGSFILE"
+        		echo "\e[31m.....OOOooops!\e[97m" | tee -aa "$CPPLOG"/"$CPALOG"
+            	echo $1 | tee -aa "$CPPLOG"/"$CPALOG"
             	exit
             	;;
 	esac
@@ -234,22 +234,24 @@ function fInit () {
 : '
 	Consistências iniciais (principais):
 	C1: se o usuário é root
-	C2: se a pasta corrente é a de instalação
-	C3: se o arquivo de configuração está disponível
+	C2: se o arquivo de configuração está disponível
+	C3: se a pasta corrente é a de instalação
 	C4: se pasta e arquivo de logs estão preparados
-	C5: verificar a existência de algum arquivo para tratamento na pasta de uploads
+	C5: se pasta de uploads está disponível
+	C6: verificar existência de arquivos para tratamento esperando na pasta de uploads
 	--------	--------	--------  
-	C6:  verificar se aplicativo unoconv está instalado
-	C7:  verificar se aplicativo detox  está instalado
-	C8:  verificar se aplicativo figlet está instalado
-	C9:  verificar se aplicativo cowsay está instalado
-	C10: verificar existência arquivo contendo nomes das cidades
-	C11: verificar existência de arquivo com comandos SQL para inserção dados na tabela su_cidades
-	C12: verificar existência da pasta de repositório de arquivos PDF do acervo arquivístico
-	C13: verificar existência da pasta de arquivos não PDF já preparados
-	C14: verificar existência de pasta de quarentena de arquivos do acervo arquivístico
-	C15: verificar a conexão com o banco de dados
- 	C16: verificar se deve renomear os arquivos (numerando-os)
+	C7:  verificar se aplicativo unoconv está instalado
+	C8:  verificar se aplicativo aha     está instalado
+	C9:  verificar se aplicativo detox   está instalado
+	C10:  verificar se aplicativo figlet  está instalado
+	C11: verificar se aplicativo cowsay  está instalado
+	C12: verificar existência arquivo contendo nomes das cidades
+	C13: verificar existência de arquivo com comandos SQL para inserção dados na tabela su_cidades
+	C14: verificar pasta para arquivos do acervo
+	C15: verificar pasta de trabalho
+	C16: verificar existência da pasta de arquivos não PDF já preparados
+	C17: verificar existência de pasta de quarentena
+	C18: verificar a conexão com o banco de dados
 	--------	--------	--------  
 '
 	#										C1: verificar se é usuário root
@@ -257,48 +259,39 @@ function fInit () {
     	fMens "$FInsu1" "$MErr01"
         exit
 	fi
-    #										C2: verificar se pasta corrente é a de instalação
-        if [ "${PWD##*/}" != "$CPPINSTALL" ]; then
-                fMens "$FInsu1" "$MErr27"
-                exit
-        fi
-	#										C3: verificar se arquivo de configuração está disponível
+	#										C2: verificar se arquivo de configuração está disponível
 	if [ ! -f $CPCONFIG ]; then
 		fMens "$FInsu1" "$MErr20"
 		exit
 	fi
 	source	$CPCONFIG						# inserir arquivo de configuração
-	chmod	$CPPERMCONFIG	$CPCONFIG		# estabelecer permissão para arquivo de configuração 	
-	chmod	$CPPERMSHELL $0					# estabelecer permissão para este arquivo
-	#										verificar se arquivo de logs está disponível
-	if [ ! -d $CPLOG_DIR ]; then
-		mkdir	$CPLOG_DIR
-        if [ $? -ne 0 ]; then
-                fMens "$FInsuc" "$MErr19"
-                exit
-        fi	
-		fMens	"$FInfor" "$MInfo37"
-	fi
-	chmod	$CPPERMPADRAO $CPLOG_DIR		# estabelecer permissão para pasta de logs
+	chmod	$CPPERM500 $0					# estabelecer permissão para este arquivo
+    #										C3: verificar se pasta corrente é a de instalação
+	if [ "${PWD##*/}" != "$(basename $CPPINSTALL)" ]; then
+		fMens "$FInsu1" "$MErr27"
+        exit
+    fi
+	#										C4: verificar se pasta de logs está disponível
+	if [ ! -d $CPPLOG ]; then
+		fMens "$FInsuc" "$MErr19"
+ 		exit
+ 	fi	
 	#										verificar existência de arquivo de logs
-	if [ ! -f "$CPLOG_DIR/$CPLOGSFILE" ]; then
-		echo  -e "\n$MInfo44" >> "$CPLOG_DIR"/"$CPLOGSFILE"	# C4: testando escrita no arquivo de logs 
+	if [ ! -f "$CPPLOG/$CPALOG" ]; then
+		echo  -e "\n$MInfo44" >> "$CPPLOG"/"$CPALOG"	# testando escrita no arquivo de logs 
 		if [ $? -ne 0 ]; then
 			fMens	"$FInsuc" "$MErr23"
 			exit
 		fi
-		fMens	"$FInfor" "$MInfo39"
+		fMens	"$FInsu4" "$MInfo39"
 	fi
-	chmod	$CPPERMARQUI $CPLOG_DIR"/"$CPLOGSFILE			# estabelecer permissão para arquivo de logs
-	#	verifica existência de pasta de uploads de arquivos
-	if [ ! -d $CPUPLOADS ]; then
+	#										C5: verifica existência de pasta de uploads de arquivos
+	if [ ! -d $CPPUPLOADS ]; then
 		fMens "$FInsuc" "$MErr09"
 		exit
 	fi
-	chmod $CPPERMPADRAO $CPUPLOADS			# estabelecer permissão para a pasta de uploads
-
-	#										C5: verificar existência de arquivos para serem tratados
-	if ls $CPUPLOADS/*.*  1> /dev/null 2>&1; then
+	#										C6: verificar existência de arquivos para serem tratados
+	if ls $CPPUPLOADS/*.*  1> /dev/null 2>&1; then
 		:
 	else
 		exit 0								# nada a ser tratado: sem arquivos novos
@@ -307,8 +300,8 @@ function fInit () {
 	fMens	"$FLinha"	""
 	fMens	"$FInfor" "$MInfo10"			# mensagem que existem novos arquivos para serem tratados
 	fMens	"$FInfo2" "$MInfo53"
-	fMens	"$FInfo1" "$(ls $CPUPLOADS/* | wc -l)"
-	#										C6: verificar se aplicativo unoconv está instalado
+	fMens	"$FInfo1" "$(ls $CPPUPLOADS/* | wc -l)"
+	#										C7: verificar se aplicativo unoconv está instalado
 	#										(necessário para conversão arquivos -> .pdf)
 	if [ -n "$(dpkg --get-selections | grep unoconv | sed '/deinstall/d')" ]; then
 	:
@@ -316,14 +309,22 @@ function fInit () {
 		fMens "$FInsuc" "$MErr30"
 		exit
 	fi
-	#										C7: verificar se aplicativo detox está instalado
+	#										C8: verificar se aplicativo aha está instalado
+	#										(necessário para geração html de arquivo de logs)
+	if [ -n "$(dpkg --get-selections | grep aha | sed '/deinstall/d')" ]; then
+	:
+	else
+		fMens "$FInsuc" "$MErr49"
+		exit
+	fi
+	#										C9: verificar se aplicativo detox está instalado
 	if [ -n "$(dpkg --get-selections | grep detox | sed '/deinstall/d')" ]; then
 	:
 	else
 		fMens "$FInsuc" "$MErr25"
 		exit
 	fi
-	#										C8: verificar se aplicativo figlet está instalado
+	#										C10: verificar se aplicativo figlet está instalado
 	if [ -n "$(dpkg --get-selections | grep figlet | sed '/deinstall/d')" ]; then
 		fMens "$FInfo1" "$MCor02"			# saída na cor amarela 
 		fMens "$FFighl"
@@ -335,71 +336,61 @@ function fInit () {
 	fMens "$FInfo1" "$0"
 	fMens "$FInfor" "$MInfo42:  $(date '+%d-%m-%Y as  %H:%M:%S') --- $MInfo43"
 	fMens "$FInfo1" "$MCor01"
-	#										C9: verificar se aplicativo cowsay está instalado
+	#										C11: verificar se aplicativo cowsay está instalado
 	if [ -n  "$(dpkg --get-selections | grep cowsay | sed '/deinstall/d')" ]; then
 		fMens "$FCowsa"  "$CPNOMECOWSAY1"
 	else
 		fMens "$FInfor" "$MInfo40"
 	fi
-	chmod $CPPERMFIXOS      super_cowsay1.txt	# estabelecer permissão para o arquivo de mensagens cowsay	
-	chmod $CPPERMFIXOS $CPPADMIN/$CPNOMECIDADES
-	#										C10: verificar existência arquivo contendo nomes das cidades (em letras maiúsculas)
+	#										C12: verificar existência arquivo contendo nomes das cidades (em letras maiúsculas)
     if [ ! -f $CPPADMIN/$CPNOMECIDADES ]; then
 		fMens "$FInsuc" "$MErr03"
         exit
 	fi
-    chmod $CPPERMFIXOS $CPPADMIN/$CPNOMECIDADES
-    #										C11: verificar existência arquivo SQL para inserção dados na tabela 'su_cidades'
+    #										C13: verificar existência arquivo SQL para inserção dados na tabela 'su_cidades'
     if [ ! -f $CPINSERECIDADES ]; then
 		fMens "$FInsuc" "$MErr04"
 		exit
     fi
-	chmod $CPPERMFIXOS $CPINSERECIDADES
-	#										C12: verificar existência da pasta para arquivos PDF do acervo arquivístico
-	if [ ! -d $CPIMAGEM ]; then
+	#										C14: verificar existência da pasta para arquivos do acervo
+	if [ ! -d $CPPIMAGEM ]; then
 		fMens "$FInsuc" "$MErr11"
 		exit
 	fi
-	#									preparar pasta de trabalho (arquivos temporários)
-	rm -rf $CPTEMP 2>/dev/null
+	#										C15: verificar pasta de trabalho (arquivos temporários)
+	rm -rf $CPPWORK 2>/dev/null
     if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr05"
         exit
 	fi
-    mkdir $CPTEMP
+    mkdir $CPPWORK
     if [ $? -ne 0 ]; then
     	fMens "$FInsuc" "$MErr06"
         exit
 	else
     	fMens "$FSucss" "$MInfo03"
 	fi
-    chmod $CPPERMPADRAO $CPTEMP			# estabelecer permissão para pasta de trabalho
-
-	#									C13: verificar existência de pasta de arquivos originais não PDF já preparados
+	#										C16: verificar existência de pasta de arquivos originais não PDF
 	if [ ! -d $CPPRIMITIVO ]; then
 		mkdir $CPPRIMITIVO
 	    if [ $? -ne 0 ]; then
 			fMens "$FInsuc" "$MErr34"
         	exit
 		else
-			fMens	"$FSucss"	"$MInfo52"
+			fMens	"$FInsu4"	"$MInfo52"
 		fi
 	fi
-	chmod $CPPERMPADRAO $CPPRIMITIVO	# estabelecer permissão para pasta arquivos originais não PDF (já preparados)
-
-
-	#									C14: verificar existência de pasta de quarentena de arquivos do acervo arquivístico
-	if [ ! -d $CPQUARENTINE ]; then
-		mkdir $CPQUARENTINE
+	#										C17: verificar existência de pasta de quarentena
+	if [ ! -d $CPPQUARENTINE ]; then
+		mkdir $CPPQUARENTINE
 	    if [ $? -ne 0 ]; then
 			fMens "$FInsuc" "$MErr18"
         	exit
 		else
-			fMens	"$FSucss"	"$MInfo36"
+			fMens	"$FInsu4"	"$MInfo36"
 		fi
 	fi
-	chmod $CPPERMPADRAO $CPQUARENTINE               # estabelecer permissão para pasta de quarentena
-	#												C15: testar conexão com o banco de dados
+	#										C18: testar conexão com o banco de dados
     mysql -u $CPBASEUSER -b $CPBASE -p$CPBASEPASSW -e "quit" 2>/dev/null
 	if [ $? -ne 0 ]; then
     	fMens "$FInsuc" "$MErr07"
@@ -407,10 +398,22 @@ function fInit () {
     else
 			fMens "$FSucss" "$MInfo07"
 	fi
-	#												# C16: verificar se deve renomear os arquivos (numerando-os)
+	#											verificar se deve renomear os arquivos (numerando-os)
 	if [ $CPNUMERARPDF -ne 0 ]; then
-		fMens	"$FInfor"	"$MInfo24"				# mensagem informativa que irá renomear os arquivos
+		fMens	"$FInfor"	"$MInfo24"			# mensagem informativa que irá renomear os arquivos
 	fi
+	#											Definir permissões para pastas e arquivos
+	chmod	$CPPERM750 $CPPLOG					# estabelecer permissão para pasta   logs
+	chmod	$CPPERM750 $CPPUPLOADS				# estabelecer permissão para pasta   uploads
+    chmod 	$CPPERM750 $CPPWORK					# estabelecer permissão para pasta   trabalho
+	chmod 	$CPPERM750 $CPPRIMITIVO				# estabelecer permissão para pasta   arquivos originais não PDF (trabalhados)
+	chmod	$CPPERM750 $CPPQUARENTINE			# estabelecer permissão para pasta   quarentena
+	# ... ... ...
+	chmod	$CPPERM600 $CPCONFIG				# estabelecer permissão para arquivo configuração
+	chmod	$CPPERM640 $CPPLOG"/"$CPALOG		# estabelecer permissão para arquivo logs
+	chmod 	$CPPERM440 $CPNOMECOWSAY1			# estabelecer permissão para arquivo mensagens cowsay	
+	chmod 	$CPPERM440 $CPPADMIN/$CPNOMECIDADES	# estabelecer permissão para arquivo nomes de cidades
+	chmod 	$CPPERM440 $CPINSERECIDADES			# estabelecer permissão para arquivo SQL de inserção dados
 	return
 }
 #
@@ -429,37 +432,37 @@ function fGarq () {
 	local	su_nomebase
 	#									tirar apostrofo (e outros caracteres especiais) presentes no nome dos arquivos
 	#									primeira limpeza ainda superficial, mas necessária para iniciar tratamento dos PDF
-	find $CPTEMP -type f -print | while read su_arq;
+	find $CPPWORK -type f -print | while read su_arq;
 	do su_fileClean=$( echo ${su_arq} | tr ", @()&'!$" "-" );
 		mv "$su_arq" "$su_fileClean" 2>/dev/null;
 	done
-	su_quant=$(ls -l $CPTEMP/*.[pP][dD][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
+	su_quant=$(ls -l $CPPWORK/*.[pP][dD][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
 	su_quantTratados=$su_quantTratados+$su_quant		# atualiza quantidade arquivos já tratados nesta ativação do script
 	#                               					verificar se há corrupção dos arquivos PDF
-	for i in "$CPTEMP"/*.[pP][dD][fF]; do
+	for i in "$CPPWORK"/*.[pP][dD][fF]; do
 		pdfinfo "$i" &>/dev/null
 		if [ ! $? -eq 0 ]; then
-			mv -f $i "$CPQUARENTINE"/.
+			mv -f $i "$CPPQUARENTINE"/.
 			fMens   "$FInfor"       "$MInfo47 $(basename $i)"
 		fi
 	done
 	#                               						verificar se ainda há arquivos PDF a serem tratados
-	su_qpdf=$(ls -la $CPTEMP/*.[pP][dD][fF] 2>/dev/null | grep -e "^-" | wc -l) 2>/dev/null
+	su_qpdf=$(ls -la $CPPWORK/*.[pP][dD][fF] 2>/dev/null | grep -e "^-" | wc -l) 2>/dev/null
 	if [ $su_qpdf -eq 0 ]; then
 		fMens	"$FInfor"	"$MInfo60"
 		return
 	fi
 	#														modificar nomes dos arquivos PDF para minúsculo
-	for i in "$CPTEMP"/*.[pP][dD][fF]; do
+	for i in "$CPPWORK"/*.[pP][dD][fF]; do
 		detox -s lower-only $i
 		if [ $? -ne 0 ]; then
-			mv -f $i "$CPQUARENTINE"/. 2>/dev/null			# enviar o arquivo PDF para quarentena
+			mv -f $i "$CPPQUARENTINE"/. 2>/dev/null			# enviar o arquivo PDF para quarentena
 			fMens "$FInsu2" "$MErr44"
 			fMens "$FInsu3" "$(basename $i)"
 		fi
 	done
 	#                               						verificar se ainda há arquivos PDF a serem tratados
-	su_qpdf=$(ls -la $CPTEMP/*.[pP][dD][fF] 2>/dev/null | grep -e "^-" | wc -l) 2>/dev/null
+	su_qpdf=$(ls -la $CPPWORK/*.[pP][dD][fF] 2>/dev/null | grep -e "^-" | wc -l) 2>/dev/null
 	if [ $su_qpdf -eq 0 ]; then
 		fMens	"$FInfor"	"$MInfo60"
 		return
@@ -468,26 +471,26 @@ function fGarq () {
 	if [ $CPNUMERARPDF -ne 0 ]; then
 	 	fMens   "$FInfor"	"$MInfo11"						# mensagem de renomear arquivos 
 		if [ ! -f $CPPADMIN/$CPINDICEPDF ]; then			# testar existência de arquivo com próximo número para numerar
-			mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+			mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
 			fMens "$FInsu4" "$MErr28"						# arquivo com informação de numeração não encontrado 
 			fMens "$FInfor" "$MInfo38"
 			return
 		fi
 		su_cont=$(cat $CPPADMIN/$CPINDICEPDF)				# faz leitura do próximo número a ser renomeado o arquivo
 		if (echo $su_cont | egrep '[^0-9]' &> /dev/null) then
-			mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/. 2>/dev/mull	# enviar os arquivos PDF para quarentena
+			mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/mull	# enviar os arquivos PDF para quarentena
 			fMens	"$FInsuc" "$MErr29"									# valor encontrado não é numérico
 			fMens "$FInfor" "$MInfo38"
 			return
 		fi
-		for i in $CPTEMP/*.[pP][dD][fF]
+		for i in $CPPWORK/*.[pP][dD][fF]
 		do 
 			su_arq=$(basename $i)								# nome do arquivo com extensão, mas sem caminho
 			su_arq=${su_arq%.*}									# nome do arquivo sem extensão e sem caminho
-			mv -i "$i" "$CPTEMP/super${su_cont}_${su_arq:0:$CPMAX}.pdf"
+			mv -i "$i" "$CPPWORK/super${su_cont}_${su_arq:0:$CPMAX}.pdf"
 			if [ $? -ne 0 ]
 			then
-				mv -f $CPTEMP/*.[pP][dD][fF] "$CPQUARENTINE"/.	# enviar os arquivos PDF para quarentena
+				mv -f $CPPWORK/*.[pP][dD][fF] "$CPPQUARENTINE"/.	# enviar os arquivos PDF para quarentena
 				fMens "$FInsu4" "$MErr12"
 				fMens "$FInfor" "$MInfo38"
 				return
@@ -496,7 +499,7 @@ function fGarq () {
 				echo $su_cont > $CPPADMIN/$CPINDICEPDF			# atualiza valor do contador no arquivo
 				if [ $? -ne 0 ]
 				then
-					mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
+					mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
 					fMens "$FInsu4" "$MErr45"
 					fMens "$FInfor" "$MInfo38"
 					return
@@ -506,160 +509,160 @@ function fGarq () {
 		fMens "$FSucss" "$MInfo12"	
 	fi
 	#													verificar se os arquivos já estão na pasta de quarentena
-	for i in $CPTEMP/*.[pP][dD][fF]; do
+	for i in $CPPWORK/*.[pP][dD][fF]; do
 		su_nomebase=$(basename $i)						# nome do arquivo com extensão, e sem caminho (path)
-		if [ -f $CPQUARENTINE/$su_nomebase ]; then
+		if [ -f $CPPQUARENTINE/$su_nomebase ]; then
 			#											arquivo já está colocado em quarentena
 			fMens	"$FInfor"	"$MInfo33 $su_nomebase"
 			rm -f $i									# suspender o tratamento do arquivo.
 		fi
 	done
 	#													verificar se ainda existem arquivos PDF a serem tratados
-	if [ ! "$(ls -A $CPTEMP)" ]; then
+	if [ ! "$(ls -A $CPPWORK)" ]; then
 			fMens	"$FInfor"	"$MInfo38"
 			return
 	fi
 	#													verificar se os arquivos já estão no acervo (na base dados)
-	for i in $CPTEMP/*.[pP][dD][fF]; do
+	for i in $CPPWORK/*.[pP][dD][fF]; do
 		su_nomebase=$(basename $i)						# nome do arquivo com extensão, e sem caminho (path)
 		# su_nomebaseSem="${su_nomebase%.*}"			# nome do arquivo sem extensão
-		if [ -f $CPIMAGEM/$su_nomebase ]; then
+		if [ -f $CPPIMAGEM/$su_nomebase ]; then
 			#											arquivo já existe no repositório
 			fMens	"$FInfo2"	"$MInfo34"
 			fMens	"$FInfo1"	"$su_nomebase"
-			mv -f $i $CPQUARENTINE/.
+			mv -f $i $CPPQUARENTINE/.
 		else
 			fMens	"$FInfo2"	"$MInfo35"				# arquivo para ser tratado.  Não existe no repositório
 			fMens	"$FInfo1"	"$su_nomebase"
 		fi
 	done
 	#													verificar se sobrou algum arquivo pdf a ser tratado
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then
     	fMens	"$FInfor" "$MInfo56"
 	else
     	fMens	"$FInfor" "$MInfo38"
 		return
 	fi
 	#													gerar arquivos TXT a partir de arquivos PDF
-	ls $CPTEMP/*.[pP][dD][fF] | awk '{printf "pdftotext  -layout "$1; gsub(/\.pdf/,".txt",$1); print " "$1}' > $CPLOG_DIR/super_temp_gera_txt.bash 2>/dev/null
+	ls $CPPWORK/*.[pP][dD][fF] | awk '{printf "pdftotext  -layout "$1; gsub(/\.pdf/,".txt",$1); print " "$1}' > $CPPLOG/super_temp_gera_txt.bash 2>/dev/null
 	if [ $? -ne 0 ]; then
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-		rm -f $CPLOG_DIR/super_temp_gera_txt.bash
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
+		rm -f $CPPLOG/super_temp_gera_txt.bash
 		fMens "$FInsu4" "$MErr13"
 		fMens "$FInfor" "$MInfo38"
 		return
 	fi
-	chmod 740 $CPLOG_DIR/super_temp_gera_txt.bash 2>/dev/null
-	bash $CPLOG_DIR/super_temp_gera_txt.bash 2>/dev/null
+	chmod 740 $CPPLOG/super_temp_gera_txt.bash 2>/dev/null
+	bash $CPPLOG/super_temp_gera_txt.bash 2>/dev/null
 	if [ $? -ne 0 ]; then
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-		rm -f $CPLOG_DIR/super_temp_gera_txt.bash
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
+		rm -f $CPPLOG/super_temp_gera_txt.bash
 		fMens "$FInsu4" "$MErr16"
 		fMens "$FInfor" "$MInfo38"
 		return
 	fi
-	rm -f $CPLOG_DIR/super_temp_gera_txt.bash
+	rm -f $CPPLOG/super_temp_gera_txt.bash
 	#							gerar nomes dos arquivos TXT: sem acentuação, letras maiúsculas e sem caracteres controle
-	for i in "$CPTEMP"/*.txt
+	for i in "$CPPWORK"/*.txt
 	do
 		sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' $i > $i"."$CPACENTO
 		if [ $? -ne 0 ]; then
-			mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-			rm -f $CPTEMP/*.*
+			mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
+			rm -f $CPPWORK/*.*
 			fMens "$FInsu4" "$MErr47"
 			fMens "$FInfor" "$MInfo38"
 			return
 		fi
 	done
 	#
-	for i in  "$CPTEMP"/*.$CPACENTO
+	for i in  "$CPPWORK"/*.$CPACENTO
 	do
 		tr  [:cntrl:] ' ' < $i > $i".contrl4"
 		tr -d '\176-\377' < $i".contrl4" > $i"."$CPCONTRL
 	done
 	#
-	for i in "$CPTEMP"/*.$CPCONTRL
+	for i in "$CPPWORK"/*.$CPCONTRL
 	do
 		tr [:lower:] [:upper:] < $i > $i"."$CPMAIUSCULA
 	done
-	rm -f "$CPTEMP"/*.$CPCONTRL "$CPTEMP"/*.contrl4 "$CPTEMP"/*.$CPACENTO 2> /dev/null
+	rm -f "$CPPWORK"/*.$CPCONTRL "$CPPWORK"/*.contrl4 "$CPPWORK"/*.$CPACENTO 2> /dev/null
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo14"
 	else
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
 		fMens "$FInsu4" "$MErr48"
 		fMens "$FInfor" "$MInfo38"
 		return
 	fi
 	#													gerar arquivos JPG a partir de arquivos PDF
-	ls $CPTEMP/*.[pP][dD][fF] | awk '{printf "convert "$1"[0]"; gsub(/\.pdf/,"_pagina1.jpg",$1); print " "$1}' > $CPLOG_DIR/super_temp_gera_jpg.bash 2>/dev/null
-	chmod 740 $CPLOG_DIR/super_temp_gera_jpg.bash 2>/dev/null
-	bash $CPLOG_DIR/super_temp_gera_jpg.bash 2>/dev/null
+	ls $CPPWORK/*.[pP][dD][fF] | awk '{printf "convert "$1"[0]"; gsub(/\.pdf/,"_pagina1.jpg",$1); print " "$1}' > $CPPLOG/super_temp_gera_jpg.bash 2>/dev/null
+	chmod 740 $CPPLOG/super_temp_gera_jpg.bash 2>/dev/null
+	bash $CPPLOG/super_temp_gera_jpg.bash 2>/dev/null
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo19"
-		rm -f $CPLOG_DIR/super_temp_gera_jpg.bash
+		rm -f $CPPLOG/super_temp_gera_jpg.bash
 	else
 		fMens "$FInsu4" "$MErr46"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-		rm -f $CPLOG_DIR/super_temp_gera_jpg.bash
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+		rm -f $CPPLOG/super_temp_gera_jpg.bash
 		return
 	fi
 	#													gerar arquivo com ocorrências das cidades nos arquivos TXT
 	fMens "$FInfor" "$MInfo15"
-	cat $CPPADMIN/$CPNOMECIDADES | sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' | awk 'BEGIN{FS=","}{print "grep -Howi \""$1"\" '$CPTEMP'/*.txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA' | awk '\''BEGIN{FS=\":\"}{print $2\", \"$1}'\'' | sort | uniq -c | sed '\''s/\\, /\\,/g'\'' | sed '\''s/   /  /g'\''| sed '\''s/  / /g'\'' | sed '\''s/  //g'\'' | awk '\''{guarda=$1; $1=\"\"; print $0\",\"guarda;}'\''"}' > $CPLOG_DIR/super_temp_ocorrencias_cidades.bash 2>/dev/null
+	cat $CPPADMIN/$CPNOMECIDADES | sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' | awk 'BEGIN{FS=","}{print "grep -Howi \""$1"\" '$CPPWORK'/*.txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA' | awk '\''BEGIN{FS=\":\"}{print $2\", \"$1}'\'' | sort | uniq -c | sed '\''s/\\, /\\,/g'\'' | sed '\''s/   /  /g'\''| sed '\''s/  / /g'\'' | sed '\''s/  //g'\'' | awk '\''{guarda=$1; $1=\"\"; print $0\",\"guarda;}'\''"}' > $CPPLOG/super_temp_ocorrencias_cidades.bash 2>/dev/null
 	if [ $? -ne 0 ]; then
 		fMens "$FInsu4" "$MErr14"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-		rm -f $CPLOG_DIR/super_temp_ocorrencias_cidades.bash
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+		rm -f $CPPLOG/super_temp_ocorrencias_cidades.bash
 		return
 	fi
-	bash $CPLOG_DIR/super_temp_ocorrencias_cidades.bash > $CPLOG_DIR/super_temp_tabela_ocorrencias_novospdf.txt 2> /dev/null
+	bash $CPPLOG/super_temp_ocorrencias_cidades.bash > $CPPLOG/super_temp_tabela_ocorrencias_novospdf.txt 2> /dev/null
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo16"
-		rm -f $CPLOG_DIR/super_temp_ocorrencias_cidades.bash
+		rm -f $CPPLOG/super_temp_ocorrencias_cidades.bash
 	else
 		fMens "$FInsu4" "$MErr14"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-		rm -f $CPLOG_DIR/super_temp_ocorrencias_cidades.bash $CPLOG_DIR/super_temp_tabela_ocorrencias_novospdf.txt 
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+		rm -f $CPPLOG/super_temp_ocorrencias_cidades.bash $CPPLOG/super_temp_tabela_ocorrencias_novospdf.txt 
 		return
 	fi
 	#													gerar arquivo de instruções SQL para popular tabela su_docs_cidades
-	cat $CPLOG_DIR/super_temp_tabela_ocorrencias_novospdf.txt | sed 's/txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA'/pdf/g' | awk 'BEGIN{FS=","}{gsub(/^ /,"",$1);print "insert into su_docs_cidades (id_cidade, id_documento, ocorrencia) values ((select id_chave_cidade from su_cidades where cidade_sem_acentuacao=\""$1"\" limit 1),(select id_chave_documento from su_documents where photo_filename_documento like \""$2"\" limit 1),"$3");"}' > $CPLOG_DIR/super_temp_popular_su_docs_cidades.sql
+	cat $CPPLOG/super_temp_tabela_ocorrencias_novospdf.txt | sed 's/txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA'/pdf/g' | awk 'BEGIN{FS=","}{gsub(/^ /,"",$1);print "insert into su_docs_cidades (id_cidade, id_documento, ocorrencia) values ((select id_chave_cidade from su_cidades where cidade_sem_acentuacao=\""$1"\" limit 1),(select id_chave_documento from su_documents where photo_filename_documento like \""$2"\" limit 1),"$3");"}' > $CPPLOG/super_temp_popular_su_docs_cidades.sql
 	if [ $? -ne 0 ]; then
 		fMens "$FInsu4" "$MErr15"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-		rm -f $CPLOG_DIR/super_temp_popular_su_docs_cidades.sql $CPLOG_DIR/super_temp_tabela_ocorrencias_novospdf.txt 
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql $CPPLOG/super_temp_tabela_ocorrencias_novospdf.txt 
 		return
 	fi
 	#													trocar indicação de pastas: de temporária para a pasta de imagens
-	sed "s#$CPTEMP#$CPIMAGEM#g" -i $CPLOG_DIR/super_temp_popular_su_docs_cidades.sql
+	sed "s#$CPPWORK#$CPPIMAGEM#g" -i $CPPLOG/super_temp_popular_su_docs_cidades.sql
 	if [ $? -eq 0 ]; then
 			fMens "$FSucss" "$MInfo17"
 	else
 		fMens "$FInsu4" "$MErr15"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-		rm -f $CPLOG_DIR/super_temp_popular_su_docs_cidades.sql $CPLOG_DIR/super_temp_tabela_ocorrencias_novospdf.txt 
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql $CPPLOG/super_temp_tabela_ocorrencias_novospdf.txt 
 		return
 	fi
-	rm -f $CPLOG_DIR/super_temp_tabela_ocorrencias_novospdf.txt
+	rm -f $CPPLOG/super_temp_tabela_ocorrencias_novospdf.txt
 	#												preparar arquivo SQL visando popular as tabelas:
-	find $CPTEMP/*.[pP][dD][fF] | grep -i pdf | sed $'s/\//\t\t /g' | awk '{guarda=$NF; printf "insert into su_documents (photo_filename_documento, alt_foto_jpg, nome_documento) values (\"'$CPIMAGEM'/"$NF"\",";gsub(/\.pdf/,"", $NF); printf "\"'$CPIMAGEM'/"$NF"_pagina1.jpg\",\"" ; gsub(/-/," ",$NF); gsub(/_/," ",$NF); print $NF"\");"; out=""; print "insert into su_docs_signatarios (id_signatario, id_documento) values ((select id_chave_registrado from su_registrados where nome_registrado like \"signatário indefinido\"),(select id_chave_documento from su_documents where photo_filename_documento=\"'$CPIMAGEM'/"guarda"\"));"; print "insert into su_docs_instituicoes (id_instituicao, id_documento) values ((select id_chave_instituicao from su_instituicoes where nome_instituicao like \"Instituição Indefinida\"),(select id_chave_documento from su_documents where photo_filename_documento=\"'$CPIMAGEM'/"guarda"\"));"}' > $CPLOG_DIR/super_temp_documentos_novospdf.sql
+	find $CPPWORK/*.[pP][dD][fF] | grep -i pdf | sed $'s/\//\t\t /g' | awk '{guarda=$NF; printf "insert into su_documents (photo_filename_documento, alt_foto_jpg, nome_documento) values (\"'$CPPIMAGEM'/"$NF"\",";gsub(/\.pdf/,"", $NF); printf "\"'$CPPIMAGEM'/"$NF"_pagina1.jpg\",\"" ; gsub(/-/," ",$NF); gsub(/_/," ",$NF); print $NF"\");"; out=""; print "insert into su_docs_signatarios (id_signatario, id_documento) values ((select id_chave_registrado from su_registrados where nome_registrado like \"signatário indefinido\"),(select id_chave_documento from su_documents where photo_filename_documento=\"'$CPPIMAGEM'/"guarda"\"));"; print "insert into su_docs_instituicoes (id_instituicao, id_documento) values ((select id_chave_instituicao from su_instituicoes where nome_instituicao like \"Instituição Indefinida\"),(select id_chave_documento from su_documents where photo_filename_documento=\"'$CPPIMAGEM'/"guarda"\"));"}' > $CPPLOG/super_temp_documentos_novospdf.sql
 	if [ $? -eq 0 ]; then
 			fMens "$FSucss" "$MInfo04"
 	else
 		fMens "$FInsu4" "$MErr22"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.			# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-		rm -f $CPLOG_DIR/super_temp_*.sql 2>/dev/null
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.			# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+		rm -f $CPPLOG/super_temp_*.sql 2>/dev/null
 		return
 	fi
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then		# ainda existem arquivos PDF?
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then		# ainda existem arquivos PDF?
 		fInse										# insere as informações dos arquivos no acervo arquivístico
 	fi
 	return
@@ -673,29 +676,29 @@ function fGarq () {
 #
 function fInse () {
 	#													popular a base de dados
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPLOG_DIR/super_temp_documentos_novospdf.sql"
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPPLOG/super_temp_documentos_novospdf.sql"
 	if [ $? -eq 0 ]; then
-		rm -f $CPLOG_DIR/super_temp_documentos_novospdf.sql
+		rm -f $CPPLOG/super_temp_documentos_novospdf.sql
 		fMens "$FSucss" "$MInfo25"
 	else
 		fMens "$FInsu4" "$MErr17"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-		rm -f $CPLOG_DIR/super_temp*.sql 
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+		rm -f $CPPLOG/super_temp*.sql 
 		return
 	fi
 	#													inserir dados das ocorrências de nomes de cidades presentes nos arquivos
 	#													TXT na tabela su_docs_cidades
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE 2>/dev/null < $CPLOG_DIR/super_temp_popular_su_docs_cidades.sql
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE 2>/dev/null < $CPPLOG/super_temp_popular_su_docs_cidades.sql
    	if [ $? -eq 0 ]; then
    		fMens "$FSucss" "$MInfo05"
-		mv -f $CPTEMP/*.* $CPIMAGEM/.
-   		rm -f $CPLOG_DIR/super_temp_popular_su_docs_cidades.sql 
+		mv -f $CPPWORK/*.* $CPPIMAGEM/.
+   		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql 
    	else
    		fMens "$FInsu4" "$MErr24"
-		mv -f $CPTEMP/*.[pP][dD][fF] $CPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPTEMP/*.*
-   		rm -f $CPLOG_DIR/super_temp_popular_su_docs_cidades.sql 
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+		rm -f $CPPWORK/*.*
+   		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql 
    	fi
 	return
 }	# fim da rotina de inserção de dados nas tabelas do mysql
@@ -707,7 +710,7 @@ function fInse () {
 # --------------------------------------------------------------------------------------------------------------------------+
 function fTrataPDF () {
 	#									verificar existência de arquivos PDF para serem tratados
-	if ls $CPUPLOADS/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPUPLOADS/*.[pP][dD][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo48"
@@ -721,22 +724,22 @@ function fTrataPDF () {
 	local su_arq
 	local su_inodesList
 	local su_fileClean
-	su_quant=$(ls -l $CPUPLOADS/*.[pP][dD][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
-	if [ $su_quant -gt $CPQPDFLOTE ]; then
-		su_quant=$CPQPDFLOTE			# limita quantidade de arquivos a transferir
-	fi
+	su_quant=$(ls -l $CPPUPLOADS/*.[pP][dD][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
+	if [ $su_quant -gt $((CPQPDFLOTE-su_quantTratados)) ]; then
+			su_quant=$((CPQPDFLOTE-su_quantTratados))							# limita quantidade de arquivos a transferir
+    fi
 	fMens	"$FInfor" "$MInfo08"		# mensagem informando do inicio tratamento arquivos PDF
-	su_inodesList=$(ls -i $CPUPLOADS/*.[pP][dD][fF] | awk '{print $1}' | tr '\n' ' ')
+	su_inodesList=$(ls -i $CPPUPLOADS/*.[pP][dD][fF] | awk '{print $1}' | tr '\n' ' ')
 	#									mover certa quantidade de  arquivos DOCX para pasta de trabalho
 	#									Os demais, ficarão para a próxima ativação deste script via cron
 	for i in $su_inodesList				# transferir usando inode: arquivos podem ter nomes com caracteres de controle
 	do
-		find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPTEMP \;  # mover um arquivo
+		find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPWORK \;  # mover um arquivo
 		if [ $? -ne 0 ]; then
-			su_arq=$(find $CPUPLOADS -xdev -inum $i)
+			su_arq=$(find $CPPUPLOADS -xdev -inum $i)
 			fMens "$FInsu2" "$MErr08"
 			fMens "$FInsu3" "$su_arq"
-			find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPQUARENTINE \;  # mover para quarentena
+			find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPQUARENTINE \;  # mover para quarentena
 		fi
 		j=$j+1
 		if [ $j -eq $su_quant ]; then
@@ -745,12 +748,12 @@ function fTrataPDF () {
 	done
 	#									tirar apostrofo (e outros caracteres especiais) presentes no nome dos arquivos
 	#									primeira limpeza ainda superficial, mas necessária para iniciar tratamento dos PDF
-	find $CPTEMP -type f -print | while read su_arq;
+	find $CPPWORK -type f -print | while read su_arq;
 	do su_fileClean=$( echo ${su_arq} | tr ", *#$@%()&'!" "-" );
 		mv "$su_arq" "$su_fileClean" 2>/dev/null;
 	done
 	#									loop para certificar-se do mime-type
-	su_arq=$(ls -1 $CPTEMP/*.[pP][dD][fF] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[pP][dD][fF] 2>/dev/null)
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)					# nome do arquivo, sem caminho
 		su_tipo=$(file --mime-type -b $i)
@@ -758,11 +761,11 @@ function fTrataPDF () {
 		then
 			fMens   "$FInsu2"       "$MErr41"
 			fMens   "$FInsu3"       "$su_nomebase"
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
 		fi
 	done
 	#								verificar existência de arquivos PDF para serem tratados
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo48"
@@ -778,7 +781,7 @@ function fTrataPDF () {
 # --------------------------------------------------------------------------------------------------------------------------+
 function fTrataDOCX () {
 	#									verificar existência de arquivos DOCX para serem tratados
-	if ls $CPUPLOADS/*.[dD][oO][cC][xX]  1> /dev/null 2>&1; then
+	if ls $CPPUPLOADS/*.[dD][oO][cC][xX]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo51"
@@ -792,23 +795,23 @@ function fTrataDOCX () {
 	local su_arq
 	local su_inodesList
 	local su_fileClean
-	su_quant=$(ls -l $CPUPLOADS/*.[dD][oO][cC][xX] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
-	if [ $su_quant -gt $CPQPDFLOTE ]; then
-		su_quant=$CPQPDFLOTE			# limita quantidade de arquivos a transferir
-	fi
+	su_quant=$(ls -l $CPPUPLOADS/*.[dD][oO][cC][xX] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
+	if [ $su_quant -gt $((CPQPDFLOTE-su_quantTratados)) ]; then
+		su_quant=$((CPQPDFLOTE-su_quantTratados))								# limita quantidade de arquivos a transferir
+    fi
 	fMens	"$FInfor" "$MInfo49"		# mensagem informando do inicio tratamento arquivos DOCX
-	su_inodesList=$(ls -i $CPUPLOADS/*.[dD][oO][cC][xX] | awk '{print $1}' | tr '\n' ' ')
+	su_inodesList=$(ls -i $CPPUPLOADS/*.[dD][oO][cC][xX] | awk '{print $1}' | tr '\n' ' ')
 	#
  	#									mover certa quantidade de  arquivos DOCX para pasta de trabalho
 	#									Os demais, ficarão para a próxima ativação deste script via cron
 	for i in $su_inodesList				# transferir usando inode: arquivos podem ter seus nomes com caracteres de controle
 	do
-		find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPTEMP \;  # mover um arquivo
+		find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPWORK \;  # mover um arquivo
 		if [ $? -ne 0 ]; then
-			su_arq=$(find $CPUPLOADS -xdev -inum $i)
+			su_arq=$(find $CPPUPLOADS -xdev -inum $i)
 			fMens "$FInsu2" "$MErr08"
 			fMens "$FInsu3" "$su_arq"
-			find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPQUARENTINE \;  # mover para quarentena
+			find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPQUARENTINE \;  # mover para quarentena
 		fi
 		j=$j+1
 		if [ $j -eq $su_quant ]; then
@@ -817,11 +820,11 @@ function fTrataDOCX () {
 	done
 	#									tirar apostrofo (e outros caracteres especiais) presentes no nome dos arquivos
 	#									primeira limpeza ainda superficial, mas necessária para iniciar tratamento dos PDF
-	find $CPTEMP -type f -print | while read su_arq;
+	find $CPPWORK -type f -print | while read su_arq;
 	do su_fileClean=$( echo ${su_arq} | tr ", *#$@%()&'!" "-" );
 		mv "$su_arq" "$su_fileClean" 2>/dev/null;
 	done
-	su_arq=$(ls -1 $CPTEMP/*.[dD][oO][cC][xX] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[dD][oO][cC][xX] 2>/dev/null)
 	#													loop para certificar-se do mime-type
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)						# nome do arquivo, sem caminho
@@ -830,25 +833,25 @@ function fTrataDOCX () {
 		then
 			fMens	"$FInsu2"	"$MErr37"
 			fMens	"$FInsu3"	"$su_nomebase"
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
 		fi
 	done
 	#									verificar ainda existência de arquivos DOCX para serem tratados
-	if ls $CPTEMP/*.[dD][oO][cC][xX]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[dD][oO][cC][xX]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo51"
 		return							# nada a ser tratado: sem arquivos DOCX novos
 	fi
 	#													loop para geração de PDFs
-	su_arq=$(ls -1 $CPTEMP/*.[dD][oO][cC][xX] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[dD][oO][cC][xX] 2>/dev/null)
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)						# nome do arquivo, sem caminho
 		su_nomebaseSem="${su_nomebase%.*}"				# nome do arquivo, sem caminho e sem exensão
-		unoconv -f pdf -d document -o $CPTEMP/$su_nomebaseSem $i  
+		unoconv -f pdf -d document -o $CPPWORK/$su_nomebaseSem $i  
 		if [ $? -ne 0 ]; then
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
-			rm -f  $CPTEMP/$su_nomebaseSem.pdf
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
+			rm -f  $CPPWORK/$su_nomebaseSem.pdf
 			fMens 	"$FInsu2" "$MErr33"
 			fMens	"$FInsu3" "$su_nomebase"
 		else
@@ -858,7 +861,7 @@ function fTrataDOCX () {
 		fi 
 	done
 	#									verificar existência de arquivos PDF gerados para serem tratados
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo51"
@@ -874,7 +877,7 @@ function fTrataDOCX () {
 # --------------------------------------------------------------------------------------------------------------------------+
 function fTrataDOC () {
 	#									verificar existência de arquivos DOC para serem tratados
-	if ls $CPUPLOADS/*.[dD][oO][cC]  1> /dev/null 2>&1; then
+	if ls $CPPUPLOADS/*.[dD][oO][cC]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo54"
@@ -889,23 +892,23 @@ function fTrataDOC () {
 	local su_arq
 	local su_inodesList
 	local su_fileClean
-	su_quant=$(ls -l $CPUPLOADS/*.[dD][oO][cC] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
-	if [ $su_quant -gt $CPQPDFLOTE ]; then
-		su_quant=$CPQPDFLOTE			# limita quantidade de arquivos a transferir
-	fi
+	su_quant=$(ls -l $CPPUPLOADS/*.[dD][oO][cC] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
+	if [ $su_quant -gt $((CPQPDFLOTE-su_quantTratados)) ]; then
+			su_quant=$((CPQPDFLOTE-su_quantTratados))							# limita quantidade de arquivos a transferir
+    fi
 	fMens	"$FInfor" "$MInfo55"		# mensagem informando do início tratamento arquivos DOC
-	su_inodesList=$(ls -i $CPUPLOADS/*.[dD][oO][cC] | awk '{print $1}' | tr '\n' ' ')
+	su_inodesList=$(ls -i $CPPUPLOADS/*.[dD][oO][cC] | awk '{print $1}' | tr '\n' ' ')
 
     #									mover certa quantidade de  arquivos DOCX para pasta de trabalho
 	#									Os demais, ficarão para a próxima ativação deste script via cron
 	for i in $su_inodesList				# transferir usando inode: arquivos podem ter nomes com caracteres de controle
 	do
-		find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPTEMP \;  # mover um arquivo
+		find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPWORK \;  # mover um arquivo
 		if [ $? -ne 0 ]; then
-			su_arq=$(find $CPUPLOADS -xdev -inum $i)
+			su_arq=$(find $CPPUPLOADS -xdev -inum $i)
 			fMens "$FInsu2" "$MErr08"
 			fMens "$FInsu3" "$su_arq"
-			find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPQUARENTINE \;  # mover para quarentena
+			find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPQUARENTINE \;  # mover para quarentena
 		fi
 		j=$j+1
 		if [ $j -eq $su_quant ]; then
@@ -914,11 +917,11 @@ function fTrataDOC () {
 	done
 	#									tirar apostrofo (e outros caracteres especiais) presentes no nome dos arquivos
 	#									primeira limpeza ainda superficial, mas necessária para iniciar tratamento dos PDF
-	find $CPTEMP -type f -print | while read su_arq;
+	find $CPPWORK -type f -print | while read su_arq;
 	do su_fileClean=$( echo ${su_arq} | tr ", *#$@%()&'!" "-" );
 		mv "$su_arq" "$su_fileClean" 2>/dev/null;
 	done
-	su_arq=$(ls -1 $CPTEMP/*.[dD][oO][cC] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[dD][oO][cC] 2>/dev/null)
 	#													loop para certificar-se do mime-type
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)						# nome do arquivo, sem caminho
@@ -927,25 +930,25 @@ function fTrataDOC () {
 		then
 			fMens   "$FInsu2"       "$MErr38"
 			fMens   "$FInsu3"       "$su_nomebase"
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
 		fi
 	done
 	#													verificar ainda existência de arquivos DOCX para serem tratados
-	if ls $CPTEMP/*.[dD][oO][cC]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[dD][oO][cC]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"       "$MInfo54"
 		return											# nada a ser tratado: sem arquivos DOC novos
 	fi
 	#													loop para geração de PDFs		
-	su_arq=$(ls -1 $CPTEMP/*.[dD][oO][cC] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[dD][oO][cC] 2>/dev/null)
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)						# nome do arquivo, sem caminho
 		su_nomebaseSem="${su_nomebase%.*}"				# nome do arquivo, sem caminho e sem exensão
-		unoconv -f pdf -d document -o $CPTEMP/$su_nomebaseSem $i  
+		unoconv -f pdf -d document -o $CPPWORK/$su_nomebaseSem $i  
 		if [ $? -ne 0 ]; then
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
-			rm -f $CPTEMP/$su_nomebaseSem.pdf
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
+			rm -f $CPPWORK/$su_nomebaseSem.pdf
 			fMens "$FInsu2" "$MErr32"
 			fMens "$FInsu3" "$su_nomebase"
 		else
@@ -955,7 +958,7 @@ function fTrataDOC () {
 		fi 
 	done
 	#									verificar existência de arquivos PDF gerados para serem tratados
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo54"
@@ -971,7 +974,7 @@ function fTrataDOC () {
 # --------------------------------------------------------------------------------------------------------------------------+
 function fTrataRTF () {
 	#									verificar existência de arquivos RTF para serem tratados
-	if ls $CPUPLOADS/*.[rR][tT][fF]  1> /dev/null 2>&1; then
+	if ls $CPPUPLOADS/*.[rR][tT][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo57"
@@ -986,22 +989,22 @@ function fTrataRTF () {
 	local su_arq
 	local su_inodesList
 	local su_fileClean
-	su_quant=$(ls -l $CPUPLOADS/*.[rR][tT][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
-	if [ $su_quant -gt $CPQPDFLOTE ]; then
-		su_quant=$CPQPDFLOTE			# limita quantidade de arquivos a transferir
-	fi
+	su_quant=$(ls -l $CPPUPLOADS/*.[rR][tT][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
+	if [ $su_quant -gt $((CPQPDFLOTE-su_quantTratados)) ]; then
+			su_quant=$((CPQPDFLOTE-su_quantTratados))							# limita quantidade de arquivos a transferir
+    fi
 	fMens	"$FInfor" "$MInfo58"		# mensagem informando do inicio tratamento arquivos RTF
-	su_inodesList=$(ls -i $CPUPLOADS/*.[rR][tT][fF] | awk '{print $1}' | tr '\n' ' ')
+	su_inodesList=$(ls -i $CPPUPLOADS/*.[rR][tT][fF] | awk '{print $1}' | tr '\n' ' ')
 	#									mover certa quantidade de  arquivos RTF para pasta de trabalho
 	#									Os demais, ficarão para a próxima ativação deste script via cron
 	for i in $su_inodesList				# transferir usando inode: arquivos podem ter nomes com caracteres de controle
 	do
-		find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPTEMP \;  # mover um arquivo
+		find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPWORK \;  # mover um arquivo
 		if [ $? -ne 0 ]; then
-			su_arq=$(find $CPUPLOADS -xdev -inum $i)
+			su_arq=$(find $CPPUPLOADS -xdev -inum $i)
 			fMens "$FInsu2" "$MErr08"
 			fMens "$FInsu3" "$su_arq"
-			find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPQUARENTINE \;  # mover para quarentena
+			find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPQUARENTINE \;  # mover para quarentena
 		fi
 		j=$j+1
 		if [ $j -eq $su_quant ]; then
@@ -1010,11 +1013,11 @@ function fTrataRTF () {
 	done
 	#									tirar apostrofo (e outros caracteres especiais) presentes no nome dos arquivos
 	#									primeira limpeza ainda superficial, mas necessária para iniciar tratamento dos PDF
-	find $CPTEMP -type f -print | while read su_arq;
+	find $CPPWORK -type f -print | while read su_arq;
 	do su_fileClean=$( echo ${su_arq} | tr ", *#$@%()&'!" "-" );
 		mv "$su_arq" "$su_fileClean" 2>/dev/null;
 	done
-	su_arq=$(ls -1 $CPTEMP/*.[rR][tT][fF] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[rR][tT][fF] 2>/dev/null)
 	#									loop para certificar-se do mime-type
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)		# nome do arquivo, sem caminho
@@ -1023,25 +1026,25 @@ function fTrataRTF () {
 		then
 			fMens   "$FInsu2"       "$MErr40"
 			fMens   "$FInsu3"       "$su_nomebase"
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
 		fi
 	done
 	#									verificar ainda existência de arquivos RTF para serem tratados
-	if ls $CPTEMP/*.[rR][tT][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[rR][tT][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"       "$MInfo57"
 		return							# nada a ser tratado: sem arquivos RTF novos
 	fi
 	#									loop para geração de PDFs
-	su_arq=$(ls -1 $CPTEMP/*.[rR][tT][fF] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[rR][tT][fF] 2>/dev/null)
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)						# nome do arquivo, sem caminho
 		su_nomebaseSem="${su_nomebase%.*}"				# nome do arquivo, sem caminho e sem exensão
-		unoconv -f pdf -d document -o $CPTEMP/$su_nomebaseSem $i  
+		unoconv -f pdf -d document -o $CPPWORK/$su_nomebaseSem $i  
 		if [ $? -ne 0 ]; then
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
-			rm -f  $CPTEMP/$su_nomebaseSem.pdf
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
+			rm -f  $CPPWORK/$su_nomebaseSem.pdf
 			fMens "$FInsu2" "$MErr35"
 			fMens   "$FInsu3" "$su_nomebase"
 		else
@@ -1051,7 +1054,7 @@ function fTrataRTF () {
 		fi 
 	done
 	#									verificar existência de arquivos PDF gerados para serem tratados
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo57"
@@ -1067,7 +1070,7 @@ function fTrataRTF () {
 # --------------------------------------------------------------------------------------------------------------------------+
 function fTrataODT () {
 	#									verificar existência de arquivos ODT para serem tratados
-	if ls $CPUPLOADS/*.[oO][dD][tT]  1> /dev/null 2>&1; then
+	if ls $CPPUPLOADS/*.[oO][dD][tT]  1> /dev/null 2>&1; then
 		:
 	else
 	fMens   "$FInfor"	"$MInfo20"
@@ -1082,22 +1085,22 @@ function fTrataODT () {
 	local su_arq
 	local su_inodesList
 	local su_fileClean
-	su_quant=$(ls -l $CPUPLOADS/*.[oO][dD][tT] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
-	if [ $su_quant -gt $CPQPDFLOTE ]; then
-		su_quant=$CPQPDFLOTE			# limita quantidade de arquivos a transferir
-	fi
+	su_quant=$(ls -l $CPPUPLOADS/*.[oO][dD][tT] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
+	if [ $su_quant -gt $((CPQPDFLOTE-su_quantTratados)) ]; then
+			su_quant=$((CPQPDFLOTE-su_quantTratados))							# limita quantidade de arquivos a transferir
+    fi
 	fMens	"$FInfor" "$MInfo21"		# mensagem informando do inicio tratamento arquivos ODT
-	su_inodesList=$(ls -i $CPUPLOADS/*.[oO][dD][tT] | awk '{print $1}' | tr '\n' ' ')
+	su_inodesList=$(ls -i $CPPUPLOADS/*.[oO][dD][tT] | awk '{print $1}' | tr '\n' ' ')
 	#									mover certa quantidade de  arquivos ODT para pasta de trabalho
 	#									Os demais, ficarão para a próxima ativação deste script via cron
 	for i in $su_inodesList				# transferir usando inode: arquivos podem ter nomes com caracteres de controle
 	do
-		find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPTEMP \;  # mover um arquivo
+		find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPWORK \;  # mover um arquivo
 		if [ $? -ne 0 ]; then
-			su_arq=$(find $CPUPLOADS -xdev -inum $i)
+			su_arq=$(find $CPPUPLOADS -xdev -inum $i)
 			fMens "$FInsu2" "$MErr08"
 			fMens "$FInsu3" "$su_arq"
-			find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPQUARENTINE \;  # mover para quarentena
+			find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPQUARENTINE \;  # mover para quarentena
 		fi
 		j=$j+1
 		if [ $j -eq $su_quant ]; then
@@ -1106,11 +1109,11 @@ function fTrataODT () {
 	done
 	#									tirar apostrofo (e outros caracteres especiais) presentes no nome dos arquivos
 	#									primeira limpeza ainda superficial, mas necessária para iniciar tratamento dos PDF
-	find $CPTEMP -type f -print | while read su_arq;
+	find $CPPWORK -type f -print | while read su_arq;
 	do su_fileClean=$( echo ${su_arq} | tr ", *#$@%()&'!" "-" );
 		mv "$su_arq" "$su_fileClean" 2>/dev/null;
 	done
-	su_arq=$(ls -1 $CPTEMP/*.[oO][dD][tT] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[oO][dD][tT] 2>/dev/null)
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)                                              # nome do arquivo, sem caminho
 		su_tipo=$(file --mime-type -b $i)
@@ -1118,11 +1121,11 @@ function fTrataODT () {
 		then
 			fMens   "$FInsu2"       "$MErr39"
 			fMens   "$FInsu3"       "$su_nomebase"
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
 		fi
 	done
 	#									verificar ainda existência de arquivos ODT para serem tratados
-	if ls $CPTEMP/*.[oO][dD][tT]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[oO][dD][tT]  1> /dev/null 2>&1; then
 			:
 	else
 		fMens   "$FInfor"       "$MInfo20"
@@ -1130,14 +1133,14 @@ function fTrataODT () {
 	fi
 	#
 	#									loop para geração de PDF
-	su_arq=$(ls -1 $CPTEMP/*.[oO][dD][tT] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[oO][dD][tT] 2>/dev/null)
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)						# nome do arquivo, sem caminho
 		su_nomebaseSem="${su_nomebase%.*}"				# nome do arquivo, sem caminho e sem exensão
-		unoconv -f pdf -d document -o $CPTEMP/$su_nomebaseSem $i  
+		unoconv -f pdf -d document -o $CPPWORK/$su_nomebaseSem $i  
 		if [ $? -ne 0 ]; then
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
-			rm -f  $CPTEMP/$su_nomebaseSem.pdf
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
+			rm -f  $CPPWORK/$su_nomebaseSem.pdf
 			fMens 	"$FInsu2" "$MErr36"
 			fMens   "$FInsu3" "$su_nomebase"
 		else
@@ -1147,7 +1150,7 @@ function fTrataODT () {
 		fi 
 	done
 	#									verificar existência de arquivos PDF gerados para serem tratados
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"	"$MInfo20"
@@ -1163,7 +1166,7 @@ function fTrataODT () {
 # --------------------------------------------------------------------------------------------------------------------------+
 function fTrataTXT () {
 	#									verificar existência de arquivos TXT para serem tratados
-	if ls $CPUPLOADS/*.[tT][xX][tT]  1> /dev/null 2>&1; then
+	if ls $CPPUPLOADS/*.[tT][xX][tT]  1> /dev/null 2>&1; then
 		:
 	else
 	fMens   "$FInfor"	"$MInfo23"
@@ -1180,23 +1183,23 @@ function fTrataTXT () {
 	local su_nomebase
 	local su_nomebaseSem
 	#
-	su_quant=$(ls -l $CPUPLOADS/*.[tT][xX][tT] 2>/dev/null | grep  "^-"  -c)    # numero arquivos existentes
-        if [ $su_quant -gt $CPQPDFLOTE ]; then
-                su_quant=$CPQPDFLOTE		# limita quantidade de arquivos a transferir
+	su_quant=$(ls -l $CPPUPLOADS/*.[tT][xX][tT] 2>/dev/null | grep  "^-"  -c) 	# numero arquivos existentes
+	if [ $su_quant -gt $((CPQPDFLOTE-su_quantTratados)) ]; then
+			su_quant=$((CPQPDFLOTE-su_quantTratados))							# limita quantidade de arquivos a transferir
         fi
 	fMens   "$FInfor" "$MInfo59"            # mensagem informando do inicio tratamento arquivos TXT
 	#
-	su_inodesList=$(ls -i $CPUPLOADS/*.[tT][xX][tT] | awk '{print $1}' | tr '\n' ' ')
+	su_inodesList=$(ls -i $CPPUPLOADS/*.[tT][xX][tT] | awk '{print $1}' | tr '\n' ' ')
 	#										mover certa quantidade de arquivos TXT para pasta de trabalho
 	#										Os demais, ficarão para a próxima ativação deste script via cron
 	for i in $su_inodesList					# transferir usando inode: arquivos podem ter seus nomes com caracteres de controle
 	do
-		find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPTEMP \;  # mover um arquivo
+		find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPWORK \;  # mover um arquivo
 		if [ $? -ne 0 ]; then
-			su_arq=$(find $CPUPLOADS -xdev -inum $i)
+			su_arq=$(find $CPPUPLOADS -xdev -inum $i)
 			fMens "$FInsu2" "$MErr08"
 			fMens "$FInsu3" "$su_arq"
-			find $CPUPLOADS -type f -inum $i -exec mv -f {} $CPQUARENTINE \;  # mover para quarentena
+			find $CPPUPLOADS -type f -inum $i -exec mv -f {} $CPPQUARENTINE \;  # mover para quarentena
 		fi
 		j=$j+1
 		if [ $j -eq $su_quant ]; then
@@ -1205,11 +1208,11 @@ function fTrataTXT () {
 	done
 	#										tirar apostrofo (e outros caracteres especiais) presentes no nome dos arquivos
 	#										primeira limpeza ainda superficial, mas necessária para iniciar tratamento do arquivo
-	find $CPTEMP -type f -print | while read su_arq;
+	find $CPPWORK -type f -print | while read su_arq;
 	do su_fileClean=$( echo ${su_arq} | tr ", *#$@%()&'!" "-" );
 		mv "$su_arq" "$su_fileClean" 2>/dev/null;
 	done
-	su_arq=$(ls -1 $CPTEMP/*.[tT][xX][tT] 2>/dev/null)	# loop para certificar-se do mime-type
+	su_arq=$(ls -1 $CPPWORK/*.[tT][xX][tT] 2>/dev/null)	# loop para certificar-se do mime-type
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)						# nome do arquivo, sem caminho
 		su_tipo=$(file --mime-type -b $i)
@@ -1217,25 +1220,25 @@ function fTrataTXT () {
 		then
 			fMens   "$FInsu2"       "$MErr42"
 			fMens   "$FInsu3"       "$su_nomebase"
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
 		fi
 	done
 	#													verificar ainda existência de arquivos TXT para serem tratados
-	if ls $CPTEMP/*.[tT][xX][tT]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[tT][xX][tT]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"       "$MInfo23"
 		return											# nada a ser tratado: sem arquivos TXT novos
 	fi
 	#													loop para geração de PDFs
-	su_arq=$(ls -1 $CPTEMP/*.[tT][xX][tT] 2>/dev/null)
+	su_arq=$(ls -1 $CPPWORK/*.[tT][xX][tT] 2>/dev/null)
 	for i in $su_arq; do
 		su_nomebase=$(basename $i)									# nome do arquivo, sem caminho
 		su_nomebaseSem="${su_nomebase%.*}"							# nome do arquivo, sem caminho e sem exensão
-		unoconv -f pdf -d document -o $CPTEMP/$su_nomebaseSem $i
+		unoconv -f pdf -d document -o $CPPWORK/$su_nomebaseSem $i
 		if [ $? -ne 0 ]; then
-			mv -f  $i $CPQUARENTINE/$su_nomebase 2>/dev/null
-			rm -f $CPTEMP/$su_nomebaseSem.pdf
+			mv -f  $i $CPPQUARENTINE/$su_nomebase 2>/dev/null
+			rm -f $CPPWORK/$su_nomebaseSem.pdf
 			fMens "$FInsu2" "$MErr43"
 			fMens "$FInsu3" "$su_nomebase"
 		else
@@ -1245,7 +1248,7 @@ function fTrataTXT () {
 		fi
 	done
 	#													verificar existência de arquivos PDF gerados para serem tratados
-	if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
+	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then
 		:
 	else
 		fMens   "$FInfor"       "$MInfo23"
@@ -1265,6 +1268,7 @@ function fTrataTXT () {
 declare -a su_Funcoes=(fTrataPDF fTrataDOCX fTrataDOC fTrataRTF fTrataODT fTrataTXT)		# array com nome das funções para tratamento dos tipos de arquivos
 declare -i su_pontFuncoes=0
 declare -i su_quantTratados=0
+declare -a su_globi=""
 fInit							# testes do ambiente e preparações iniciais
 while [ ${#su_Funcoes[*]} -gt $su_pontFuncoes ]; do
 	${su_Funcoes["$su_pontFuncoes"]}
@@ -1274,43 +1278,47 @@ while [ ${#su_Funcoes[*]} -gt $su_pontFuncoes ]; do
 	fi
 	let su_pontFuncoes=$su_pontFuncoes+1;
 done
+#													retirar, por segurança,  possíveis arquivos estranhos da pasta upload
+for i in "${CPEXTAMPLAS[@]}";do su_globi=$su_globi:$CPPUPLOADS/*$i;done
+GLOBIGNORE=$su_globi
+mv -f $CPPUPLOADS/* $CPPQUARENTINE/. 2>/dev/null
+unset GLOBIGNORE
 #
-	#												resumo
-	fMens "$FInfo2" "$MInfo31"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
-	fMens "$FInfo2" "$MInfo26"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_documents")"
-	fMens "$FInfo2" "$MInfo27"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_signatarios") "
-	fMens "$FInfo2" "$MInfo28"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_instituicoes")"
-	fMens "$FInfo2" "$MInfo29"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_cidades") "
-	fMens "$FInfo2" "$MInfo30"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
-	fMens "$FInfo2" "$MInfo02"
-	fMens "$FInfo1" "$(ls -la $CPQUARENTINE/ | grep -e "^-" | wc -l)"
-	fMens "$FInfo2" "$MInfo45"
-	fMens "$FInfo1" "$(ls -la $CPUPLOADS/ | grep -e "^-" | wc -l)"
-#									verificar existência de arquivos PDF para serem tratados
-#if ls $CPTEMP/*.[pP][dD][fF]  1> /dev/null 2>&1; then
-#		fInse						# insere as informações dos arquivos nas tabelas do acervo arquivístico
-#	else
-#		fMens   "$FInfor"	"$MInfo48"  # nada a ser tratado: sem arquivos PDF novos
-#fi
+#												resumo
+fMens "$FInfo2" "$MInfo31"
+fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
+fMens "$FInfo2" "$MInfo26"
+fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_documents")"
+fMens "$FInfo2" "$MInfo27"
+fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_signatarios") "
+fMens "$FInfo2" "$MInfo28"
+fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_instituicoes")"
+fMens "$FInfo2" "$MInfo29"
+fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_cidades") "
+fMens "$FInfo2" "$MInfo30"
+fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
+fMens "$FInfo2" "$MInfo02"
+fMens "$FInfo1" "$(ls -la $CPPQUARENTINE/ | grep -e "^-" | wc -l)"
+fMens "$FInfo2" "$MInfo45"
+fMens "$FInfo1" "$(ls -la $CPPUPLOADS/ | grep -e "^-" | wc -l)"
 #
-#													compactar arquivo de log, se necessário
-if	[ $(ls -l $CPLOG_DIR/$CPLOGSFILE | awk '{ print $5}') -gt 900000 ];then
-	tar -zcf $CPLOG_DIR/$CPLOGSFILEGZ  $CPLOG_DIR/$CPLOGSFILE  2> /dev/null
+#								mensagem de fim do script com sucesso
+fMens	"$FSucss"	"$MInfo32"
+fMens	"$FInfor"	"$MInfo09:  $(date '+%d-%m-%Y as  %H:%M:%S')"
+#						Gerar arquivo de logs em html necessário a interface administrativa
+rm -f $CPPLOG/$CPALOGHTML
+cat $CPPLOG/super_logshell.log | aha -b > $CPPLOG/$CPALOGHTML
+chmod $CPPERM640	$CPPLOG/$CPALOGHTML
+#
+#						compactar arquivo de log, se necessário
+if	[ $(ls -l $CPPLOG/$CPALOG | awk '{ print $5}') -gt $CPMAXLOG ];then
+	tar -zcf $CPPLOG/$CPLOGSFILEGZ  $CPPLOG/$CPALOG  2> /dev/null
 	if [ $? -eq 0 ];then
-		rm -f $CPLOG_DIR/$CPLOGSFILE
+		rm -f $CPPLOG/$CPALOG
 		fMens	"$FSucss" "$MInfo46:  $(date '+%d-%m-%Y as  %H:%M:%S')"
-		mv "$CPLOG_DIR/$CPLOGSFILEGZ" "$CPLOG_DIR/$(date +%F)$CPLOGSFILEGZ"
+		mv "$CPPLOG/$CPLOGSFILEGZ" "$CPPLOG/$(date '+%Y-%m-%d-%H-%M')$CPLOGSFILEGZ"
 	else
 		fMens	"$FInsuc" "$MErr26"
 	fi
 fi
-#								fim do script com sucesso
-fMens	"$FSucss"	"$MInfo32"
-fMens	"$FInfor"	"$MInfo09:  $(date '+%d-%m-%Y as  %H:%M:%S')"
 exit	0

@@ -9,14 +9,14 @@
 </head>
 <body onload="lista_h2()">
 <div id="menu">
-Superinterface:
+<span class="indice"><< Conteúdo >></span>
 </div>
 
 <div id="conteudo">
 <h1>Superinterface - Referência Técnica</h1>
 <table>
 <tr><td>
-<img src="./super_wash.jpg" width="400" style="border: 1px solid black"></td>
+<img src="./super_wash.jpg" width="300"></td>
 <td><div class="comentario">
 <b>Objetivo</b>
 <p></p><p></p>
@@ -30,15 +30,14 @@ Este projeto é mais uma iniciativa do <a href="http://wash.net.br" target="_bla
 <br \><br \>Seja Bem Vind@, e aproveite!!
 </div>
 </td></tr></table>
+<!--  ******************************************* -->
 <h2 id="consideracoes_iniciais">Considerações Iniciais</h2>
-A solução Superinterface constitui de um sistema formado de três blocos distintos:
+A solução Superinterface constitui de um sistema formado de três blocos distintos, conforme exposto a seguir:
 <dl>
-<dt>Blocos Superinterface:</dt>
-<dd>a) a plataforma Potlatch: um sistema CRUD (Create, Retrieve, Update & Delete), voltado para a entrada de dados de forma estruturada no banco de dados
-localizado no servidor MySQL. A Potlatch não é voltada para o usuário final;</dd>
-<dd>b) um visualizador de dados: Giramundônics.  É destinado ao usuário final, ermitindo a visualização do acervo da Superinterface e realizar busca de dados.
-Não tem ferramentas de entrada de dados. Não é um CRUD.</dd>
-<dd>c) uma ferramenta de manutenção ou backoffice: dá acesso a todas as tabelas da Superinterface, peritindo edição das informações.  É um CRUD.</dd>
+<dt>Blocos:</dt>
+<dd>- a plataforma Potlatch: um sistema CRUD (Create, Retrieve, Update & Delete), voltado para a entrada de dados de forma estruturada no banco de dados localizado no servidor MySQL. A Potlatch não é voltada para o usuário final;</dd><br \>
+<dd>- um visualizador de dados: Giramundônics.  É destinado ao usuário final, permitindo a visualização do acervo da Superinterface e realizar busca de dados. Não tem ferramentas de entrada de dados. Não é um CRUD.</dd><br \>
+<dd>- uma ferramenta de manutenção ou backoffice: dá acesso a todas as tabelas da Superinterface, peritindo edição das informações.  É um CRUD.</dd>
 </dl>
 
 A Superinterface visa criar um acervo de documetos PDF sobre uma determinada temática, podendo realizar buscas textuais neste acervo e permitir aos responsáveis pela criação do acervo a entrada de metadados e outras informações sobre estes documentos. O objetivo também é estabelecer um instrumento para a busca de dados no acervo, para que o público possa ter a melhor visibilidade sobre os documentos do acervo.
@@ -56,26 +55,27 @@ Dentre as informações que podem ser disponibilizados para cada arquivo atravé
 </dl>
 
 O principal aspecto que foi perseguido no desenvolvimento da solução foi a automatização da coleta das informações:
-<ul>
-<li>Nomes de Cidades</li>
-<li>Nomes Próprios</li>
-<li>Nomes de Instituições</li>
-<li>CPFs e CNPJs de beneficiários</li>
-</ul>
+<dl>
+<dt></dt>
+<dd>- nomes de Cidades</dd>
+<dd>- nomes Próprios</dd>
+<dd>- nomes de Instituições</dd>
+</dl>
 
 Os dados estão organizados por documento e, sempre que possível, geo-localizados. Várias ferramentas de automatização estão sendo avaliadas e utilizadas para que a Superinterface consiga fazer essa coleta de dados, inclusive:
 <dl>
 <dt>Ferramentas:</dt>
-<dd>* ferramentas de tratamento de texto convencionais (sed, regexp, grep, awk, head, tail, cat, entre outras)</dd>
-<dd>* ferramentas de análise de linguagem natural (Unitex)</dd>
-<dd>* ferramentas baseadas em algoritmo genético (desenvolvimento próprio)</dd>
+<dd>- ferramentas de tratamento de texto convencionais (sed, regexp, grep, awk, head, tail, cat, entre outras)</dd>
+<dd>- ferramentas de análise de linguagem natural (Unitex)</dd>
+<dd>- ferramentas baseadas em algoritmo genético (desenvolvimento próprio)</dd>
 </dl>
 
-Destas 3 abordagens, a mais madura é a primeira e já vem sendo usada amplamente para gerar parte dos metadados da plataforma Superinterface.
-
-<h2 id="instalacao">Instalação</h2>
+Destas 3 abordagens, a mais madura é a primeira e já vem sendo usada amplamente para gerar parte dos metadados da plataforma Superinterface.<p></p>
+<!--  ******************************************* -->
+<h2 id="instalacao">Manual Instalação</h2>
 Para realizar a instalação da Superinterface, proceda da seguinte forma:
 <ol>
+<!-- ...................... -->
 <li><h3 id="preparacao_ambiente">Preparação do Ambiente</h3>
 <ol style="list-style-type:lower-alpha">
 <li>Sistema Operacional, linguagens e outros aspectos gerais:</li>
@@ -130,18 +130,21 @@ Observações:
 </pre>
 </ul>
 <p></p>
-<li>Cron job:
-A solução tem um "vigilante" que monitora de tempos em tempos se existem arquivos PDF para serem incorporados ao acervo da Superinterface. Para isto funcionar, crie uma entrada no crontab do usuário da solução da seguinte forma:
+<li>Cron job:<br />
+A solução tem um "vigilante" que monitora de tempos em tempos se existem arquivos para serem incorporados ao acervo da Superinterface. A pasta que este vigilante verifica é /su_uploads.  Se existirem arquivos nesta pasta, o vigilante inicia o tratamento destes arquivos.<br />
+Para isto funcionar, crie uma entrada no crontab do usuário da aplicação, por exemplo, da seguinte forma:
 <pre>
 MAILTO=""
 */1  *  *  *  *  cd /var/www/html/host1/su_install/; ./super_novospdf.sh cron
 </pre>
-Observações:
+Dicas e observações:
 <ul><li> no caso exemplificado, o vigilante está sendo ativado a cada 1 minuto.</li>
-<li>Comandos para editar e exibir a crontab do usuário:</li>
+<li>deve haver um equilíbrio entre a quantidade máxima de arquivos a serem tratados a cada ativação do vigilante (lote de arquivos: parâmetro ajustável no arquivo de configuração da Superinterface) e o intervalo de tempo entre cada ativação do vigilante programado no Cron.  Além disso, o tamanho dos arquivos e a capacidade de processamento da máquina também são fatores críticos.  Para arquivos de tamanho pequenos (até 5 laudas), e ativação do vigilante a cada minuto, trabalhe com um lote máximo de 4 arquivos para serem tratados a cada ativação.</li>
+<li>a quantidade deste lote de arquivos, bem como o intervalo de tempo de ativação do vigilante, podem ser alterados a qualquer instante do funcionamento da Superinterface.  Observe na prática o tempo de processamento que estão sendo necessários para proessamento dos arquivos através do arquivo de log.</li> 
+<li>comandos úteis para listar e editar a crontab referente a aplicação:</li>
 <pre>
-    $ crontab -e
     $ crontab -l
+    $ crontab -e
 </pre>
 </ul></li>
 <p></p>
@@ -160,6 +163,8 @@ Obs: limite os privilégios do usuário do banco conforme exemplificado nestes c
 <p></p>
 Obs: no comando acima, algumas bibliotecas tiveram inibidas suas instalações por não se fazer necessárias a esta aplicação, já que mão utilizaremos o LibreOffice no módulo gráfico.  Para uma instalação numa máquina com interface gráfica e uso do LibreOffice, instalar o unoconv sem a necessidade de inibições (apt-get install unoconv).
 <p></p>
+<li>Instalar aha</li>
+# apt-get install aha<br /><p></p>
 <li>Instalar também:</li>
 # apt-get install figlet cowsay detox imagemagick php-imagick php-common poppler-utils qpdf<br />
 No ambiente Debian/linux, pode ainda se fazer necessário a criação de um link simbólico:
@@ -170,7 +175,7 @@ Inserir no arquivo  /etc/ImageMagick-6/policy.xml, se ainda não existir esta li
 &lt;policy domain="coder" rights="read | write" pattern="PDF" /&gt;</pre>
 </ol></li>
 <p></p><br />
-
+<!-- ...................... -->
 <li><h3 id="preparacao_scripts">Preparação dos Scripts</h3>
 <ol style="list-style-type:lower-alpha">
 <li>Todo código está disponível no GitHub, bastando baixar a <a href="https://github.com/wash-git/Superinterface">última release da aplicação Superinterface</a></li>.
@@ -188,7 +193,7 @@ Obs:  no exemplo acima, 1.0 se refere a versão da aplicação.  Verifique a ver
 	su_admin/
 	su_css/
 	su_docs/
-	su_exemplos_tabelas/
+	su_exemplos/
 	su_icons/
 	su_install/
 	su_php/
@@ -218,15 +223,6 @@ $  chmod 750 super_novospdf.sh
 </dl>
 Obs: por segurança, não é recomendado que o usuário da aplicação tenha privilégios de criação de base de dados. 
 <p></p>
-<li>Duas possibilidades de instalação:<br />
-A instalação pode ser realizada de duas formas:
-<ol><li>apenas gerando as tabelas padrão da Superinterface;</li>
-<li>gerando as tabelas padrão da Superinterface junto com tabelas de uma aplicação do usuário.</li></ol></li><br />
-O procedimento padrão de instalação, após desempacotar a aplicação, é seguir o primeiro caso: gerar apenas as tabelas da Superinterface. Isso se deve ao fato de não ser encontrado na pasta su_install um arquivo de nome super_tab_aplicacao.sql.<br />
-<br />
-Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo serão executados logo após a geração das tabelas padrão da Superinterface, caracterizando a segundo opção da instalação. Todas as tabelas serão geradas em uma única base de dados.<br /><br />
-<strong>Dica:</strong> na pasta su_exemplos_tabelas/ existem arquivos SQL exemplos de aplicação de usuários.  Se desejar realizar um teste, copie um dos arquivos para a pasta su_install/, renomeando o arquivo escolhido para super_tab_aplicacao.sql. Para construir seu arquivo SQL de aplicação, observe a estrutura desses arquivos SQL exemplos e faça algo parecido.<br />
-<p></p>
 <li>Realizar a instalação da aplicação
 <pre>
 su_install$ ./super_install.sh
@@ -235,19 +231,20 @@ Obs: acompanhe o log da instalação através do arquivo super_logshell.log que 
 Se a instalação foi realizada com sucesso, ao seu final terá sido gerada pastas adicionais necessárias ao funcionamento da solução. Deverão
 existir as seguintes pastas:
 <pre>
-drwxr-----  web1 web1  su_admin
-drwxr-----  web1 web1  su_autophp
-drwxr-----  web1 web1  su_css
-drwxr.....  web1 web1  su_docs
-drwxr.....  web1 web1  su_exemplos_tabelas
-drwxr-----  web1 web1  su_icons
-drwxr-----  web1 web1  su_imagens
-drwxr-----  web1 web1  su_install
-drwxr-----  web1 web1  su_logs
-drwxr-----  web1 web1  su_pdfuploads
-drwxr-----  web1 web1  su_php
-drwxr-----  web1 web1  su_quarentine
-drwxr-----  web1 web1  su_work
+drwxr-x---  web1 web1  su_admin
+drwxr-x---  web1 web1  su_autophp
+drwxr-x---  web1 web1  su_css
+drwxr-x---  web1 web1  su_docs
+drwxr-x---  web1 web1  su_exemplos
+drwxr-x---  web1 web1  su_icons
+drwxr-x---  web1 web1  su_imagens
+drwxr-x---  web1 web1  su_install
+drwxr-x---  web1 web1  su_logs
+drwxr-x---  web1 web1  su_php
+drwxr-x---  web1 web1  su_primitivos
+drwxr-x---  web1 web1  su_quarentine
+drwxr-x---  web1 web1  su_uploads
+drwxr-x---  web1 web1  su_work
 </pre>
 <dl>
   <dt>Observações</dt>
@@ -255,16 +252,16 @@ drwxr-----  web1 web1  su_work
   <dd><strong>* su_autophp:</strong> pasta que contém os arquivos PHP e HTML gerados automaticamente pela SuperInterface</dd>
   <dd><strong>* su_css:</strong> pasta com os arquivos de estilos da Superinterface.</dd>
   <dd><strong>* su_docs:</strong> pasta com os arquivos relativos a documentação da Superinterface.</dd>
-  <dd><strong>* su_exemplos_tabelas:</strong> pasta com exemplos de arquivos SQL que podem ser instalados em conjunto com as tabelas padrão da Superinterface.</dd>
+  <dd><strong>* su_exemplos:</strong> pasta com exemplos de arquivos SQL que podem ser instalados em conjunto com as tabelas padrão da Superinterface.</dd>
   <dd><strong>* su_icons:</strong> pasta com imagens utilizadas em páginas da Superinterface.</dd>
   <dd><strong>* su_logs:</strong> pasta com os logs de todas as operações da solução, desde o momento da instalação até o presente momento. A pasta também será utilizada para guardar arquivos temporários necessários ao funcionamento da aplicação.</dd>
   <dd><strong>* su_imagens:</strong> pasta onde estarão guardados os arquivos PDF pertencentes ao acervo da Superinterface, juntamente com sua imagem jpg, versão texto puro e outras versões necessárias.</dd>
   <dd><strong>* su_install:</strong> pasta com os arquivos de configuração, arquivos SQL com informações iniciais de preenchimento de tabelas e outros arquivos necessários à instalação da Superinterface, além dos scripts shell necessários ao seu funcionamento.</dd> 
   <dd><strong>* su_pdfuploads:</strong> pasta para onde serão direcionados os arquivos PDF após seu upload pelo usuário, com objetivo de fazer incorporações ao acervo da aplicação Superinterface.  A execução deste processo de incorporação de novos documentos PDF ao acervo estará sob responsabilidade do vigilante (ativado pelo cron).</dd>
   <dd><strong>* su_php:</strong> pasta com arquivos PHP referente as funções de administração da Superinterface.</dd>
-  <dd><strong>* su_primitivo:</strong> pasta onde serão guardados os arquivos originais não PDF que forem submitidos ao acerco da aplicação</dd> 
-  <dd><strong>* su_quarentine:</strong> pasta para onde serão destinados os arquivos PDF que apresentarem problemas para serem incorporados ao acervo, ou quando  houver a tentativa de incorporação de arquivo que já pertença ao acervo.</dd>
-  <dd><strong>* su_work:</strong> pasta auxiliar para tratamento dos arquivos PDF disponibilizados pelo usuário.</dd> 
+  <dd><strong>* su_primitivos:</strong> pasta onde serão guardados os arquivos originais que forem submitidos ao acervo, tais como DOCX, DOC, RTF, ODT e TXT.  Os arquivos PDF submetidos ao acervo não são guardados nesta pasta, e sim diretamente na pasta principal do acervo.  Arquivos PDF com problemas na sua estrutura, bem como outros tipos de arquivos, estes serão enviados para pasta da quarentena.</dd> 
+  <dd><strong>* su_quarentine:</strong> pasta para onde serão enviados os arquivos PDF que apresentarem problemas para serem incorporados ao acervo, arquivos submetidos em duplicidade ao acervo, bem como tipos de arquivos não aceitos pela Superinterface.</dd>
+  <dd><strong>* su_work:</strong> pasta auxiliar para tratamento dos arquivos submetidos ao acervo. É uma pasta que retém os arquivos submetidos ao acervo apenas durante o tempo em que estes estão sendo trabalhados para serem incorporados ao acervo.</dd> 
   <dd>* Neste momento, já se pode verificar as páginas iniciais da aplicação funcionando:
 	<ul class="list-circle">
 	<li>obs: no momento da instalação, as credenciais "usuário/senha" de acesso ao Portal de Administração é "admin/admin", respectivamente.  É aconselhável, por segurança, trocar estas credenciais logo no primeiro acesso à aplicação Superinterface.</li>
@@ -280,48 +277,128 @@ Este procedimento limpa as tabelas existentes na base, recria as tabelas e execu
 </li>
 </ol>
 </li>
+<p></p>
+<p></p>
+<!-- ...................... -->
+<li><h3 id="tabelasexternas">Tabelas Externas</h3>
+Existem duas possibilidades de instalação da Superinterface:<br />
+<ol style="list-style-type:lower-alpha">
+<li>apenas gerando as tabelas padrão da Superinterface;</li>
+<li>gerando as tabelas padrão da Superinterface junto com tabelas necessárias à uma aplicação do usuário.</li>
+</ol><br />
+O procedimento mais comum de instalação da Superintrface é seguir o primeiro caso: gerar apenas as tabelas padrão da Superinterface. Isso é feito automaticamente pelo script de instalação caso não seja encontrado na pasta /su_install um arquivo de nome super_tab_aplicacao.sql.</li>
+<br />
+Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo serão executados logo após a geração das tabelas padrão da Superinterface, que é o caso do segundo método da instalação. Todas as tabelas serão geradas em uma única base de dados.<br /><br />
+<strong>Dica:</strong> na pasta su_exemplos/ existem arquivos SQL exemplos de aplicação de usuários.  Se desejar realizar um teste, copie um dos arquivos para a pasta su_install/, renomeando o arquivo escolhido para super_tab_aplicacao.sql. Para construir seu arquivo SQL de aplicação, observe a estrutura desses arquivos SQL exemplos e faça algo parecido.<br />
+<p></p>
+</li>
+<!-- ...................... -->
+<li><h3 id="logs">Registro de Logs</h3>
+Todas as operações da Superinterface estão registradas através de logs.  São dois os arquivo de logs:
+<ol style="list-style-type:square">
+<li> su_logs/super_logshell.log</li>
+<li> su_logs/super_logshell.html</li>
+</ol><br />
+O segundo arquivo, super_logshell.html, é apenas uma cópia do primeiro arquivo destinada a ser visualizada através da interface administrativa da Superinterface.  Mas seu conteúdo é exatamente o mesmo.<br />
+A Superinterface realiza a compressão do arquivo de log quando o tamanho deste arquivo atinge um determinado valor predeterminado por configuração.  Neste processo, é gerado um arquivo comprimido ".tar", o qual fica guardado na própria pasta de logs.
+<p></p>
+É muito importante verificar periodicamente o arquivo de log, certificando que todas as operações estão sendo realizadas sem ocorrências de exceções.<p></p>
+Código de cores: para facilitar a visualização das mensagens, estas obedecem um código de cores: (a) na cor branca estão as mensagens informativas, de forma o usuário acompanhar o que fora realizado pela Superinterface; (b) na cor azul, as operações mais críticas que foram realizadas com sucesso; (c) e na cor vermelha, as mensagens de exceções que merecem uma atenção maior do administrador do serviço.
+<li><h3 id="troubleshoot">Troubleshoot</h3>
+Caso se verifique algum problema na instalação e o arquivo de log gerado não tenha conseguido gerar uma mensagem de diagnóstico clara do que está acontecendo, execute opcionalmente o script abaixo diretamente via comando do terminal, e acompanhe as mensagens:<br />
+$ ./super_scriptinicial.sh<br /> <br />
+Após realizar o diagnóstico do problema e ter solucionado a dificuldade, (re)instale a solução via seu comando padrão:<br />
+$ ./super_install.sh<br /><br />
 </ol>
-<p></p>
-<p></p>
+</ol>
+<!--  ******************************************* -->
 <h2 id="manual_usuario">Manual do Usuário</h2>
-Após instalação da solução, existem três possibilidades ao usuário (considerando a instalação na URL www.exemplo.br):
+<ol>
+<!-- ...................... -->
+<li><h3 id="menuprincipal">Menu Principal</h3></li>
+Após instalação da solução, existem três possibilidades ao usuário (considerando a instalação na URL www.exemplo.br):<p></p>
 <table>
 <tr><th>Função</th><th style="width:70%">URL</th></tr>
 <tr><td>Giramundonics</td><td>http://www.exemplo.br</td></tr>
-<tr><td>Painel de Administração</td><td>http://www.exemplo.br/su_php/super_admin.php</td></tr>
+<tr><td>Portal de Administração</td><td>http://www.exemplo.br/su_php/super_admin.php</td></tr>
 <tr><td>Documentação</td><td>http://www.exemplo.br/su_docs/super_documentacao.php</td></tr>
-</table>
-Inicialmente, o visualizador Giramundonics não mostrará nenhum arquivo, já que na instalação da Superinterface nenhum arquivo PDF é incorporado ao acervo.
-O acesso ao painel de administração se faz através das credenciais admin/admin. Ao abrir o painel, o usuário terá um menu com as seguintes opções:
+</table><p></p>
+Inicialmente, o visualizador Giramundonics não mostrará nenhum arquivo, já que na instalação da Superinterface nenhum arquivo está incorporado ao acervo.
+O acesso ao Portal de Administração se faz inicialmente através das credenciais admin/admin. Recomenda-se trocar estas credenciais logo no primeiro acesso.<p></p>
+Ao abrir o portal, o usuário terá um menu com as seguintes opções:
 <pre>
-Upload PDF|Giramundonics|BackOffice|Acervo|Quarentena|Usuários|Tabelas|Logs|Status
+    Upload|Giramundonics|BackOffice|Acervo|Quarentena|Originais|Usuários|Tabelas|Logs|Status|Manual
 </pre>
-<ul>
-<li>Upload PDF: disponibilizar arquivos PDF para compor o acervo de documentos da Superinterface.</li>
+<ol style="list-style-type:square;">
+<li>Upload: disponibilizar arquivos para compor o acervo de documentos da Superinterface.</li>
 <li>Giramundonics: visualizador gráfico dos arquivos pertencentes ao acervo de documentos da Superinterface</li>
 <li>BackOffice: interface para edição de metadados dos arquivos pertencente ao acervo da Superinterface. Um CRUD.</li>
-<li>Acervo: lista dos arquivos PDF já pertencentes ao acervo da Superinterface.</li>
-<li>Quarentena: lista dos arquivos PDF em quarentena (arquivos inconsistentes ou em duplicata)</li>
-<li>Usuários: administração de usuários da Superinterface</li>
-<li>Tabelas: lista de tabelas geradas automaticamente pela Superinterface</li>
-<li>Logs: logs de funcionamento da Superinterface</li>
-<li>Status: conjunto de informações sobre a configuração do ambiente de funcionamento da Superinterface</li>
-</ul>
-<ol>
-<li>Upload de arquivos PDF:<br />
-Esta facilidade tem uma limitação de tamanho de arquivo por dois fatores: pela configuração do PHP (que pode ser visualizada através da opção "Status" do menu), e também limitado pelo arquivo de configuração de uploads da aplicação (em su_admin/super_config_upload.cnf).</li>
+<li>Acervo: lista dos arquivos já pertencentes ao acervo da Superinterface.</li>
+<li>Quarentena: lista dos arquivos em quarentena (arquivos inconsistentes, em duplicidade ou tipo não aceito)</li>
+<li>Originais: lista de arquivos originais que forem submitidos ao acervo, de tipos aceitos pelo Superintrface, mas não PDF (tais como DOCX, DOC, RTF, ODT e TXT).</li>
+<li>Usuários: administração de usuários da Superinterface.</li>
+<li>Tabelas: lista de tabelas geradas automaticamente pela Superinterface.</li>
+<li>Logs: logs de funcionamento da Superinterface.</li>
+<li>Status: conjunto de informações sobre a configuração do ambiente de funcionamento da Superinterface.</li>
+<li>Manual: este documento.</li>
+</ol>
+<!-- ...................... -->
+<li><h3 id="uploads">Upload de arquivos</h3></li>
+Os arquivos que podem ser submetidos ao acervo da Superinterface devem pertencer a um certo conjunto de tipos predeterminados.  Os tipos aceitos estão definidos no arquivo de configuração da Superinterface, onde para cada tipo existe um tratamento específico. Para submeter arquivos ao acervo, existem duas maneiras básicas:
+<ol style="list-style-type:square;">
+<li>Grande quantidade de arquivos: se você tem acesso direto as pastas da aplicação via ftp ou ssh, copie os arquivos a serem submetidos ao acervo para a pasta /su_uploads.</li>
+<li>Alguns poucos arquivos: utilize a interface gráfica da Superinterface, atravé das opção "Uploads" do menu principal.</li>
+</ol><p></p>Alguns comportamentos devem ser observados:
+<ol style="list-style-type:square;">
+<li>Utilizando a opção "Uploads" da interface gráfica da Superinterface, haverá duas limitações referente ao tamanho dos arquivos: pela configuração php.ini do PHP (que pode ser visualizada através da opção "Status" do menu); por limitação da prórpia Superintrface, programada através do arquivo de configuração da aplicação.  As duas limitações podem ser visualizadas através da opção "Status" do menu principal.</li>
+<li>Utilizando a opção "Uploads" da interface gráfica da Superinterface, haverá a verificação do tipo de arquivo que está sendo submetido. Somente alguns tipos de arquivos são aceitos pela Superinterface, conforme estabelecido através de seu arquivo de configuração.</li>
+<li>Utilizando o acesso via ftp ou ssh diretamente à pasta /su_uploads, as verificações de segurança quanto ao tamanho limite de cada arquivo e quanto ao tipo de arquivo não serão realizadas.  Use esta opção com parcimônia.</li>
+</ol>
+<li><h3 id="uploads">Crescimento do acervo</h3></li>
+Após os uploads dos arquivos, estes serão incorporados gradativamente ao acervo a partir de cada ativação do "vigilante" programado através do Cron.  A cada ativação, um lote de arquivos é tratado e incorporado ao acervo.  Assim, é normal que imediatamente após o upload de arquivos estes ainda não apareçam no acervo. Espere o tratamento gradativo dos lotes de arquivos.<br \>
+
+O tratamento em lotes dos arquivos possibilita um uso mais racional de processamento da máquina.
+
+<li><h3 id="uploads">Perguntas frequentes</h3></li>
+<ol style="list-style-type:square;">
+<li>Por que após fazer o upload de arquivo ele não aprece imediatamente no acervo?</li>
+Antes de tudo, isso é normal e pode estar acontecendo devido algumas razões:
+<ol style="list-style-type:circle;">
+<li>o "vigilante" ainda não foi acionado. Neste caso, espere um pouco mais para o arquivo ser tratado.</li>
+<li>o "vigilante" foi acionado, mas pode  existir uma fila de arquivos para serem tratados. Espere o tratamento gradativo dos arquivos, o qual é realizados em lotes.</li>
+<li>pode ser que o tratamento do arquivo já foi realizado e alguma inconsistência na estrutura do documento foi detectada. Neste caso utilize a opção "Quarentena" da interface administrativa da Superintrface e verifique se o arquivo foi enviado para lá.</li>
+</ol>
+<li>Como alterar o tamanho limite para uploads de arquivos?</li>
+Para fazer isto é necessário ter conhecimento técnico para alterar um dos arquivos de configuração descritos abaixo.  Três situações:
+<ol style="list-style-type:circle;">
+<li>Se a limitição se refere ao PHP, o parâmetro referente a uploads de arquivos na configuração do PHP deve ser alterado.</li>
+<li>Se a limitação se refere a configuração da Superinterface, e a Superinterface ainda não foi instalada, altere o parâmetro de uploads de arquivos em /su_install/super_config.cnf.</li>
+<li>Se a limitação se refere a configuração da Superinterface, e a Superinterface já está em funcionamento, altere o parâmetro de uploads de arquivos /su_admin/em super_config_php.cnf</li>
+</ol>
+<li>Como posso saber qual o tamanho máximo permitido para upload de arquivos?</li>
+Essas informações estão disponíveis através da opção "Status" do Portal de Administração da Superinterface. Observe que o controle está sendo realizado tanto pela configuração do PHP (php.ini) como através de parâmetro da Superinterface.  Vale o menor valor.
+<li>Como outras pessoas podem ter acesso ao Painel de Administração?</li>
+Para isso cadastre essas pessoas através da opção "Usuários" do Painel de Administração. Cada usuário pode ser cadastrado com o perfil de "Administrador" ou "Conteudista".
+<li>Que tabelas existem na base de dados da Superinterface?</li>
+Essa informação está disponível através da opção "Tabelas" do Portal de Administração.  Inclusive se a instalação fora feita com tabelas externas, estas também aparecerão quando se usar esta facilidade do portal.
+<li>Como posso acompanhar as operações da Superinterface?</li>
+Através da opção "Logs" do Painel de Administração se tem acesso as informações em tempo real a respeito das operações que os scripts da Superinterface estão realizando. 
+</ol>
 </ol>
 </div>
-<script>
+<script type="text/javascript">
 function lista_h2(){
 var i;
 $x=document.querySelectorAll('h2,h3');
-//$x=document.getElementsByTagName("H2");
 menuzinho=document.getElementById("menu");
 menuzinho.innerHTML=menuzinho.innerHTML+"<br><br>";
 for (i=0; i<$x.length; i++){
-menuzinho.innerHTML=menuzinho.innerHTML+"<br><a class='lista_de_conteudo' href='#"+$x[i].id+"'>"+$x[i].innerHTML+"</a><br>";
-
+	if ($x[i].tagName == "H2" ) {
+		menuzinho.innerHTML=menuzinho.innerHTML+"<br>* <a class='lista_de_conteudo2' href='#"+$x[i].id+"'>"+$x[i].innerHTML+"</a><br>";
+	}
+	else {    /*  será H3 */
+		menuzinho.innerHTML=menuzinho.innerHTML+"&ensp;<a class='lista_de_conteudo3' href='#"+$x[i].id+"'>"+$x[i].innerHTML+"</a><br>";
+	}
 }
 }
 </script>
