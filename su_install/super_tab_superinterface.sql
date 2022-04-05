@@ -18,7 +18,9 @@ CREATE TABLE su_nomes_cidades AS SELECT nome_cidade from su_cidades;
 
 -- CREATE TABLE su_instituicoes (id_chave_instituicao int not null auto_increment, nome_instituicao varchar(1000), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, primary key(id_chave_instituicao));
 
-CREATE TABLE su_instituicoes (id_chave_instituicao int(11) not null auto_increment, nome_instituicao varchar(1000) DEFAULT NULL, time_stamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(), primary key(id_chave_instituicao));
+CREATE TABLE su_instituicoes (id_chave_instituicao int(11) not null auto_increment, nome_instituicao varchar(300) DEFAULT NULL, instituicao_sem_acentuacao varchar(300),  time_stamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(), primary key(id_chave_instituicao));
+
+CREATE TABLE su_nomes_instituicoes AS SELECT nome_instituicao from su_instituicoes;
 
 CREATE TABLE su_tipos_documentos (id_chave_tipo_de_documento int not null auto_increment, nome_tipo_de_documento varchar(200), primary key (id_chave_tipo_de_documento), unique(nome_tipo_de_documento));
 
@@ -57,7 +59,7 @@ CREATE TABLE su_docs_signatarios (id_chave_documento_signatario int not null aut
 
 CREATE TABLE su_docs_registrados (id_chave_documento_registrado int not null auto_increment, id_documento int, id_registrado int, ocorrencias int, primary key (id_chave_documento_registrado));
 
-CREATE TABLE su_docs_instituicoes (id_chave_documento_instituicao int not null auto_increment, id_documento int, id_instituicao int, primary key (id_chave_documento_instituicao));
+CREATE TABLE su_docs_instituicoes (id_chave_documento_instituicao int not null auto_increment, id_documento int, id_instituicao int, ocorrencia_inst int, primary key (id_chave_documento_instituicao));
 
 CREATE TABLE su_interfaces (id_chave_interface int not null auto_increment, nome_da_interface varchar(200), id_estilo int, comentario varchar(1000), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_interface), UNIQUE(nome_da_interface));
 
@@ -202,7 +204,6 @@ INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('S�
 INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Sergipe',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'SE', 'victor');
 INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Tocantins',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'TO', 'victor');
 INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Indefinido',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Indefinido') ,'??', 'victor');
-INSERT INTO su_instituicoes (nome_instituicao) values ('Instituição Indefinida'),('Presidência da República'),('Câmara dos Deputados');
 INSERT INTO su_registrados (nome_registrado, name_of_war, id_estado, id_pais, id_cidade) values ('signatário indefinido', 'indefinido', (select id_chave_estado from su_estados where nome_estado like 'Indefinido'), (select id_chave_pais from su_paises where nome_pais like 'Indefinido'),(select id_chave_cidade from su_cidades where nome_cidade like 'Indefinido'));
 INSERT INTO su_registrados (nome_registrado, name_of_war, id_cidade, id_estado, id_pais) values ('Rafael Procópio','Rafael',(select id_chave_cidade from su_cidades where cidade_sem_acentuacao like 'GUARULHOS'),(select id_chave_estado from su_estados where sigla_estado like 'SP'),(select id_chave_pais from su_paises where nome_pais like 'BRASIL'));
 INSERT INTO su_registrados (nome_registrado, name_of_war, id_cidade, id_estado, id_pais) values ('Jacqueline Baumgartz','Jacke',(select id_chave_cidade from su_cidades where cidade_sem_acentuacao like 'SAO JOSE DOS CAMPOS'),(select id_chave_estado from su_estados where sigla_estado like 'SP'),(select id_chave_pais from su_paises where nome_pais like 'BRASIL'));

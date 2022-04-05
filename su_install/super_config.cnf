@@ -7,7 +7,7 @@
 CPBASE=""                              # base de dados da aplicação
 CPBASEUSER=""                          # usuário da base de dados
 CPBASEPASSW=""                         # password da base de dados
-CPNUMERARPDF=1                         # renomear arquivos PDF (0 = não; 1 = sim)
+CPNUMERARPDF=0                         # renomear arquivos PDF (0 = não; 1 = sim)
 CPHTTPHOST=""                          # Host name $_SERVER['HTTP_HOST'] + pasta raiz
                                        # exemplos:
 									   # observatorio.wash.net.br/superinterface
@@ -39,8 +39,10 @@ CPALOG="super_logshell.log"            # nome do arquivo de logs da Superinterfa
 CPALOGHTML="super_logshell.html"       # nome do arquivo de logs da Superinterface em formato html
 CPPHPFILE="super_config_php.cnf"       # nome do arquivo de configuração gerado para o PHP
 CPLOGSFILEGZ="super_logfile.tar"	   # nome base do arquivo compactado de logs
-CPNOMECIDADES="super_cidades_maiusculas.txt" # nome arquivo contendo o nomes das cidades (em letras maiúsculas)
-CPINSERECIDADES="super_insere_cidades.sql"   # nome arquivo com comandos SQL de inserção de dados na tabela 'su_cidades'
+CPNOMECIDADES="super_cidades_maiusculas.txt"    # nome arquivo com nomes das cidades (em letras maiúsculas, sem controle)
+CPNOMEINST="super_instituicoes_maiusculas.txt"  # nome arquivo com nomes das instituições (em letras maiúsculas, sem controle)
+CPINSERECIDADES="super_insere_cidades.sql"      # nome arquivo com comandos SQL de inserção de dados na tabela 'su_cidades'
+CPINSEREINST="super_insere_instituicoes.sql"    # nome arquivo com comandos SQL de inserção de dados na tabela 'su_instituicoes'
 CPINSERENOMES="super_insere_nomes.sql"       # nome arquivo com comandos SQL de inserção de dados na tabela 'su_names_brasil'
 CPCRIATABELAS="super_tab_superinterface.sql" # nome arquico SQL de criação tabelas e inserts iniciais da Superinterface
 CPTABAPLICACAO="super_tab_aplicacao.sql"     # nome arquivo SQL de criação tabelas e inserts iniciais da aplicação do usuário 

@@ -49,6 +49,10 @@ MErr33="Erro! Não foi possível gerar o arquivo de configuração para as rotin
 MErr34="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela de 'su_names_brasil'"
 MErr35="Erro! Não foi possível criar pasta para arquivos PHP que viriam a ser automaticamente gerados"
 MErr36="Erro! Para instalar a Superinterface é obrigatório estar na pasta 'su_install'"
+MErr37="Erro! Não foi possível inserir informações na tabela 'su_instituicoes'"
+MErr38="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela de 'su_instituicoes'"
+MErr39="Erro! Não foi possível gerar arquivo auxiliar de nomes de instituições"
+MErr40="Erro! Não foi possível inserir conjunto inicial de nomes de instituições na base de dados"
 #
 MInfo01="Preparando as pastas"
 MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
@@ -56,7 +60,7 @@ MInfo03="Sucesso! Pasta administrativa preparada"
 MInfo04="Geração automática de código PHP:"
 MInfo05="Verifique os códigos PHP gerados automaticamente na pasta: "
 MInfo06="Sucesso! Criada pasta de uploads para novos arquivos"
-#MInfo07=""
+MInfo07="Sucesso! Informações inseridas corretamente na tabela 'su_instituicoes'"
 MInfo08="Iniciando a instalação"
 MInfo09="Sucesso! Conexão com o banco de dados foi realizada corretamente"
 MInfo10="Verifique o log da instalação da Superinterface através do arquivo: "
@@ -185,23 +189,26 @@ function fInit () {
 		C13: verificar existência arquivo SQL para criação de tabelas e inserts iniciais
 		C14: verificar existência arquivo SQL para inserção de dados tabela su_cidades
 		C15: verificar existência arquivo SQL para inserção de dados tabela su_names_brasil
-		C16: verificar criação de pasta do acervo (imagens de arquivos PDF)
-		C17: verificar criação de pasta para uploads de arquivos
-		C18: verificar criação de pasta de trabalho temporária
-		C19: verificar criação de pasta para arquivos originais não PDF
-		C20: verificar criação de pasta de quarentena
-		C21: verificar criação de pasta arquivos PHP gerados automaticamente
-		C22: verificar existência de pasta administrativa da Superinterface
-		C23: verificar criação arquivo índice numeração de nomes arquivos PDF
-		C24: definir permissões de acesso a pastas e arquivos
-		C25: verificar a conexão com o banco de dados
-		C26: verificar se base de dados está limpa
-		C27: verificar criação das tabelas da Superinterface
-		C28: verificar se existe, e tratar arquivo adicional SQL de aplicação externa
-		C29: verificar inserção de dados na tabela su_cidades a partir de arquivo SQL
-		C30: verificar inserção de dados na tabela su_names_brasil a partir de arquivo SQL
-		C31: verifica criação de arquivo de nomes cidades sem acentuação
-		C32: verifica a criação de usuário administrador
+		C16: verificar existência arquivo SQL para inserção de dados tabela su_instituições
+		C17: verificar criação de pasta do acervo (imagens de arquivos PDF)
+		C18: verificar criação de pasta para uploads de arquivos
+		C19: verificar criação de pasta de trabalho temporária
+		C20: verificar criação de pasta para arquivos originais não PDF
+		C21: verificar criação de pasta de quarentena
+		C22: verificar criação de pasta arquivos PHP gerados automaticamente
+		C23: verificar existência de pasta administrativa da Superinterface
+		C24: verificar criação arquivo índice numeração de nomes arquivos PDF
+		C25: definir permissões de acesso a pastas e arquivos
+		C26: verificar a conexão com o banco de dados
+		C27: verificar se base de dados está limpa
+		C28: verificar criação das tabelas da Superinterface
+		C29: verificar se existe, e tratar arquivo adicional SQL de aplicação externa
+		C30: verificar inserção de dados na tabela su_cidades a partir de arquivo SQL
+		C31: verificar inserção de dados na tabela su_instituicoes a partir de arquivo SQL
+		C32: verificar inserção de dados na tabela su_names_brasil a partir de arquivo SQL
+		C33: verifica criação de arquivo de nomes cidades sem acentuação
+		C34: verifica criação de arquivo de nomes instituições sem acentuação
+		C35: verifica a criação de usuário administrador
         --------        --------        --------  
 '
 #
@@ -348,7 +355,15 @@ function fInit () {
 		fMens "$FInsuc" "$MErr34"
 		exit
 	fi
-	#											C16: verificar criação de pasta do acervo (imagens de arquivos PDF)
+	#											C16: verificar existência arquivo SQL p/ inserção dados tabela su_instituições
+	if [ ! -f $CPINSEREINST ]; then
+		fMens "$FInsuc" "$MErr38"
+		exit
+	fi
+
+
+
+	#											C17: verificar criação de pasta do acervo (imagens de arquivos PDF)
 	fMens "$FInfor" "$MInfo01" 
 	rm -rf $CPPIMAGEM 2>/dev/null
 	if [ $? -ne 0 ]; then
@@ -362,7 +377,7 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo02"
 	fi
-	#											C17: verificar criação de pasta para uploads de arquivos
+	#											C18: verificar criação de pasta para uploads de arquivos
 	rm -rf $CPPUPLOADS 2>/dev/null
 	if [ $? -ne 0 ]; then
  		fMens "$FInsuc" "$MErr30"
@@ -375,7 +390,7 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo06"
 	fi
-	#											C18: verificar criação de pasta de trabalho temporária
+	#											C19: verificar criação de pasta de trabalho temporária
 	rm -rf $CPPWORK 2>/dev/null
 	mkdir $CPPWORK
 	if [ $? -ne 0 ]; then
@@ -384,7 +399,7 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo33"
 	fi
-	#											C19: verificar criação de pasta para arquivos originais não PDF
+	#											C20: verificar criação de pasta para arquivos originais não PDF
 	rm -rf $CPPRIMITIVO
 	mkdir $CPPRIMITIVO
 	if [ $? -ne 0 ]; then
@@ -393,7 +408,7 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo27"
 	fi
-	#											C20: verificar criação de pasta de quarentena
+	#											C21: verificar criação de pasta de quarentena
 	rm -rf $CPPQUARENTINE
 	mkdir $CPPQUARENTINE
 	if [ $? -ne 0 ]; then
@@ -402,7 +417,7 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo32"
 	fi
-	#											C21: verificar criação de pasta arquivos PHP gerados automaticamente
+	#											C22: verificar criação de pasta arquivos PHP gerados automaticamente
 	rm -rf $CPPAUTOPHP	
 	mkdir $CPPAUTOPHP
 	if [ $? -ne 0 ]; then
@@ -411,18 +426,18 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo51"
 	fi
-	# 											C22: verificar existência de pasta administrativa da Superinterface
+	# 											C23: verificar existência de pasta administrativa da Superinterface
 	if [ ! -d $CPPADMIN ]; then
 		fMens "$FInsuc" "$MErr20"
 		exit
 	fi
-	#											C23: verificar criação arquivo índice numeração de nomes arquivos PDF
+	#											C24: verificar criação arquivo índice numeração de nomes arquivos PDF
 	echo 100 > $CPPADMIN/$CPINDICEPDF
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr07"
 		exit
 	fi
-	#											C24: definir permissões de acesso a pastas e arquivos
+	#											C25: definir permissões de acesso a pastas e arquivos
 	#											Deixar inicialmente os diretorios e pastas com uma permissão padrão
 	find ../ -type d -exec chmod $CPPERM750 {} \;
 	find ../ -type f -exec chmod $CPPERM640 {} \;
@@ -448,7 +463,7 @@ function fInit () {
 	chmod $CPPERM750 $CPPUPLOADS            # definir permissão pasta de uploads de arquivos destinados ao acervo
 	#
 	fMens "$FSucss" "$MInfo03"					# pasta administrativa preparada
-	#											C25: testar conexão com o banco de dados
+	#											C26: testar conexão com o banco de dados
 	mysql -u $CPBASEUSER -b $CPBASE -p$CPBASEPASSW -e "quit" 2>/dev/null
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr08"
@@ -475,7 +490,7 @@ function fArquivos () {
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
 function fTabelas () { 
-	#											C26: apagar possíveis tabelas e verificar se base de dados está limpa
+	#											C27: apagar possíveis tabelas e verificar se base de dados está limpa
 	TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
 	for t in $TABLES
 	do
@@ -491,7 +506,7 @@ function fTabelas () {
 		fMens "$FInsuc" "$MErr13"
  		exit
 	fi
-	#											C27: criar e verificar existência das tabelas da Superinterface
+	#											C28: criar e verificar existência das tabelas da Superinterface
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPCRIATABELAS"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo17"
@@ -499,7 +514,7 @@ function fTabelas () {
 		fMens "$FInsuc" "$MErr13"
  		exit
 	fi
-	#											C28: verificar se existe arquivo adicional SQL de aplicação externa
+	#											C29: verificar se existe arquivo adicional SQL de aplicação externa
 	if [ -f $CPTABAPLICACAO ]; then
 		#										criar tabelas da aplicação e inserir seus dados
 		mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPTABAPLICACAO"
@@ -512,12 +527,20 @@ function fTabelas () {
 	else
 		fMens "$FInfor" "$MInfo15"
 	fi
-	#											C29: verificar inserção de dados na tabela 'su_cidades'
+	#											C30: verificar inserção de dados na tabela 'su_cidades'
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSERECIDADES"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo19"
 	else
 		fMens "$FInsuc" "$MErr14"
+ 		exit
+	fi
+	#											C31: verificar inserção de dados na tabela 'su_instituicoes'
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSEREINST"
+	if [ $? -eq 0 ]; then
+		fMens "$FSucss" "$MInfo07"
+	else
+		fMens "$FInsuc" "$MErr37"
  		exit
 	fi
 	#				resumo
@@ -533,24 +556,39 @@ function fTabelas () {
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_cidades") "
 	fMens "$FInfo2" "$MInfo40"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
-	#											C30: verificar inserção de dados na tabela 'su_names_brasil'
+	#											C32: verificar inserção de dados na tabela 'su_names_brasil'
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSERENOMES"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr21"
  		exit
 	fi
+	#											C33: verifica criação de arquivo de nomes cidades sem acentuação
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO su_nomes_cidades(nome_cidade) SELECT nome_cidade FROM su_cidades"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr22"
  		exit
 	fi
-	#											C31: verifica criação de arquivo de nomes cidades sem acentuação
 	rm -rf  $CPPADMIN/$CPNOMECIDADES
 	mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from su_nomes_cidades' |  sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:] > $CPPADMIN/$CPNOMECIDADES
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr06"
  		exit
 	fi
+	#											C34: verifica criação de arquivo de nomes instituições sem acentuação
+	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO su_nomes_instituicoes(nome_instituicao) SELECT nome_instituicao FROM su_instituicoes"
+	if [ $? -ne 0 ]; then
+		fMens "$FInsuc" "$MErr40"
+ 		exit
+	fi
+	rm -rf  $CPPADMIN/$CPNOMEINST
+	mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from su_nomes_instituicoes' |  sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:] > $CPPADMIN/$CPNOMEINST
+	if [ $? -ne 0 ]; then
+		fMens "$FInsuc" "$MErr39"
+ 		exit
+	fi
+
+
+
 	#				resumo
 	fMens "$FSucss" "$MInfo28"
 	fMens "$FInfo2" "$MInfo29"
@@ -571,7 +609,7 @@ function fUseradmin () {
 	var="admin"
 	hash="$(echo -n "$var" | sha1sum | awk '{print $1}')"
 	sql="INSERT INTO su_usuarios (username, senha , nome , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)";	# Administrador tem privilégio = 0 (máximo privilégio)
-	#											C32: verifica a criação de usuário administrador
+	#											C35: verifica a criação de usuário administrador
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "$sql"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo12"
