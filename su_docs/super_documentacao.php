@@ -36,22 +36,19 @@ A solução Superinterface constitui de um sistema formado de três blocos disti
 <dl>
 <dt>Blocos:</dt>
 <dd>- a plataforma Potlatch: um sistema CRUD (Create, Retrieve, Update & Delete), voltado para a entrada de dados de forma estruturada no banco de dados localizado no servidor MySQL. A Potlatch não é voltada para o usuário final;</dd><br \>
-<dd>- um visualizador de dados: Giramundônics.  É destinado ao usuário final, permitindo a visualização do acervo da Superinterface e realizar busca de dados. Não tem ferramentas de entrada de dados. Não é um CRUD.</dd><br \>
-<dd>- uma ferramenta de manutenção ou backoffice: dá acesso a todas as tabelas da Superinterface, peritindo edição das informações.  É um CRUD.</dd>
+<dd>- um visualizador de dados: Giramundonics.  É destinado ao usuário final, permitindo a visualização do acervo da Superinterface e realizar busca de informações. Não possui facilidades de entrada de dados. Não é um CRUD.</dd><br \>
+<dd>- uma ferramenta de manutenção ou backoffice: dá acesso a todas as tabelas da Superinterface, permitindo edição das informações.  É um CRUD.</dd>
 </dl>
 
-A Superinterface visa criar um acervo de documetos PDF sobre uma determinada temática, podendo realizar buscas textuais neste acervo e permitir aos responsáveis pela criação do acervo a entrada de metadados e outras informações sobre estes documentos. O objetivo também é estabelecer um instrumento para a busca de dados no acervo, para que o público possa ter a melhor visibilidade sobre os documentos do acervo.
+A Superinterface visa criar um acervo de documetos PDF sobre uma determinada temática, podendo realizar buscas textuais neste acervo e permitir aos responsáveis pela criação do acervo a entrada de metadados e outras informações sobre estes documentos. O objetivo também é estabelecer um instrumento para a busca de informações no acervo, para que o público possa ter a melhor visibilidade sobre os documentos do acervo.
 
-Dentre as informações que podem ser disponibilizados para cada arquivo através da Superinterface, estão:
+Dentre as informações que podem ser disponibilizadas para cada arquivo através da Superinterface, estão:
 <dl>
 <dt>Informações:</dt>
 <dd>- instituições envolvida;</dd>
 <dd>- autoridades;</dd>
-<dd>- empresas e entidades;</dd>
-<dd>- valores financeiros envolvidos;</dd>
-<dd>- distribuição geográfica de valores;</dd>
-<dd>- identificação da atuação da sociedade civil;</dd>
-<dd>- registro de indicadores (e.g. número de editais, número de participantes, etc)</dd>
+<dd>- cidades envolvidas;</dd>
+<dd>- identificação da atuação da sociedade civil.</dd>
 </dl>
 
 O principal aspecto que foi perseguido no desenvolvimento da solução foi a automatização da coleta das informações:
@@ -62,7 +59,7 @@ O principal aspecto que foi perseguido no desenvolvimento da solução foi a aut
 <dd>- nomes de Instituições</dd>
 </dl>
 
-Os dados estão organizados por documento e, sempre que possível, geo-localizados. Várias ferramentas de automatização estão sendo avaliadas e utilizadas para que a Superinterface consiga fazer essa coleta de dados, inclusive:
+Os dados estão organizados por documento. Várias ferramentas de automatização estão sendo avaliadas e utilizadas para que a Superinterface consiga fazer essa coleta de dados, inclusive:
 <dl>
 <dt>Ferramentas:</dt>
 <dd>- ferramentas de tratamento de texto convencionais (sed, regexp, grep, awk, head, tail, cat, entre outras)</dd>
@@ -76,7 +73,7 @@ Destas 3 abordagens, a mais madura é a primeira e já vem sendo usada amplament
 Para realizar a instalação da Superinterface, proceda da seguinte forma:
 <ol>
 <!-- ...................... -->
-<li><h3 id="preparacao_ambiente">Preparação do Ambiente</h3>
+<li><h3 id="preparacao_ambiente">Ambiente</h3>
 <ol style="list-style-type:lower-alpha">
 <li>Sistema Operacional, linguagens e outros aspectos gerais:</li>
 GNU/LINUX-Debian 9 ou superior<br />
@@ -176,7 +173,7 @@ Inserir no arquivo  /etc/ImageMagick-6/policy.xml, se ainda não existir esta li
 </ol></li>
 <p></p><br />
 <!-- ...................... -->
-<li><h3 id="preparacao_scripts">Preparação dos Scripts</h3>
+<li><h3 id="preparacao_scripts">Scripts</h3>
 <ol style="list-style-type:lower-alpha">
 <li>Todo código está disponível no GitHub, bastando baixar a <a href="https://github.com/wash-git/Superinterface">última release da aplicação Superinterface</a></li>.
 <li>Evite fazer a instalação da aplicação como usuário root. Deve-se realizar todas instalação do código da aplicação Superinterface como um usuário normal, sem prerrogativas de administrador.</li>
@@ -293,6 +290,15 @@ Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo 
 <p></p>
 </li>
 <!-- ...................... -->
+<li><h3 id="verbetes">Verbetes para Buscas</h3>
+Para a Superinterface possibilitar ao usuário a facilidade de busca de verbetes nos conteúdos dos arquivos, é necessário definir o seu vocabulário controlado. Existem duas fontes de dados que o administrador da Superinterface deve fornecer, as quais já vêm fornecidas inicialmente quando se baixa e instala a solução:<p></p>
+<table>
+<tr><th>Informação</th><th style="width:70%">Descrição</th></tr>
+<tr><td>Cidades</td><td>Através do arquivo:     su_install/super_insere_cidades.sql</td></tr>
+<tr><td>Instituições</td><td>Através do arquivo:     su_install/super_insere_instituicoes.sql</td></tr>
+</table><p></p>
+Estes arquivos podem (e devem) ser alterados no momento da instalação da solução, possibilitando melhor adequar a solução à realidade em que será utilizada.  Apenas deve-se observar a estrutura desses arquivos de forma a mantê-la. 
+<!-- ...................... -->
 <li><h3 id="logs">Registro de Logs</h3>
 Todas as operações da Superinterface estão registradas através de logs.  São dois os arquivo de logs:
 <ol style="list-style-type:square">
@@ -343,8 +349,8 @@ Ao abrir o portal, o usuário terá um menu com as seguintes opções:
 <li>Manual: este documento.</li>
 </ol>
 <!-- ...................... -->
-<li><h3 id="uploads">Upload de arquivos</h3></li>
-Os arquivos que podem ser submetidos ao acervo da Superinterface devem pertencer a um certo conjunto de tipos predeterminados.  Os tipos aceitos estão definidos no arquivo de configuração da Superinterface, onde para cada tipo existe um tratamento específico. Para submeter arquivos ao acervo, existem duas maneiras básicas:
+<li><h3 id="uploads">Upload de Arquivos</h3></li>
+Os arquivos podem ser submetidos ao acervo da Superinterface a qualquer tempo. Estes devem pertencer a um certo conjunto de tipos de arquivos predeterminados.  Os tipos aceitos estão definidos no arquivo de configuração da Superinterface, onde para cada tipo existe um tratamento específico. Para submeter arquivos ao acervo, existem duas maneiras básicas:
 <ol style="list-style-type:square;">
 <li>Grande quantidade de arquivos: se você tem acesso direto as pastas da aplicação via ftp ou ssh, copie os arquivos a serem submetidos ao acervo para a pasta /su_uploads.</li>
 <li>Alguns poucos arquivos: utilize a interface gráfica da Superinterface, atravé das opção "Uploads" do menu principal.</li>
@@ -354,12 +360,25 @@ Os arquivos que podem ser submetidos ao acervo da Superinterface devem pertencer
 <li>Utilizando a opção "Uploads" da interface gráfica da Superinterface, haverá a verificação do tipo de arquivo que está sendo submetido. Somente alguns tipos de arquivos são aceitos pela Superinterface, conforme estabelecido através de seu arquivo de configuração.</li>
 <li>Utilizando o acesso via ftp ou ssh diretamente à pasta /su_uploads, as verificações de segurança quanto ao tamanho limite de cada arquivo e quanto ao tipo de arquivo não serão realizadas.  Use esta opção com parcimônia.</li>
 </ol>
-<li><h3 id="uploads">Crescimento do acervo</h3></li>
-Após os uploads dos arquivos, estes serão incorporados gradativamente ao acervo a partir de cada ativação do "vigilante" programado através do Cron.  A cada ativação, um lote de arquivos é tratado e incorporado ao acervo.  Assim, é normal que imediatamente após o upload de arquivos estes ainda não apareçam no acervo. Espere o tratamento gradativo dos lotes de arquivos.<br \>
 
-O tratamento em lotes dos arquivos possibilita um uso mais racional de processamento da máquina.
+<li><h3 id="visibilidade">Visibilidade do Acervo</h3></li>
+A visibilidade dos arquivos que estão no acervo da Superinterface é disponibilizada através da interface gráfica Giramundonics. O Giramundonics possibilita se ter a visualização de uma miniatura da apresentação original de cada arquivo e, se desejar, o usuário poderá abrir os arquivos de interesse. Além disso, o Giramundonics disponibiliza ao usuário facilidades de busca de termos nos conteúdos dos arquivos, de forma que se localize com rapidez e facilidade quais os arquivos que trazem os verbetes de interesse. 
 
-<li><h3 id="uploads">Perguntas frequentes</h3></li>
+<li><h3 id="uploads">Crescimento do Acervo</h3></li>
+O acervo do Giramundonics vai se constituindo cumulativamente ao longo do tempo. Após uploads de arquivos, estes serão incorporados gradativamente ao acervo a partir de cada ativação do "vigilante", que deve ser programado através da facilidade do Cron do sistema operacional.  A cada ativação, um lote de arquivos é tratado e incorporado ao acervo.  Assim, é normal que imediatamente após o upload de arquivos estes ainda não apareçam no acervo. Espere o tratamento gradativo dos lotes de arquivos.<br \>
+
+O tratamento em lotes dos arquivos possibilita um uso mais racional da capacidade de processamento da máquina.
+
+<li><h3 id="buscas">Buscas no Acervo</h3></li>
+As buscas de conteúdos no acervo da Superinterface estão disponíveis na interface gráfica disponibilizada pelo Giramundonics, e pode ser realizada de três formas:
+<ul>
+<li>Pelo nome do arquivo: a busca se inicia pelo primeiro caractere do nome do arquivo.</li>
+<li>Pelo nome da cidade.</li>
+<li>Pelo nome da instituição.</li>
+</ul>
+A medida que se inicia a digitação do termo a ser buscado, as buscas já são iniciadas.<br \>
+Os termos que estão indexados pertencem a um vocabulário controlado, constituindo um conjunto normalizado de termos que serve à indexação e à recuperação da informação. Esses termos são predefinidos através de arquivos de configuração, os quais o administrador da Superinterface pode alterar.
+<li><h3 id="uploads">Perguntas Frequentes</h3></li>
 <ol style="list-style-type:square;">
 <li>Por que após fazer o upload de arquivo ele não aprece imediatamente no acervo?</li>
 Antes de tudo, isso é normal e pode estar acontecendo devido algumas razões:
