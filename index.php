@@ -1,7 +1,4 @@
 <?php
-require_once('FirePHPCore/fb.php');
-FB::log('Minha Log message');
-FB::info('Minha Info message');
 ?>
 
 <script type="text/javascript">

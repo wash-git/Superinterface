@@ -364,7 +364,7 @@ Os arquivos podem ser submetidos ao acervo da Superinterface a qualquer tempo. E
 <li><h3 id="visibilidade">Visibilidade do Acervo</h3></li>
 A visibilidade dos arquivos que estão no acervo da Superinterface é disponibilizada através da interface gráfica Giramundonics. O Giramundonics possibilita se ter a visualização de uma miniatura da apresentação original de cada arquivo e, se desejar, o usuário poderá abrir os arquivos de interesse. Além disso, o Giramundonics disponibiliza ao usuário facilidades de busca de termos nos conteúdos dos arquivos, de forma que se localize com rapidez e facilidade quais os arquivos que trazem os verbetes de interesse. 
 
-<li><h3 id="uploads">Crescimento do Acervo</h3></li>
+<li><h3 id="crescimento">Crescimento do Acervo</h3></li>
 O acervo do Giramundonics vai se constituindo cumulativamente ao longo do tempo. Após uploads de arquivos, estes serão incorporados gradativamente ao acervo a partir de cada ativação do "vigilante", que deve ser programado através da facilidade do Cron do sistema operacional.  A cada ativação, um lote de arquivos é tratado e incorporado ao acervo.  Assim, é normal que imediatamente após o upload de arquivos estes ainda não apareçam no acervo. Espere o tratamento gradativo dos lotes de arquivos.<br \>
 
 O tratamento em lotes dos arquivos possibilita um uso mais racional da capacidade de processamento da máquina.
@@ -378,7 +378,7 @@ As buscas de conteúdos no acervo da Superinterface estão disponíveis na inter
 </ul>
 A medida que se inicia a digitação do termo a ser buscado, as buscas já são iniciadas.<br \>
 Os termos que estão indexados pertencem a um vocabulário controlado, constituindo um conjunto normalizado de termos que serve à indexação e à recuperação da informação. Esses termos são predefinidos através de arquivos de configuração, os quais o administrador da Superinterface pode alterar.
-<li><h3 id="uploads">Perguntas Frequentes</h3></li>
+<li><h3 id="perguntas">Perguntas Frequentes</h3></li>
 <ol style="list-style-type:square;">
 <li>Por que após fazer o upload de arquivo ele não aprece imediatamente no acervo?</li>
 Antes de tudo, isso é normal e pode estar acontecendo devido algumas razões:
