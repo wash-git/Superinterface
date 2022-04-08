@@ -193,6 +193,7 @@ Obs:  no exemplo acima, 1.0 se refere a versão da aplicação.  Verifique a ver
 	su_exemplos/
 	su_icons/
 	su_install/
+	su_js/
 	su_php/
 	index.php
 	LICENSE
@@ -236,6 +237,7 @@ drwxr-x---  web1 web1  su_exemplos
 drwxr-x---  web1 web1  su_icons
 drwxr-x---  web1 web1  su_imagens
 drwxr-x---  web1 web1  su_install
+drwxr-x---  web1 web1  su_js
 drwxr-x---  web1 web1  su_logs
 drwxr-x---  web1 web1  su_php
 drwxr-x---  web1 web1  su_primitivos
@@ -253,7 +255,8 @@ drwxr-x---  web1 web1  su_work
   <dd><strong>* su_icons:</strong> pasta com imagens utilizadas em páginas da Superinterface.</dd>
   <dd><strong>* su_logs:</strong> pasta com os logs de todas as operações da solução, desde o momento da instalação até o presente momento. A pasta também será utilizada para guardar arquivos temporários necessários ao funcionamento da aplicação.</dd>
   <dd><strong>* su_imagens:</strong> pasta onde estarão guardados os arquivos PDF pertencentes ao acervo da Superinterface, juntamente com sua imagem jpg, versão texto puro e outras versões necessárias.</dd>
-  <dd><strong>* su_install:</strong> pasta com os arquivos de configuração, arquivos SQL com informações iniciais de preenchimento de tabelas e outros arquivos necessários à instalação da Superinterface, além dos scripts shell necessários ao seu funcionamento.</dd> 
+  <dd><strong>* su_install:</strong> pasta com os arquivos de configuração, arquivos SQL com informações iniciais de preenchimento de tabelas e outros arquivos necessários à instalação da Superinterface, além dos scripts shell necessários ao seu funcionamento.</dd>
+  <dd><strong>* su_js:</strong> pasta com os arquivos javascript.</dd>
   <dd><strong>* su_pdfuploads:</strong> pasta para onde serão direcionados os arquivos PDF após seu upload pelo usuário, com objetivo de fazer incorporações ao acervo da aplicação Superinterface.  A execução deste processo de incorporação de novos documentos PDF ao acervo estará sob responsabilidade do vigilante (ativado pelo cron).</dd>
   <dd><strong>* su_php:</strong> pasta com arquivos PHP referente as funções de administração da Superinterface.</dd>
   <dd><strong>* su_primitivos:</strong> pasta onde serão guardados os arquivos originais que forem submitidos ao acervo, tais como DOCX, DOC, RTF, ODT e TXT.  Os arquivos PDF submetidos ao acervo não são guardados nesta pasta, e sim diretamente na pasta principal do acervo.  Arquivos PDF com problemas na sua estrutura, bem como outros tipos de arquivos, estes serão enviados para pasta da quarentena.</dd> 

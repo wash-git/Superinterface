@@ -84,6 +84,7 @@ MErr50="Erro! Não foi possível gerar arquivo com as ocorrências dos nomes das
 MErr51="Erro! Não foi possível gerar arquivo de instruções SQL para popular tabela su_docs_instituicoes. Transferindo arquivo(s) do lote para quarentena"
 MErr52="Erro! Não foi possível inserir informações na tabela su_docs_instituicoes. Transferindo arquivos do lote para a quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
 MErr53="Alerta! Não foi possível gerar o TXT para este arquivo, logo não indexando seu conteúdo. Ainda assim, seu PDF e JPG serão colocados no acervo: "
+MErr54="Erro! Pasta de arquivos javascript não foi encontrada"
 #
 #	mensagens de informação
 MInfo01="Bem vindo ao script de tratamento de novos arquivos do acervo em: "
@@ -253,10 +254,11 @@ function fInit () {
 	C12: verificar existência arquivo contendo nomes das cidades
 	C13: verificar existência de arquivo com comandos SQL para inserção dados na tabela su_cidades
 	C14: verificar pasta para arquivos do acervo
-	C15: verificar pasta de trabalho
-	C16: verificar existência da pasta de arquivos não PDF já preparados
-	C17: verificar existência de pasta de quarentena
-	C18: verificar a conexão com o banco de dados
+	C15: verificar pasta de arquivos javascript
+	C16: verificar pasta de trabalho
+	C17: verificar existência da pasta de arquivos não PDF já preparados
+	C18: verificar existência de pasta de quarentena
+	C19: verificar a conexão com o banco de dados
 	--------	--------	--------  
 '
 	#										C1: verificar se é usuário root
@@ -362,7 +364,12 @@ function fInit () {
 		fMens "$FInsuc" "$MErr11"
 		exit
 	fi
-	#										C15: verificar pasta de trabalho (arquivos temporários)
+	#										C15: verificar existência da pasta de arquivos javascript
+	if [ ! -d $CPPIMAGEM ]; then
+		fMens "$FInsuc" "$MErr54"
+		exit
+	fi
+	#										C16: verificar pasta de trabalho (arquivos temporários)
 	rm -rf $CPPWORK 2>/dev/null
     if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr05"
@@ -375,7 +382,7 @@ function fInit () {
 	else
     	fMens "$FSucss" "$MInfo03"
 	fi
-	#										C16: verificar existência de pasta de arquivos originais não PDF
+	#										C17: verificar existência de pasta de arquivos originais não PDF
 	if [ ! -d $CPPRIMITIVO ]; then
 		mkdir $CPPRIMITIVO
 	    if [ $? -ne 0 ]; then
@@ -385,7 +392,7 @@ function fInit () {
 			fMens	"$FInsu4"	"$MInfo52"
 		fi
 	fi
-	#										C17: verificar existência de pasta de quarentena
+	#										C18: verificar existência de pasta de quarentena
 	if [ ! -d $CPPQUARENTINE ]; then
 		mkdir $CPPQUARENTINE
 	    if [ $? -ne 0 ]; then
@@ -395,7 +402,7 @@ function fInit () {
 			fMens	"$FInsu4"	"$MInfo36"
 		fi
 	fi
-	#										C18: testar conexão com o banco de dados
+	#										C19: testar conexão com o banco de dados
     mysql -u $CPBASEUSER -b $CPBASE -p$CPBASEPASSW -e "quit" 2>/dev/null
 	if [ $? -ne 0 ]; then
     	fMens "$FInsuc" "$MErr07"
@@ -408,11 +415,21 @@ function fInit () {
 		fMens	"$FInfor"	"$MInfo24"			# mensagem informativa que irá renomear os arquivos
 	fi
 	#											Definir permissões para pastas e arquivos
-	chmod	$CPPERM750 $CPPLOG					# estabelecer permissão para pasta   logs
-	chmod	$CPPERM750 $CPPUPLOADS				# estabelecer permissão para pasta   uploads
-    chmod 	$CPPERM750 $CPPWORK					# estabelecer permissão para pasta   trabalho
-	chmod 	$CPPERM750 $CPPRIMITIVO				# estabelecer permissão para pasta   arquivos originais não PDF (trabalhados)
-	chmod	$CPPERM750 $CPPQUARENTINE			# estabelecer permissão para pasta   quarentena
+    chmod $CPPERM750 $CPPINSTALL            # definir permissão pasta de instalação da Superinterface
+    chmod $CPPERM750 $CPPPHP                # definir permissão pasta arquivos PHP da admin da Superinterface
+    chmod $CPPERM750 $CPPJS                 # definir permissão pasta de arquivos javascript
+    chmod $CPPERM750 $CPPLOG                # definir permissão pasta de logs
+    chmod $CPPERM750 $CPPCSS                # definir permissão pasta de css
+    chmod $CPPERM750 $CPPDOCS               # definir permissão pasta da documentação da Superinterface
+    chmod $CPPERM750 $CPPEXEMPLOS           # definir permissão pasta exemplos SQL externos
+    chmod $CPPERM750 $CPPICONS              # definir permissão pasta de icons
+    chmod $CPPERM750 $CPPIMAGEM             # definir permissão pasta do acervo de arquivos
+    chmod $CPPERM750 $CPPAUTOPHP            # definir permissão pasta de arquivos PHP a serem gerados
+    chmod $CPPERM750 $CPPADMIN              # definir permissão pasta administrativa da Superinterface
+    chmod $CPPERM750 $CPPQUARENTINE         # definir permissão pasta de quarentena
+    chmod $CPPERM750 $CPPWORK               # definir permissão pasta de trabalho
+    chmod $CPPERM750 $CPPRIMITIVO           # definir permissão pasta de arquivos não PDF já preparados
+    chmod $CPPERM750 $CPPUPLOADS            # definir permissão pasta de uploads de arquivos destinados ao acervo
 	# ... ... ...
 	chmod	$CPPERM600 $CPCONFIG				# estabelecer permissão para arquivo configuração
 	chmod	$CPPERM640 $CPPLOG"/"$CPALOG		# estabelecer permissão para arquivo logs

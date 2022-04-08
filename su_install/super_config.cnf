@@ -4,12 +4,12 @@
 #                                                                                                                           |
 # --------------------------------------------------------------------------------------------------------------------------+
 #	Parte 1: parametrizações
-CPBASE=""                              # base de dados da aplicação
-CPBASEUSER=""                          # usuário da base de dados
-CPBASEPASSW=""                         # password da base de dados
-CPNUMERARPDF=0                         # renomear arquivos PDF (0 = não; 1 = sim)
-CPHTTPHOST=""                          # Host name $_SERVER['HTTP_HOST'] + pasta raiz
-                                       # exemplos:
+CPBASE="basesandra"                              # base de dados da aplicação
+CPBASEUSER="sandra"                              # usuário da base de dados
+CPBASEPASSW="Port2021#sandra"                    # password da base de dados
+CPNUMERARPDF=0                                   # renomear arquivos PDF (0 = não; 1 = sim)
+CPHTTPHOST="observatorio.wash.net.br/espaco1"    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+										# exemplos:
 									   # observatorio.wash.net.br/superinterface
 									   # exemplo.br
 CPQPDFLOTE=4                           # quantidade máxima de arquivos PDF tratados a cada ativação do script do cron
@@ -34,6 +34,7 @@ CPPEXEMPLOS="../su_exemplos"           # pasta de exemplos de arquivos SQL aplic
 CPPICONS="../su_icons"                 # pasta de icons
 CPPINSTALL="../su_install"             # pasta com arquivos de instalação da Superinterface
 CPPPHP="../su_php"                     # pasta de arquivos PHP da administração da Superinterface
+CPPJS="../su_js"                       # pasta de arquivos javascript
 CPINDICEPDF="super_indicepdf.txt"      # nome do arquivo para guardar último número de índice para nome arq. PDF 
 CPALOG="super_logshell.log"            # nome do arquivo de logs da Superinterface em formato texto
 CPALOGHTML="super_logshell.html"       # nome do arquivo de logs da Superinterface em formato html

@@ -23,7 +23,7 @@ $mensagens = array (
 		"Mens01" => "Para subir múltiplos arquivos, use os botões abaixo:",
 		"Mens02" => "Cria interfaces para o banco: ",
 		"Mens03" => "Lista de Arquivos a serem gravados no servidor",
-		"Mens04" => "Back_Office do Observatório Aldir Blanc (Portlatch)",
+		"Mens04" => "Back_Office da Superinterface (Portlatch)",
 		"Mens05" => "Tabelas Independentes",
 		"Mens06" => "Tabelas Dependentes",
 		"Mens07" => "Tabelas de Conexão 2",
@@ -305,7 +305,6 @@ function Cria_Mostra_Diretorios_PHP(){
 	$fs_busca_inteiro=fopen('../su_autophp/super_mostra_diretorio_imagens.php','w');
 	Envia_mensagem($mensagens['Mens23']);
 	$busca='<?php
-//require_once "../su_install/super_config_php.cnf";
 require_once "'.$arqconfig.'";
 $identscript=$pag_backoffice1;      // identificação do script super_backoffice.php
 require_once "../su_admin/super_config_includes.php";
@@ -1261,7 +1260,6 @@ function Cria_insere($fs,$banco, $tabela, $campos, $fks_table, $fks_campos){
 		if (strpos($value,'nome_')===false){} else {$campo_tem_nome=" order by ".$value;}
 	}
 	$php='<?php
-//require_once "../su_install/super_config_php.cnf";
 require_once "'.$arqconfig.'";
 $identscript=$pag_backoffice1;      // identificação do script super_backoffice.php
 require_once "../su_admin/super_config_includes.php";
@@ -1309,10 +1307,9 @@ echo "
 <div id=\'insercao\' class=\'botoeira\'>
 </div>
 ";
-$database="'.$banco.'";
 $path_imagem="";
 
-$conn= new mysqli("localhost", $username, $pass, $database);
+$conn= new mysqli("localhost", $username, $pass, $banco);
 
 $sql_comment="SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_NAME = \''.$tabela.'\';";
 
@@ -2229,7 +2226,7 @@ oReq.send();
 
 function mostra_botao(div_insercao, tabela, nivel){
 	nivel_insercao=nivel;
-	  var botao=\'<input  type='.'\"'.'button'.'\" data-nivel='.'\"'.'\'+nivel+\''.'\" value='.'\"'.'mostra inserção \'+tabela+\''.'\" onclick='.'\"'.'painel_insercao('."`".'\'+div_insercao+\''."`".','."`".'\'+tabela+\''."`".')'.'\" />\';
+	  var botao=\'<input  type='.'\"'.'button'.'\" data-nivel='.'\"'.'\'+nivel+\''.'\" value='.'\"'.'Inserir em \'+tabela+\''.'\" onclick='.'\"'.'painel_insercao('."`".'\'+div_insercao+\''."`".','."`".'\'+tabela+\''."`".')'.'\" />\';
 	  document.getElementById(div_insercao).innerHTML=botao;
 
         disable_niveis();
@@ -3015,9 +3012,7 @@ if ($nivel=="3") { $cor_background="green";}
 if ($nivel=="4") { $cor_background="blue"; $cor_letra="yellow";}
 if ($nivel=="5") { $cor_background="orange";}
 
-$banco_de_dados=$base;
-$database=$banco_de_dados;
-$conn= new mysqli("localhost", $username, $pass, $database);
+$conn= new mysqli("localhost", $username, $pass, $banco);
 
 $sql="
 select col.TABLE_NAME as \'table\',
@@ -3042,7 +3037,7 @@ select col.TABLE_NAME as \'table\',
 				     where col.TABLE_SCHEMA not in(\'information_schema\',\'sys\',
 					                                   \'mysql\', \'performance_schema\')
 									         and tab.table_type = \'BASE TABLE\'
-										 and col.TABLE_SCHEMA = \'".$banco_de_dados."\'
+										 and col.TABLE_SCHEMA = \'".$banco."\'
 										 and tab.TABLE_NAME= \'".$tabela."\'
 										 order by col.TABLE_SCHEMA,
 										          col.TABLE_NAME,
@@ -3134,7 +3129,7 @@ if (		(strpos($coluna,\'id_chave\')===false) &&
 						var w_h=`width=1000 height=1000`;
 						var w=window.open(dummy,mostra,w_h);
 						var resposta=``;
-						var url=`super_mostra_diretorio_imagens.php?banco=\'.$banco_de_dados.\'&diretorio=su_imagens&id_input=id_campo_nome_photo_filename&id_input_path=`+identificador+`&id_input_img=photo_filename_img&jpg=1&png=1&gif=1&pdf=0`;
+						var url=`super_mostra_diretorio_imagens.php?banco=\'.$banco.\'&diretorio=su_imagens&id_input=id_campo_nome_photo_filename&id_input_path=`+identificador+`&id_input_img=photo_filename_img&jpg=1&png=1&gif=1&pdf=0`;
 						console.log(url);
 						var oReq = new XMLHttpRequest();
 						var gueti=`GET`;
@@ -3232,12 +3227,12 @@ if (		(strpos($coluna,\'id_chave\')===false) &&
         data-momento=\'insercao\'
 	data-id=\'-1\'
         data-max-itens=\'100\'
-	data-banco=\'".$banco_de_dados."\' 
+	data-banco=\'".$banco."\' 
 	data-tabela=\'".$tabela."\'
 	data-campo=\'".$coluna."\' 
 	data-fkid=\'-1\' 
         data-default=\'\'
-	data-fk-banco=\'".$banco_de_dados."\' 
+	data-fk-banco=\'".$banco."\' 
 	data-fk-tabela=\'".$rtn."\' 
 	data-fk-id=\'".$rcn."\'
 	data-selecionado=\'-1\'
@@ -3283,7 +3278,6 @@ function Cria_VerDef(){
 	$fs_def=fopen('../su_autophp/super_verdef.php','w');
 	Envia_mensagem($mensagens['Mens36']);
 	$php='<?php
-//require_once"../su_install/'.$arqconfig .'";
 require_once "'.$arqconfig.'";
 $identscript=$pag_backoffice1;      // identificação do script super_backoffice.php
 require_once "../su_admin/super_config_includes.php";
@@ -3291,9 +3285,8 @@ require_once "../su_admin/super_config_includes.php";
 if(isset($_GET["tabela"])){
   $tabela = $_GET["tabela"];
 }
-$database=$banco_de_dados;
 
-$conn= new mysqli("localhost", $username, $pass, $database);
+$conn= new mysqli("localhost", $username, $pass, $banco);
 
 $sql="
 select col.TABLE_NAME as \'table\',
@@ -3318,7 +3311,7 @@ select col.TABLE_NAME as \'table\',
 				     where col.TABLE_SCHEMA not in(\'information_schema\',\'sys\',
 					                                   \'mysql\', \'performance_schema\')
 									         and tab.table_type = \'BASE TABLE\'
-										 and col.TABLE_SCHEMA = \'".$banco_de_dados."\'
+										 and col.TABLE_SCHEMA = \'".$banco."\'
 										 and tab.TABLE_NAME= \'".$tabela."\'
 										 order by col.TABLE_SCHEMA,
 										          col.TABLE_NAME,
@@ -4007,11 +4000,11 @@ function(){
 }, 300);
 }
 
-function Abre_VerDef(banco,tabela){
+function Abre_VerDef(tabela){
 
 var w=window.open("","EstruturaDaTabela","width=900 height=600");
            var resposta="";
-           var url="super_verdef.php?banco="+banco+"&tabela="+tabela;
+           var url="super_verdef.php?tabela="+tabela;
            var oReq=new XMLHttpRequest();
            oReq.open("GET", url, false);
            oReq.onload = function (e) {
@@ -4040,7 +4033,7 @@ function CriaBotao($fs,$tabela,$n_fks){
 var txt=document.getElementById('fks_".$n_fks."').innerHTML;
 var conta=document.getElementById('n_fks_".$n_fks."').innerText;
 var valor=parseInt(conta)+1;
-document.getElementById('fks_".$n_fks."').innerHTML=txt+'<input type=".'"'."button".'"'." value=".'"'.$tabela.'"'." onclick=\"Abre_insere(\\'super_insere_".$tabela.".php?offset=0&limit=".$limitador_registros."&campo_busca=&valor_busca=\\')\"/><input  type=".'"'."button".'"'." value=".'"'.$mensagens['Mens14'].'"'." style=".'"font-size: x-small; color:white; background-color: blue; border: 1px solid black"'." onclick=\"Abre_VerDef(\\'".$banco_de_dados."\\',\\'".$tabela."\\')\"/><br>';
+document.getElementById('fks_".$n_fks."').innerHTML=txt+'<input type=".'"'."button".'"'." value=".'"'.$tabela.'"'." onclick=\"Abre_insere(\\'super_insere_".$tabela.".php?offset=0&limit=".$limitador_registros."&campo_busca=&valor_busca=\\')\"/><input  type=".'"'."button".'"'." value=".'"'.$mensagens['Mens14'].'"'." style=".'"font-size: x-small; color:white; background-color: blue; border: 1px solid black"'." onclick=\"Abre_VerDef(\\'".$tabela."\\')\"/><br>';
 document.getElementById('n_fks_".$n_fks."').innerText=valor;
 ";
 
