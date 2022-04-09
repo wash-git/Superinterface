@@ -1749,7 +1749,7 @@ var i;
 
 for (i=0; i<pontos.length; i++){
 	console.log(\'varanda: \'+pontos.id);
-	carrega_NtoN(pontos[i].id,\''.$banco.'\', \''.$tabela.'\',\'id_documento\',document.getElementById(pontos[i].id).innerText);
+	carrega_NtoN(pontos[i].id,\''.$tabela.'\',\'id_documento\',document.getElementById(pontos[i].id).innerText);
 	// aqui vc tem que passar o nome da tabela NtoN e o nome do campo dessa tabela que é uma chave externa que aponta para o id_chave_ da <tabela> referida neste arquivo isuper_insere_<tabela>.php
 } // fim do for
 
@@ -1783,7 +1783,7 @@ function carrega_drop_btn(element){
 
   if(element.getAttribute(\'data-momento\')==\'atualizacao\'){
            var resposta=\'\';
-           var url=\'super_auto_ler_tabela_campo.php?banco='.$banco.'&tabela=\'+element.getAttribute(\'data-fk-tabela\')+\'&campo_id=\'+element.getAttribute(\'data-fk-id\')+\'&id=\'+element.getAttribute(\'data-fkid\');
+           var url=\'super_auto_ler_tabela_campo.php?tabela=\'+element.getAttribute(\'data-fk-tabela\')+\'&campo_id=\'+element.getAttribute(\'data-fk-id\')+\'&id=\'+element.getAttribute(\'data-fkid\');
            var oReq=new XMLHttpRequest();
            oReq.open(\'GET\', url, false);
            oReq.onload = function (e) {
@@ -2030,7 +2030,7 @@ for (i = 0; i < x.length; i++) {
 // se o dropbtn for de inserao de dados, ao inves de atualização, nao faz sentido buscar dados na base, porque o campo tem que estar vazio
   if(x[i].getAttribute(\'data-momento\')==\'atualizacao\'){
            var resposta=\'\';
-           var url=\'super_auto_ler_tabela_campo.php?banco='.$banco.'&tabela=\'+x[i].getAttribute(\'data-fk-tabela\')+\'&campo_id=\'+x[i].getAttribute(\'data-fk-id\')+\'&id=\'+x[i].getAttribute(\'data-fkid\');
+           var url=\'super_auto_ler_tabela_campo.php?tabela=\'+x[i].getAttribute(\'data-fk-tabela\')+\'&campo_id=\'+x[i].getAttribute(\'data-fk-id\')+\'&id=\'+x[i].getAttribute(\'data-fkid\');
            var oReq=new XMLHttpRequest();
            oReq.open(\'GET\', url, false);
            oReq.onload = function (e) {
@@ -2115,7 +2115,7 @@ function apaga_registro_com_tabela(tabela, id){ // igual a apaga_registro, mas t
 
 if (!confirm(\'O registro \'+id+\' da tabela \'+tabela+\'será apagado.\')) {return;}
 var resposta=\'\';
-var url=\'super_apaga_registro.php?banco='.$banco.'&tabela=\'+tabela+\'&id=\'+id;
+var url=\'super_apaga_registro.php?tabela=\'+tabela+\'&id=\'+id;
 alert(url);
 var oReq=new XMLHttpRequest();
 oReq.open(\'GET\', url, false);
@@ -2133,7 +2133,7 @@ oReq.send();
 
 function apaga_registro(id){
 var resposta=\'\';
-var url=\'super_apaga_registro.php?banco='.$banco.'&tabela='.$tabela.'&id=\'+id;
+var url=\'super_apaga_registro.php?tabela='.$tabela.'&id=\'+id;
 alert(url);
 var oReq=new XMLHttpRequest();
 oReq.open(\'GET\', url, false);
@@ -2192,7 +2192,7 @@ if (input_inserivel.getAttribute(".\'"\'."data-nivel".\'"\'.")!=nivel_de_inserca
 
 
 var resposta=\'\';
-var url=\'super_insere_registro.php?banco='.$banco.'&tabela=\'+tabela+\'&campos=\'+acumula_campos+\'&valores=\'+acumula_valores;
+var url=\'super_insere_registro.php?tabela=\'+tabela+\'&campos=\'+acumula_campos+\'&valores=\'+acumula_valores;
 alert(url);
 var oReq=new XMLHttpRequest();
 oReq.open(\'GET\', url, false);
@@ -2237,7 +2237,7 @@ function mostra_botao(div_insercao, tabela, nivel){
 function painel_insercao(div_insercao, tabela){
 	   nivel_insercao++;
            var resposta=\'\';
-           var url=\'super_insercao.php?banco='.$banco.'&tabela=\'+tabela+\'&nivel=\'+nivel_insercao;
+           var url=\'super_insercao.php?tabela=\'+tabela+\'&nivel=\'+nivel_insercao;
            var oReq=new XMLHttpRequest();
            oReq.open(\'GET\', url, false);
            oReq.onload = function (e) {
@@ -2260,7 +2260,7 @@ function atualiza_fk (id_elemento_campo){
 
 		var campo=document.getElementById(id_elemento_campo);
 	                var resposta=\'\';
-	                var url=\'super_atualiza_campos.php?banco='.$banco.'&tabela=\'+campo.getAttribute(\'data-tabela\')+\'&campo=\'+campo.getAttribute(\'data-campo\')+\'&id=\'+campo.getAttribute(\'data-id\')+\'&valor=\'+campo.getAttribute(\'data-fkid\');;
+	                var url=\'super_atualiza_campos.php?tabela=\'+campo.getAttribute(\'data-tabela\')+\'&campo=\'+campo.getAttribute(\'data-campo\')+\'&id=\'+campo.getAttribute(\'data-id\')+\'&valor=\'+campo.getAttribute(\'data-fkid\');;
 	                var oReq=new XMLHttpRequest();
 			oReq.open(\'GET\', url, false);
 			oReq.onload = function (e) {
@@ -2279,7 +2279,7 @@ function atualiza (matriz){
 		var campo=document.getElementById(item);
                 if (campo.getAttribute(\'data-alterado\')==\'alterado\'){
 	                var resposta=\'\';
-	                var url=\'super_atualiza_campos.php?banco='.$banco.'&tabela=\'+campo.getAttribute(\'data-tabela\')+\'&campo=\'+campo.getAttribute(\'data-campo\')+\'&id=\'+campo.getAttribute(\'data-id\')+\'&valor=\'+campo.value;
+	                var url=\'super_atualiza_campos.php?tabela=\'+campo.getAttribute(\'data-tabela\')+\'&campo=\'+campo.getAttribute(\'data-campo\')+\'&id=\'+campo.getAttribute(\'data-id\')+\'&valor=\'+campo.value;
 	                var oReq=new XMLHttpRequest();
 			oReq.open(\'GET\', url, false);
 			oReq.onload = function (e) {
@@ -3352,7 +3352,8 @@ if ($result->num_rows>0) {
 
     }
 }
-echo"</div></table><input type=\'button\' value=\'Fecha\' data-nivel=\'".$nivel."\'  onclick=\'window.close()\'>
+#echo"</div></table><input type=\'button\' value=\'Fecha\' data-nivel=\'".$nivel."\'  onclick=\'window.close()\'>
+echo"</div></table><input type=\'button\' value=\'Fecha\'  onclick=\'window.close()\'>
 <script>
 var mywindow=window;
 mywindow.resizeTo(document.getElementById(\'conteudo\').scrollWidth+50,document.getElementById(\'conteudo\').scrollHeight+50);
@@ -3471,7 +3472,7 @@ function carrega_drop_btn(element){
 
   if(element.getAttribute(\'data-momento\')==\'atualizacao\'){
            var resposta=\'\';
-           var url=\'super_auto_ler_tabela_campo.php?banco='.$banco_de_dados.'&tabela=\'+element.getAttribute(\'data-fk-tabela\')+\'&campo_id=\'+element.getAttribute(\'data-fk-id\')+\'&id=\'+element.getAttribute(\'data-fkid\');
+           var url=\'super_auto_ler_tabela_campo.php?tabela=\'+element.getAttribute(\'data-fk-tabela\')+\'&campo_id=\'+element.getAttribute(\'data-fk-id\')+\'&id=\'+element.getAttribute(\'data-fkid\');
            var oReq=new XMLHttpRequest();
            oReq.open(\'GET\', url, false);
            oReq.onload = function (e) {
@@ -3572,7 +3573,7 @@ if ((str_busca!=\'\') || (parseInt(elemento_input.getAttribute(\'data-selecionad
 function busca_lista(elemento_input, elemento, banco, tabela, campo, str_busca, max_itens){
 // busca a lista de valores de campos fk, de acordo com o nome_, usando o que foi teclado como search. Coloca no dropdown
            var resposta=\'\';
-           var url=\'super_busca_str.php?banco=\'+banco+\'&tabela=\'+tabela+\'&campo=\'+campo+\'&str_busca=\'+str_busca;
+           var url=\'super_busca_str.php?tabela=\'+tabela+\'&campo=\'+campo+\'&str_busca=\'+str_busca;
            var oReq=new XMLHttpRequest();
            oReq.open(\'GET\', url, false);
            oReq.onload = function (e) {
@@ -3632,7 +3633,7 @@ function busca_lista_sub_select(elemento_input, elemento, banco, tabela, campo, 
 // funcao para o caso da tabela foreign nao ter nome_... dai tem que buscar na tabela fk da fk.
            console.log(str_busca);
            var resposta=\'\';
-           var url=\'super_busca_registro_inteiro.php?banco=\'+banco+\'&tabela=\'+tabela+\'&nome_chave_primaria=\'+campo+\'&busca_str=\'+str_busca;
+           var url=\'super_busca_registro_inteiro.php?tabela=\'+tabela+\'&nome_chave_primaria=\'+campo+\'&busca_str=\'+str_busca;
            // este codigo PHP busca apenas os campos que nao estao na tabela campos_excluidos... isso reduz o tamanho do string que aparece no dropdown
            var oReq=new XMLHttpRequest();
            oReq.open(\'GET\', url, false);

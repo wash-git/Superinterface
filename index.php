@@ -454,6 +454,7 @@ echo "
 <head>
 <title>Plataforma Potlatch</title>
 <link rel='stylesheet' href='su_css/super_portlet.css' type='text/css'>
+<link rel='icon' type='image/x-icon' href=\"./su_icons/super_favicon.svg\"/>
 </head>
 <body onload='conta_disparo=1; flag_carregando=0; carrega_dados(\"nome\",\"\");'>
 <div id='conteudo'>
