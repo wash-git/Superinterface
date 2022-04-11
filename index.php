@@ -139,13 +139,14 @@ function keyBusca(tipo) {
 } // fim keyBusca
 
 function carrega_dados(tipo,texto_busca){  // chama o PHP que vai pegar os dados na base e joga na paleta_instancia
-	var resposta="";
+		var resposta="";
+		console.log("tipo= ",tipo,"         texto_busca= ",texto_busca);
 	if (eh_mobile) {alert("ainda não disponível para mobile");return;}
 	else{
-		if (tipo=="nome") {var url='su_php/super_search_documentos_pelo_nome.php?banco='+banco_de_dados+'&nome='+texto_busca;}
-		if (tipo=="cidade") {var url='su_php/super_search_documentos_pela_cidade.php?banco='+banco_de_dados+'&cidade='+texto_busca;}
+		if (tipo=="nome") {var url='su_php/super_search_documentos_pelo_nome.php?nome='+texto_busca;}
+		if (tipo=="cidade") {var url='su_php/super_search_documentos_pela_cidade.php?cidade='+texto_busca;}
 		//if (tipo=="palavra") {var url='su_php/super_search_documentos_pela_palavra.php?palavra='+texto_busca;}
-		if (tipo=="instituicao") {var url='su_php/super_search_documentos_pela_instituicao.php?banco='+banco_de_dados+'&instituicao='+texto_busca;}
+		if (tipo=="instituicao") {var url='su_php/super_search_documentos_pela_instituicao.php?instituicao='+texto_busca;}
 	} 
 	var oReq=new XMLHttpRequest();
 	oReq.open("GET", url, false);
@@ -495,7 +496,9 @@ echo "
 	</tr>
 	<tr>
 		<td  class='padrao'>
-		<input type='button' value='Limpar' onclick='carrega_dados(\"nome\",document.getElementById(\"search_nome\").value);'>
+		<!-- <input type='button' value='Limpar' onclick='carrega_dados(\"nome\",document.getElementById(\"search_nome\").value);'> -->
+		     <input type='button' value='Limpar' onclick='carrega_dados(\"nome\",document.getElementById(\"search_nome\").\"\");'>
+
 		</td>
 		<td  class='padrao'>
 		<input type='button' value='Limpar'>
@@ -518,7 +521,7 @@ echo "
 
 echo "</div>
 </body>
-<script type='text/javascript' src='./su_js/super_index2.js'></script>
+<script type='text/javascript' src='./su_js/super_giro2.js'></script>
 </html>";
 
 ?>
