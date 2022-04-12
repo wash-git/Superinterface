@@ -125,5 +125,20 @@ table, tr, th,td {
 	margin-left: auto;
 	margin-right: auto;
 }
+.img_container{
+        display: inline-block;
+        justify-content: center;
+/*      background-color: lightblue;
+        border: 1px solid blue; */
+        border: 0;
+        padding: 10px;
+        width: 95%;
+/*  height: 600px; */
+}
+.img_item{
+        width:44%;
+        padding: 30px;
+}
+
 
 /* ######################################## */

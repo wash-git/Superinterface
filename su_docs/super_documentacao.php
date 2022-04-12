@@ -31,7 +31,7 @@ Este projeto é mais uma iniciativa do <a href="http://wash.net.br" target="_bla
 </div>
 </td></tr></table>
 <!--  ******************************************* -->
-<h2 id="consideracoes_iniciais">Considerações Iniciais</h2>
+<h2 id="apresentacao">Apresentação</h2>
 A solução Superinterface constitui de um sistema formado de três blocos distintos, conforme exposto a seguir:
 <dl>
 <dt>Blocos:</dt>
@@ -280,6 +280,19 @@ Este procedimento limpa as tabelas existentes na base, recria as tabelas e execu
 <p></p>
 <p></p>
 <!-- ...................... -->
+<li><h3 id="tabelasibge">Tabelas IBGE</h3>
+Informações oriundas de tabelas do IBGE serão utilizadas pela Superinterface como fonte de informações primárias para preenchimento das suas tabelas.
+<ol style="list-style-type:lower-alpha">
+
+<li>Códigos dos Países</li>
+O IBGE disponibiliza um aquivo com códigos e abreviações de países e territórios do mundo. Esse arquivo pode ser baixado de <a href="https://ftp.ibge.gov.br/Registro_Civil/Codigos_dos_paises/paises_e_territorios_codigos_e_abreviacoes.xls">Códigos dos países</a>.
+<li>Códigos dos Estados Brasileiros</li>
+O código dos Estados brasileiros está definido pelo IBGE, conforme pode-se verificar em <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php" target="_blank">Código dos Estados brasileiros</a>
+<li>Códigos dos Municípios Brasileiros</li>
+O IBGE disponibiliza um aquivo com os códigos de identificação dos municípios brasileiros. Esse arquivo pode ser baixado de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php" target="_blank">Tabela de Códigos de Municípios do IBGE</a>.
+</ol>
+</li>
+<!-- ...................... -->
 <li><h3 id="tabelasexternas">Tabelas Externas</h3>
 Existem duas possibilidades de instalação da Superinterface:<br />
 <ol style="list-style-type:lower-alpha">
@@ -298,23 +311,42 @@ Para a Superinterface possibilitar ao usuário a facilidade de busca de verbetes
 <table>
 <tr><th>Informação</th><th style="width:70%">Descrição</th></tr>
 <tr><td>Cidades</td><td>Através do arquivo:     su_install/super_insere_cidades.sql</td></tr>
-<tr><td>Instituições</td><td>Através do arquivo:     su_install/super_insere_instituicoes.sql</td></tr>
+<tr><td>Instituições</td><td>Através do arquivo:     su_install/super_instituicoes.csv</td></tr>
 </table><p></p>
 Estes arquivos podem (e devem) ser alterados no momento da instalação da solução, possibilitando melhor adequar a solução à realidade em que será utilizada.  Apenas deve-se observar a estrutura desses arquivos de forma a mantê-la. 
+<p></p>
+<ol style="list-style-type:lower-alpha">
+<li>Cidades</li>
+O IBE fornece uma planilha com a listagem de todos os municipios brasileiros, como pode-se observar na sessão de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Códigos dos municípios</a> desta entidade.
+<li>Instituições</li>
+Para o caso das instituições, a Superinterface fará a importação das informações a partir da leitura de uma planilha. Durante a instalação, já existe uma planilha básica fornecida a título de exemplo e o sistema pode ser instalado utilizando este arquivo. As figuras abaixo mostram uma planilha csv típica de instituições (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
+<div class="img_container">
+<img src="./super_csv_tipico.png"  height="82%" class="img_item"  />
+<img src="./super_csv_configuracao.png" class="img_item"  />
+</div>
+<dl>
+<dt>Ou seja:</dt>
+<dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- separação de campos: por vírgula</dd>
+<dd>- delimitador de texto: aspas</dd>
+</dl>
+</ol>
+<p></p>
 <!-- ...................... -->
 <li><h3 id="logs">Registro de Logs</h3>
-Todas as operações da Superinterface estão registradas através de logs.  São dois os arquivo de logs:
+Todas as atividades batch da Superinterface, inclusive qualquer anormalidade no tratamento do acervo, são registradas em seu arquivo de log de forma a permitir ao usuário administrador o acompanhamento destas atividades. Na verdade, na pasta de logs desta aplicação existem dois arquivo de logs:
 <ol style="list-style-type:square">
 <li> su_logs/super_logshell.log</li>
 <li> su_logs/super_logshell.html</li>
 </ol><br />
-O segundo arquivo, super_logshell.html, é apenas uma cópia do primeiro arquivo destinada a ser visualizada através da interface administrativa da Superinterface.  Mas seu conteúdo é exatamente o mesmo.<br />
-A Superinterface realiza a compressão do arquivo de log quando o tamanho deste arquivo atinge um determinado valor predeterminado por configuração.  Neste processo, é gerado um arquivo comprimido ".tar", o qual fica guardado na própria pasta de logs.
+O segundo arquivo, super_logshell.html, é apenas uma cópia do primeiro arquivo destinado a ser visualizado através da interface administrativa da Superinterface.  Mas seu conteúdo é exatamente igual ao do primeiro arquivo.<br />
+A Superinterface realiza a compressão do arquivo de log quando o tamanho deste arquivo atinge um determinado valor predeterminado por configuração.  Para isso, é gerado um arquivo comprimido ".tar", o qual fica guardado na própria pasta de logs.
 <p></p>
-É muito importante verificar periodicamente o arquivo de log, certificando que todas as operações estão sendo realizadas sem ocorrências de exceções.<p></p>
+É muito importante verificar sistematicamente o arquivo de log, certificando que todas as operações estão sendo realizadas sem ocorrências de exceções.<p></p>
 Código de cores: para facilitar a visualização das mensagens, estas obedecem um código de cores: (a) na cor branca estão as mensagens informativas, de forma o usuário acompanhar o que fora realizado pela Superinterface; (b) na cor azul, as operações mais críticas que foram realizadas com sucesso; (c) e na cor vermelha, as mensagens de exceções que merecem uma atenção maior do administrador do serviço.
 <li><h3 id="troubleshoot">Troubleshoot</h3>
-Caso se verifique algum problema na instalação e o arquivo de log gerado não tenha conseguido gerar uma mensagem de diagnóstico clara do que está acontecendo, execute opcionalmente o script abaixo diretamente via comando do terminal, e acompanhe as mensagens:<br />
+Eventuais anormalidades no tratamento do acervo são registradas em seu arquivo de log (su_logs/super_logshell.log) de forma a permitir ao usuário administrador o acompanhamento e as intervenções de correção necessárias. Recomenda-se o acompanhamento continuado deste arquivo de log por parte do usuário administrador desta aplicação.<p></p>
+Durante a instalação, caso se verifique alguma dificuldade e o arquivo de log não tenha o registro completo da situação, execute alternativamente o script abaixo via comando do terminal, e acompanhe as mensagens:<br />
 $ ./super_scriptinicial.sh<br /> <br />
 Após realizar o diagnóstico do problema e ter solucionado a dificuldade, (re)instale a solução via seu comando padrão:<br />
 $ ./super_install.sh<br /><br />

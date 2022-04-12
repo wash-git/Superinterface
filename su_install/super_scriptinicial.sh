@@ -50,10 +50,11 @@ MErr34="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela
 MErr35="Erro! Não foi possível criar pasta para arquivos PHP que viriam a ser automaticamente gerados"
 MErr36="Erro! Para instalar a Superinterface é obrigatório estar na pasta 'su_install'"
 MErr37="Erro! Não foi possível inserir informações na tabela 'su_instituicoes'"
-MErr38="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela de 'su_instituicoes'"
+MErr38="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_instituicoes'"
 MErr39="Erro! Não foi possível gerar arquivo auxiliar de nomes de instituições"
 MErr40="Erro! Não foi possível inserir conjunto inicial de nomes de instituições na base de dados"
 MErr41="Erro! Pasta de arquivos javascript não foi encontrada"
+MErr42="Erro! Não foi possível gerar integralmente as informações para a tabela 'su_instituicoes'"
 #
 MInfo01="Preparando as pastas"
 MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
@@ -190,7 +191,7 @@ function fInit () {
 		C13: verificar existência arquivo SQL para criação de tabelas e inserts iniciais
 		C14: verificar existência arquivo SQL para inserção de dados tabela su_cidades
 		C15: verificar existência arquivo SQL para inserção de dados tabela su_names_brasil
-		C16: verificar existência arquivo SQL para inserção de dados tabela su_instituições
+		C16: verificar existência arquivo com dados destinados à tabela su_instituições
 		C17: verificar criação de pasta do acervo (imagens de arquivos PDF)
 		C18: verificar criação de pasta para uploads de arquivos
 		C19: verificar criação de pasta de trabalho temporária
@@ -357,7 +358,7 @@ function fInit () {
 		fMens "$FInsuc" "$MErr34"
 		exit
 	fi
-	#											C16: verificar existência arquivo SQL p/ inserção dados tabela su_instituições
+	#											C16: verificar existência arquivo com dados destinados à tabela su_instituições
 	if [ ! -f $CPINSEREINST ]; then
 		fMens "$FInsuc" "$MErr38"
 		exit
@@ -544,13 +545,27 @@ function fTabelas () {
  		exit
 	fi
 	#											C32: verificar inserção de dados na tabela 'su_instituicoes'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSEREINST"
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo07"
-	else
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREINST' INTO TABLE su_instituicoes FIELDS TERMINATED BY '\n' (nome_instituicao)"
+	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr37"
  		exit
 	fi
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = UPPER(nome_instituicao)"
+	if [ $? -eq 0 ]; then
+		fMens "$FSucss" "$MInfo07"
+	else
+		fMens "$FInsuc" "$MErr42"
+ 		exit
+	fi
+
+#
+#	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSEREINST"
+#	if [ $? -eq 0 ]; then
+#		fMens "$FSucss" "$MInfo07"
+#	else
+#		fMens "$FInsuc" "$MErr37"
+# 		exit
+#	fi
 	#				resumo
 	fMens "$FInfo2" "$MInfo18"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
