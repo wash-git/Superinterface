@@ -55,6 +55,9 @@ MErr39="Erro! Não foi possível gerar arquivo auxiliar de nomes de instituiçõ
 MErr40="Erro! Não foi possível inserir conjunto inicial de nomes de instituições na base de dados"
 MErr41="Erro! Pasta de arquivos javascript não foi encontrada"
 MErr42="Erro! Não foi possível gerar integralmente as informações para a tabela 'su_instituicoes'"
+MErr43="Erro! Não foi possível inserir informações na tabela 'su_paises'"
+MErr44="Erro! Não foi possível inserir informações na tabela 'su_estados'"
+MErr45="Erro! Não foi possível inserir informações na tabela 'su_registrados'"
 #
 MInfo01="Preparando as pastas"
 MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
@@ -68,7 +71,7 @@ MInfo09="Sucesso! Conexão com o banco de dados foi realizada corretamente"
 MInfo10="Verifique o log da instalação da Superinterface através do arquivo: "
 MInfo11="Verifique as estruturas das tabelas criadas através da opção 'Tabelas' da interface administrativa"
 MInfo12="Sucesso! Criado usuário/senha da interface de administração da Superinterface"
-#MInfo13=""
+MInfo13="Sucesso! Informações inseridas corretamente na tabela 'su_paises'"
 MInfo14="Sucesso! Tabelas adicionais da aplicação do usuário foram criadas, e informações fornecidas foram inseridas"
 MInfo15="Atenção: não foi encontrado arquivo SQL para criação tabelas da aplicação externa do usuário. Continuando a instalar a Superinterface"
 MInfo16="Sucesso! Possíveis tabelas remanescentes no banco de dados foram eliminadas"
@@ -76,9 +79,9 @@ MInfo17="Sucesso! Tabelas do banco de dados (re)criadas, e informações inserid
 MInfo18="Quantidade de tabelas geradas= "
 MInfo19="Sucesso! Informações inseridas corretamente na tabela 'su_cidades'"
 MInfo20="Quantidade de registros na tabela 'su_cidades'= "
-#MInfo21=""
+MInfo21="Sucesso! Informações inseridas corretamente na tabela 'su_estados'"
 MInfo22="Quantidade de registros na tabela 'su_documents'= "
-#MInfo23=""
+MInfo23="Sucesso! Informações inseridas corretamente na tabela de usuários 'su_registrados'"
 MInfo24="Quantidade de registros na tabela 'su_docs_signatários'= "
 MInfo25="Quantidade de registros na tabela 'su_docs_instituicoes'= "
 MInfo26="super_install.sh"
@@ -363,9 +366,6 @@ function fInit () {
 		fMens "$FInsuc" "$MErr38"
 		exit
 	fi
-
-
-
 	#											C17: verificar criação de pasta do acervo (imagens de arquivos PDF)
 	fMens "$FInfor" "$MInfo01" 
 	rm -rf $CPPIMAGEM 2>/dev/null
@@ -557,7 +557,6 @@ function fTabelas () {
 		fMens "$FInsuc" "$MErr42"
  		exit
 	fi
-
 #
 #	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSEREINST"
 #	if [ $? -eq 0 ]; then
@@ -566,6 +565,30 @@ function fTabelas () {
 #		fMens "$FInsuc" "$MErr37"
 # 		exit
 #	fi
+	#											C3_: verificar inserção de dados na tabela 'su_paises'
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREPAIS' INTO TABLE su_paises FIELDS TERMINATED by ',' LINES TERMINATED BY '\n' (codigo_pais, nome_pais, sigla_pais) "
+	if [ $? -eq 0 ]; then
+		fMens "$FSucss" "$MInfo13"
+	else
+		fMens "$FInsuc" "$MErr43"
+ 		exit
+	fi
+	#											C3_: verificar inserção de dados na tabela 'su_cidades'
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "super_tab_insere_estados.sql"
+	if [ $? -eq 0 ]; then
+		fMens "$FSucss" "$MInfo21"
+	else
+		fMens "$FInsuc" "$MErr44"
+ 		exit
+	fi
+	#											C3_: verificar inserção de dados na tabela de usuários 'su_registrados'
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "super_tab_insere_usuarios.sql"
+	if [ $? -eq 0 ]; then
+		fMens "$FSucss" "$MInfo23"
+	else
+		fMens "$FInsuc" "$MErr45"
+ 		exit
+	fi
 	#				resumo
 	fMens "$FInfo2" "$MInfo18"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"

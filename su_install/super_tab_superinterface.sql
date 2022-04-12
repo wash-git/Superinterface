@@ -4,7 +4,7 @@
 
 -- Criação de usuários administrativos da Superinterface --
 CREATE TABLE su_usuarios (username varchar(10) NOT NULL, senha varchar(42) NOT NULL, nome varchar(80) NOT NULL, email varchar(80) NOT NULL, cidade varchar(40) NOT NULL, estado char(2) NOT NULL, privilegio TINYINT unsigned  NOT NULL, ativo bool NOT NULL, primary key (username));
-ALTER TABLE su_usuarios comment='Contém a identificação dos usuários para acesso aos ambientes restritos da Superinterface';
+ALTER TABLE su_usuarios comment='Contém a identificação dos usuários para acesso a interface administrativa da Superinterface';
 
 CREATE TABLE su_tipos_logradouros (id_chave_tipo_de_logradouro int not null auto_increment, nome_tipo_de_logradouro varchar(100), abreviatura varchar(50), primary key(id_chave_tipo_de_logradouro), unique(nome_tipo_de_logradouro), unique(abreviatura));
 
@@ -16,15 +16,13 @@ CREATE TABLE su_cidades (id_chave_cidade int not null auto_increment, id_estado 
 
 CREATE TABLE su_nomes_cidades AS SELECT nome_cidade from su_cidades;
 
--- CREATE TABLE su_instituicoes (id_chave_instituicao int not null auto_increment, nome_instituicao varchar(1000), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, primary key(id_chave_instituicao));
-
 CREATE TABLE su_instituicoes (id_chave_instituicao int(11) not null auto_increment, nome_instituicao varchar(300) DEFAULT NULL, instituicao_sem_acentuacao varchar(300),  time_stamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(), primary key(id_chave_instituicao));
 
 CREATE TABLE su_nomes_instituicoes AS SELECT nome_instituicao from su_instituicoes;
 
 CREATE TABLE su_tipos_documentos (id_chave_tipo_de_documento int not null auto_increment, nome_tipo_de_documento varchar(200), primary key (id_chave_tipo_de_documento), unique(nome_tipo_de_documento));
 
-CREATE TABLE su_paises (id_chave_pais int not null auto_increment, nome_pais varchar(200), sigla_pais varchar(20), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_pais), UNIQUE(nome_pais), UNIQUE(sigla_pais));
+CREATE TABLE su_paises (id_chave_pais int not null auto_increment, codigo_pais varchar(10), nome_pais varchar(150), sigla_pais varchar(5), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_pais), UNIQUE(nome_pais), UNIQUE(codigo_pais));
 
 CREATE TABLE su_documents (id_chave_documento int not null auto_increment, sigla varchar(30),  id_tipo_de_documento int, id_curador int, nome_documento varchar(200), originalfilename varchar(200), titulo varchar(300), photo_filename_documento varchar(200), alt_foto_jpg varchar(200), descricao varchar(2000), relevancia varchar(2000), data_doc date, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY (id_chave_documento), unique(sigla), unique(photo_filename_documento));
 --
@@ -43,8 +41,6 @@ CREATE TABLE su_tabelas_para_usuario (id_chave_tabela_para_o_usuario int not nul
 CREATE TABLE su_csss_tags (id_chave_css_tag int not null auto_increment, nome_da_tag varchar(200), id_estilo int, codigo_css varchar (2000), comentario varchar(1000), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_css_tag), UNIQUE(nome_da_tag));
 
 CREATE TABLE su_csss_classes (id_chave_css_classe int not null auto_increment, nome_da_classe varchar(200), id_estilo int, codigo_CSS varchar (2000), comentario varchar(1000), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_css_classe), UNIQUE(nome_da_classe));
-
--- CREATE TABLE su_classificacoes_documentos (id_chave_classificacao_de_documento int not null auto_increment, nome_classificacao_de_documento varchar(200), PRIMARY KEY(id_chave_classificacao_de_documento), UNIQUE(nome_classificacao_de_documento));
 
 --
 -- Criação de Tabelas de Ligação (cardinalidade de N para N)
@@ -109,7 +105,7 @@ ALTER TABLE su_docs_signatarios ADD CONSTRAINT FK_documento_signatario FOREIGN K
 ALTER TABLE su_docs_signatarios comment='Estabelece uma cardinalidade N para N entre a tabela Documentos e a tabela su_registrados. Indica a lista de pessoas que assinou um determinado documento ou quantos documentos foram assinados por uma pessoaa.1';
 ALTER TABLE su_docs_registrados ADD CONSTRAINT FK_registrado_documento FOREIGN KEY (id_registrado) REFERENCES su_registrados(id_chave_registrado);
 ALTER TABLE su_docs_registrados ADD CONSTRAINT FK_documento_registrado FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
-ALTER TABLE su_docs_registrados comment='É uma tabela que é similar à tabela su_docs_signatarios, mas não está restrita apenas a esse aspecto. A tabela su_docs_registrados é mais ampla e contém o nome das pessoas que fazem parte do Staff do projeto, por exemplo. A tabela contém também o nome de curadores, ou qualquer outra pessoa com interesse na Lei Aldir Blanc. Não existe outro lugar para guardar nomes de pessoas. Esta tabela difere de su_docs_signatarios porque aqui temos os nomes que aparecem no documento, mas que nao sao necessariamente signatarios';
+ALTER TABLE su_docs_registrados comment='É uma tabela que é similar à tabela su_docs_signatarios, mas não está restrita apenas a esse aspecto. A tabela su_docs_registrados é mais ampla e contém o nome das pessoas que fazem parte do Staff do projeto, por exemplo. A tabela contém também o nome de curadores, ou qualquer outra pessoa interessada. Não existe outro lugar para guardar nomes de pessoas. Esta tabela difere de su_docs_signatarios porque aqui temos os nomes que aparecem no documento, mas que nao sao necessariamente signatarios';
 ALTER TABLE su_docs_instituicoes ADD CONSTRAINT FK_instituicao_documento FOREIGN KEY (id_instituicao) REFERENCES su_instituicoes(id_chave_instituicao);
 ALTER TABLE su_docs_instituicoes ADD CONSTRAINT FK_documento_instituicao FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
 ALTER TABLE su_docs_instituicoes comment='Indica as instituições que aparecem num dado documento, ou os documentos que contém uma certa instituição.';
@@ -124,7 +120,6 @@ ALTER TABLE su_tabelas_ligacao comment='Indica todos os casos de tabelas com dua
 ALTER TABLE su_tipos_documentos comment='Contém as categorias de documentos.';
 ALTER TABLE su_estados comment='Todos os estados Brasileiros com chave externa para os países.';
 ALTER TABLE su_paises comment='Registro de países.';
--- ALTER TABLE su_classificacoes_documentos comment='Uma forma mais ampla de classificar os documentos permitindo uma cardinalidade N para N, diferente de su_tipos_documentos que foi concebido para cardinalidade 1 para N.';
 --
 -- Populando tabela su_tipos_logradouros
 --
@@ -139,9 +134,9 @@ insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values (
 --
 -- Populando tabela su_tabelas_para_usuario
 --
-insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_documents','É a tabela onde serão inseridos novos documentos. Além disso, essa tabela permite realizar as 8 tarefas descritas no vídeo.');
+insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_documents','É a tabela onde serão inseridos novos documentos.');
 insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_instituicoes','É a tabela onde serão inseridas as instituições às quais os documentos farão referências.');
-insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_registrados','É a tabela onde serão inseridos os dados de indivíduos com algum papel a desempenhar no modelo de dados da LAB. Esse papel pode ser de staff do Wash, ou de signatário de um documento, por exemplo. Outros papéis ainda estão sendo desenvolvidos. Para as 8 tarefas descritas no vídeo, o importante é o papel de signatário. Quando um novo registrado é inserido nesta tabela, ele aparece na tabela su_documents.');
+insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_registrados','É a tabela onde serão inseridos os dados de indivíduos com algum papel a desempenhar no modelo de dados. Esse papel pode ser de staff do Wash, ou de signatário de um documento, por exemplo. Quando um novo registrado é inserido nesta tabela, ele aparece na tabela su_documents.');
 --
 -- Populando tabela su_tipos_documentos
 --
@@ -167,46 +162,4 @@ INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Prestações d
 INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Notas Técnicas, Relatórios, Pareceres, Soluções de Divergência');
 INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Questionários, levantamentos');
 INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Emails, Cartas');
-
-INSERT INTO su_paises (nome_pais, sigla_pais, usuario) VALUES ('Brasil', 'BR', 'victor');
-INSERT INTO su_paises (nome_pais, sigla_pais, usuario) VALUES ('Estados Unidos', 'EUA', 'victor');
-INSERT INTO su_paises (nome_pais, sigla_pais, usuario) VALUES ('Grã-Bretanha', 'GBR', 'victor');
-INSERT INTO su_paises (nome_pais, sigla_pais, usuario) VALUES ('França', 'FR', 'victor');
-INSERT INTO su_paises (nome_pais, sigla_pais, usuario) VALUES ('Alemanha', 'GER', 'victor');
-INSERT INTO su_paises (nome_pais, sigla_pais, usuario) VALUES ('Indefinido', '??', 'victor');
-INSERT INTO su_paises (nome_pais, sigla_pais, usuario) VALUES ('Itália', 'ITA', 'victor');
-
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Acre',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'AC', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Alagoas',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'AL', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Amapá',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'AP', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Amazonas',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'AM', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Bahia',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'BA', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Ceará',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'CE', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Distrito Federal',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'DF', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Espírito Santo',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'ES', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Goiás',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'GO', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Maranhão',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'MA', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Mato Grosso',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'MT', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Mato Grosso do Sul',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'MS', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Minas Gerais',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'MG', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Pará',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'PA', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Paraíba',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'PB', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Paraná',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'PR', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Pernambuco',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'PE', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Piauí',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'PI', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Rio de Janeiro',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'RJ', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Rio Grande do Norte',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'RN', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Rio Grande do Sul',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'RS', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Rondônia',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'RO', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Roraima',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'RR', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Santa Catarina',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'SC', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('São Paulo',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'SP', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Sergipe',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'SE', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Tocantins',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Brasil') ,'TO', 'victor');
-INSERT INTO su_estados (nome_estado, id_pais, sigla_estado, usuario) VALUES ('Indefinido',(SELECT id_chave_pais from su_paises WHERE nome_pais like 'Indefinido') ,'??', 'victor');
-INSERT INTO su_registrados (nome_registrado, name_of_war, id_estado, id_pais, id_cidade) values ('signatário indefinido', 'indefinido', (select id_chave_estado from su_estados where nome_estado like 'Indefinido'), (select id_chave_pais from su_paises where nome_pais like 'Indefinido'),(select id_chave_cidade from su_cidades where nome_cidade like 'Indefinido'));
-INSERT INTO su_registrados (nome_registrado, name_of_war, id_cidade, id_estado, id_pais) values ('Rafael Procópio','Rafael',(select id_chave_cidade from su_cidades where cidade_sem_acentuacao like 'GUARULHOS'),(select id_chave_estado from su_estados where sigla_estado like 'SP'),(select id_chave_pais from su_paises where nome_pais like 'BRASIL'));
-INSERT INTO su_registrados (nome_registrado, name_of_war, id_cidade, id_estado, id_pais) values ('Jacqueline Baumgartz','Jacke',(select id_chave_cidade from su_cidades where cidade_sem_acentuacao like 'SAO JOSE DOS CAMPOS'),(select id_chave_estado from su_estados where sigla_estado like 'SP'),(select id_chave_pais from su_paises where nome_pais like 'BRASIL'));
-INSERT INTO su_registrados (nome_registrado, name_of_war, id_cidade, id_estado, id_pais) values ('Celso','Celso',(select id_chave_cidade from su_cidades where cidade_sem_acentuacao like 'SAO JOSE DOS CAMPOS'),(select id_chave_estado from su_estados where sigla_estado like 'SP'),(select id_chave_pais from su_paises where nome_pais like 'BRASIL'));
-INSERT INTO su_registrados (nome_registrado, name_of_war, id_cidade, id_estado, id_pais) values ('Wagner Lima','Wagner',(select id_chave_cidade from su_cidades where cidade_sem_acentuacao like 'JACAREI'),(select id_chave_estado from su_estados where sigla_estado like 'SP'),(select id_chave_pais from su_paises where nome_pais like 'BRASIL'));
 

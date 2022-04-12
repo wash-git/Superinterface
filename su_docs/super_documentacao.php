@@ -306,23 +306,41 @@ Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo 
 <p></p>
 </li>
 <!-- ...................... -->
-<li><h3 id="verbetes">Verbetes para Buscas</h3>
-Para a Superinterface possibilitar ao usuário a facilidade de busca de verbetes nos conteúdos dos arquivos, é necessário definir o seu vocabulário controlado. Existem duas fontes de dados que o administrador da Superinterface deve fornecer, as quais já vêm fornecidas inicialmente quando se baixa e instala a solução:<p></p>
+<li><h3 id="populartabs">Popular Tabelas</h3>
+Para possibilitar o perfeito funcionamento da Superinterface, inclusive disponibilizar a facilidade de busca de verbetes nos conteúdos do acervo de arquivos, é necessário alimentar algumas tabelas com informações vindas de fontes externas. Isso possibilitará a construção do necessário vocabulário controlado da solução.<p></p>
+
+Para facilitar a instalação, essas fontes de dados externas já vêm fornecidas no pacote da Superinterface. Mas devem ser avaliadas pelo usuário instalador se elas estão atualizadas e são aderentes aos objetivos de uso de sua instalação. Essas fontes de informações são as seguintes:<p></p>
 <table>
 <tr><th>Informação</th><th style="width:70%">Descrição</th></tr>
+<tr><td>Países</td><td>Através do arquivo:     su_install/super_ibge_paises.csv</td></tr>
 <tr><td>Cidades</td><td>Através do arquivo:     su_install/super_insere_cidades.sql</td></tr>
 <tr><td>Instituições</td><td>Através do arquivo:     su_install/super_instituicoes.csv</td></tr>
 </table><p></p>
 Estes arquivos podem (e devem) ser alterados no momento da instalação da solução, possibilitando melhor adequar a solução à realidade em que será utilizada.  Apenas deve-se observar a estrutura desses arquivos de forma a mantê-la. 
 <p></p>
 <ol style="list-style-type:lower-alpha">
+<li>Países</li>
+A fonte primária de informação é o IBGE, que fornece uma planilha com a listagem de todos os países do mundo e uma codificação única para cada país. Este arquivo pode ser baixado de <a href="https://ftp.ibge.gov.br/Registro_Civil/Codigos_dos_paises/paises_e_territorios_codigos_e_abreviacoes.xls">Códigos dos países</a>.<p></p>
+A Superinterface fará a importação das informações a partir da leitura desta planilha. As figuras abaixo mostram a planilha csv típica de instituições (à esquerda), e a configuração básica deste arquivo (à direita):
+<div class="img_container">
+<img src="./super_csv_pais_tab.png" height="90%" class="img_item"  />
+<img src="./super_csv_pais_config.png" height="90%" class="img_item"  />
+</div>
+<dl>
+<dt>Ou seja:</dt>
+<dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- separação de campos: por vírgula</dd>
+<dd>- delimitador de texto: aspas</dd>
+</dl>
+Observação: a planilha fornecida pelo IBGE contém algumas linhas de comentários no topo da planilha, bem como no final da planilha.  É necessário retirar estas linhas, deixando apenas as colunas com as informações limpas dos países.
+<p></p>
 <li>Cidades</li>
-O IBE fornece uma planilha com a listagem de todos os municipios brasileiros, como pode-se observar na sessão de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Códigos dos municípios</a> desta entidade.
+A fonte primária de informação é o IBGE, que fornece uma planilha com a listagem de todos os municipios brasileiros, como pode-se observar na sessão de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Códigos dos municípios</a> desta entidade.<p></p>
 <li>Instituições</li>
 Para o caso das instituições, a Superinterface fará a importação das informações a partir da leitura de uma planilha. Durante a instalação, já existe uma planilha básica fornecida a título de exemplo e o sistema pode ser instalado utilizando este arquivo. As figuras abaixo mostram uma planilha csv típica de instituições (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
 <div class="img_container">
-<img src="./super_csv_tipico.png"  height="82%" class="img_item"  />
-<img src="./super_csv_configuracao.png" class="img_item"  />
+<img src="./super_csv_inst_tab.png"  height="82%" class="img_item"  />
+<img src="./super_csv_inst_config.png" class="img_item"  />
 </div>
 <dl>
 <dt>Ou seja:</dt>
