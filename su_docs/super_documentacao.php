@@ -280,39 +280,27 @@ Este procedimento limpa as tabelas existentes na base, recria as tabelas e execu
 <p></p>
 <p></p>
 <!-- ...................... -->
-<li><h3 id="tabelasibge">Tabelas IBGE</h3>
+<li><h3 id="infosibge">Informações IBGE</h3>
 Informações oriundas de tabelas do IBGE serão utilizadas pela Superinterface como fonte de informações primárias para preenchimento das suas tabelas.
 <ol style="list-style-type:lower-alpha">
 
 <li>Códigos dos Países</li>
-O IBGE disponibiliza um aquivo com códigos e abreviações de países e territórios do mundo. Esse arquivo pode ser baixado de <a href="https://ftp.ibge.gov.br/Registro_Civil/Codigos_dos_paises/paises_e_territorios_codigos_e_abreviacoes.xls">Códigos dos países</a>.
+O IBGE define os códigos dos países e os disponibiliza através de um aquivo, junto com outras informações como  abreviações de países e territórios. Esse arquivo pode ser baixado de <a href="https://ftp.ibge.gov.br/Registro_Civil/Codigos_dos_paises/paises_e_territorios_codigos_e_abreviacoes.xls">Códigos dos países</a> e será utilizado pela Superinterface.
 <li>Códigos dos Estados Brasileiros</li>
-O código dos Estados brasileiros está definido pelo IBGE, conforme pode-se verificar em <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php" target="_blank">Código dos Estados brasileiros</a>
+O código dos Estados brasileiros está definido pelo IBGE, conforme pode-se verificar em <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php" target="_blank">Código dos Estados brasileiros</a>, cujas informações será utilizada pela Superinterface.
 <li>Códigos dos Municípios Brasileiros</li>
-O IBGE disponibiliza um aquivo com os códigos de identificação dos municípios brasileiros. Esse arquivo pode ser baixado de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php" target="_blank">Tabela de Códigos de Municípios do IBGE</a>.
+O IBGE disponibiliza um aquivo com os códigos de identificação dos municípios brasileiros. Esse arquivo pode ser baixado de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php" target="_blank">Tabela de Códigos de Municípios do IBGE</a>, cujas informações serão utilizadas pela Superinterface.
 </ol>
 </li>
 <!-- ...................... -->
-<li><h3 id="tabelasexternas">Tabelas Externas</h3>
-Existem duas possibilidades de instalação da Superinterface:<br />
-<ol style="list-style-type:lower-alpha">
-<li>apenas gerando as tabelas padrão da Superinterface;</li>
-<li>gerando as tabelas padrão da Superinterface junto com tabelas necessárias à uma aplicação do usuário.</li>
-</ol><br />
-O procedimento mais comum de instalação da Superintrface é seguir o primeiro caso: gerar apenas as tabelas padrão da Superinterface. Isso é feito automaticamente pelo script de instalação caso não seja encontrado na pasta /su_install um arquivo de nome super_tab_aplicacao.sql.</li>
-<br />
-Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo serão executados logo após a geração das tabelas padrão da Superinterface, que é o caso do segundo método da instalação. Todas as tabelas serão geradas em uma única base de dados.<br /><br />
-<strong>Dica:</strong> na pasta su_exemplos/ existem arquivos SQL exemplos de aplicação de usuários.  Se desejar realizar um teste, copie um dos arquivos para a pasta su_install/, renomeando o arquivo escolhido para super_tab_aplicacao.sql. Para construir seu arquivo SQL de aplicação, observe a estrutura desses arquivos SQL exemplos e faça algo parecido.<br />
-<p></p>
-</li>
-<!-- ...................... -->
 <li><h3 id="populartabs">Popular Tabelas</h3>
-Para possibilitar o perfeito funcionamento da Superinterface, inclusive disponibilizar a facilidade de busca de verbetes nos conteúdos do acervo de arquivos, é necessário alimentar algumas tabelas com informações vindas de fontes externas. Isso possibilitará a construção do necessário vocabulário controlado da solução.<p></p>
+Para possibilitar o perfeito funcionamento da Superinterface, inclusive disponibilizar a facilidade de busca de verbetes nos conteúdos do acervo de arquivos, é necessário alimentar algumas de suas tabelas com informações vindas de fontes externas. Isso possibilitará a construção do necessário vocabulário controlado da solução.<p></p>
 
-Para facilitar a instalação, essas fontes de dados externas já vêm fornecidas no pacote da Superinterface. Mas devem ser avaliadas pelo usuário instalador se elas estão atualizadas e são aderentes aos objetivos de uso de sua instalação. Essas fontes de informações são as seguintes:<p></p>
+Para facilitar a instalação, essas fontes de dados externas já vêm fornecidas no pacote da Superinterface. Mas devem ser avaliadas pelo usuário instalador se elas estão atualizadas e se são aderentes aos objetivos que se deseja da Superinterface. Essas fontes de informações são as seguintes:<p></p>
 <table>
 <tr><th>Informação</th><th style="width:70%">Descrição</th></tr>
 <tr><td>Países</td><td>Através do arquivo:     su_install/super_ibge_paises.csv</td></tr>
+<tr><td>Estados</td><td>Através do arquivo:       su_install/super_ibge_estadosbrasil.csv</td></tr>
 <tr><td>Cidades</td><td>Através do arquivo:     su_install/super_insere_cidades.sql</td></tr>
 <tr><td>Instituições</td><td>Através do arquivo:     su_install/super_instituicoes.csv</td></tr>
 </table><p></p>
@@ -334,6 +322,21 @@ A Superinterface fará a importação das informações a partir da leitura dest
 </dl>
 Observação: a planilha fornecida pelo IBGE contém algumas linhas de comentários no topo da planilha, bem como no final da planilha.  É necessário retirar estas linhas, deixando apenas as colunas com as informações limpas dos países.
 <p></p>
+<li>Estados</li>
+A fonte primária de informação é o IBGE, que fornece a identificação dos estados brasileiros numa codificação única para cada estado. Esta informação pode ser encontrada em <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Códigos dos estados brasileiros</a>.<p></p>
+A Superinterface fará a importação das informações a partir da leitura de uma planilha contendo estas informações. As figuras abaixo mostram a planilha csv típica dos estados (à esquerda), e a configuração básica deste arquivo (à direita):
+<div class="img_container">
+<img src="./super_csv_estadosbrasil_tab.png" height="90%" class="img_item"  />
+<img src="./super_csv_estadosbrasil_config.png" height="90%" class="img_item"  />
+</div>
+<dl>
+<dt>Ou seja:</dt>
+<dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- separação de campos: por vírgula</dd>
+<dd>- delimitador de texto: aspas</dd>
+</dl>
+Observação: a planilha não deve conter nenhuma linha de comentários no topo da planilha, bem como no final da planilha.  É necessário retirar a linha de cabeçalho caso esta exista (como está mostrado na figura acima), deixando apenas as colunas com as informações limpas dos estados.
+<p></p>
 <li>Cidades</li>
 A fonte primária de informação é o IBGE, que fornece uma planilha com a listagem de todos os municipios brasileiros, como pode-se observar na sessão de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Códigos dos municípios</a> desta entidade.<p></p>
 <li>Instituições</li>
@@ -350,6 +353,19 @@ Para o caso das instituições, a Superinterface fará a importação das inform
 </dl>
 </ol>
 <p></p>
+<!-- ...................... -->
+<li><h3 id="tabelasusuario">Tabelas Usuário</h3>
+Existem duas possibilidades de instalação da Superinterface:<br />
+<ol style="list-style-type:lower-alpha">
+<li>Situação 1: apenas gerando as tabelas padrão da Superinterface;</li>
+<li>Situação 2: gerando as tabelas padrão da Superinterface, junto com tabelas necessárias à uma aplicação do usuário.</li>
+</ol><br />
+O procedimento padrão de instalação da Superinterface é seguir a primeira situação: gerar apenas as tabelas padrão da Superinterface. Isso é feito automaticamente pelo script de instalação caso não seja encontrado na pasta /su_install um arquivo de nome super_tab_aplicacao.sql.</li>
+<br />
+Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo serão executados logo após a geração das tabelas padrão da Superinterface, que é o caso da segunda situação de instalação. Todas as tabelas serão geradas em uma única base de dados.<br /><br />
+<strong>Dica:</strong> na pasta su_exemplos/ existem arquivos SQL exemplos de aplicação de usuários.  Se desejar realizar um teste, copie um dos arquivos para a pasta su_install/, renomeando o arquivo escolhido para super_tab_aplicacao.sql. Para construir seu arquivo SQL de aplicação, observe a estrutura desses arquivos SQL exemplos e faça algo parecido.<br />
+<p></p>
+</li>
 <!-- ...................... -->
 <li><h3 id="logs">Registro de Logs</h3>
 Todas as atividades batch da Superinterface, inclusive qualquer anormalidade no tratamento do acervo, são registradas em seu arquivo de log de forma a permitir ao usuário administrador o acompanhamento destas atividades. Na verdade, na pasta de logs desta aplicação existem dois arquivo de logs:

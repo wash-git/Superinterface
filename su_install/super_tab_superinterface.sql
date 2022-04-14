@@ -10,7 +10,7 @@ CREATE TABLE su_tipos_logradouros (id_chave_tipo_de_logradouro int not null auto
 
 CREATE TABLE su_names_brasil (id_chave_name_do_brasil int not null auto_increment, nome_name_do_brasil varchar(100), minuscula_sem_acento varchar(100), maiuscula_sem_acento varchar(100), first_sem_acento varchar(100),minuscula_com_acento varchar(100), maiuscula_com_acento varchar(100), first_com_acento varchar(100), primary key(id_chave_name_do_brasil), unique(nome_name_do_brasil), unique(minuscula_sem_acento), unique(maiuscula_sem_acento), unique(first_sem_acento), unique(minuscula_com_acento), unique(maiuscula_com_acento), unique(first_com_acento));
 
-CREATE TABLE su_estados (id_chave_estado int not null auto_increment, nome_estado varchar(200), sigla_estado varchar(2), id_pais int not null,time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estado), UNIQUE(nome_estado), UNIQUE(sigla_estado));
+CREATE TABLE su_estados (id_chave_estado int not null auto_increment, codigo_estado varchar(2), sigla_estado varchar(2), nome_estado varchar(100), id_pais int not null, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estado), UNIQUE (codigo_estado),UNIQUE(sigla_estado), UNIQUE(nome_estado));
 
 CREATE TABLE su_cidades (id_chave_cidade int not null auto_increment, id_estado int, sigla_estado varchar(2), nome_cidade varchar(300), cidade_sem_acentuacao varchar(300), codigo varchar(50), gentilico varchar(50), prefeito varchar(300), area_territorial varchar(200), populacao_estimada int, densidade_demografica varchar(200), escolarizacao varchar(200), idhm varchar(200), mortalidade_infantil varchar(200), receitas_realizadas varchar(200), despesas_empenhadas varchar(200), pib_per_capita varchar(200), primary key (id_chave_cidade));
 
@@ -118,7 +118,7 @@ ALTER TABLE su_names_brasil comment='Contém uma coletânea de nomes próprios p
 ALTER TABLE su_tabelas_para_usuario comment='Contém a lista de tabelas que serão mostradas na entrada principal da plataforma Potlatch';
 ALTER TABLE su_tabelas_ligacao comment='Indica todos os casos de tabelas com duas chaves externas que relações de cardinalidade N para N. Essa tabela é preenchida automaticamente toda vez que o Super_Interfaces é executado e é usada para criar as interfaces de inserção de relações N para N.';
 ALTER TABLE su_tipos_documentos comment='Contém as categorias de documentos.';
-ALTER TABLE su_estados comment='Todos os estados Brasileiros com chave externa para os países.';
+ALTER TABLE su_estados comment='Todos os Estados brasileiros com chave externa para os países.';
 ALTER TABLE su_paises comment='Registro de países.';
 --
 -- Populando tabela su_tipos_logradouros
