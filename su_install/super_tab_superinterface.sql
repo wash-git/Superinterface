@@ -12,7 +12,7 @@ CREATE TABLE su_names_brasil (id_chave_name_do_brasil int not null auto_incremen
 
 CREATE TABLE su_estados (id_chave_estado int not null auto_increment, codigo_estado varchar(2), sigla_estado varchar(2), nome_estado varchar(100), id_pais int not null, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estado), UNIQUE (codigo_estado),UNIQUE(sigla_estado), UNIQUE(nome_estado));
 
-CREATE TABLE su_cidades (id_chave_cidade int not null auto_increment, id_estado int, sigla_estado varchar(2), nome_cidade varchar(300), cidade_sem_acentuacao varchar(300), codigo varchar(50), gentilico varchar(50), prefeito varchar(300), area_territorial varchar(200), populacao_estimada int, densidade_demografica varchar(200), escolarizacao varchar(200), idhm varchar(200), mortalidade_infantil varchar(200), receitas_realizadas varchar(200), despesas_empenhadas varchar(200), pib_per_capita varchar(200), primary key (id_chave_cidade));
+CREATE TABLE su_cidades (id_chave_cidade int not null auto_increment, id_estado int, codigo_do_estado varchar(2), nome_do_estado varchar(100), codigo varchar(7), nome_cidade varchar(100), sigla_estado varchar(2), cidade_sem_acentuacao varchar(100), primary key (id_chave_cidade));
 
 CREATE TABLE su_nomes_cidades AS SELECT nome_cidade from su_cidades;
 
@@ -89,7 +89,7 @@ ALTER TABLE su_desc_interfaces ADD CONSTRAINT FK_tags_descricao FOREIGN KEY (id_
 ALTER TABLE su_elementos_classes ADD CONSTRAINT FK_elementos_classes FOREIGN KEY (id_classe) REFERENCES su_csss_classes(id_chave_css_classe); 
 ALTER TABLE su_elementos_classes ADD CONSTRAINT FK_elementos_descricao FOREIGN KEY (id_elemento_descrito) REFERENCES su_desc_interfaces(id_chave_descricao_da_interface);
 ALTER TABLE su_cidades ADD CONSTRAINT FK_estado_cidade FOREIGN KEY (id_estado) REFERENCES su_estados(id_chave_estado);
-ALTER TABLE su_cidades comment='Contém todas as cidades brasileiras, com dados demográficos originários do IBGE. Tem uma chave externa para o Estado, uma vez que o Brasil tem cidades homônimas, mas para estados diferentes.';
+ALTER TABLE su_cidades comment='Contém todas as cidades brasileiras, com dados originários do IBGE. Tem uma chave externa para o Estado, uma vez que o Brasil tem cidades homônimas, mas para estados diferentes.';
 ALTER TABLE su_registrados ADD CONSTRAINT FK_estado_registrado FOREIGN KEY (id_estado) REFERENCES su_estados(id_chave_estado);
 ALTER TABLE su_registrados ADD CONSTRAINT FK_cidade_registrado FOREIGN KEY (id_cidade) REFERENCES su_cidades(id_chave_cidade);
 ALTER TABLE su_registrados ADD CONSTRAINT FK_pais_registrado FOREIGN KEY (id_pais) REFERENCES su_paises(id_chave_pais);
@@ -120,17 +120,6 @@ ALTER TABLE su_tabelas_ligacao comment='Indica todos os casos de tabelas com dua
 ALTER TABLE su_tipos_documentos comment='Contém as categorias de documentos.';
 ALTER TABLE su_estados comment='Todos os Estados brasileiros com chave externa para os países.';
 ALTER TABLE su_paises comment='Registro de países.';
---
--- Populando tabela su_tipos_logradouros
---
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Avenida','Av.');
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Rua','Rua');
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Travessa','Tr.');
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Beco','Bc.');
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Alameda','Al.');
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Viela','Vl.');
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Praça','Pr.');
-insert into su_tipos_logradouros (nome_tipo_de_logradouro, abreviatura) values ('Fazenda','Fz.');
 --
 -- Populando tabela su_tabelas_para_usuario
 --

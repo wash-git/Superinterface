@@ -294,15 +294,16 @@ O IBGE disponibiliza um aquivo com os códigos de identificação dos município
 </li>
 <!-- ...................... -->
 <li><h3 id="populartabs">Popular Tabelas</h3>
-Para possibilitar o perfeito funcionamento da Superinterface, inclusive disponibilizar a facilidade de busca de verbetes nos conteúdos do acervo de arquivos, é necessário alimentar algumas de suas tabelas com informações vindas de fontes externas. Isso possibilitará a construção do necessário vocabulário controlado da solução.<p></p>
+Para possibilitar o perfeito funcionamento da Superinterface, inclusive disponibilizar a facilidade de busca de verbetes nos conteúdos do acervo de arquivos, é necessário alimentar algumas de suas tabelas com informações oriundas de fontes externas. Isso possibilitará a construção do necessário vocabulário controlado da solução.<p></p>
 
 Para facilitar a instalação, essas fontes de dados externas já vêm fornecidas no pacote da Superinterface. Mas devem ser avaliadas pelo usuário instalador se elas estão atualizadas e se são aderentes aos objetivos que se deseja da Superinterface. Essas fontes de informações são as seguintes:<p></p>
 <table>
 <tr><th>Informação</th><th style="width:70%">Descrição</th></tr>
-<tr><td>Países</td><td>Através do arquivo:     su_install/super_ibge_paises.csv</td></tr>
-<tr><td>Estados</td><td>Através do arquivo:       su_install/super_ibge_estadosbrasil.csv</td></tr>
-<tr><td>Cidades</td><td>Através do arquivo:     su_install/super_insere_cidades.sql</td></tr>
-<tr><td>Instituições</td><td>Através do arquivo:     su_install/super_instituicoes.csv</td></tr>
+<tr><td>Países</td><td>Através do arquivo:    su_install/super_csv_ibge_paises.csv</td></tr>
+<tr><td>Estados</td><td>Através do arquivo:   su_install/super_csv_ibge_estadosbrasil.csv</td></tr>
+<tr><td>Cidades</td><td>Através do arquivo:   su_install/super_csv_ibge_cidadesbrasil.csv</td></tr>
+<tr><td>Instituições</td><td>Através do arquivo:         su_install/super_csv_instituicoes.csv</td></tr>
+<tr><td>Tipos de Logradouros</td><td>Através do arquivo: su_install/super_csv_logradourosbrasil.csv</td></tr>
 </table><p></p>
 Estes arquivos podem (e devem) ser alterados no momento da instalação da solução, possibilitando melhor adequar a solução à realidade em que será utilizada.  Apenas deve-se observar a estrutura desses arquivos de forma a mantê-la. 
 <p></p>
@@ -338,7 +339,20 @@ A Superinterface fará a importação das informações a partir da leitura de u
 Observação: a planilha não deve conter nenhuma linha de comentários no topo da planilha, bem como no final da planilha.  É necessário retirar a linha de cabeçalho caso esta exista (como está mostrado na figura acima), deixando apenas as colunas com as informações limpas dos estados.
 <p></p>
 <li>Cidades</li>
-A fonte primária de informação é o IBGE, que fornece uma planilha com a listagem de todos os municipios brasileiros, como pode-se observar na sessão de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Códigos dos municípios</a> desta entidade.<p></p>
+A fonte primária de informação é o IBGE, que fornece uma planilha com a listagem de todos os municipios brasileiros, como pode-se observar na sessão de <a href="https://www.ibge.gov.br/explica/codigos-dos-municipios.php">Códigos dos municípios</a> desta entidade. As figuras abaixo mostram uma planilha csv típica dos municípios (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
+<div class="img_container">
+<img src="./super_csv_cidadesbrasil_tab.png" height="100%" class="img_item"  />
+<img src="./super_csv_cidadesbrasil_config.png" class="img_item"  />
+</div>
+<dl>
+<dt>Ou seja:</dt>
+<dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- separação de campos: por vírgula</dd>
+<dd>- delimitador de texto: aspas</dd>
+</dl>
+Observação: a planilha não deve conter nenhuma linha de comentários no topo da planilha, bem como no final da planilha. É necessário retirar a linha de cabeçalho caso esta exista, deixando apenas as colunas com as informações limpas dos estados. Outro aspecto, deve-se eliminar algumas colunas desnecessária à aplicação Superinterface que estão presentes no arquivo original do IBGE, deixando apenas as seguintes colunas na planilha: UF, Nome_UF, Nome_Município e Código_Município_Completo. 
+<p></p>
+
 <li>Instituições</li>
 Para o caso das instituições, a Superinterface fará a importação das informações a partir da leitura de uma planilha. Durante a instalação, já existe uma planilha básica fornecida a título de exemplo e o sistema pode ser instalado utilizando este arquivo. As figuras abaixo mostram uma planilha csv típica de instituições (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
 <div class="img_container">
@@ -350,7 +364,20 @@ Para o caso das instituições, a Superinterface fará a importação das inform
 <dd>- conjunto de caracteres: UTF-8</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
-</dl>
+</dl><p></p>
+<li>Tipos de Logradouros</li>
+A Superinterface fará a importação das informações de tipos de logradouros a partir da leitura de uma planilha. Durante a instalação, já existe uma planilha básica fornecida e o sistema pode ser instalado utilizando este arquivo. As figuras abaixo mostram uma planilha csv típica de tipos de logradouros (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
+<div class="img_container">
+<img src="./super_csv_logradourosbrasil_tab.png"  height="90%" class="img_item"  />
+<img src="./super_csv_logradourosbrasil_config.png" height="90%" class="img_item"  />
+</div>
+<dl>
+<dt>Ou seja:</dt>
+<dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- separação de campos: por vírgula</dd>
+<dd>- delimitador de texto: aspas</dd>
+</dl><p></p>
+
 </ol>
 <p></p>
 <!-- ...................... -->
