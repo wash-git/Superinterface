@@ -127,28 +127,4 @@ insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_
 insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_instituicoes','É a tabela onde serão inseridas as instituições às quais os documentos farão referências.');
 insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_registrados','É a tabela onde serão inseridos os dados de indivíduos com algum papel a desempenhar no modelo de dados. Esse papel pode ser de staff do Wash, ou de signatário de um documento, por exemplo. Quando um novo registrado é inserido nesta tabela, ele aparece na tabela su_documents.');
 --
--- Populando tabela su_tipos_documentos
---
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Tipo de documento indefinido');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Atas e registros de reuniões');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Relatório de Projetos');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Despachos, Ofícios, Memorandos e Portarias');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Planos de Trabalho, Planos de Ação, Planejamento, Propostas');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Convênios e suas minutas');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Contratos e suas minutas');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Divulgação Pública, Artigos, Boletins, Convites, Anúncios, Manifestos, Circulares, Comunicados, Discursos');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Planilha, anotações, registros soltos');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Emendas, Leis, Portarias, Decretos, Medidas Provisórias, Portarias, suas minutas e projetos');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Apresentações');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Diário Oficial');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Editais e suas minutas');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Cadastros, registros');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Requerimento, Solicitações, Petições, Questionamentos');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Cartilhas, Instruções, Manuais, Guias, Perguntas Orientadoras, Apostilas');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Denúncias, Representações');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Inquéritos, investigações');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Prestações de contas e auditorias');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Notas Técnicas, Relatórios, Pareceres, Soluções de Divergência');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Questionários, levantamentos');
-INSERT INTO su_tipos_documentos (nome_tipo_de_documento) values ('Emails, Cartas');
 

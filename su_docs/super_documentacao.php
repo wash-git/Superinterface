@@ -304,8 +304,9 @@ Para facilitar a instalação, essas fontes de dados externas já vêm fornecida
 <tr><td>Cidades</td><td>Através do arquivo:   su_install/super_csv_ibge_cidadesbrasil.csv</td></tr>
 <tr><td>Instituições</td><td>Através do arquivo:         su_install/super_csv_instituicoes.csv</td></tr>
 <tr><td>Tipos de Logradouros</td><td>Através do arquivo: su_install/super_csv_logradourosbrasil.csv</td></tr>
+<tr><td>Tipos de Documentos</td><td>Através do arquivo: su_install/super_csv_tiposdocumentos.csv</td></tr>
 </table><p></p>
-Estes arquivos podem (e devem) ser alterados no momento da instalação da solução, possibilitando melhor adequar a solução à realidade em que será utilizada.  Apenas deve-se observar a estrutura desses arquivos de forma a mantê-la. 
+Estes arquivos podem ser alterados no momento da instalação da Superinterface, caso o usuário responsável pela sua instalação  avalie como necesário. Em algumas situações, isso possibilitará uma  melhor adequação da solução à realidade em que será utilizada.  Apenas deve-se observar as estruturas desses arquivos de forma a mantê-las. 
 <p></p>
 <ol style="list-style-type:lower-alpha">
 <li>Países</li>
@@ -376,7 +377,24 @@ A Superinterface fará a importação das informações de tipos de logradouros 
 <dd>- conjunto de caracteres: UTF-8</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
-</dl><p></p>
+</dl>
+
+
+
+<p></p>
+<li>Tipos de Documentos</li>
+A Superinterface fará a importação das informações de tipos de documentos a partir da leitura de uma planilha. Durante a instalação, já existe uma planilha básica fornecida e o sistema pode ser instalado utilizando este arquivo. As figuras abaixo mostram uma planilha csv típica de tipos de documentos (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
+<div class="img_container">
+<img src="./super_csv_tiposdocumentos_tab.png"  height="90%" class="img_item"  />
+<img src="./super_csv_tiposdocumentos_config.png" height="90%" class="img_item"  />
+</div>
+<dl>
+<dt>Ou seja:</dt>
+<dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- separação de campos: por vírgula</dd>
+<dd>- delimitador de texto: aspas</dd>
+</dl>
+<p></p>
 
 </ol>
 <p></p>

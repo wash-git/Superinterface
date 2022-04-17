@@ -4,11 +4,11 @@
 #                                                                                                                           |
 # --------------------------------------------------------------------------------------------------------------------------+
 #	Parte 1: parametrizações
-CPBASE=""                                        # base de dados da aplicação
-CPBASEUSER=""                                    # usuário da base de dados
-CPBASEPASSW=""                                   # password da base de dados
+CPBASE="baseportlet"                             # base de dados da aplicação
+CPBASEUSER="portlet"                             # usuário da base de dados
+CPBASEPASSW="Port2021#super"                     # password da base de dados
 CPNUMERARPDF=1                                   # renomear arquivos PDF (0 = não; 1 = sim)
-CPHTTPHOST=""                                    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+CPHTTPHOST="observatorio.wash.net.br/espaco3"    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
 									   # exemplos:
 									   # observatorio.wash.net.br/superinterface
 									   # exemplo.br
@@ -42,7 +42,8 @@ CPPHPFILE="super_config_php.cnf"       # nome do arquivo de configuração gerad
 CPLOGSFILEGZ="super_logfile.tar"	   # nome base do arquivo compactado de logs
 CPNOMECIDADES="super_cidades_maiusculas.txt"    # nome arquivo com nomes das cidades (em letras maiúsculas, sem controle)
 CPNOMEINST="super_instituicoes_maiusculas.txt"  # nome arquivo com nomes das instituições (em letras maiúsculas, sem controle)
-CPINSEREINST="super_csv_instituicoes.csv"          # arquivo com nomes de instituições destinados a tabela 'su_instituicoes'
+CPINSEREINST="super_csv_instituicoes.csv"          # arquivo com nomes de instituições para  tabela 'su_instituicoes'
+CPINSEREDOCS="super_csv_tiposdocumentos.csv"       # arquivo com nomes de tipos de documentos para tabela 'su_instituicoes'
 CPINSEREPAIS="super_csv_ibge_paises.csv"           # arquivo com nomes e códigos de países para tabela 'su_paises'
 CPINSEREESTADOS="super_csv_ibge_estadosbrasil.csv" # arquivo com nomes e códigos estados brasileiros para tabela 'su_estados'
 CPINSERECIDADES="super_csv_ibge_cidadesbrasil.csv" # arquivo com nomes e códigos cidades para tabela 'su_cidades'
