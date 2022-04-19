@@ -305,6 +305,7 @@ Para facilitar a instalação, essas fontes de dados externas já vêm fornecida
 <tr><td>Instituições</td><td>Através do arquivo:         su_install/super_csv_instituicoes.csv</td></tr>
 <tr><td>Tipos de Logradouros</td><td>Através do arquivo: su_install/super_csv_logradourosbrasil.csv</td></tr>
 <tr><td>Tipos de Documentos</td><td>Através do arquivo: su_install/super_csv_tiposdocumentos.csv</td></tr>
+<tr><td>Registrados</td><td>Através do arquivo: su_install/super_csv_registrados.csv</td></tr>
 </table><p></p>
 Estes arquivos podem ser alterados no momento da instalação da Superinterface, caso o usuário responsável pela sua instalação  avalie como necesário. Em algumas situações, isso possibilitará uma  melhor adequação da solução à realidade em que será utilizada.  Apenas deve-se observar as estruturas desses arquivos de forma a mantê-las. 
 <p></p>
@@ -319,6 +320,7 @@ A Superinterface fará a importação das informações a partir da leitura dest
 <dl>
 <dt>Ou seja:</dt>
 <dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- aspas em todas as células de texto, exceto campos numéricos</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
 </dl>
@@ -334,6 +336,7 @@ A Superinterface fará a importação das informações a partir da leitura de u
 <dl>
 <dt>Ou seja:</dt>
 <dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- aspas em todas as células de texto, exceto campos numéricos</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
 </dl>
@@ -348,6 +351,7 @@ A fonte primária de informação é o IBGE, que fornece uma planilha com a list
 <dl>
 <dt>Ou seja:</dt>
 <dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- aspas em todas as células de texto</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
 </dl>
@@ -363,6 +367,7 @@ Para o caso das instituições, a Superinterface fará a importação das inform
 <dl>
 <dt>Ou seja:</dt>
 <dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- aspas em todas as células de texto</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
 </dl><p></p>
@@ -375,13 +380,10 @@ A Superinterface fará a importação das informações de tipos de logradouros 
 <dl>
 <dt>Ou seja:</dt>
 <dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- aspas em todas as células de texto</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
-</dl>
-
-
-
-<p></p>
+</dl><p></p>
 <li>Tipos de Documentos</li>
 A Superinterface fará a importação das informações de tipos de documentos a partir da leitura de uma planilha. Durante a instalação, já existe uma planilha básica fornecida e o sistema pode ser instalado utilizando este arquivo. As figuras abaixo mostram uma planilha csv típica de tipos de documentos (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
 <div class="img_container">
@@ -391,9 +393,26 @@ A Superinterface fará a importação das informações de tipos de documentos a
 <dl>
 <dt>Ou seja:</dt>
 <dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- aspas em todas as células de texto</dd>
 <dd>- separação de campos: por vírgula</dd>
 <dd>- delimitador de texto: aspas</dd>
 </dl>
+<p></p>
+<p></p>
+<li>Registrados</li>
+A Superinterface fará a importação das informações de nomes de pessoas registradas no sistema  a partir da leitura de uma planilha. Durante a instalação, já existe uma planilha básica fornecida e o sistema pode ser instalado utilizando este arquivo. As figuras abaixo mostram uma planilha csv típica de registrados (à esquerda), e a configuração básica deste arquivo (à direita):<p></p>
+<div class="img_container">
+<img src="./super_csv_registrados_tab.png"  height="90%" class="img_item"  />
+<img src="./super_csv_registrados_config.png" height="90%" class="img_item"  />
+</div>
+<dl>
+<dt>Ou seja:</dt>
+<dd>- conjunto de caracteres: UTF-8</dd>
+<dd>- aspas em todas as células de texto</dd>
+<dd>- separação de campos: por vírgula</dd>
+<dd>- delimitador de texto: aspas</dd>
+</dl><p></p>
+Tal tabela guardará nomes de pessoas para duas finalidades diferentes: nomes de autoridades que possivelmente aparecerão nos documentos do acervo; nomes dos colaboradores da Superinterface que estarão contribuindo com a gestão dos metadados dos documentos.
 <p></p>
 
 </ol>

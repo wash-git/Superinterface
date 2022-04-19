@@ -1311,7 +1311,7 @@ $path_imagem="";
 
 $conn= new mysqli("localhost", $username, $pass, $banco);
 
-$sql_comment="SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_NAME = \''.$tabela.'\';";
+$sql_comment="SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = \'".$banco."\' AND TABLE_NAME = \''.$tabela.'\';";
 
 $result_comment=$conn->query("$sql_comment");
 

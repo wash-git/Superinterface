@@ -85,8 +85,8 @@ MInfo18="Quantidade de tabelas geradas= "
 MInfo19="Sucesso! Informações inseridas corretamente na tabela 'su_cidades'"
 MInfo20="Quantidade de CIDADES - registros na tabela 'su_cidades'= "
 MInfo21="Sucesso! Informações inseridas corretamente na tabela 'su_estados'"
-MInfo22="Quantidade de DOCUMENTOS - registros na tabela 'su_documents'= "
-MInfo23="Sucesso! Informações inseridas corretamente na tabela de usuários 'su_registrados'"
+MInfo22="Quantidade de registros na tabela 'su_documents'= "
+MInfo23="Sucesso! Informações inseridas corretamente na tabela 'su_registrados'"
 MInfo24="Quantidade de registros na tabela 'su_docs_signatarios'= "
 MInfo25="Quantidade de registros na tabela 'su_docs_instituicoes'= "
 MInfo26="super_install.sh"
@@ -102,7 +102,7 @@ MInfo35="Quantidade de ESTADOS - registros na tabela 'su_estados'= "
 MInfo36="Quantidade de TIPOS LOGRADOUROS - registros na tabela 'su_tipos_logradouros'= "
 MInfo37="Sucesso! Informações inseridas corretamente na tabela 'su_tipos_documentos'"
 MInfo38="Quantidade de TIPOS DOCUMENTOS  - registros na tabela 'su_tipos_documentos'= "
-#MInfo39=""
+MInfo39="Quantidade de nomes REGISTRADOS - registros na tabela 'su_registrados'= "
 MInfo40="Quantidade de registros na tabela 'su_docs_cidades'= "
 MInfo41="Bem vind@ ao script de instalação da Superinterface em:   "
 #MInfo42=""
@@ -565,7 +565,7 @@ function fTabelas () {
 		fMens "$FInfor" "$MInfo15"
 	fi
 	#											C34: verificar inserção de dados na tabela 'su_instituicoes'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREINST' INTO TABLE su_instituicoes FIELDS TERMINATED BY '\n' (nome_instituicao)"
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREINST' INTO TABLE su_instituicoes FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n'  (nome_instituicao)"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr37"
  		exit
@@ -586,7 +586,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET i
  		exit
 	fi
 	#											C35: verificar inserção de dados na tabela 'su_paises'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREPAIS' INTO TABLE su_paises FIELDS TERMINATED by ',' LINES TERMINATED BY '\n' (codigo_pais, nome_pais, sigla_pais) SET usuario='Admin' "
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREPAIS' INTO TABLE su_paises FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (codigo_pais, nome_pais, sigla_pais) SET usuario='Admin' "
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo13"
 	else
@@ -599,7 +599,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET i
 		fMens "$FInsuc" "$MErr44"
 		exit
 	fi
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREESTADOS' INTO TABLE su_estados FIELDS TERMINATED by ',' LINES TERMINATED BY '\n' (codigo_estado, sigla_estado, nome_estado) SET id_pais=$pais_brasil,usuario='Admin' "
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREESTADOS' INTO TABLE su_estados FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (codigo_estado, sigla_estado, nome_estado) SET id_pais=$pais_brasil,usuario='Admin' "
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo21"
 	else
@@ -615,7 +615,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET i
 #		exit
 #	fi
 	#											C37: verificar inserção de dados na tabela 'su_cidades'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERECIDADES' INTO TABLE su_cidades FIELDS TERMINATED by ',' LINES TERMINATED BY '\n' (codigo_do_estado, nome_do_estado, codigo, nome_cidade) "
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERECIDADES' INTO TABLE su_cidades FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (codigo_do_estado, nome_do_estado, codigo, nome_cidade) "
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr14"
  		exit
@@ -638,7 +638,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade
 	fi
 	#
 	#											C38: verificar inserção de dados na tabela 'su_tipos_logradouros'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERELOGRA' INTO TABLE su_tipos_logradouros FIELDS TERMINATED by ',' LINES TERMINATED BY '\n' (nome_tipo_de_logradouro, abreviatura)  "
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERELOGRA' INTO TABLE su_tipos_logradouros FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (nome_tipo_de_logradouro, abreviatura)  "
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo28"
 	else
@@ -646,7 +646,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade
  		exit
 	fi
 	#											C39: verificar inserção de dados na tabela 'su_tipos_documentos'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREDOCS' INTO TABLE su_tipos_documentos FIELDS TERMINATED by ',' LINES TERMINATED BY '\n' (nome_tipo_de_documento)  "
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREDOCS' INTO TABLE su_tipos_documentos FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (nome_tipo_de_documento)  "
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo37"
 	else
@@ -654,7 +654,14 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade
  		exit
 	fi
 	#											C40: verificar inserção de dados na tabela de usuários 'su_registrados'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "super_tab_insere_usuarios.sql"
+#	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSEREREGIST"
+#	if [ $? -eq 0 ]; then
+#		fMens "$FSucss" "$MInfo23"
+#	else
+#		fMens "$FInsuc" "$MErr45"
+# 		exit
+#	fi
+mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREREGIST' INTO TABLE su_registrados FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n'  (nome_registrado,name_of_war) SET usuario='Admin' "
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo23"
 	else
@@ -694,6 +701,8 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade
 	#				resumo
 	fMens "$FInfo2" "$MInfo18"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
+	fMens "$FInfo2" "$MInfo39"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_registrados')"
 	fMens "$FInfo2" "$MInfo29"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_instituicoes')"
 	fMens "$FInfo2" "$MInfo34"

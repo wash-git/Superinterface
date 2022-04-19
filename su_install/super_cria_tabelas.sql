@@ -10,7 +10,7 @@ CREATE TABLE su_tipos_logradouros (id_chave_tipo_de_logradouro int not null auto
 
 CREATE TABLE su_names_brasil (id_chave_name_do_brasil int not null auto_increment, nome_name_do_brasil varchar(100), minuscula_sem_acento varchar(100), maiuscula_sem_acento varchar(100), first_sem_acento varchar(100),minuscula_com_acento varchar(100), maiuscula_com_acento varchar(100), first_com_acento varchar(100), primary key(id_chave_name_do_brasil), unique(nome_name_do_brasil), unique(minuscula_sem_acento), unique(maiuscula_sem_acento), unique(first_sem_acento), unique(minuscula_com_acento), unique(maiuscula_com_acento), unique(first_com_acento));
 
-CREATE TABLE su_estados (id_chave_estado int not null auto_increment, codigo_estado varchar(2), sigla_estado varchar(2), nome_estado varchar(100), id_pais int not null, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estado), UNIQUE (codigo_estado),UNIQUE(sigla_estado), UNIQUE(nome_estado));
+CREATE TABLE su_estados (id_chave_estado int not null auto_increment, codigo_estado int, sigla_estado varchar(2), nome_estado varchar(100), id_pais int not null, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estado), UNIQUE (codigo_estado),UNIQUE(sigla_estado), UNIQUE(nome_estado));
 
 CREATE TABLE su_cidades (id_chave_cidade int not null auto_increment, id_estado int, codigo_do_estado varchar(2), nome_do_estado varchar(100), codigo varchar(7), nome_cidade varchar(100), sigla_estado varchar(2), cidade_sem_acentuacao varchar(100), primary key (id_chave_cidade));
 
@@ -22,7 +22,7 @@ CREATE TABLE su_nomes_instituicoes AS SELECT nome_instituicao from su_instituico
 
 CREATE TABLE su_tipos_documentos (id_chave_tipo_de_documento int not null auto_increment, nome_tipo_de_documento varchar(200), primary key (id_chave_tipo_de_documento), unique(nome_tipo_de_documento));
 
-CREATE TABLE su_paises (id_chave_pais int not null auto_increment, codigo_pais varchar(10), nome_pais varchar(150), sigla_pais varchar(5), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_pais), UNIQUE(nome_pais), UNIQUE(codigo_pais));
+CREATE TABLE su_paises (id_chave_pais int not null auto_increment, codigo_pais int, nome_pais varchar(150), sigla_pais varchar(5), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_pais), UNIQUE(nome_pais), UNIQUE(codigo_pais));
 
 CREATE TABLE su_documents (id_chave_documento int not null auto_increment, sigla varchar(30),  id_tipo_de_documento int, id_curador int, nome_documento varchar(200), originalfilename varchar(200), titulo varchar(300), photo_filename_documento varchar(200), alt_foto_jpg varchar(200), descricao varchar(2000), relevancia varchar(2000), data_doc date, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY (id_chave_documento), unique(sigla), unique(photo_filename_documento));
 --
@@ -93,16 +93,16 @@ ALTER TABLE su_cidades comment='Contém todas as cidades brasileiras, com dados 
 ALTER TABLE su_registrados ADD CONSTRAINT FK_estado_registrado FOREIGN KEY (id_estado) REFERENCES su_estados(id_chave_estado);
 ALTER TABLE su_registrados ADD CONSTRAINT FK_cidade_registrado FOREIGN KEY (id_cidade) REFERENCES su_cidades(id_chave_cidade);
 ALTER TABLE su_registrados ADD CONSTRAINT FK_pais_registrado FOREIGN KEY (id_pais) REFERENCES su_paises(id_chave_pais);
-ALTER TABLE su_registrados comment='É a tabela que registra todos os stake-holders identificados até o momento. São pessoas que podem assumir diversos papéis e interesses: signatários de documentos, destinatários de documentos, autoridades, líderes comunitários, representantes de entidades variadas, curadores, etc';
+ALTER TABLE su_registrados comment='É a tabela que registra todos os stake-holders relativos aos documentos. Podem ser as pessoas que trabalham com a Superinterface e serão tutores de documentos do acervo (estarão definidas assim na tabela su_documentos), ou ainda pessoas citadas nos conteúdos dos documentos como suas signatárias (ou que tenham alguma participação relevante que está citada nos conteúdos dos documentos do acervo). Em ambos os casos, essas pessoas deverão ser cadastradas nesta tabela.';
 ALTER TABLE su_documents add constraint fk_curador foreign key (id_curador) references su_registrados(id_chave_registrado);
 ALTER TABLE su_documents add constraint fk_tipo_de_documento foreign key (id_tipo_de_documento) references su_tipos_documentos(id_chave_tipo_de_documento);
-ALTER TABLE su_documents comment='Documentos guarda todos os documentos do acervo. Campos: photo_filename_documento aponta para path do documento referido pelo registro, id_curador indica quem fez a análise do documento (Registrados), id_tipo_documento aponta para su_tipos_documentos. É a tabela central da base da Superinterface.';
+ALTER TABLE su_documents comment='É a tabela principal da Superinterface. Esta tabela guarda as informações de todos os documentos do acervo. Campos: id_curador (da tabela su_registrados) indica quem faz a análise do documento, id_tipo_documento aponta para su_tipos_documentos. ';
 ALTER TABLE su_docs_tokens ADD CONSTRAINT FK_id_documento FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
 ALTER TABLE su_docs_tokens ADD CONSTRAINT FK_id_token FOREIGN KEY (id_token) REFERENCES su_tokens_acervo(id_chave_token_no_acervo);
 ALTER TABLE su_docs_tokens comment='Indica os tokens contidos num certo documento, descontados pontuação e a linha do arquivo em que esse token ocorreu. O arquivo a que se refere é um arquivo csv com uma única coluna, portanto a linha da ocorrência indica a ordem de ocorrência da palavra no text. Esta tabela permite reconstituir parcialmente o arquivo texto do documento original.';
 ALTER TABLE su_docs_signatarios ADD CONSTRAINT FK_signatario_documento FOREIGN KEY (id_signatario) REFERENCES su_registrados(id_chave_registrado);
 ALTER TABLE su_docs_signatarios ADD CONSTRAINT FK_documento_signatario FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
-ALTER TABLE su_docs_signatarios comment='Estabelece uma cardinalidade N para N entre a tabela Documentos e a tabela su_registrados. Indica a lista de pessoas que assinou um determinado documento ou quantos documentos foram assinados por uma pessoaa.1';
+ALTER TABLE su_docs_signatarios comment='Estabelece uma cardinalidade N para N entre a tabela su_documentos e a tabela su_registrados. Indica a lista de pessoas que aparecem se responsabilizando (assinando) cada documento ou quais documentos foram assinados por determinada pessoa (que consta em su_registrados)';
 ALTER TABLE su_docs_registrados ADD CONSTRAINT FK_registrado_documento FOREIGN KEY (id_registrado) REFERENCES su_registrados(id_chave_registrado);
 ALTER TABLE su_docs_registrados ADD CONSTRAINT FK_documento_registrado FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
 ALTER TABLE su_docs_registrados comment='É uma tabela que é similar à tabela su_docs_signatarios, mas não está restrita apenas a esse aspecto. A tabela su_docs_registrados é mais ampla e contém o nome das pessoas que fazem parte do Staff do projeto, por exemplo. A tabela contém também o nome de curadores, ou qualquer outra pessoa interessada. Não existe outro lugar para guardar nomes de pessoas. Esta tabela difere de su_docs_signatarios porque aqui temos os nomes que aparecem no documento, mas que nao sao necessariamente signatarios';
@@ -120,6 +120,7 @@ ALTER TABLE su_tabelas_ligacao comment='Indica todos os casos de tabelas com dua
 ALTER TABLE su_tipos_documentos comment='Contém as categorias de documentos.';
 ALTER TABLE su_estados comment='Todos os Estados brasileiros com chave externa para os países.';
 ALTER TABLE su_paises comment='Registro de países.';
+ALTER TABLE su_estados ADD CONSTRAINT FK_estados_paises FOREIGN KEY (id_pais) REFERENCES su_paises(id_chave_pais);
 --
 -- Populando tabela su_tabelas_para_usuario
 --
@@ -127,4 +128,3 @@ insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_
 insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_instituicoes','É a tabela onde serão inseridas as instituições às quais os documentos farão referências.');
 insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_registrados','É a tabela onde serão inseridos os dados de indivíduos com algum papel a desempenhar no modelo de dados. Esse papel pode ser de staff do Wash, ou de signatário de um documento, por exemplo. Quando um novo registrado é inserido nesta tabela, ele aparece na tabela su_documents.');
 --
-

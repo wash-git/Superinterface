@@ -4,15 +4,16 @@
 #                                                                                                                           |
 # --------------------------------------------------------------------------------------------------------------------------+
 #	Parte 1: parametrizações
-CPBASE="baseportlet"                             # base de dados da aplicação
-CPBASEUSER="portlet"                             # usuário da base de dados
-CPBASEPASSW="Port2021#super"                     # password da base de dados
-CPNUMERARPDF=1                                   # renomear arquivos PDF (0 = não; 1 = sim)
-CPHTTPHOST="observatorio.wash.net.br/espaco3"    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+CPBASE=""                                 # base de dados da aplicação
+CPBASEUSER=""                             # usuário da base de dados
+CPBASEPASSW=""                            # password da base de dados
+CPNUMERARPDF=0                            # renomear arquivos PDF (0 = não; 1 = sim)
+CPHTTPHOST=""                             # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+
 									   # exemplos:
 									   # observatorio.wash.net.br/superinterface
 									   # exemplo.br
-CPQPDFLOTE=4                           # quantidade máxima de arquivos PDF tratados a cada ativação do script do cron
+CPQPDFLOTE=2                           # quantidade máxima de arquivos PDF tratados a cada ativação do script do cron
 CPTAMMAX=1900000                       # tamanho max do arquivo para upload (em bytes). Não é o pnp.ini.
 #
 #	Parte 2: variáveis do ambiente
@@ -48,10 +49,11 @@ CPINSEREPAIS="super_csv_ibge_paises.csv"           # arquivo com nomes e código
 CPINSEREESTADOS="super_csv_ibge_estadosbrasil.csv" # arquivo com nomes e códigos estados brasileiros para tabela 'su_estados'
 CPINSERECIDADES="super_csv_ibge_cidadesbrasil.csv" # arquivo com nomes e códigos cidades para tabela 'su_cidades'
 CPINSERELOGRA="super_csv_logradourosbrasil.csv"    # arquivo com tipos de logradouros para tabela 'su_logradouros'
-CPINSERENOMES="super_insere_nomes.sql"       # nome arquivo com comandos SQL de inserção de dados na tabela 'su_names_brasil'
-CPCRIATABELAS="super_tab_superinterface.sql" # nome arquico SQL de criação tabelas e inserts iniciais da Superinterface
-CPTABAPLICACAO="super_tab_aplicacao.sql"     # nome arquivo SQL de criação tabelas e inserts iniciais da aplicação do usuário 
-CPTABELASCRIADAS="super_tabelascriadas.html" # nome do arquivo com a lista das tabelas criadas, e suas estruturas
+CPINSERENOMES="super_insere_nomes.sql"        # arquivo com comandos SQL de inserção de dados na tabela 'su_names_brasil'
+CPCRIATABELAS="super_cria_tabelas.sql"        # arquico SQL de criação tabelas e inserts iniciais da Superinterface
+CPTABAPLICACAO="super_tab_aplicacao.sql"      # arquivo SQL de criação tabelas e inserts iniciais da aplicação do usuário
+CPINSEREREGIST="super_csv_registrados.csv"    # arquivo SQL com comandos de inserção de dados na tabela 'su_registrados'
+CPTABELASCRIADAS="super_tabelascriadas.html"  # arquivo com a lista das tabelas criadas, e suas estruturas
 CPACENTO="acento"                      # extensão nome dos arquivos com conteúdo sem caracteres acentuados
 CPCONTRL="contrl"                      # extensão nome dos arquivos com conteúdo sem caracteres controles
 CPMAIUSCULA="maiuscula"                # extensão nome dos arquivos com conteúdo todo em caixa alta
