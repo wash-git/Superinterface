@@ -293,6 +293,28 @@ O IBGE disponibiliza um aquivo com os códigos de identificação dos município
 </ol>
 </li>
 <!-- ...................... -->
+<li><h3 id="tabelas">Tabelas</h3>
+Para que seja possível gerar a Plataforma Potlatch automaticamente, é necessário que o banco de dados tenha algumas características especiais.  As tabelas têm seus nomes no plural, para indicar o caráter coletivo dos dados de uma tabela (conjunto de registros). Por exemplo, hoje estão presentes na base de dados essas seguintes tabelas (entre outras):<br />
+<ul>
+<li>su_documentos: quarda os documentos do acervo;</li>
+<li>su_registrados: guarda os nomes de todos os stake-holders do acervo (signatários de documentos, destinatários de documentos, autoridades, curadores e outros);</li>
+<li>su_tipos_de_Documentos: guarda todos os tipos de documentos;</li>
+<li>su_cidades: guarda todas as cidades do Brasil.</li>
+</ul><p></p>
+Embora o uso de maiúsculas na primeira letra do nome da tabela seja encorajado (exceto para preposições), existem questões associadas à transição dos nomes nas várias versões do MySQL, com diferentes configurações de sensibilidade de case. Portanto, por simplicidade adotou-se a prática de se usar letras minúsculas para todos os nomes, sejam de campos ou de tabelas.<br /><br />
+
+Atenção especial deve-se ter com essas regras de nomeação dos campos das tabelas:
+<ul>
+<li>id_chave_tal: o campo da chave primária da tabela sempre se inicia com id_chave_, seguido do nome da tabela no singular. Embora o schema do MySQL forneça quais campos são do tipo chave primária, optou-se por usar esse nome especial para os casos de chaves primárias;</li>
+<li>nome_tal: o campo que se inicia com nome_ indica qual campo da tabela externa será mostrado em drop boxes na potlatch, quando uma tabela tem uma relação do tipo "1 para N" ou "N para N" com outra tabela, seguido do nome da tabela no singular;</li>
+<li>photo_filename_tal: indica o campo que conterá o path do arquivo do acervo relacionado àquele campo, seguido do nome da tabela no singular. São campos da Superinterface que apontam para arquivos de imagens ou PDFs. </li>
+</ul>
+Obs: a potlatch não guarda campos BLOBS.  
+<p></p></li>
+
+
+
+<!-- ...................... -->
 <li><h3 id="populartabs">Popular Tabelas</h3>
 Para possibilitar o perfeito funcionamento da Superinterface, inclusive disponibilizar a facilidade de busca de verbetes nos conteúdos do acervo de arquivos, é necessário alimentar algumas de suas tabelas com informações oriundas de fontes externas. Isso possibilitará a construção do necessário vocabulário controlado da solução.<p></p>
 
@@ -418,18 +440,38 @@ Tal tabela guardará nomes de pessoas para duas finalidades diferentes: nomes de
 </ol>
 <p></p>
 <!-- ...................... -->
-<li><h3 id="tabelasusuario">Tabelas Usuário</h3>
+<li><h3 id="tabelasusuarios">Tabelas do Usuário</h3>
 Existem duas possibilidades de instalação da Superinterface:<br />
 <ol style="list-style-type:lower-alpha">
 <li>Situação 1: apenas gerando as tabelas padrão da Superinterface;</li>
-<li>Situação 2: gerando as tabelas padrão da Superinterface, junto com tabelas necessárias à uma aplicação do usuário.</li>
+<li>Situação 2: além das tabelas padrão da Superinterface, incorporar tabelas necessárias à uma aplicação do usuário.</li>
 </ol><br />
-O procedimento padrão de instalação da Superinterface é seguir a primeira situação: gerar apenas as tabelas padrão da Superinterface. Isso é feito automaticamente pelo script de instalação caso não seja encontrado na pasta /su_install um arquivo de nome super_tab_aplicacao.sql.</li>
+O procedimento padrão de instalação da Superinterface é seguir a primeira situação: gerar apenas as tabelas padrão da Superinterface. Isso é feito automaticamente pelo script de instalação caso não seja encontrado o arquivo su_install/super_tab_aplicacao.sql.</li>
 <br />
-Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo serão executados logo após a geração das tabelas padrão da Superinterface, que é o caso da segunda situação de instalação. Todas as tabelas serão geradas em uma única base de dados.<br /><br />
-<strong>Dica:</strong> na pasta su_exemplos/ existem arquivos SQL exemplos de aplicação de usuários.  Se desejar realizar um teste, copie um dos arquivos para a pasta su_install/, renomeando o arquivo escolhido para super_tab_aplicacao.sql. Para construir seu arquivo SQL de aplicação, observe a estrutura desses arquivos SQL exemplos e faça algo parecido.<br />
+Caso exista este arquivo super_tab_aplicacao.sql, os comandos SQL deste arquivo serão executados logo após a geração das tabelas padrão da Superinterface. Todas as tabelas serão geradas em uma única base de dados.<br /><br />
+Dica: na pasta su_exemplos/ existem arquivos SQL exemplos de aplicação de usuários.  Se desejar realizar um teste, copie um dos arquivos para a pasta su_install/, renomeando o arquivo escolhido para super_tab_aplicacao.sql. Para construir seu arquivo SQL de aplicação, observe a estrutura desses arquivos SQL exemplos e faça algo parecido.<br /><br />
+A título de um pequeno exemplo, uma certa aplicação tinha a necessidade de ter um arquivo com nomes de jornalistas, e uma referência ao estado de seu trabalho.  Vejamos abaixo como poderia ficar este arquivo super_tab_aplicacao.sql, já considerando a existência das tabelas padrão da Superinterface:<br />
+<pre>
+CREATE TABLE su_jornalistas (
+	id_chave_jor int not null auto_increment,
+	nome_jor varchar(50),
+	id_estado_jor int,
+	primary key (id_chave_jor));
+
+ALTER TABLE su_jornalistas
+	ADD CONSTRAINT FK_regra_jor FOREIGN KEY (id_estado_jor)
+	REFERENCES su_estados(id_chave_estado);
+
+INSERT INTO su_jornalistas (
+	nome_jor,
+	id_estado_jor)
+	values (
+		'José de José',
+		(select id_chave_estado from su_estados where codigo_estado=25));
+</pre>
 <p></p>
 </li>
+
 <!-- ...................... -->
 <li><h3 id="logs">Registro de Logs</h3>
 Todas as atividades batch da Superinterface, inclusive qualquer anormalidade no tratamento do acervo, são registradas em seu arquivo de log de forma a permitir ao usuário administrador o acompanhamento destas atividades. Na verdade, na pasta de logs desta aplicação existem dois arquivo de logs:
