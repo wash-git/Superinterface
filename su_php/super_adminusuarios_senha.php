@@ -10,7 +10,7 @@ if(isset($_GET['user'])) {
 ?>
 <html lang='pt-br'>
 <head>
-<title>Administração de usuários</title>
+<title>Trocar Senha</title>
 <link rel='stylesheet' href='../su_css/super_admin.css' type='text/css'>
 <meta charset='UTF-8'>
 </head>
@@ -23,11 +23,11 @@ $html='<div class = "container form-signin"> </div> <!-- /container -->
 	<h4 class = "form-signin-heading">'.SUMENSP035.': '.$user.'</h4>';
 if ($_SESSION['autoridade'] != 0) {
 	// usuário não é administrador
-	$html.='<input type = "password" class = "form-control" name = "senhaatual" placeholder ='.SUMENSP055.' maxlength="10" required autofocus></br>';
+	$html.='<input type = "password" class = "form-control" name = "senhaatual" placeholder ='.SUMENSP055.' maxlength="8" required autofocus></br>';
 }
 $html.='
-		<input type = "password" class = "form-control" name = "novasenha1" placeholder ='.SUMENSP056.'  minlength="6" maxlength="10" required autofocus></br>
-		<input type = "password" class = "form-control" name = "novasenha2" placeholder ='.SUMENSP057.'  maxlength="10" required autofocus></br>
+		<input type = "password" class = "form-control" name = "novasenha1" placeholder ='.SUMENSP056.'  title="'.SUMENSP056.'" minlength="5" maxlength="8" required autofocus pattern="[a-zA-Z0-9]+" ></br>
+		<input type = "password" class = "form-control" name = "novasenha2" placeholder ='.SUMENSP057.'  maxlength="8" required autofocus></br>
 		<input type="hidden" name="user" value="'.$user.'">
 		<button class = "botaoEnviar" type = "submit" name = "enviar">'.SUMENSP058.'</button>
 		</form></div>';

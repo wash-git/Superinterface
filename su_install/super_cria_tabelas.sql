@@ -3,8 +3,8 @@
 -- ------------------------------------------
 
 -- Criação de usuários administrativos da Superinterface --
-CREATE TABLE su_usuarios (username varchar(10) NOT NULL, senha varchar(42) NOT NULL, nome varchar(80) NOT NULL, email varchar(80) NOT NULL, cidade varchar(40) NOT NULL, estado char(2) NOT NULL, privilegio TINYINT unsigned  NOT NULL, ativo bool NOT NULL, primary key (username));
-ALTER TABLE su_usuarios comment='Contém a identificação dos usuários para acesso a interface administrativa da Superinterface';
+CREATE TABLE su_usuarios (id_chave_usuario int not null auto_increment, username varchar(10) NOT NULL, senha varchar(42) NOT NULL, nome_usuario varchar(80) NOT NULL, email varchar(80) NOT NULL, cidade varchar(40) NOT NULL, estado char(2) NOT NULL, privilegio TINYINT unsigned  NOT NULL, ativo bool NOT NULL, primary key (id_chave_usuario));
+ALTER TABLE su_usuarios comment='Contém a identificação dos usuários para acesso a interface administrativa da Superinterface, ao mesmo tempo em que é uma lista de curadores dos documentos';
 
 CREATE TABLE su_tipos_logradouros (id_chave_tipo_de_logradouro int not null auto_increment, nome_tipo_de_logradouro varchar(100), abreviatura varchar(50), primary key(id_chave_tipo_de_logradouro), unique(nome_tipo_de_logradouro), unique(abreviatura));
 
@@ -53,6 +53,8 @@ CREATE TABLE su_docs_tokens (id_chave_documento_token int not null auto_incremen
 
 CREATE TABLE su_docs_signatarios (id_chave_documento_signatario int not null auto_increment, id_documento int, id_signatario int, primary key (id_chave_documento_signatario));
 
+CREATE TABLE su_docs_curadores (id_chave_documento_curador int not null auto_increment, id_documento int, id_curador int, primary key (id_chave_documento_curador));
+
 CREATE TABLE su_docs_registrados (id_chave_documento_registrado int not null auto_increment, id_documento int, id_registrado int, ocorrencias int, primary key (id_chave_documento_registrado));
 
 CREATE TABLE su_docs_instituicoes (id_chave_documento_instituicao int not null auto_increment, id_documento int, id_instituicao int, ocorrencia_inst int, primary key (id_chave_documento_instituicao));
@@ -62,6 +64,8 @@ CREATE TABLE su_interfaces (id_chave_interface int not null auto_increment, nome
 CREATE TABLE su_elementos_classes (id_chave_elemento_classe int not null auto_increment, id_classe int, id_elemento_descrito int, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_elemento_classe), UNIQUE(id_classe, id_elemento_descrito));
 
 CREATE TABLE su_registrados (id_chave_registrado int not null auto_increment, nome_registrado varchar(200),   name_of_war varchar(100), id_estado int, id_pais int, id_cidade int, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY (id_chave_registrado));
+
+CREATE TABLE su_curadores (id_chave_curador int not null auto_increment, nome_curador varchar(200),   name_of_war varchar(100), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY (id_chave_curador));
 
 CREATE TABLE su_estilos (id_chave_estilo int not null auto_increment, nome_do_estilo varchar(200), comentario varchar(1000), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estilo), UNIQUE(nome_do_estilo));
 
@@ -103,6 +107,10 @@ ALTER TABLE su_docs_tokens comment='Indica os tokens contidos num certo document
 ALTER TABLE su_docs_signatarios ADD CONSTRAINT FK_signatario_documento FOREIGN KEY (id_signatario) REFERENCES su_registrados(id_chave_registrado);
 ALTER TABLE su_docs_signatarios ADD CONSTRAINT FK_documento_signatario FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
 ALTER TABLE su_docs_signatarios comment='Estabelece uma cardinalidade N para N entre a tabela su_documentos e a tabela su_registrados. Indica a lista de pessoas que aparecem se responsabilizando (assinando) cada documento ou quais documentos foram assinados por determinada pessoa (que consta em su_registrados)';
+
+ALTER TABLE su_docs_curadores ADD CONSTRAINT FK_curador_documento FOREIGN KEY (id_curador) REFERENCES su_usuarios(id_chave_usuario);
+ALTER TABLE su_docs_curadores ADD CONSTRAINT FK_documento_curador FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
+ALTER TABLE su_docs_curadores comment='Estabelece uma cardinalidade N para N entre a tabela su_documentos e a tabela su_usuarios. Indica a lista de curadores que aparecem se responsabilizando pela curadoria de cada documento (que consta em su_usuarios), responsáveis pelos metadados de cada documento';
 ALTER TABLE su_docs_registrados ADD CONSTRAINT FK_registrado_documento FOREIGN KEY (id_registrado) REFERENCES su_registrados(id_chave_registrado);
 ALTER TABLE su_docs_registrados ADD CONSTRAINT FK_documento_registrado FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
 ALTER TABLE su_docs_registrados comment='É uma tabela que é similar à tabela su_docs_signatarios, mas não está restrita apenas a esse aspecto. A tabela su_docs_registrados é mais ampla e contém o nome das pessoas que fazem parte do Staff do projeto, por exemplo. A tabela contém também o nome de curadores, ou qualquer outra pessoa interessada. Não existe outro lugar para guardar nomes de pessoas. Esta tabela difere de su_docs_signatarios porque aqui temos os nomes que aparecem no documento, mas que nao sao necessariamente signatarios';

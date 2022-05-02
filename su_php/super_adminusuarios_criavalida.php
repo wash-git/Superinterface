@@ -23,6 +23,11 @@ $ativof = $_POST["ativo"];
 <body>
 <?php
 suPrintCabecalho(SUMENSP033);
+if ( $_SESSION['autoridade'] != 0) {
+	// usuário NÃO é um administrador
+	die("
+			<div class=\"resposta\"><br /><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP116."<br \><br /></br /><hr class=\"new1\"><br \><a href=\"./super_adminusuarios.php\">".SUMENSP006."</a></div>");
+}	
 if ( ! (ctype_alnum($userf) AND ctype_alnum($senhao) ) ) {
 	die("
 			<div class=\"resposta\"><br /><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP073."<br \><br /></br /><hr class=\"new1\"><br \><a href=\"./super_adminusuarios.php\">".SUMENSP006."</a></div>");
@@ -35,7 +40,7 @@ if (mysqli_connect_errno()) {
 			<div class=\"resposta\"><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP027."<br \><br /><hr class=\"new1\"><br \><a href=\"./super_adminusuarios.php\">".SUMENSP006."</a></div></body></html>");
 }
 //mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-if (!mysqli_query ($link, "INSERT INTO su_usuarios (username,senha,nome,email,cidade,estado,privilegio,ativo) VALUES ('$userf','$senhaf','$nomef','$emailf','$cidadef','$estadof','$privilegiof','$ativof')")){
+if (!mysqli_query ($link, "INSERT INTO su_usuarios (username,senha,nome_usuario,email,cidade,estado,privilegio,ativo) VALUES ('$userf','$senhaf','$nomef','$emailf','$cidadef','$estadof','$privilegiof','$ativof')")){
 		die("
 						<div class=\"resposta\"><br /><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP062."<br \><br /></br /><hr class=\"new1\"><br \><a href=\"./super_adminusuarios.php\">".SUMENSP006."</a></div>");
 		exit();

@@ -21,7 +21,7 @@ if (mysqli_connect_errno()) {
 }
 if ($_SESSION['autoridade'] == 0 )
 {
-	$result=mysqli_query($link, "SELECT * from su_usuarios ORDER BY nome ASC");
+	$result=mysqli_query($link, "SELECT * from su_usuarios ORDER BY nome_usuario ASC");
 }
 else {
 	$result=mysqli_query($link, "SELECT * from su_usuarios WHERE username = '$_SESSION[nome_usuario]'");
@@ -34,14 +34,15 @@ if (! $result){
 if (mysqli_num_rows($result) > 0) {
 	// encontrou usuario(s)
 	echo "<table id=\"table1\" class=\"center\">";
-	echo "<tr><th>".SUMENSP020."</th><th>".SUMENSP021."</th><th>".SUMENSP022."</th><th>".SUMENSP023."</th><th>".SUMENSP024."</th><th>".SUMENSP025."</th><th>".SUMENSP026."</th><th></th><th></th></tr>";
+	echo "<tr><th>".SUMENSP020."</th><th>".SUMENSP021."</th><th>".SUMENSP022."</th><th>".SUMENSP023."</th><th>".SUMENSP024."</th><th>".SUMENSP025."</th><th>".SUMENSP026."</th><th></th><th></th><th></th></tr>";
 	while($row = mysqli_fetch_assoc($result)) {
-		  echo "<tr><td>". $row["nome"]. "</td><td>" .$row["username"]. "</td><td> " .$row["email"]."</td><td> " .$row["cidade"]. "</td><td>" .$row["estado"]. "</td><td>" .$row["privilegio"]. "</td><td>" .$row["ativo"]. "</td><td><a href=\"super_adminusuarios_remover.php?user=".$row["username"]."\"><img border=\"0\" alt=\"".SUMENSP010."\" title=\"".SUMENSP010."\" src=\"../su_icons/lixeira.png\" ></a></td> <td> <a href=\"super_adminusuarios_senha.php?user=".$row["username"]."\">   <img border=\"0\" alt=\"".SUMENSP053."\" title=\"".SUMENSP053."\" src=\"../su_icons/editar.png\" >   </a></td></tr>";
+
+			echo "<tr><td>". $row["nome_usuario"]. "</td><td>" .$row["username"]. "</td><td> " .$row["email"]."</td><td> " .$row["cidade"]. "</td><td>" .$row["estado"]. "</td><td>" .$row["privilegio"]. "</td><td>" .$row["ativo"]. "</td> <td> <a href=\"super_adminusuarios_editar.php?user=".$row["username"]."\">   <img border=\"0\" alt=\"".SUMENSP106."\" title=\"".SUMENSP106."\" src=\"../su_icons/super_editar.png\" >   </a></td><td> <a href=\"super_adminusuarios_senha.php?user=".$row["username"]."\">   <img border=\"0\" alt=\"".SUMENSP053."\" title=\"".SUMENSP053."\" src=\"../su_icons/super_senha.png\" >   </a></td><td><a href=\"super_adminusuarios_remover.php?user=".$row["username"]."\"><img border=\"0\" alt=\"".SUMENSP010."\" title=\"".SUMENSP010."\" src=\"../su_icons/super_lixeira.png\" ></a> </td>   </tr>";
 	}
 	if ($_SESSION['autoridade'] == 0 )
 	{
 		// link para criar usuário, pois usuário é administrador
-  		echo "<tr><td colspan=\"9\"><a href=\"super_adminusuarios_cria.php\" target=\"_self\">".SUMENSP028."</a></td></tr>";
+  		echo "<tr><td colspan=\"10\"><a href=\"super_adminusuarios_cria.php\" target=\"_self\">".SUMENSP028."</a></td></tr>";
 	}
 	mysqli_close($link);
 	echo "</table>";

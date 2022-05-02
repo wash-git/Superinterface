@@ -65,6 +65,7 @@ MErr49="Erro! Não foi possível inserir informações na tabela 'su_tipos_docum
 MErr50="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_tipos_documentos'"
 MErr51="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_logradouros'"
 MErr52="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_registrados'"
+MErr53="Erro! Não foi possível inserir informações de curadores na tabela 'su_usuarios'"
 #
 MInfo01="Preparando as pastas"
 MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
@@ -117,6 +118,8 @@ MInfo48="Alerta: notamos a falta do aplicativo figlet. Ele não é obrigatório.
 #MInfo49=""
 MInfo50="Aviso: nenhum arquivo PDF será tratado nesta instalação. A incorporação de arquivos ao acervo da Superinterface ocorrerá quando o script ativado via cron for executado"
 MInfo51="Sucesso! Criada pasta para guardar os arquivos PHP gerados automaticamente nesta instalação"
+MInfo52="Sucesso! Informações de curadores inseridas corretamente na tabela 'su_usuarios'"
+MInfo53="Quantidade de registros na tabela 'su_usuarios'= "
 #
 FInfor=0	# saída normal: new line ao final, sem tratamento de cor
 FInfo1=1	# saída normal: new line ao final, sem tratamento de cor e sem ..... (sem pontinhos ilustrativos)
@@ -227,11 +230,12 @@ function fInit () {
 		C39: verificar inserção de dados na tabela su_tipos_logradouros
 		C40: verificar inserção de dados na tabela su_tipos_documentos
 		C41: verificar inserção de dados na tabela su_registrados
-		C42: verificar inserção de dados na tabela su_names_brasil a partir de arquivo SQL
-		C43: verifica criação de arquivo de nomes cidades sem acentuação
-		C44: verificar criação de arquivo de nomes instituições sem acentuação
-		C45: verificar existência arquivo SQL adicional de aplicação externa
-		C46: verifica a criação de usuário administrador
+		C42: verificar inserção de dados de curadores na tabela su_usuarios
+		C43: verificar inserção de dados na tabela su_names_brasil a partir de arquivo SQL
+		C44: verifica criação de arquivo de nomes cidades sem acentuação
+		C45: verificar criação de arquivo de nomes instituições sem acentuação
+		C46: verificar existência arquivo SQL adicional de aplicação externa
+		C47: verifica a criação de usuário administrador
         --------        --------        --------  
 '
 #
@@ -644,7 +648,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade
 		fMens "$FInsuc" "$MErr49"
  		exit
 	fi
-	#											C41: verificar inserção de dados na tabela de usuários 'su_registrados'
+	#											C41: verificar inserção de dados na tabela 'su_registrados'
 #	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSEREREGIST"
 #	if [ $? -eq 0 ]; then
 #		fMens "$FSucss" "$MInfo23"
@@ -659,13 +663,24 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPI
 		fMens "$FInsuc" "$MErr45"
  		exit
 	fi
-	#											C42: verificar inserção de dados na tabela 'su_names_brasil'
+
+	#											C42: verificar inserção de curadores na tabela 'su_usuarios'
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERECURADORES' INTO TABLE su_usuarios FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n'  (username,nome_usuario) SET senha=$RANDOM,privilegio=1,ativo=0 "
+	if [ $? -eq 0 ]; then
+		fMens "$FSucss" "$MInfo52"
+	else
+		fMens "$FInsuc" "$MErr53"
+ 		exit
+	fi
+
+
+	#											C43: verificar inserção de dados na tabela 'su_names_brasil'
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSERENOMES"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr21"
  		exit
 	fi
-	#											C43: verifica criação de arquivo de nomes cidades sem acentuação
+	#											C44: verifica criação de arquivo de nomes cidades sem acentuação
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO su_nomes_cidades(nome_cidade) SELECT nome_cidade FROM su_cidades"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr22"
@@ -677,7 +692,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPI
 		fMens "$FInsuc" "$MErr06"
  		exit
 	fi
-	#											C44: verifica criação de arquivo de nomes instituições sem acentuação
+	#											C45: verifica criação de arquivo de nomes instituições sem acentuação
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO su_nomes_instituicoes(nome_instituicao) SELECT nome_instituicao FROM su_instituicoes"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr40"
@@ -689,7 +704,7 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPI
 		fMens "$FInsuc" "$MErr39"
  		exit
 	fi
-	#											C45: verificar se existe arquivo SQL adicional de aplicação externa do usuário
+	#											C46: verificar se existe arquivo SQL adicional de aplicação externa do usuário
 	if [ -f $CPTABAPLICACAO ]; then
 		#										criar tabelas da aplicação e inserir seus dados
 		mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPTABAPLICACAO"
@@ -731,6 +746,9 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPI
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_instituicoes")"
 	fMens "$FInfo2" "$MInfo40"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
+	fMens "$FInfo2" "$MInfo53"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_usuarios") "
+
 	fMens "$FInfo2" "$MInfo42"
 	fMens "$FInfo1"	"$(pgrep soffice)"
 
@@ -745,8 +763,8 @@ function fUseradmin () {
 	#
 	var="admin"
 	hash="$(echo -n "$var" | sha1sum | awk '{print $1}')"
-	sql="INSERT INTO su_usuarios (username, senha , nome , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)";	# Administrador tem privilégio = 0 (máximo privilégio)
-	#											C46: verifica a criação de usuário administrador
+	sql="INSERT INTO su_usuarios (username, senha , nome_usuario , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)";	# Administrador tem privilégio = 0 (máximo privilégio)
+	#											C47: verifica a criação de usuário administrador
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "$sql"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo12"

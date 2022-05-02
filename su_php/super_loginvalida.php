@@ -10,8 +10,8 @@ require_once ("../su_admin/super_config_php.cnf");
 require_once "../su_admin/super_mensagensphp.php";
 require_once "../su_admin/super_library_functions.php";
 // Obtem valores do login (filtra caracteres alphanumericos)
-$userf =  preg_replace("/[^a-zA-Z0-9]+/", "6",$_POST["username"]);
-$senhaf = preg_replace("/[^a-zA-Z0-9]+/", "6",$_POST["senha"]);
+$userf =  preg_replace("/[^a-zA-Z0-9]+/", "8",$_POST["username"]);
+$senhaf = preg_replace("/[^a-zA-Z0-9]+/", "8",$_POST["senha"]);
 $senhaf = sha1($senhaf);
 ?>
 <html lang='pt-br'>
@@ -30,7 +30,7 @@ if (mysqli_connect_errno()) {
 	die("
 			<div class=\"resposta\"><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP027."<br \><br /><hr class=\"new1\"><br \><a href=\"./super_login.php\">".SUMENSP006."</a></div></body></html>");
 }
-$result = mysqli_query($link, "SELECT * from su_usuarios where BINARY username = '$userf' AND senha = '$senhaf'");
+$result = mysqli_query($link, "SELECT * from su_usuarios where BINARY username = '$userf' AND senha = '$senhaf' AND ativo = 1");
 if (! $result){
 	die("
 			<div class=\"resposta\"><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP064."<br \><br /><hr class=\"new1\"><br \><a href=\"./super_login.php\">".SUMENSP006."</a></div></body></html>");

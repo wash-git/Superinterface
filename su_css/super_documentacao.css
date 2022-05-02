@@ -136,9 +136,20 @@ table, tr, th,td {
 /*  height: 600px; */
 }
 .img_item{
-        width:44%;
+        width:40%;
         padding: 30px;
 }
 
+.centerimage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
 
+.spelling-sublinhado {
+  text-decoration-line: underline;
+  text-decoration-style: double; /* wavy; */
+  text-decoration-color: #FFA501;
+}
 /* ######################################## */

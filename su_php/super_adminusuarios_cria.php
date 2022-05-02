@@ -23,18 +23,21 @@ suPrintCabecalho(SUMENSP033);
 		 <input type = "text" class = "form-control" name = "username" maxlength="10" placeholder = <?php echo SUMENSP066 ?>
                required autofocus></br>
 			<input type = "password" class = "form-control" name = "senha" placeholder = <?php echo SUMENSP040 ?> maxlength="10" required autofocus></br>
-			<input type = "text" class = "form-control" name = "nome" maxlength="15"placeholder = <?php echo SUMENSP020 ?> maxlength="15" required autofocus></br>
-			<input type = "text" class = "form-control" name = "email" maxlength="25"placeholder = <?php echo SUMENSP022 ?> "
+			<input type = "text" class = "form-control" name = "nome" title=" <?php echo SUMENSP112 ?>" maxlength="40" placeholder = <?php echo SUMENSP020 ?> maxlength="15" required autofocus></br>
+			<input type = "text" class = "form-control" name = "email" title=" <?php echo SUMENSP113 ?>" maxlength="40" placeholder = <?php echo SUMENSP022 ?>
                required autofocus></br>
-            <input type = "text" class = "form-control" name = "cidade" maxlength="25"placeholder = <?php echo SUMENSP036 ?>
+            <input type = "text" class = "form-control" name = "cidade" title=" <?php echo SUMENSP112 ?>" maxlength="40"placeholder = <?php echo SUMENSP036 ?>
                required autofocus></br>
-			<input type = "text" class = "form-control" name = "estado" maxlength="2" placeholder =  <?php echo SUMENSP037 ?>
+			<input type = "text" class = "form-control" name = "estado" title=" <?php echo SUMENSP114 ?>"   maxlength="2" placeholder =  <?php echo SUMENSP037 ?>
 			   required autofocus></br>
 			<fieldset class = "form-control">
-				<label><?php echo SUMENSP038 ?><input type="radio"  name="privilegio" value="0" /></label>
 				<label><?php echo SUMENSP039 ?><input type="radio" name="privilegio" value="1" CHECKED /></label>
+				<label><?php echo SUMENSP038 ?><input type="radio"  name="privilegio" value="0" /></label>
+			</fieldset>	
+			<fieldset class = "form-control" title="<?php echo SUMENSP115 ?>">
+				<label><?php echo SUMENSP111 ?><input type="radio" name="ativo" value="0" CHECKED /></label>
+				<label><?php echo SUMENSP026 ?><input type="radio"  name="ativo" value="1" /></label>
 			</fieldset>		
-			<input type="hidden" name="ativo" value="1">
             <button class = "botaoEnviar" type = "submit"
                name = "criar"><?php echo SUMENSP041 ?></button>
          </form>

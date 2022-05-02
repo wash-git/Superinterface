@@ -3,22 +3,37 @@ require_once ("../su_admin/super_config_php.cnf");
 $identscript=$pag_admin;      // identificação do script de administração da Superinterface
 require_once "../su_admin/super_config_includes.php";
 // Obtem valores do formulário de criação do usuário
-$userf = $_POST["user"];
-$senhan1 = $_POST["novasenha1"];
-$senhan2 = $_POST["novasenha2"];
-if (isset($_POST["senhaatual"])) { 
-	$senhaa = $_POST["senhaatual"]; 
+$userf =   $_POST["user"];
+$emailf =  $_POST["email"];
+$cidadef = $_POST["cidade"];
+$estadof = $_POST["estado"];
+$nomef = $_POST["nome"];
+//if (isset($_POST["senhaatual"])) { 
+//	$senhaa = $_POST["senhaatual"]; 
+//}
+//if ($_SESSION['autoridade'] == 0) {
+	// usuário é administrador
+//	if ($_POST["perfil"] == "Admin" ) { $perfilf = 0; }
+//	else { $perfilf = 1;}
+//	if ($_POST["situacao"] == "desabilitado" ) { $situacaof = 0;}
+//	else { $situacaof = 1;}
+//}
+if ($_SESSION['autoridade'] == 0) {
+	// usuário é administrador
+	$perfilf = $_POST["privilegio"];
+	$situacaof = $_POST["ativo"];
 }
 ?>
 <html lang='pt-br'>
 <head>
-<title>Atualizar Senha</title>
+<title>Atualização de usuários</title>
 <link rel='stylesheet' href='../su_css/super_admin.css' type='text/css'>
 <meta charset='UTF-8'>
 </head>
 <body>
 <?php
-suPrintCabecalho(SUMENSP054);
+suPrintCabecalho(SUMENSP107);
+/**
 if ( ! (ctype_alnum($userf) AND ctype_alnum($senhan1) AND  ctype_alnum($senhan2)) ) {
 	die("
 			<div class=\"resposta\"><br /><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP073."<br \><br /></br /><hr class=\"new1\"><br \><a href=\"./super_adminusuarios.php\">".SUMENSP006."</a></div>");
@@ -27,6 +42,7 @@ if ($senhan1 !== $senhan2) {
 	die("
 			<div class=\"resposta\"><br /><img class=\"middle\" src=\"../su_icons/super_negativo.png\" />".SUMENSP059."<br \><br /></br /><hr class=\"new1\"><br \><a href=\"./super_adminusuarios.php\">".SUMENSP006."</a></div>");
 }
+ */
 $link = mysqli_connect("localhost",$username,$pass, $banco);
 // Check connection
 if (mysqli_connect_errno()) {
@@ -40,14 +56,9 @@ if (mysqli_connect_errno()) {
 }
 if ($_SESSION['autoridade'] != 0) {
 	// usuário não é administrador
-	$senhaa = SHA1($senhaa);
-	$userf = $_SESSION['nome_usuario'];
-	mysqli_query($link, "SELECT * from su_usuarios where username = '$userf' AND senha = '$senhaa'");
+	$userf=$_SESSION['nome_usuario'];
 }
-else{
-	// usuário é administrador
-	mysqli_query($link, "SELECT * from su_usuarios where username = '$userf'");
-}
+$result = mysqli_query($link, "SELECT * from su_usuarios where username = '$userf'");
 $encontrou =  mysqli_affected_rows($link);
 if ( $encontrou == 0 )
 {
@@ -59,10 +70,24 @@ if ( $encontrou == 0 )
 		echo "</body></html>";
 		exit;
 }
-$senhan1 = SHA1($senhan1);
-mysqli_query ($link, "UPDATE su_usuarios SET senha = '$senhan1' WHERE username = '$userf'");
+$row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+if ($nomef == "") { $nomef = $row["nome_usuario"];}
+if ($_SESSION['autoridade'] != 0) {
+	// usuário não é administrador
+	//$sql=   "UPDATE su_usuarios SET email = '$emailf', cidade = '$cidadef', estado = '$estadof' WHERE username = '".$_SESSION['nome_usuario']."'";
+		$sql="UPDATE su_usuarios SET nome_usuario = '$nomef', email = '$emailf', cidade = '$cidadef', estado = '$estadof' WHERE username = '$userf'";
+} else {
+		// usuário administrador
+		$sql="UPDATE su_usuarios SET nome_usuario = '$nomef', email = '$emailf', cidade = '$cidadef', estado = '$estadof', privilegio = '$perfilf', ativo = '$situacaof' WHERE username = '$userf'";
+}
+if (mysqli_query($link, $sql)) {
+	suPrintSucesso(SUMENSP108);
+} else {
+		suPrintInsucesso(SUMENSP109);
+		echo "perfilf= ".$perfilf;
+		echo "situacaof= ".$situacaof;
+}
 mysqli_close($link);
-suPrintSucesso(SUMENSP060);
 suPrintRodape(SUMENSP006,"./super_adminusuarios.php");
 ?>
 </body></html>

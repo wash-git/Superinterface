@@ -4,12 +4,11 @@
 #                                                                                                                           |
 # --------------------------------------------------------------------------------------------------------------------------+
 #	Parte 1: parametrizações
-CPBASE=""                                 # base de dados da aplicação
-CPBASEUSER=""                             # usuário da base de dados
-CPBASEPASSW=""                            # password da base de dados
-CPNUMERARPDF=0                            # renomear arquivos PDF (0 = não; 1 = sim)
-CPHTTPHOST=""                             # Host name $_SERVER['HTTP_HOST'] + pasta raiz
-
+CPBASE=""                                        # base de dados da aplicação
+CPBASEUSER=""                                    # usuário da base de dados
+CPBASEPASSW=""                                   # password da base de dados
+CPNUMERARPDF=1                                   # renomear arquivos PDF (0 = não; 1 = sim)
+CPHTTPHOST=""                                    # Host name
 									   # exemplos:
 									   # observatorio.wash.net.br/superinterface
 									   # exemplo.br
@@ -50,6 +49,7 @@ CPINSEREESTADOS="super_csv_ibge_estadosbrasil.csv" # arquivo com nomes e código
 CPINSERECIDADES="super_csv_ibge_cidadesbrasil.csv" # arquivo com nomes e códigos cidades para tabela 'su_cidades'
 CPINSERELOGRA="super_csv_logradourosbrasil.csv"    # arquivo com tipos de logradouros para tabela 'su_logradouros'
 CPINSERENOMES="super_insere_nomes.sql"        # arquivo com comandos SQL de inserção de dados na tabela 'su_names_brasil'
+CPINSERECURADORES="super_csv_curadores.csv"   # arquivo com nomes de curadores para tabela 'su_usuarios'
 CPCRIATABELAS="super_cria_tabelas.sql"        # arquico SQL de criação tabelas e inserts iniciais da Superinterface
 CPTABAPLICACAO="super_tab_aplicacao.sql"      # arquivo SQL de criação tabelas e inserts iniciais da aplicação do usuário
 CPINSEREREGIST="super_csv_registrados.csv"    # arquivo SQL com comandos de inserção de dados na tabela 'su_registrados'
