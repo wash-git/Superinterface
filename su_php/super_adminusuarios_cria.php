@@ -20,9 +20,9 @@ suPrintCabecalho(SUMENSP033);
 
          <form class = "form-signin" role = "form" action = "./super_adminusuarios_criavalida.php" method = "POST">
 		 <h4 class = "form-signin-heading"><?php echo SUMENSP034.":" ?></h4>
-		 <input type = "text" class = "form-control" name = "username" maxlength="10" placeholder = <?php echo SUMENSP066 ?>
+		 <input type = "text" class = "form-control" name = "username" title="<?php echo SUMENSP118 ?>"   maxlength="10" pattern="[a-zA-Z0-9]+" placeholder = <?php echo SUMENSP066 ?>
                required autofocus></br>
-			<input type = "password" class = "form-control" name = "senha" placeholder = <?php echo SUMENSP040 ?> maxlength="10" required autofocus></br>
+			<input type = "password" class = "form-control" name = "senha" title=" <?php echo SUMENSP117 ?>"   placeholder = <?php echo SUMENSP040 ?> maxlength="8" pattern="[a-zA-Z0-9]+" required autofocus></br>
 			<input type = "text" class = "form-control" name = "nome" title=" <?php echo SUMENSP112 ?>" maxlength="40" placeholder = <?php echo SUMENSP020 ?> maxlength="15" required autofocus></br>
 			<input type = "text" class = "form-control" name = "email" title=" <?php echo SUMENSP113 ?>" maxlength="40" placeholder = <?php echo SUMENSP022 ?>
                required autofocus></br>

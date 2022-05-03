@@ -717,6 +717,34 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPI
 	else
 		fMens "$FInfor" "$MInfo15"
 	fi
+}	# fim da rotina de preparação de tabelas
+#
+# --------------------------------------------------------------------------------------------------------------------------+
+#											 																				|
+#			   				   	                FUNÇÃO PARA CRIAR USUÁRIO ADMIN												|
+#																															|
+# --------------------------------------------------------------------------------------------------------------------------+
+function fUseradmin () { 
+	#
+	var="admin"
+	hash="$(echo -n "$var" | sha1sum | awk '{print $1}')"
+	sql="INSERT INTO su_usuarios (username, senha , nome_usuario , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)";	# Administrador tem privilégio = 0 (máximo privilégio)
+	#											C47: verifica a criação de usuário administrador
+	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "$sql"
+	if [ $? -eq 0 ]; then
+		fMens "$FSucss" "$MInfo12"
+	else
+		fMens "$FInsuc" "$MErr11"
+ 		exit
+	fi
+}
+#
+# --------------------------------------------------------------------------------------------------------------------------+
+#											 																				|
+#			   				   	                FUNÇÃO PARA INFORMAR UM RESUMO DA BASE DE DADOS								|
+#																															|
+# --------------------------------------------------------------------------------------------------------------------------+
+fResumo () {
 	#				resumo
 	fMens "$FInfo2" "$MInfo18"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
@@ -748,30 +776,8 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPI
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
 	fMens "$FInfo2" "$MInfo53"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_usuarios") "
-
 	fMens "$FInfo2" "$MInfo42"
 	fMens "$FInfo1"	"$(pgrep soffice)"
-
-}	# fim da rotina de preparação de tabelas
-#
-# --------------------------------------------------------------------------------------------------------------------------+
-#											 																				|
-#			   				   	                FUNÇÃO PARA CRIAR USUÁRIO ADMIN												|
-#																															|
-# --------------------------------------------------------------------------------------------------------------------------+
-function fUseradmin () { 
-	#
-	var="admin"
-	hash="$(echo -n "$var" | sha1sum | awk '{print $1}')"
-	sql="INSERT INTO su_usuarios (username, senha , nome_usuario , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)";	# Administrador tem privilégio = 0 (máximo privilégio)
-	#											C47: verifica a criação de usuário administrador
-	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "$sql"
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo12"
-	else
-		fMens "$FInsuc" "$MErr11"
- 		exit
-	fi
 }
 #
 #
@@ -779,6 +785,7 @@ fInit				# verificação e preparação do ambiente de instalação
 fArquivos			# preparar os arquivos PDF
 fTabelas			# gerar as tabelas e os inserts de dados
 fUseradmin			# criar usuário admin
+fResumo				# informar um resumo da base de dados
 #
 fMens	"$FInfor"	"$MInfo04"
 #					Chama script php para fazer a geração de código PHP da Superinterface

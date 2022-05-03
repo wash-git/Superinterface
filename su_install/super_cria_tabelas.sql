@@ -3,7 +3,7 @@
 -- ------------------------------------------
 
 -- Criação de usuários administrativos da Superinterface --
-CREATE TABLE su_usuarios (id_chave_usuario int not null auto_increment, username varchar(10) NOT NULL, senha varchar(42) NOT NULL, nome_usuario varchar(80) NOT NULL, email varchar(80) NOT NULL, cidade varchar(40) NOT NULL, estado char(2) NOT NULL, privilegio TINYINT unsigned  NOT NULL, ativo bool NOT NULL, primary key (id_chave_usuario));
+CREATE TABLE su_usuarios (id_chave_usuario int not null auto_increment, username varchar(10) NOT NULL, senha varchar(42) NOT NULL, nome_usuario varchar(40) NOT NULL, email varchar(40) NOT NULL, cidade varchar(40) NOT NULL, estado char(2) NOT NULL, privilegio TINYINT unsigned  NOT NULL, ativo bool NOT NULL, primary key (id_chave_usuario));
 ALTER TABLE su_usuarios comment='Contém a identificação dos usuários para acesso a interface administrativa da Superinterface, ao mesmo tempo em que é uma lista de curadores dos documentos';
 
 CREATE TABLE su_tipos_logradouros (id_chave_tipo_de_logradouro int not null auto_increment, nome_tipo_de_logradouro varchar(100), abreviatura varchar(50), primary key(id_chave_tipo_de_logradouro), unique(nome_tipo_de_logradouro), unique(abreviatura));

@@ -78,7 +78,23 @@ th,td {
 	font-size: small;
 }
 input[type=button] {
-	font-size: x-small;
+	font-size: medium;
+}
+
+.centrar {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.w3-button {
+	width:120px;
+}
+
+.w3-verde {
+	color:#fff!important;
+	background-color:#008000!important;
+	font-size: large
 }
 .dropbtn {
 	background-color: #4CAF50;

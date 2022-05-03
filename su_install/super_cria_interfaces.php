@@ -4052,6 +4052,56 @@ fwrite($fs,$botao_join."\n");
 	}
 
 }
+/* ######################## >>>>   FUNÇÃO 25: Reescreve a função de acesso à tabela   <<<<< ########################  */
+// objetivo: a tabela só deve ser acessada via Painel de Administração da Superinterface. Inibir o acesso via Potlatch
+function Reescreve_funcao($fs,$tabela){
+	global $arqconfig;
+	global $mensagens;
+	require("$arqconfig");
+$php='<?php
+require_once "'.$arqconfig.'";
+$identscript=$pag_backoffice1;      // identificação do script super_backoffice.php
+require_once "../su_admin/super_config_includes.php";
+echo "
+<html>
+<head>
+<title>Inserção de dados na tabela de usuários</title>
+<link rel=\'stylesheet\' href=\'../su_css/super_cria_insere.css\' type=\'text/css\'>
+<meta http-equiv=\'Cache-Control\' content=\'no-cache, no-store, must-revalidate\'/>
+<meta http-equiv=\'Pragma\' content=\'no-cache\'/>
+<meta http-equiv=\'Expires\' content=\'0\'/>
+
+<meta charset=\'UTF-8\'>
+</head>
+<body id=\'conteudo\'>
+<div class=\'cabecalio\'>
+<h1>'.$mensagens['Mens12'].$tabela.'</h1>
+<div id=\'id_comentario_tabela\' style=\'border: 2px solid blue; background: yellow\'></div>
+</div>
+<div id=\'insercao\' class=\'botoeira\'>
+</div>
+
+<div style=\'border: 1px solid black; background-color: orange; width: 100%\'>
+	<table style=\'width: 100%\'>
+	<tr><td> </td><td> </td><td> </td></tr>
+	</table>
+</div>
+"; 
+
+echo "<div style=\'width: 100%; height: 40px; overflow-y: scroll\'></div>";
+
+echo "
+<div class=\'centrar\'><h2> Desculpe!!</h2></div><br />
+<div class=\'centrar\'><h3>Mas esta tabela só pode ser acessada via o <br />Painel de Administração da Superinterface.</h3></div>
+
+<div class=\'centrar\'>
+<input type=\'button\' class=\'w3-button w3-verde\' value=\'Fechar\'  onclick=\'window.close()\'></div>
+
+</body>
+</html>";
+?>';
+fwrite($fs,$php);
+}
 /*
 + --------------------------------------------------------------------------------------------------------------------------+
 |																															|
@@ -4229,6 +4279,9 @@ if ($result->num_rows>0) {
 else {
 	throw new Exception ($mensagens['Mens32']);
 }
+$tabela="su_usuarios";
+$fs_temp=fopen($dir.'./../su_autophp/super_insere_'.$tabela.'.php','w');
+Reescreve_funcao($fs_temp,$tabela);
 $saida_html=$saida_html."</table><br /><br /><br /><br /><br /><br /></div>";
 #$saida_html=$saida_html."</body></html>";
 if(file_exists( $pastalogs."/".$listatabelas )){

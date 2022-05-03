@@ -79,32 +79,32 @@ while($bytes>=1024)
 }
 $tam_base =  round($bytes,0)."".$Type[$Index];
 //
-if ($result = mysqli_query($link, "SELECT nome from su_usuarios")){
-	$num_usuarios = mysqli_num_rows($result);
+if ($result = mysqli_query($link, "SELECT COUNT(*) FROM su_usuarios")){
+	$num_usuarios = mysqli_fetch_row($result)[0];
 }
 else{
 	$num_usuarios = "-";
 }
-if ($result = mysqli_query($link, "SELECT nome_documento from su_documents")){
-	$num_documentos = mysqli_num_rows($result);
+if ($result = mysqli_query($link, "SELECT COUNT(*) FROM su_documents")){
+	$num_documentos = mysqli_fetch_row($result)[0];
 }
 else{
 	$num_documentos = "-";
 }
-if ($result = mysqli_query($link, "SELECT nome_cidade from su_cidades")){
-	$num_cidades = mysqli_num_rows($result);
+if ($result = mysqli_query($link, "SELECT COUNT(*) FROM su_cidades")){
+	$num_cidades = mysqli_fetch_row($result)[0];
 }
 else{
 	$num_cidades = "-";
 }
-if ($result = mysqli_query($link, "SELECT nome_instituicao from su_instituicoes")){
-	$num_instituicoes = mysqli_num_rows($result);
+if ($result = mysqli_query($link, "SELECT COUNT(*) FROM su_instituicoes")){
+	$num_instituicoes = mysqli_fetch_row($result)[0];
 }
 else{
 	$num_instituicoes = "-";
 }
-if ($result = mysqli_query($link, "SELECT first_sem_acento from su_names_brasil")){
-	$num_nomes = mysqli_num_rows($result);
+if ($result = mysqli_query($link, "SELECT COUNT(*) FROM su_names_brasil")){
+	$num_nomes = mysqli_fetch_row($result)[0];
 }
 else{
 	$num_nomes = "-";
