@@ -33,7 +33,7 @@ MErr17="Erro! Arquivo SHELL com comandos SQL da aplicação do usuário retornou
 MErr18="Erro! Não foi possível preparar pasta de arquivos originais não PDF: a pasta não pode ser criada"
 MErr19="Erro! Não foi possível preparar pasta de temporários: a pasta não pode ser criada"
 MErr20="Erro! Pasta Administrativa não foi encontrada"
-#MErr21=""
+MErr21="Erro! Aplicativo 'unoconv' instalado mas não respondendo. Pare o processo do 'unoconv' (via comando 'kill') para que o mesmo possa ser reiniciado"
 MErr22="Erro! Não foi possível configurar corretamente os privilégios dos usuários"
 MErr23="Erro! Não foi encontrado o arquivo de configuração"
 MErr24="Erro! Não foi possível criar tabela de usuários"
@@ -310,7 +310,11 @@ function fInit () {
 	#											C07: verificar se aplicativo unoconv está instalado
 	#                                       	(necessário para conversão .docx -> .pdf)
 	if [ -n "$(dpkg --get-selections | grep unoconv | sed '/deinstall/d')" ]; then
-	:
+		pidsoffice="$(pgrep soffice)" 
+		if [ $? -ne 0 ];then
+			fMens "$FInsuc" "$MErr21"
+			exit
+		fi
 	else
 		fMens "$FInsuc" "$MErr28"
 		exit
