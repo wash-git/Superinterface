@@ -2,15 +2,11 @@
 -- ------------------------------------------
 -- ------------------------------------------
 
--- Criação de usuários administrativos da Superinterface --
-CREATE TABLE su_usuarios (id_chave_usuario int not null auto_increment, username varchar(10) NOT NULL, senha varchar(42) NOT NULL, nome_usuario varchar(40) NOT NULL, email varchar(40) NOT NULL, cidade varchar(40) NOT NULL, estado char(2) NOT NULL, privilegio TINYINT unsigned  NOT NULL, ativo bool NOT NULL, primary key (id_chave_usuario));
-ALTER TABLE su_usuarios comment='Contém a identificação dos usuários para acesso a interface administrativa da Superinterface, ao mesmo tempo em que é uma lista de curadores dos documentos';
-
-CREATE TABLE su_tipos_logradouros (id_chave_tipo_de_logradouro int not null auto_increment, nome_tipo_de_logradouro varchar(100), abreviatura varchar(50), primary key(id_chave_tipo_de_logradouro), unique(nome_tipo_de_logradouro), unique(abreviatura));
+CREATE TABLE su_tiposlogradouros (id_chave_tipo_de_logradouro int not null auto_increment, nome_tipo_de_logradouro varchar(100), abreviatura varchar(50), primary key(id_chave_tipo_de_logradouro), unique(nome_tipo_de_logradouro), unique(abreviatura));
 
 CREATE TABLE su_names_brasil (id_chave_name_do_brasil int not null auto_increment, nome_name_do_brasil varchar(100), minuscula_sem_acento varchar(100), maiuscula_sem_acento varchar(100), first_sem_acento varchar(100),minuscula_com_acento varchar(100), maiuscula_com_acento varchar(100), first_com_acento varchar(100), primary key(id_chave_name_do_brasil), unique(nome_name_do_brasil), unique(minuscula_sem_acento), unique(maiuscula_sem_acento), unique(first_sem_acento), unique(minuscula_com_acento), unique(maiuscula_com_acento), unique(first_com_acento));
 
-CREATE TABLE su_estados (id_chave_estado int not null auto_increment, codigo_estado int, sigla_estado varchar(2), nome_estado varchar(100), id_pais int not null, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estado), UNIQUE (codigo_estado),UNIQUE(sigla_estado), UNIQUE(nome_estado));
+CREATE TABLE su_estados (id_chave_estado int not null auto_increment, codigo_estado int, sigla_estado varchar(2), nome_estado varchar(100), id_pais int, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estado), UNIQUE (codigo_estado),UNIQUE(sigla_estado), UNIQUE(nome_estado));
 
 CREATE TABLE su_cidades (id_chave_cidade int not null auto_increment, id_estado int, codigo_do_estado varchar(2), nome_do_estado varchar(100), codigo varchar(7), nome_cidade varchar(100), sigla_estado varchar(2), cidade_sem_acentuacao varchar(100), primary key (id_chave_cidade));
 
@@ -20,7 +16,7 @@ CREATE TABLE su_instituicoes (id_chave_instituicao int(11) not null auto_increme
 
 CREATE TABLE su_nomes_instituicoes AS SELECT nome_instituicao from su_instituicoes;
 
-CREATE TABLE su_tipos_documentos (id_chave_tipo_de_documento int not null auto_increment, nome_tipo_de_documento varchar(200), primary key (id_chave_tipo_de_documento), unique(nome_tipo_de_documento));
+CREATE TABLE su_tiposdocumentos (id_chave_tipo_de_documento int not null auto_increment, nome_tipo_de_documento varchar(200), primary key (id_chave_tipo_de_documento), unique(nome_tipo_de_documento));
 
 CREATE TABLE su_paises (id_chave_pais int not null auto_increment, codigo_pais int, nome_pais varchar(150), sigla_pais varchar(5), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_pais), UNIQUE(nome_pais), UNIQUE(codigo_pais));
 
@@ -65,7 +61,7 @@ CREATE TABLE su_elementos_classes (id_chave_elemento_classe int not null auto_in
 
 CREATE TABLE su_registrados (id_chave_registrado int not null auto_increment, nome_registrado varchar(200),   name_of_war varchar(100), id_estado int, id_pais int, id_cidade int, time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY (id_chave_registrado));
 
-CREATE TABLE su_curadores (id_chave_curador int not null auto_increment, nome_curador varchar(200),   name_of_war varchar(100), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY (id_chave_curador));
+-- CREATE TABLE su_curadores (id_chave_curador int not null auto_increment, nome_curador varchar(200),   name_of_war varchar(100), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY (id_chave_curador));
 
 CREATE TABLE su_estilos (id_chave_estilo int not null auto_increment, nome_do_estilo varchar(200), comentario varchar(1000), time_stamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP, usuario varchar(100), PRIMARY KEY(id_chave_estilo), UNIQUE(nome_do_estilo));
 
@@ -99,7 +95,7 @@ ALTER TABLE su_registrados ADD CONSTRAINT FK_cidade_registrado FOREIGN KEY (id_c
 ALTER TABLE su_registrados ADD CONSTRAINT FK_pais_registrado FOREIGN KEY (id_pais) REFERENCES su_paises(id_chave_pais);
 ALTER TABLE su_registrados comment='É a tabela que registra todos os stake-holders relativos aos documentos. Podem ser as pessoas que trabalham com a Superinterface e serão tutores de documentos do acervo (estarão definidas assim na tabela su_documentos), ou ainda pessoas citadas nos conteúdos dos documentos como suas signatárias (ou que tenham alguma participação relevante que está citada nos conteúdos dos documentos do acervo). Em ambos os casos, essas pessoas deverão ser cadastradas nesta tabela.';
 ALTER TABLE su_documents add constraint fk_curador foreign key (id_curador) references su_registrados(id_chave_registrado);
-ALTER TABLE su_documents add constraint fk_tipo_de_documento foreign key (id_tipo_de_documento) references su_tipos_documentos(id_chave_tipo_de_documento);
+ALTER TABLE su_documents add constraint fk_tipo_de_documento foreign key (id_tipo_de_documento) references su_tiposdocumentos(id_chave_tipo_de_documento);
 ALTER TABLE su_documents comment='É a tabela principal da Superinterface. Esta tabela guarda as informações de todos os documentos do acervo. Campos: id_curador (da tabela su_registrados) indica quem faz a análise do documento, id_tipo_documento aponta para su_tipos_documentos. ';
 ALTER TABLE su_docs_tokens ADD CONSTRAINT FK_id_documento FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento);
 ALTER TABLE su_docs_tokens ADD CONSTRAINT FK_id_token FOREIGN KEY (id_token) REFERENCES su_tokens_acervo(id_chave_token_no_acervo);
@@ -125,14 +121,9 @@ ALTER TABLE su_tokens_acervo comment='Esta tabela permite conhecer todos os toke
 ALTER TABLE su_names_brasil comment='Contém uma coletânea de nomes próprios para permitir a identificação de nomes próprios compostos/completos nos documentos. É usada através da comparação com su_docs_tokens, verificando se há nomes próprios em sequência, caracterizando um nome própio completo (José é nome simples e José da Silva é nome composto/completo). Guarda os nomes em várias configurações de maiúsculas e minúsculas para acelerar a busca.';
 ALTER TABLE su_tabelas_para_usuario comment='Contém a lista de tabelas que serão mostradas na entrada principal da plataforma Potlatch';
 ALTER TABLE su_tabelas_ligacao comment='Indica todos os casos de tabelas com duas chaves externas que relações de cardinalidade N para N. Essa tabela é preenchida automaticamente toda vez que o Super_Interfaces é executado e é usada para criar as interfaces de inserção de relações N para N.';
-ALTER TABLE su_tipos_documentos comment='Contém as categorias de documentos.';
+ALTER TABLE su_tiposdocumentos comment='Contém as categorias de documentos.';
 ALTER TABLE su_estados comment='Todos os Estados brasileiros com chave externa para os países.';
 ALTER TABLE su_paises comment='Registro de países.';
 ALTER TABLE su_estados ADD CONSTRAINT FK_estados_paises FOREIGN KEY (id_pais) REFERENCES su_paises(id_chave_pais);
 --
--- Populando tabela su_tabelas_para_usuario
---
-insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_documents','É a tabela onde serão inseridos novos documentos.');
-insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_instituicoes','É a tabela onde serão inseridas as instituições às quais os documentos farão referências.');
-insert into su_tabelas_para_usuario (nome_tabela, descricao_tabela) values ('su_registrados','É a tabela onde serão inseridos os dados de indivíduos com algum papel a desempenhar no modelo de dados. Esse papel pode ser de staff do Wash, ou de signatário de um documento, por exemplo. Quando um novo registrado é inserido nesta tabela, ele aparece na tabela su_documents.');
---
+

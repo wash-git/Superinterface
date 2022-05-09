@@ -26,17 +26,17 @@ MErr10="Erro! Houve problemas no script de geração automática de código PHP"
 MErr11="Erro! Não foi possível criar usuário/senha do administrador" 
 MErr12="Erro! Não foi possível limpar as tabelas do banco de dados"
 MErr13="Erro! Não foi possível criar tabelas no banco de dados"
-MErr14="Erro! Não foi possível inserir informações na tabela 'su_cidades'"
+MErr14="Erro! Não foi possível inserir comentário na tabela de usuários"
 MErr15="Erro! Não foi possível apagar alguns arquivos antigos"
 MErr16="Erro! Não foi possível se conectar com a base de dados legada"
-MErr17="Erro! Não foi possível criar as tabelas da aplicação e inserir seus dados"
+MErr17="Erro! Arquivo SHELL com comandos SQL da aplicação do usuário retornou com código de erro= "
 MErr18="Erro! Não foi possível preparar pasta de arquivos originais não PDF: a pasta não pode ser criada"
 MErr19="Erro! Não foi possível preparar pasta de temporários: a pasta não pode ser criada"
 MErr20="Erro! Pasta Administrativa não foi encontrada"
-MErr21="Erro! Não foi possível inserir conjunto inicial de nomes próprios de brasileiros na base de dados"
-MErr22="Erro! Não foi possível inserir conjunto inicial de nomes de cidades do Brasil na base de dados"
+#MErr21=""
+MErr22="Erro! Não foi possível configurar corretamente os privilégios dos usuários"
 MErr23="Erro! Não foi encontrado o arquivo de configuração"
-MErr24="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela de 'su_cidades'"
+MErr24="Erro! Não foi possível criar tabela de usuários"
 MErr25="Erro! Não foi encontrado o arquivo com comandos SQL para criação das tabelas da Superinterface"
 MErr26="Erro! Não foi possível preparar as pastas necessárias à aplicação Superinterface"
 MErr27="Erro! Não foi possível preparar pasta de logs: a pasta não pode ser criada"
@@ -46,67 +46,68 @@ MErr30="Erro! Não foi possível preparar pasta de upload para novos arquivos"
 MErr31="Erro! Não foi possível criar pasta de uploads para novos arquivos"
 MErr32="Erro! É necessário ter instalado o aplicativo 'detox' (apt-get install detox)"
 MErr33="Erro! Não foi possível gerar o arquivo de configuração para as rotinas PHP"
-MErr34="Erro! Não foi encontrado o arquivo com comandos SQL para popular tabela de 'su_names_brasil'"
+#MErr34=""
 MErr35="Erro! Não foi possível criar pasta para arquivos PHP que viriam a ser automaticamente gerados"
 MErr36="Erro! Para instalar a Superinterface é obrigatório estar na pasta 'su_install'"
-MErr37="Erro! Não foi possível inserir informações na tabela 'su_instituicoes'"
-MErr38="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_instituicoes'"
+#MErr37=""
+#MErr38=""
 MErr39="Erro! Não foi possível gerar arquivo auxiliar de nomes de instituições"
-MErr40="Erro! Não foi possível inserir conjunto inicial de nomes de instituições na base de dados"
+#MErr40=""
 MErr41="Erro! Pasta de arquivos javascript não foi encontrada"
-MErr42="Erro! Não foi possível gerar integralmente as informações para a tabela 'su_instituicoes'"
-MErr43="Erro! Não foi possível inserir informações na tabela 'su_paises'"
-MErr44="Erro! Não foi possível inserir informações na tabela 'su_estados'"
-MErr45="Erro! Não foi possível inserir informações na tabela 'su_registrados'"
-MErr46="Erro! Não foi encontrado o arquivo para popular tabela de 'su_paises'"
-MErr47="Erro! Não foi encontrado o arquivo para popular tabela de 'su_estados'"
-MErr48="Erro! Não foi possível inserir informações na tabela 'su_tipos_logradouros'"
-MErr49="Erro! Não foi possível inserir informações na tabela 'su_tipos_documentos'"
-MErr50="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_tipos_documentos'"
-MErr51="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_logradouros'"
-MErr52="Erro! Não foi encontrado o arquivo com dados para popular tabela de 'su_registrados'"
-MErr53="Erro! Não foi possível inserir informações de curadores na tabela 'su_usuarios'"
+#MErr42=""
+#MErr43=""
+#MErr44=""
+#MErr45=""
+#MErr46=""
+#MErr47=""
+#MErr48=""
+#MErr49=""
+#MErr50=""
+#MErr51=""
+#MErr52=""
+#MErr53=""
+MErr54="Erro! Não foi possível transferir informações deste arquivo CSV para base de dados: "
 #
-MInfo01="Preparando as pastas"
+MInfo01="Preparar as pastas"
 MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
 MInfo03="Sucesso! Pasta administrativa preparada"
 MInfo04="Geração automática de código PHP:"
 MInfo05="Aproveite e dê uma olhadinha nos códigos PHP gerados automaticamente na pasta: "
 MInfo06="Sucesso! Criada pasta de uploads para novos arquivos"
-MInfo07="Sucesso! Informações inseridas corretamente na tabela 'su_instituicoes'"
+MInfo07="Resumo da Instalação, iniciando pelos parâmetros do ambiente:"
 MInfo08="Iniciando a instalação"
 MInfo09="Sucesso! Conexão com o banco de dados foi realizada corretamente"
 MInfo10="Aproveite e dê uma olhadinha no log da instalação da Superinterface que está no arquivo: "
 MInfo11="Aproveite e dê uma olhadinha nas estruturas das tabelas criadas através da opção 'Tabelas' da interface administrativa"
 MInfo12="Sucesso! Criado usuário/senha da interface de administração da Superinterface"
-MInfo13="Sucesso! Informações inseridas corretamente na tabela 'su_paises'"
-MInfo14="Sucesso! Tabelas adicionais da aplicação do usuário foram criadas, e informações fornecidas foram inseridas"
-MInfo15="Aviso: não foi encontrado arquivo SQL adicional da aplicação específica do usuário"
+MInfo13="Fazer inserção de dados nas tabelas a partir de arquivos CSV fornecidos"
+MInfo14="Sucesso! Arquivo opcional SHELL com comandos SQL da aplicação do usuário executado corretamente"
+#MInfo15=""
 MInfo16="Sucesso! Possíveis tabelas remanescentes no banco de dados foram eliminadas"
-MInfo17="Sucesso! Tabelas do banco de dados (re)criadas, e informações inseridas corretamente"
+MInfo17="Sucesso! Tabelas do banco de dados (re)criadas corretamente"
 MInfo18="Quantidade de tabelas geradas= "
-MInfo19="Sucesso! Informações inseridas corretamente na tabela 'su_cidades'"
-MInfo20="Quantidade de CIDADES - registros na tabela 'su_cidades'= "
-MInfo21="Sucesso! Informações inseridas corretamente na tabela 'su_estados'"
-MInfo22="Quantidade de registros na tabela 'su_documents'= "
-MInfo23="Sucesso! Informações inseridas corretamente na tabela 'su_registrados'"
-MInfo24="Quantidade de registros na tabela 'su_docs_signatarios'= "
-MInfo25="Quantidade de registros na tabela 'su_docs_instituicoes'= "
+MInfo19="Preparar tabelas do banco de dados"
+MInfo20="Aviso: arquivo opcional SHELL para inserts de informações na base de dados não foi fornecido"
+MInfo21="Aviso: arquivo opcional SHELL para inserts de informações na base de dados encontrado. Executando...."
+#MInfo22=""
+#MInfo23=""
+#MInfo24=""
+#MInfo25=""
 MInfo26="super_install.sh"
 MInfo27="Sucesso! Criada pasta de arquivos orginais não PDF"
-MInfo28="Sucesso! Informações inseridas corretamente na tabela 'su_tipos_logradouros'"
-MInfo29="Quantidade de INSTITUIÇÕES - registros na tabela 'su_instituicoes'= "
-MInfo30="Quantidade de CIDADES - registros na tabela 'su_nomes_cidades'= "
-MInfo31="Quantidade de NOMES   - registros na tabela 'su_names_brasil'= "
+#MInfo28=""
+#MInfo29=""
+#MInfo30=""
+#MInfo31=""
 MInfo32="Sucesso! Criada pasta de quarentena"
 MInfo33="Sucesso! Criada pasta de arquivos temporários"
-MInfo34="Quantidade de PAÍSES  - registros na tabela 'su_paises'= "
-MInfo35="Quantidade de ESTADOS - registros na tabela 'su_estados'= "
-MInfo36="Quantidade de TIPOS LOGRADOUROS - registros na tabela 'su_tipos_logradouros'= "
-MInfo37="Sucesso! Informações inseridas corretamente na tabela 'su_tipos_documentos'"
-MInfo38="Quantidade de TIPOS DOCUMENTOS  - registros na tabela 'su_tipos_documentos'= "
-MInfo39="Quantidade de nomes REGISTRADOS - registros na tabela 'su_registrados'= "
-MInfo40="Quantidade de registros na tabela 'su_docs_cidades'= "
+#MInfo34=""
+#MInfo35=""
+#MInfo36=""
+#MInfo37=""
+#MInfo38=""
+#MInfo39=""
+#MInfo40=""
 MInfo41="Bem vind@ ao script de instalação da Superinterface em:   "
 MInfo42="PID do processo 'unoconv (soffice)' em uso= "
 MInfo43="Parabéns!!!   A instalação da Superinterface foi um sucesso!"
@@ -118,18 +119,25 @@ MInfo48="Alerta: notamos a falta do aplicativo figlet. Ele não é obrigatório.
 #MInfo49=""
 MInfo50="Aviso: nenhum arquivo PDF será tratado nesta instalação. A incorporação de arquivos ao acervo da Superinterface ocorrerá quando o script ativado via cron for executado"
 MInfo51="Sucesso! Criada pasta para guardar os arquivos PHP gerados automaticamente nesta instalação"
-MInfo52="Sucesso! Informações de curadores inseridas corretamente na tabela 'su_usuarios'"
-MInfo53="Quantidade de registros na tabela 'su_usuarios'= "
+#MInfo52=""
+MInfo53="Quantidade de registros na tabela "
+MInfo54="Sucesso! Arquivo CSV transferido para base de dados: "
 #
-FInfor=0	# saída normal: new line ao final, sem tratamento de cor
-FInfo1=1	# saída normal: new line ao final, sem tratamento de cor e sem ..... (sem pontinhos ilustrativos)
+FInfor=0	# saída normal: new line ao final, sem tratamento de cor, pontinhos no início (.....)
+FInfo1=1	# saída normal: new line ao final, sem tratamento de cor e sem pontinhos no início
 FInfo2=2	# saída sem new line ao final, sem tratamento de cor
-FSucss=3	# saída para indicação de sucesso: new line ao final da mensagem. na cor azul. No final, muda para cor branca
-FSucs2=4	# saída para indicação de sucesso: new line antes e depois da mensagem, cor azul. No final, muda para cor branca
-FInsuc=5	# saída para indicação de erro, na cor vermelha
-FInsu1=6	# saída para indicação de erro, na cor vermelha (apenas no screen, não enviado para arquivo de log)
-FCowsa=7	# saída para aplicativo cowsay
-FFighl=8	# saída para aplicativo fighlet
+FInfo3=3	# saída normal: new line ao final, sem tratamento de cor, espaços em branco no inicio (     )
+FInfo4=4	# saída sem new line ao final, sem tratamento de cor, espaços em branco no início (     )
+FSucss=5	# saída para indicação de sucesso: new line ao final da mensagem. na cor azul. No final, muda para cor branca
+FSucs2=6	# saída para indicação de sucesso: new line antes e depois da mensagem, cor azul. No final, muda para cor branca
+FSucs3=7	# saída para indicação de sucesso: sem new line ao final, cor azul.
+FSucs4=8	# saída para indicação de sucesso: sem pontinhos no início, cor azul, e new line ao final.
+FInsuc=9	# saída para indicação de erro, na cor vermelha
+FInsu1=10	# saída para indicação de erro, na cor vermelha (apenas no screen, não enviado para arquivo de log)
+FInsu2=11	# saída para indicação de erro, sem line feed ao final, cor vermelha
+FInsu3=12	# saída para indicação de erro, com line feed ao final, cor vermelha, ao final volta cor default
+FCowsa=13	# saída para aplicativo cowsay
+FFighl=14	# saída para aplicativo fighlet
 #
 MCor01="\e[97m"		# cor default (branca), quando for enviar mensagens
 MCor02="\e[33m"		# cor amarela, quando for enviar mensagens
@@ -150,19 +158,37 @@ function fMens () {
 		$FInfo2)
 			echo -n ".....$2" | tee -a "$CPPLOG"/"$CPALOG"
 			;;
+		$FInfo3)
+			echo -e "     $2" | tee -a "$CPPLOG"/"$CPALOG"
+			;;
+		$FInfo4)
+			echo -n "     $2" | tee -a "$CPPLOG"/"$CPALOG"
+			;;
 		$FSucss)
 			echo -e "\e[34m.....$2\e[97m" | tee -aa "$CPPLOG"/"$CPALOG"
 			;;
 		$FSucs2)
 			echo -e "\n\e[34m.....$2\e[97m" | tee -aa "$CPPLOG"/"$CPALOG"
-			;;	
+			;;
+		$FSucs3)								# sem line feed ao final, cor azul
+			echo -ne "\e[34m.....$2" | tee -a "$CPPLOG"/"$CPALOG"
+			;;
+		$FSucs4)								# com line feed ao final, cor azul, ao final volta cor default
+			echo -e "\e[34m$2\e[97m"	| tee -a "$CPPLOG"/"$CPALOG"
+			;;
 		$FInsuc)
-			echo -e  "\n\e[31m.....$2" | tee -a "$CPPLOG"/"$CPALOG"
+			echo -e  "\n\e[31m.....$2"	| tee -a "$CPPLOG"/"$CPALOG"
 			echo -e ".....$MErr02\e[97m" | tee -a "$CPPLOG"/"$CPALOG"
 			;;
 		$FInsu1)
 			echo -e  "\n\e[31m.....$2"
 			echo -e ".....$MErr02\e[97m"
+			;;
+		$FInsu2)								# sem line feed ao final, cor vermelha
+			echo -ne "\e[31m.....$2" | tee -a "$CPPLOG"/"$CPALOG"
+			;;
+		$FInsu3)                            	# com line feed ao final, cor vermelha, ao final volta cor default
+			echo -e "\e[31m$2\e[97m"  | tee -a "$CPPLOG"/"$CPALOG"
 			;;
 		$FCowsa)
 			shuf -n 1 $2 | cowsay -p -W 50 | tee -aa "$CPPLOG"/"$CPALOG"
@@ -202,14 +228,13 @@ function fInit () {
 		C11: verificar se aplicativo aha    está instalado
 		C12: verificar criação de arquivo de configuração para o PHP
 		C13: verificar existência arquivo SQL para criação de tabelas e inserts iniciais
-		C14: verificar existência arquivo para inserção dados tabela su_paises
-		C15: verificar existência arquivo para inserção dados tabela su_estados
-		C16: verificar existência arquivo para inserção dados tabela su_cidades
-		C17: verificar existência arquivo para inserção dados tabela su_names_brasil
-		C18: verificar existência arquivo para inserção dados tabela su_instituicoes
-		C19: verificar existência arquivo para inserção dados tabela su_tipos_documentos
-		C20: verificar existência arquivo para inserção dados tabela su_logradouros
-		C21: verificar existência arquivo para inserção dados tabela su_registrados
+
+
+
+		
+
+	
+
 		C22: verificar criação de pasta do acervo (imagens de arquivos PDF)
 		C23: verificar criação de pasta para uploads de arquivos
 		C24: verificar criação de pasta de trabalho temporária
@@ -223,17 +248,17 @@ function fInit () {
 		C32: verificar a conexão com o banco de dados
 		C33: verificar se base de dados está limpa
 		C34: verificar criação das tabelas da Superinterface
-		C35: verificar inserção de dados na tabela su_instituicoes
-		C36: verificar inserção de dados na tabela su_paises
-		C37: verificar inserção de dados na tabela su_estados
-		C38: verificar inserção de dados na tabela su_cidades
-		C39: verificar inserção de dados na tabela su_tipos_logradouros
-		C40: verificar inserção de dados na tabela su_tipos_documentos
-		C41: verificar inserção de dados na tabela su_registrados
-		C42: verificar inserção de dados de curadores na tabela su_usuarios
-		C43: verificar inserção de dados na tabela su_names_brasil a partir de arquivo SQL
-		C44: verifica criação de arquivo de nomes cidades sem acentuação
-		C45: verificar criação de arquivo de nomes instituições sem acentuação
+		
+
+
+
+		
+
+
+
+		
+		
+		
 		C46: verificar existência arquivo SQL adicional de aplicação externa
 		C47: verifica a criação de usuário administrador
         --------        --------        --------  
@@ -366,57 +391,11 @@ function fInit () {
 		fMens "$FInsuc" "$MErr33"
 		exit
 	fi
-	#											C13: verificar existência de arquivo com comandos SQL de criação de 
-	#											tabelas e inserts iniciais
+	#											C13: verificar existência arquivo com comandos SQL criação de tabelas
 	if [ ! -f $CPCRIATABELAS ]; then
 		fMens "$FInsuc" "$MErr25"
 		exit
 	fi	
-	#											C14: verificar existência arquivo p/ inserção dados tabela su_paises
-	if [ ! -f $CPINSEREPAIS ]; then
-		fMens "$FInsuc" "$MErr46"
-		exit
-	fi
-	#											C15: verificar existência arquivo p/ inserção dados tabela su_estados
-	if [ ! -f $CPINSEREESTADOS ]; then
-		fMens "$FInsuc" "$MErr47"
-		exit
-	fi
-	#											C16: verificar existência arquivo p/ inserção dados tabela su_cidades
-	if [ ! -f $CPINSERECIDADES ]; then
-		fMens "$FInsuc" "$MErr24"
-		exit
-	fi
-	#											C17: verificar existência arquivo p/ inserção dados tabela su_names_brasil
-	if [ ! -f $CPINSERENOMES ]; then
-		fMens "$FInsuc" "$MErr34"
-		exit
-	fi
-	#											C18: verificar existência arquivo p/ inserção dados tabela su_instituições
-	if [ ! -f $CPINSEREINST ]; then
-		fMens "$FInsuc" "$MErr38"
-		exit
-	fi
-	#											C19: verificar existência arquivo p/ inserção dados tabela su_tipos_documentos
-	if [ ! -f $CPINSEREDOCS ]; then
-		fMens "$FInsuc" "$MErr50"
-		exit
-	fi
-
-
-	#											C20: verificar existência arquivo p/ inserção dados tabela su_logradouros
-	if [ ! -f $CPINSERELOGRA ]; then
-		fMens "$FInsuc" "$MErr51"
-		exit
-	fi
-	#											C21: verificar existência arquivo p/ inserção dados tabela su_registrados
-	if [ ! -f $CPINSEREREGIST ]; then
-		fMens "$FInsuc" "$MErr52"
-		exit
-	fi
-
-
-
 	#											C22: verificar criação de pasta do acervo (imagens de arquivos PDF)
 	fMens "$FInfor" "$MInfo01" 
 	rm -rf $CPPIMAGEM 2>/dev/null
@@ -509,6 +488,7 @@ function fInit () {
 	#
 	fMens "$FSucss" "$MInfo03"					# pasta administrativa preparada
 	#											C32: testar conexão com o banco de dados
+	fMens "$FInfor" "$MInfo19"
 	mysql -u $CPBASEUSER -b $CPBASE -p$CPBASEPASSW -e "quit" 2>/dev/null
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr08"
@@ -517,24 +497,14 @@ function fInit () {
 		fMens "$FSucss" "$MInfo09"
 	fi
 }
+
 #
 # --------------------------------------------------------------------------------------------------------------------------+
 #											 																				|
-#			   				   	    FUNÇÃO DE PREPARAÇÃO DOS ARQUIVOS PDF DO REPOSITÓRIO									|
+#			   				   			FUNÇÃO DE CRIAÇÃO DAS TABELAS 														|
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
-#											os arquivos PDF para o repositório serão preparados pelo script ativado pelo cron
-function fArquivos () {
-	fMens	"$FInfor"	"$MInfo50"
-	return
-}
-#
-# --------------------------------------------------------------------------------------------------------------------------+
-#											 																				|
-#			   				   			FUNÇÃO DE PREPARAÇÃO DAS TABELAS													|
-#																															|
-# --------------------------------------------------------------------------------------------------------------------------+
-function fTabelas () { 
+function fCriaTabelas () { 
 	#											C33: apagar possíveis tabelas e verificar se base de dados está limpa
 	TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
 	for t in $TABLES
@@ -551,6 +521,20 @@ function fTabelas () {
 		fMens "$FInsuc" "$MErr13"
  		exit
 	fi
+	# 											Criar tabela de usuários (reservada do sistema)
+	#											Tabela com usuários administradores e curadores do acervo
+	sql="CREATE TABLE su_usuarios (id_chave_usuario int not null auto_increment, username varchar(10) NOT NULL, senha varchar(42) NOT NULL, nome_usuario varchar(40) NOT NULL, email varchar(40) NOT NULL, cidade varchar(40) NOT NULL, estado char(2) NOT NULL, privilegio TINYINT unsigned  NOT NULL, ativo bool NOT NULL, primary key (id_chave_usuario));"
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql"
+	if [ $? -ne 0 ]; then
+		fMens "$FInsuc" "$MErr24"
+		exit
+	fi
+	sql="ALTER TABLE su_usuarios comment='Contém a identificação dos usuários para acesso a interface administrativa da Superinterface, ao mesmo tempo em que é uma lista de curadores dos documentos';"
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql"
+	if [ $? -ne 0 ]; then
+		fMens "$FInsuc" "$MErr14"
+		exit
+	fi
 	#											C34: criar e verificar a criação das tabelas da Superinterface
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPCRIATABELAS"
 	if [ $? -eq 0 ]; then
@@ -559,164 +543,63 @@ function fTabelas () {
 		fMens "$FInsuc" "$MErr13"
  		exit
 	fi
-	#											C35: verificar inserção de dados na tabela 'su_instituicoes'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREINST' INTO TABLE su_instituicoes FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n'  (nome_instituicao)"
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr37"
- 		exit
-	fi
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = UPPER(nome_instituicao)"
-
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(instituicao_sem_acentuacao,'Á','A'),'À','A'),'Â','A'),'Ã','A'),'Ä','A'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(instituicao_sem_acentuacao,'Í','I'),'Ì','I'),'Î','I'),'Ï','I'),'Ĩ','I'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(instituicao_sem_acentuacao,'É','E'),'È','E'),'Ê','E'),'Ë','E'),'Ê','E'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(instituicao_sem_acentuacao,'Ó','O'),'Ò','O'),'Ô','O'),'Ö','O'),'Ô','O'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(instituicao_sem_acentuacao,'Ú','U'),'Ù','U'),'Û','U'),'Ü','U'),'Û','U'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_instituicoes SET instituicao_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(instituicao_sem_acentuacao,'Ç','C'),'Ñ','N'),'<',''),'>',''),'$',''); "
-
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo07"
-	else
-		fMens "$FInsuc" "$MErr42"
- 		exit
-	fi
-	#											C36: verificar inserção de dados na tabela 'su_paises'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREPAIS' INTO TABLE su_paises FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (codigo_pais, nome_pais, sigla_pais) SET usuario='Admin' "
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo13"
-	else
-		fMens "$FInsuc" "$MErr43"
- 		exit
-	fi
-	#											C37: verificar inserção de dados na tabela 'su_estados'
-	pais_brasil=$(mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "select id_chave_pais from su_paises where nome_pais='Brasil'; ")
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr44"
-		exit
-	fi
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREESTADOS' INTO TABLE su_estados FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (codigo_estado, sigla_estado, nome_estado) SET id_pais=$pais_brasil,usuario='Admin' "
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo21"
-	else
-		fMens "$FInsuc" "$MErr44"
- 		exit
-	fi
-	#											C38: verificar inserção de dados na tabela 'su_cidades'
-#	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSERECIDADES"
-#	if [ $? -eq 0 ]; then
-#		fMens "$FSucss" "$MInfo19"
-#	else
-#		fMens "$FInsuc" "$MErr14"
-#		exit
-#	fi
-	#											C38: verificar inserção de dados na tabela 'su_cidades'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERECIDADES' INTO TABLE su_cidades FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (codigo_do_estado, nome_do_estado, codigo, nome_cidade) "
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr14"
- 		exit
-	fi
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET sigla_estado = (select sigla_estado from su_estados where codigo_estado = su_cidades.codigo_do_estado) " 
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET id_estado = (select id_chave_estado from su_estados where codigo_estado = su_cidades.codigo_do_estado) " 
-
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade_sem_acentuacao = UPPER(nome_cidade)"
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(cidade_sem_acentuacao,'Á','A'),'À','A'),'Â','A'),'Ã','A'),'Ä','A'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(cidade_sem_acentuacao,'Í','I'),'Ì','I'),'Î','I'),'Ï','I'),'Ĩ','I'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(cidade_sem_acentuacao,'É','E'),'È','E'),'Ê','E'),'Ë','E'),'Ê','E'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(cidade_sem_acentuacao,'Ó','O'),'Ò','O'),'Ô','O'),'Ö','O'),'Ô','O'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(cidade_sem_acentuacao,'Ú','U'),'Ù','U'),'Û','U'),'Ü','U'),'Û','U'); "
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " UPDATE su_cidades SET cidade_sem_acentuacao = REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(cidade_sem_acentuacao,'Ç','C'),'Ñ','N'),'<',''),'>',''),'$',''); "
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo19"
-	else
-		fMens "$FInsuc" "$MErr14"
- 		exit
-	fi
-	#
-	#											C39: verificar inserção de dados na tabela 'su_tipos_logradouros'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERELOGRA' INTO TABLE su_tipos_logradouros FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (nome_tipo_de_logradouro, abreviatura)  "
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo28"
-	else
-		fMens "$FInsuc" "$MErr48"
- 		exit
-	fi
-	#											C40: verificar inserção de dados na tabela 'su_tipos_documentos'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREDOCS' INTO TABLE su_tipos_documentos FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' (nome_tipo_de_documento)  "
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo37"
-	else
-		fMens "$FInsuc" "$MErr49"
- 		exit
-	fi
-	#											C41: verificar inserção de dados na tabela 'su_registrados'
-#	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSEREREGIST"
-#	if [ $? -eq 0 ]; then
-#		fMens "$FSucss" "$MInfo23"
-#	else
-#		fMens "$FInsuc" "$MErr45"
-# 		exit
-#	fi
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSEREREGIST' INTO TABLE su_registrados FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n'  (nome_registrado,name_of_war) SET usuario='Admin' "
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo23"
-	else
-		fMens "$FInsuc" "$MErr45"
- 		exit
-	fi
-
-	#											C42: verificar inserção de curadores na tabela 'su_usuarios'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPINSERECURADORES' INTO TABLE su_usuarios FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n'  (username,nome_usuario) SET senha=$RANDOM,privilegio=1,ativo=0 "
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo52"
-	else
-		fMens "$FInsuc" "$MErr53"
- 		exit
-	fi
-
-
-	#											C43: verificar inserção de dados na tabela 'su_names_brasil'
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPINSERENOMES"
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr21"
- 		exit
-	fi
-	#											C44: verifica criação de arquivo de nomes cidades sem acentuação
-	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO su_nomes_cidades(nome_cidade) SELECT nome_cidade FROM su_cidades"
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr22"
- 		exit
-	fi
-	rm -rf  $CPPADMIN/$CPNOMECIDADES
-	mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from su_nomes_cidades' |  sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:] > $CPPADMIN/$CPNOMECIDADES
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr06"
- 		exit
-	fi
-	#											C45: verifica criação de arquivo de nomes instituições sem acentuação
-	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "INSERT INTO su_nomes_instituicoes(nome_instituicao) SELECT nome_instituicao FROM su_instituicoes"
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr40"
- 		exit
-	fi
-	rm -rf  $CPPADMIN/$CPNOMEINST
-	mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from su_nomes_instituicoes' |  sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:] > $CPPADMIN/$CPNOMEINST
-	if [ $? -ne 0 ]; then
-		fMens "$FInsuc" "$MErr39"
- 		exit
-	fi
-	#											C46: verificar se existe arquivo SQL adicional de aplicação externa do usuário
-	if [ -f $CPTABAPLICACAO ]; then
-		#										criar tabelas da aplicação e inserir seus dados
-		mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPTABAPLICACAO"
-		if [ $? -eq 0 ]; then
-			fMens "$FSucss" "$MInfo14"
-		else
-			fMens "$FInsuc" "$MErr17"
- 			exit
+}
+#
+# --------------------------------------------------------------------------------------------------------------------------+
+#											 																				|
+#                     FUNÇÃO AUXILIAR DE INSERÇÃO DE INFORMAÇÕES NA BASE A PARTIR DE ARQUIVOS CSV                           |
+#																															|
+# --------------------------------------------------------------------------------------------------------------------------+
+function fInsereCsv () {
+	arquivo=$1													# recebe o nome do arquivo csv
+	arquivosem=$(basename $arquivo)								# retira o caminho: recebe apenas o nome completo do arquivo
+	arquivosem=${arquivosem%.*}									# nome do arquivo sem extensão
+	arquivosem=$(echo $arquivosem | sed 's/^[^_]*_//')  		# fica só com a parte após o primeiro underscore, que corresponde nome da tabela
+	tabelascsv+=($arquivosem)									# guarda os nomes das tabelas que serão manipuladas
+	nomes_col=$(head -1 $arquivo)								# nomes das colunas do arquivo csv
+	oldIFS=$IFS
+	IFS=','														# altera para vírgula a variável (de sistema) separadora de campo de entrada
+	jj=0
+	campos=()													# receberá o nome dos campos da tabela
+	sql="LOAD DATA LOCAL INFILE '$arquivo' INTO TABLE $arquivosem FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES ("
+	for i in $nomes_col
+	do
+		campos[jj]=$(echo "$i" | sed 's/\"//g')					# retira as aspas que rodeia os conteúdos de cada célula do arquivo csv
+		if [ $jj -ne 0 ]; then
+			sql=$sql,											# insere uma vírgula entre os campos
 		fi
+		sql=$sql${campos[jj]}									# insere o nome do campo na montagem do comando sql
+		((++jj))
+	done
+	IFS=$oldIFS
+	sql="$sql"")"
+	mysql -u  $CPBASEUSER -p$CPBASEPASSW -b $CPBASE  -e "$sql"
+	if [ $? -ne 0 ]; then
+		fMens "$FInsu2" "$MErr54"
+		fMens "$FInsu3" "$arquivo"
+	exit
 	else
-		fMens "$FInfor" "$MInfo15"
+		fMens "$FSucs3" "$MInfo54"
+		fMens "$FSucs4" "$arquivo"
 	fi
+}
+#
+# --------------------------------------------------------------------------------------------------------------------------+
+#											 																				|
+#			   				   			FUNÇÃO DE UPDATE DAS TABELAS    													|
+#																															|
+# --------------------------------------------------------------------------------------------------------------------------+
+function fInsertTabelas () {
+# 				Será chamado um arquivo opcional SHELL para fazer INSERT de dados na base de dados.
+# 				este arquivo é opcional, não obrigatório. Neste caso, o arquivo descrito na variável CPINSERTSCRIPT deve 
+#				ser retirado desta pasta de instalação.
+if [ ! -f $CPINSERTSCRIPT ]; then
+	fMens "$FInfor" "$MInfo20"
+else
+	fMens "$FInfor" "$MInfo21"
+	. $(dirname "$0")/$CPINSERTSCRIPT
+fi
+return 0
 }	# fim da rotina de preparação de tabelas
 #
 # --------------------------------------------------------------------------------------------------------------------------+
@@ -724,17 +607,24 @@ mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " LOAD DATA LOCAL INFILE '$CPI
 #			   				   	                FUNÇÃO PARA CRIAR USUÁRIO ADMIN												|
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
-function fUseradmin () { 
+function fUserAdmin () { 
 	#
 	var="admin"
 	hash="$(echo -n "$var" | sha1sum | awk '{print $1}')"
-	sql="INSERT INTO su_usuarios (username, senha , nome_usuario , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)";	# Administrador tem privilégio = 0 (máximo privilégio)
-	#											C47: verifica a criação de usuário administrador
+	sql="INSERT INTO su_usuarios (username, senha , nome_usuario , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)"						# Administrador tem privilégio = 0 (máximo privilégio)
+	#												  C47: verifica a criação de usuário administrador
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "$sql"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo12"
 	else
 		fMens "$FInsuc" "$MErr11"
+ 		exit
+	fi
+	# 						colocar todos os usuários como curadores e INATIVOS, exceto o admin
+	sql="UPDATE su_usuarios SET senha = $RANDOM, privilegio = 1, ativo = 0 where username != 'admin'"
+	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "$sql"
+	if [ $? -ne 0 ]; then
+		fMens "$FInsuc" "$MErr22"
  		exit
 	fi
 }
@@ -745,57 +635,75 @@ function fUseradmin () {
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
 fResumo () {
-	#				resumo
+	#								resumo de informações da instalação realizada
+	fMens "$FInfor" "$MInfo07"
+	#fMens "$FInfo3" "$(printenv SHELL)"
+	fMens "$FInfo3" "$($SHELL --version | head -1)"
+	fMens "$FInfo3" "$(/usr/bin/lsb_release -ds)"
+	fMens "$FInfo3" "$(printenv LANG)"
+	fMens "$FInfo3" "$(php -v | head -1)"
+	fMens "$FInfo3" "$(mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e \"select @@version\" | head -1)"
+	fMens "$FInfo3" "$(/usr/bin/id -un)"
+	fMens "$FInfo4" "$MInfo42"
+	fMens "$FInfo1"	"$(pgrep soffice)"
 	fMens "$FInfo2" "$MInfo18"
 	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
-	fMens "$FInfo2" "$MInfo39"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_registrados')"
-	fMens "$FInfo2" "$MInfo29"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_instituicoes')"
-	fMens "$FInfo2" "$MInfo34"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_paises')"
-	fMens "$FInfo2" "$MInfo35"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_estados')"
-	fMens "$FInfo2" "$MInfo30"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_nomes_cidades')"
-	fMens "$FInfo2" "$MInfo20"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_cidades") "
-	fMens "$FInfo2" "$MInfo31"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_names_brasil')"
-	fMens "$FInfo2" "$MInfo36"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_tipos_logradouros")"
-	fMens "$FInfo2" "$MInfo38"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_tipos_documentos")"
-	fMens "$FInfo2" "$MInfo22"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_documents")"
-	fMens "$FInfo2" "$MInfo24"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_signatarios") "
-	fMens "$FInfo2" "$MInfo25"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_instituicoes")"
-	fMens "$FInfo2" "$MInfo40"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
-	fMens "$FInfo2" "$MInfo53"
-	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_usuarios") "
-	fMens "$FInfo2" "$MInfo42"
-	fMens "$FInfo1"	"$(pgrep soffice)"
+	#	for i in "${tabelascsv[@]}"							# irá imprimir o número de registros nas tabelas populadas a partir arquivos csv
+	#	do
+	#		fMens "$FInfo2" "$MInfo53 $i= "
+	#		fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $i") "
+	#	done
+	if	[ $CPRELATORIOTABELAS ]; then
+	{
+		exec 8< super_relatoriotabelas.csv  # associa lista_arquivos ao descritor 8
+		while read arq <&8; do   # Lê uma linha de cada vez do descritor 3.
+			arq=$(echo "$arq" | sed 's/\"//g')	# retira as aspas que rodeia os conteúdos de cada célula do arquivo csv
+			fMens "$FInfo4" "$MInfo53 $arq= "
+			fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
+		done
+		exec 8<&-  # libera descritor 8
+	}
+	else {
+		TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
+		for arq in $TABLES
+		do
+			fMens "$FInfo4" "$MInfo53 $arq= "
+			fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
+		done
+	}
+	fi
 }
 #
 #
-fInit				# verificação e preparação do ambiente de instalação
-fArquivos			# preparar os arquivos PDF
-fTabelas			# gerar as tabelas e os inserts de dados
-fUseradmin			# criar usuário admin
-fResumo				# informar um resumo da base de dados
-#
-fMens	"$FInfor"	"$MInfo04"
-#					Chama script php para fazer a geração de código PHP da Superinterface
-php super_cria_interfaces.php &
-PID=$!				# captura o PID do último comando anterior lançado em background.
-wait $PID			# wait é um comando built-in do Linux que espera completar um process em execução.
-if [ $? -ne 0 ]; then
-	fMens "$FInsuc" "$MErr10"	# Erro na geração de código PHP
+fInit										# verificação e preparação do ambiente de instalação
+fCriaTabelas								# cria as tabelas
+fMens "$FInfor" "$MInfo13" 
+tabelascsv=()								# neste array será guardado o nome das tabelas que serão populadas pelos arquivos csv
+for file in $CPPCSV/*.csv
+do
+		fInsereCsv $file					# chama rotina para inserir no banco de dados informações dos arquivos csv existentes
+done
+retval=0
+fInsertTabelas								# Insert de dados
+if [ $retval -eq 0 ]; then
+	fMens "$FSucss" "$MInfo14"
+else
+	fMens "$FInsu2" "$MErr17"
+	fMens "$FInsu3" "$retval"
 	exit
 fi
+fUserAdmin									# criar usuário admin
+#
+fMens	"$FInfor"	"$MInfo04"
+#											Chama script php para fazer a geração de código PHP da Superinterface
+php super_cria_interfaces.php &
+PID=$!										# captura o PID do último comando anterior lançado em background.
+wait $PID									# wait é um comando built-in do Linux que espera completar um process em execução.
+if [ $? -ne 0 ]; then
+	fMens "$FInsuc" "$MErr10"				# Erro na geração de código PHP
+	exit
+fi
+fResumo	$tabelascsv									# informar um resumo da base de dados
 fMens	"$FSucs2"	"$MInfo43"
 fMens	"$FInfo2"	"$MInfo10" ; fMens	"$FInfo1"	"$CPPLOG/$CPALOG"
 fMens	"$FInfo2"	"$MInfo05" ; fMens	"$FInfo1"	"$CPPAUTOPHP"

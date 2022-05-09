@@ -34,7 +34,7 @@ declare -r su_mimePdf="application/pdf"
 MErr01="Não é permitido executar este script como usuário root"
 MErr02="Não foi possível substituir caracteres de controle dos nomes dos arquivos. Verifique se comando 'detox' está instalado"
 MErr03="Erro! Arquivo com nome das cidades não foi encontrado"
-MErr04="Erro! Arquivo com comandos SQL para popular tabela de 'su_cidades' não foi encontrado"
+MErr04="Erro! Não foi encontrado o arquivo SHELL do usuário para preparação dos INSERTs na base de dados"
 MErr05="Erro! Não foi possível preparar pasta de trabalho temporária: pasta não pode ser limpa"
 MErr06="Erro! Não foi possível preparar pasta de trabalho temporária: pasta não pode ser criada"
 MErr07="Erro! Não foi possível se conectar com o banco de dados"
@@ -44,17 +44,17 @@ MErr10="Interrompendo a execução do script"
 MErr11="Erro! Pasta para guardar os arquivos do acervo não foi encontrada"
 MErr12="Não foi possível deixar os nomes dos arquivos em minúsculo.  Transferindo arquivo(s) do lote para quarentena"
 MErr13="Erro! Problemas na geração do script para criação de arquivos TXT. Transferindo arquivo(s) do lote para quarentena"
-MErr14="Erro! Não foi possível gerar arquivo com as ocorrências dos nomes das cidades. Transferindo arquivo(s) do lote para quarentena"
-MErr15="Erro! Não foi possível gerar arquivo de instruções SQL para popular tabela su_docs_cidades. Transferindo arquivo(s) do lote para quarentena"
+MErr14="Transferindo arquivos para quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
+MErr15="Erro! Problemas na inserção de informações na base de dados a partir do arquivo= "
 MErr16="Erro! Problema na execução do script de geração de arquivos TXT. Transferindo arquivo(s) do lote para quarentena"
-MErr17="Erro! Não foi possível inserir informações nas tabelas: su_documents, su_docs_signatarios, su_docs_instituicoes. Transferindo arquivos do lote para quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
+#MErr17=""
 MErr18="Erro! Não foi possível criar pasta de quarentena"
 MErr19="Erro! Pasta de logs não existe"
 MErr20="Erro! Arquivo de configuração desta aplicação não foi encontrado"
 MErr21="Erro! Problemas na cópia de arquivos da pasta de upload para a pasta emporária de tratamento destes arquivos"
-MErr22="Erro! Problemas na criação do arquivo de comandos SQL para popular tabelas. Transferindo arquivo(s) do lote para quarentena"
+#MErr22=""
 MErr23="Erro! Arquivo de logs não existe e não foi possível recriá-lo"
-MErr24="Erro! Não foi possível inserir informações na tabela su_docs_cidades. Transferindo arquivos do lote para a quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
+#MErr24=""
 MErr25="Erro! É necessário instalar o aplicativo 'detox' conforme manual de instalação"
 MErr26="Erro! Não foi possível compactar arquivo de logs"
 Merr27="Erro! Script periódico de incorporação de arquivos ao acervo da Superinterface só pode ser executado a partir da pasta 'su_install'"
@@ -80,17 +80,19 @@ MErr46="Erro! Não foi possível gerar JPG da primeira página do PDF.  Transfer
 MErr47="Erro! Problemas na criação do arquivo TXT sem acento. Transferindo arquivo(s) do lote para quarentena"
 MErr48="Erro! Problemas na preparação de arquivo TXT sem caracteres de controle. Transferindo arquivo(s) do lote para quarentena"
 MErr49="Erro! É necessário instalar o aplicativo 'aha' conforme manual de instalação"
-MErr50="Erro! Não foi possível gerar arquivo com as ocorrências dos nomes das isntituições. Transferindo arquivo(s) do lote para quarentena"
-MErr51="Erro! Não foi possível gerar arquivo de instruções SQL para popular tabela su_docs_instituicoes. Transferindo arquivo(s) do lote para quarentena"
-MErr52="Erro! Não foi possível inserir informações na tabela su_docs_instituicoes. Transferindo arquivos do lote para a quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
+#MErr50=""
+#MErr51=""
+#MErr52=""
 MErr53="Alerta! Não foi possível gerar o TXT para este arquivo, logo não indexando seu conteúdo. Ainda assim, seu PDF e JPG serão colocados no acervo: "
 MErr54="Erro! Pasta de arquivos javascript não foi encontrada"
+#MErr55=""
+MErr56="Erro! Script SHELL do usuário, para preparação dos INSERTs da aplicação, retornou com código de erro= "
 #
 #	mensagens de informação
 MInfo01="Bem vindo ao script de tratamento de novos arquivos do acervo em: "
 MInfo02="Quantidade de arquivos na pasta de quarentena= "
 MInfo03="Sucesso. Criada pasta temporária para tratamento de arquivos" 
-MInfo04="Sucesso. Geração de arquivo com instruções SQL para popular diversas tabelas do acervo foi realizada corretamente"
+#MInfo04=""
 MInfo05="Sucesso. Informações inseridas corretamente na tabela su_docs_cidades"
 MInfo06="Aviso: pasta de logs não estava criada.  Criação foi realizada com sucesso"
 MInfo07="Sucesso. Conexão com o banco de dados foi realizada corretamente"
@@ -99,31 +101,31 @@ MInfo09="Script terminado as"
 MInfo10="Existe(m) arquivo(s) novos para ser(em) tratado(s)"
 MInfo11="Renomeando os arquivos PDF e fazendo sua numeração"
 MInfo12="Sucesso. Numerado os nomes dos arquivos PDF"
-MInfo13="Sucesso. Geração de arquivo de ocorrências de instituicoes foi realizada corretamente"
+#MInfo13=""
 MInfo14="Sucesso. Geração de arquivos TXT realizada corretamente"
-MInfo15="Gerando arquivo com ocorrências de nomes de cidades. Pode demorar um pouco. Espere...."
-MInfo16="Sucesso. Geração de arquivo de ocorrências de cidades foi realizada corretamente"
-MInfo17="Sucesso. Geração de arquivo SQL para popular tabela su_docs_cidades foi realizada corretamente"
-MInfo18="Gerando arquivo com ocorrências de nomes de instituições. Pode demorar um pouco. Espere...."
+#MInfo15=""
+#MInfo16=""
+#MInfo17=""
+#MInfo18=""
 MInfo19="Sucesso. Geração de arquivos JPG realizada corretamente"
 MInfo20="Nenhum arquivo ODT para ser tratado neste momento"
 MInfo21="Iniciando o tratamento de um lote de arquivos ODT"
 MInfo22="Alcançado o número máximo de arquivos passíveis de tratamento nesta ativação do script"
 MInfo23="Nenhum arquivo TXT para ser tratado neste momento"
 MInfo24="Sistema configurado para renomear e numerar os arquivos. Atenção: isso fará parar a verificação de arquivos duplicados no acervo"
-MInfo25="Sucesso. Informações inseridas corretamente nas diversas tabelas do acervo"
-MInfo26="Quantidade de DOCUMENTOS - registros na tabela 'su_documents'= "
-MInfo27="Quantidade de registros na tabela 'su_docs signatários'= "
-MInfo28="Quantidade de registros na tabela 'su_docs instituições'= "
-MInfo29="Quantidade de CIDADES - registros na tabela 'su_cidades'= "
-MInfo30="Quantidade de registros na tabela 'su_docs_cidades'= "
+#MInfo25=""
+MInfo26="Quantidade de registros na tabela "
+MInfo27="Aviso: script SHELL do usuário, para preparação dos INSERTs na base de dados, foi encontrado. Executando, mas pode demorar um pouco..."
+MInfo28="Sucesso! Script SHELL do usuário, de preparação dos INSERTs da aplicação, foi executado corretamente"
+#MInfo29=""
+#MInfo30=""
 MInfo31="Quantidade de tabelas existentes na base= "
 MInfo32="Sucesso. Fim do tratamento dos novos arquivos submetidos ao acervo!"
 MInfo33="Arquivo já existia na pasta de quarentena. Suspendendo o tratamento deste arquivo: "
 MInfo34="Movendo este arquivo para pasta de quarentena pois ele já existe no repositório: "
 MInfo35="Detectado arquivo novo, a ser incluído no repositório:  "
 MInfo36="Aviso: estranho! Pasta de quarentena não encontrada no ambiente.  Fizemos sua recriação com sucesso"
-MInfo37="Sucesso. Geração de arquivo SQL para popular tabela su_docs_instituicoes foi realizada corretamente"
+#MInfo37=""
 MInfo38="Término do tratamento para este lote de arquivos"
 MInfo39="Aviso: estranho! O arquivo de logs não existia.  Fizemos sua recriação"
 MInfo40="Aviso: notamos a falta do aplicativo cowsay. Mas ele não é obrigatório. Dica: assim que possível, instalar o cowsay conforme manual de instalação"
@@ -147,29 +149,30 @@ MInfo57="Nenhum arquivo RTF para ser tratado neste momento"
 MInfo58="Iniciando o tratamento de um lote de arquivos RTF"
 MInfo59="Iniciando o tratamento de um lote de arquivos TXT"
 MInfo60="Cancelando o tratamento deste lote de arquivos"
-MInfo61="Sucesso. Informações inseridas corretamente na tabela su_docs_instituicoes"
-MInfo62="Quantidade de INSTITUIÇÕES - registros na tabela 'su_instituicoes'= "
-MInfo63="Quantidade de PAÍSES  - registros na tabela 'su_paises'= "
-MInfo64="Quantidade de ESTADOS - registros na tabela 'su_estados'= "
-MInfo65="Quantidade de NOMES   - registros na tabela 'su_names_brasil'= "
-MInfo66="Quantidade de TIPOS LOGRADOUROS - registros na tabela 'su_tipos_logradouros'= "
-MInfo67="Quantidade de TIPOS DOCUMENTOS  - registros na tabela 'su_tipos_documentos'= "
+#MInfo61=""
+#MInfo62=""
+#MInfo63=""
+#MInfo64=""
+#MInfo65=""
+#MInfo66=""
+#MInfo67=""
 MInfo68="PID do processo 'unoconv (soffice)' em uso= "
 MInfo69="Processo 'unoconv (soffice)' não encontrado, e será iniciado agora"
 #				  códigos das mensagens
 FInfor=0        # saída normal: new line ao final, sem tratamento de cor
 FInfo1=1        # saída normal: new line ao final, sem tratamento de cor e sem ..... (sem pontinhos ilustrativos)
 FInfo2=2        # saída sem new line ao final, sem tratamento de cor
-FSucss=3        # saída para indicação de sucesso: new line ao final da mensagem. na cor azul. No final, muda para cor branca
-FSucs2=4        # saída para indicação de sucesso: new line antes e depois da mensagem, cor azul. No final, muda para cor branca
-FInsuc=5        # saída para indicação de erro, na cor vermelha
-FInsu1=6        # saída para indicação de erro, na cor vermelha (apenas no screen, não enviado para arquivo de log)
-FInsu2=7		# saída para indicação de erro, na cor vermelha, sem new line ao final e sem ....
-FInsu3=8
-FInsu4=9		# saída para indicação de erro, na cor vermelha, com new line ao final e com ....
-FCowsa=10        # saída para aplicativo cowsay
-FFighl=11        # saída para aplicativo fighlet
-FLinha=12		# saída de uma linha separadora para novo log
+FInfo3=3		# saída sem new line ao final, sem tratamento de cor, espaços em branco no início (     )
+FSucss=4        # saída de sucesso: new line ao final da mensagem. na cor azul. No final, muda para cor branca
+FSucs2=5        # saída de sucesso: new line antes e depois da mensagem, cor azul. No final, muda para cor branca
+FInsuc=6        # saída de erro, na cor vermelha, com mensagem de interrupção do script
+FInsu1=7        # saída de erro, na cor vermelha (apenas no screen, não enviado para arquivo de log)
+FInsu2=8		# saída de erro, na cor vermelha, sem new line ao final e sem ....
+FInsu3=9		# saída de erro, na cor vermelha, com new line ao final
+FInsu4=10		# saída de erro, na cor vermelha, com new line ao final e com ....
+FCowsa=11        # saída para aplicativo cowsay
+FFighl=12        # saída para aplicativo fighlet
+FLinha=13		# saída de uma linha separadora para novo log
 #
 MCor01="\e[97m"         # cor default (branca), quando for imprimir mensagens na tela
 MCor02="\e[33m"         # cor amarela, quando for imprimir mensagens na tela
@@ -190,6 +193,9 @@ function fMens () {								# função para enviar mensagem, das seguintes formas
 			$FInfo2)							# sem line feed, cor default
 				echo -n ".....$2" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
+			$FInfo3)
+                echo -n "     $2" | tee -a "$CPPLOG"/"$CPALOG"
+                ;;
 			$FSucs3)							# sem line feed, cor azul
 				echo -ne "\e[34m.....$2\e[97m" | tee -a "$CPPLOG"/"$CPALOG"
             	;;
@@ -203,7 +209,7 @@ function fMens () {								# função para enviar mensagem, das seguintes formas
 				echo -e  "\e[31m.....$2" | tee -a "$CPPLOG"/"$CPALOG"
             	echo -e ".....$MErr10\e[97m" | tee -a "$CPPLOG"/"$CPALOG"	# mens. interrompendo script
             	;;
-			$FInsu1)
+			$FInsu1)							# na cor vermelha (apenas no screen, não enviado para arquivo de log)
 				echo -e  "\n\e[31m.....$2"
 				echo -e ".....$MErr10\e[97m"	# mens. interrompendo script
 				;;
@@ -213,7 +219,7 @@ function fMens () {								# função para enviar mensagem, das seguintes formas
 			$FInsu3)							# com line feed ao final, cor vermelha, ao final volta cor default
 				echo -e "\e[31m$2\e[97m"  | tee -a "$CPPLOG"/"$CPALOG"
 				;;
-			$FInsu4)							# cor vermelha
+			$FInsu4)							# na cor vermelha, com new line ao final e com ....
 				echo -e  "\e[31m.....$2\e[97m" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FCowsa)
@@ -357,16 +363,6 @@ function fInit () {
 	else
 		fMens "$FInfor" "$MInfo40"
 	fi
-	#										C12: verificar existência arquivo contendo nomes das cidades (em letras maiúsculas)
-    if [ ! -f $CPPADMIN/$CPNOMECIDADES ]; then
-		fMens "$FInsuc" "$MErr03"
-        exit
-	fi
-    #										C13: verificar existência arquivo SQL para inserção dados na tabela 'su_cidades'
-    if [ ! -f $CPINSERECIDADES ]; then
-		fMens "$FInsuc" "$MErr04"
-		exit
-    fi
 	#										C14: verificar existência da pasta para arquivos do acervo
 	if [ ! -d $CPPIMAGEM ]; then
 		fMens "$FInsuc" "$MErr11"
@@ -442,8 +438,6 @@ function fInit () {
 	chmod	$CPPERM600 $CPCONFIG				# estabelecer permissão para arquivo configuração
 	chmod	$CPPERM640 $CPPLOG"/"$CPALOG		# estabelecer permissão para arquivo logs
 	chmod 	$CPPERM440 $CPNOMECOWSAY1			# estabelecer permissão para arquivo mensagens cowsay	
-	chmod 	$CPPERM440 $CPPADMIN/$CPNOMECIDADES	# estabelecer permissão para arquivo nomes de cidades
-	chmod 	$CPPERM440 $CPINSERECIDADES			# estabelecer permissão para arquivo SQL de inserção dados
 	return
 }
 #
@@ -639,165 +633,68 @@ function fGarq () {
 		rm -f $CPPLOG/super_temp_gera_jpg.bash
 		return
 	fi
-	#													gerar arquivo com ocorrências das instituicoes nos arquivos TXT
-	fMens	"$FInfor" "$MInfo18"
-	cat $CPPADMIN/$CPNOMEINST | sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' | awk 'BEGIN{FS=","}{print "grep -Howi \""$1"\" '$CPPWORK'/*.txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA' | awk '\''BEGIN{FS=\":\"}{print $2\", \"$1}'\'' | sort | uniq -c | sed '\''s/\\, /\\,/g'\'' | sed '\''s/   /  /g'\''| sed '\''s/  / /g'\'' | sed '\''s/  //g'\'' | awk '\''{guarda=$1; $1=\"\"; print $0\",\"guarda;}'\''"}' > $CPPLOG/super_temp_ocorrencias_instituicoes.bash 2>/dev/null
-	if [ $? -ne 0 ]; then
-		fMens "$FInsu4" "$MErr50"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_ocorrencias_instituicoes.bash
-		return
-	fi
-	bash $CPPLOG/super_temp_ocorrencias_instituicoes.bash > $CPPLOG/super_temp_ocorrencias_instituicoes.txt 2> /dev/null
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo13"
-		rm -f $CPPLOG/super_temp_ocorrencias_instituicoes.bash
+	#													Será chamado um arquivo SHELL para fazer a preparação dos INSERTs
+	#													na base de dados das informações dos arquivos submetidos ao acervo.
+	if [ ! -f $CPINSERTACERVO ]; then
+		fMens "$FInsuc" "$MErr04"
+		exit
 	else
-		fMens "$FInsu4" "$MErr50"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_ocorrencias_instituicoes.bash $CPPLOG/super_temp_ocorrencias_instituicoes.txt 
-		return
+		fMens "$FInfor" "$MInfo27"
+		retval=0
+	. $(dirname "$0")/super_tabelas_insert_acervo.sh
 	fi
-	#													gerar arquivo SQL para popular tabela su_docs_instituicoes
-	cat $CPPLOG/super_temp_ocorrencias_instituicoes.txt | sed 's/txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA'/pdf/g' | awk 'BEGIN{FS=","}{gsub(/^ /,"",$1);print "insert into su_docs_instituicoes (id_instituicao, id_documento, ocorrencia_inst) values ((select id_chave_instituicao from su_instituicoes where instituicao_sem_acentuacao=\""$1"\" limit 1),(select id_chave_documento from su_documents where photo_filename_documento like \""$2"\" limit 1),"$3");"}' > $CPPLOG/super_temp_popular_su_docs_instituicoes.sql
-	if [ $? -ne 0 ]; then
-		fMens "$FInsu4" "$MErr51"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_popular_su_docs_instituicoes.sql $CPPLOG/super_temp_ocorrencias_instituicoes.txt 
-		return
-	fi
-	#													trocar indicação de pastas: de temporária para a pasta de imagens
-	sed "s#$CPPWORK#$CPPIMAGEM#g" -i $CPPLOG/super_temp_popular_su_docs_instituicoes.sql
-	if [ $? -eq 0 ]; then
-			fMens "$FSucss" "$MInfo37"
+	if [ $retval -eq 0 ];then
+		fMens	"$FSucss"	"$MInfo28"
 	else
-		fMens "$FInsu4" "$MErr51"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_popular_su_docs_instituicoes.sql $CPPLOG/super_temp_ocorrencias_instituicoes.txt 
-		return
-	fi
-	rm -f $CPPLOG/super_temp_ocorrencias_instituicoes.txt
-	#													gerar arquivo com ocorrências das cidades nos arquivos TXT
-	fMens "$FInfor" "$MInfo15"
-	cat $CPPADMIN/$CPNOMECIDADES | sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' | awk 'BEGIN{FS=","}{print "grep -Howi \""$1"\" '$CPPWORK'/*.txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA' | awk '\''BEGIN{FS=\":\"}{print $2\", \"$1}'\'' | sort | uniq -c | sed '\''s/\\, /\\,/g'\'' | sed '\''s/   /  /g'\''| sed '\''s/  / /g'\'' | sed '\''s/  //g'\'' | awk '\''{guarda=$1; $1=\"\"; print $0\",\"guarda;}'\''"}' > $CPPLOG/super_temp_ocorrencias_cidades.bash 2>/dev/null
-	if [ $? -ne 0 ]; then
-		fMens "$FInsu4" "$MErr14"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_ocorrencias_cidades.bash
-		return
-	fi
-	bash $CPPLOG/super_temp_ocorrencias_cidades.bash > $CPPLOG/super_temp_ocorrencias_cidades.txt 2> /dev/null
-	if [ $? -eq 0 ]; then
-		fMens "$FSucss" "$MInfo16"
-		rm -f $CPPLOG/super_temp_ocorrencias_cidades.bash
-	else
-		fMens "$FInsu4" "$MErr14"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_ocorrencias_cidades.bash $CPPLOG/super_temp_ocorrencias_cidades.txt 
-		return
-	fi
-	#													gerar arquivo de instruções SQL para popular tabela su_docs_cidades
-	cat $CPPLOG/super_temp_ocorrencias_cidades.txt | sed 's/txt.'$CPACENTO'.'$CPCONTRL'.'$CPMAIUSCULA'/pdf/g' | awk 'BEGIN{FS=","}{gsub(/^ /,"",$1);print "insert into su_docs_cidades (id_cidade, id_documento, ocorrencia) values ((select id_chave_cidade from su_cidades where cidade_sem_acentuacao=\""$1"\" limit 1),(select id_chave_documento from su_documents where photo_filename_documento like \""$2"\" limit 1),"$3");"}' > $CPPLOG/super_temp_popular_su_docs_cidades.sql
-	if [ $? -ne 0 ]; then
-		fMens "$FInsu4" "$MErr15"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql $CPPLOG/super_temp_ocorrencias_cidades.txt 
-		return
-	fi
-	#													trocar indicação de pastas: de temporária para a pasta de imagens
-	sed "s#$CPPWORK#$CPPIMAGEM#g" -i $CPPLOG/super_temp_popular_su_docs_cidades.sql
-	if [ $? -eq 0 ]; then
-			fMens "$FSucss" "$MInfo17"
-	else
-		fMens "$FInsu4" "$MErr15"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql $CPPLOG/super_temp_ocorrencias_cidades.txt 
-		return
-	fi
-	rm -f $CPPLOG/super_temp_ocorrencias_cidades.txt
-	#												preparar arquivo SQL visando popular as tabelas:
-#	find $CPPWORK/*.[pP][dD][fF] | grep -i pdf | sed $'s/\//\t\t /g' | awk '{guarda=$NF; printf "insert into su_documents (photo_filename_documento, alt_foto_jpg, nome_documento) values (\"'$CPPIMAGEM'/"$NF"\",";gsub(/\.pdf/,"", $NF); printf "\"'$CPPIMAGEM'/"$NF"_pagina1.jpg\",\"" ; gsub(/-/," ",$NF); gsub(/_/," ",$NF); print $NF"\");"; out=""; print "insert into su_docs_signatarios (id_signatario, id_documento) values ((select id_chave_registrado from su_registrados where nome_registrado like \"signatário indefinido\"),(select id_chave_documento from su_documents where photo_filename_documento=\"'$CPPIMAGEM'/"guarda"\"));"; print "insert into su_docs_instituicoes (id_instituicao, id_documento) values ((select id_chave_instituicao from su_instituicoes where nome_instituicao like \"Instituição Indefinida\"),(select id_chave_documento from su_documents where photo_filename_documento=\"'$CPPIMAGEM'/"guarda"\"));"}' > $CPPLOG/super_temp_documentos_novospdf.sql
-	find $CPPWORK/*.[pP][dD][fF] | grep -i pdf | sed $'s/\//\t\t /g' | awk '{guarda=$NF; printf "insert into su_documents (photo_filename_documento, alt_foto_jpg, nome_documento) values (\"'$CPPIMAGEM'/"$NF"\",";gsub(/\.pdf/,"", $NF); printf "\"'$CPPIMAGEM'/"$NF"_pagina1.jpg\",\"" ; gsub(/-/," ",$NF); gsub(/_/," ",$NF); print $NF"\");"; out=""; print "insert into su_docs_signatarios (id_signatario, id_documento) values ((select id_chave_registrado from su_registrados where nome_registrado like \"signatário indefinido\"),(select id_chave_documento from su_documents where photo_filename_documento=\"'$CPPIMAGEM'/"guarda"\"));"}' > $CPPLOG/super_temp_documentos_novospdf.sql
-	if [ $? -eq 0 ]; then
-			fMens "$FSucss" "$MInfo04"
-	else
-		fMens "$FInsu4" "$MErr22"
 		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.			# enviar os arquivos PDF para quarentena
 		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp_*.sql 2>/dev/null
-		return
+		rm -f $CPPLOG/*.bash $CPPLOG/*.sql $CPPLOG/*.txt
+		fMens	"$FInsu2"	"$MErr56"
+		fMens	"$FInsu3"	"$retval"
+		fMens	"$FInsu4"	"$MErr10"
+		exit
 	fi
 	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then		# ainda existem arquivos PDF?
 		fInse										# insere as informações dos arquivos no acervo arquivístico
 	fi
-	return
-}
+}	# fim da função fGarq
 #
 # --------------------------------------------------------------------------------------------------------------------------+
 #																															|
-#							              INSERIR INFORMAÇÕES NA BASE DE DADOS												|
+#							              INSERIR INFORMAÇÕES DE OCORRÊNCIAS NA BASE DE DADOS												|
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
 #
 function fInse () {
-	#													popular a base de dados
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPPLOG/super_temp_documentos_novospdf.sql"
-	if [ $? -eq 0 ]; then
-		rm -f $CPPLOG/super_temp_documentos_novospdf.sql
-		fMens "$FSucss" "$MInfo25"
-	else
-		fMens "$FInsu4" "$MErr17"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/super_temp*.sql 
-		return
-	fi
-	#													inserir as ocorrências de nomes de cidades presentes nos arquivos
-	#													TXT na tabela su_docs_cidades
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE 2>/dev/null < $CPPLOG/super_temp_popular_su_docs_cidades.sql
-   	if [ $? -eq 0 ]; then
-		#												verifica se foi possível extrair o conteúdo do arquivo para txt
-		for i in "$CPPWORK"/*.txt
-		do
-			if [ $(wc -c $i | cut -d " " -f1) -lt 10 ]; then
-				fMens	"$FInsu2" "$MErr53"
-				fMens	"$FInsu3" "$(basename $i)"
-			fi
-		done
-   		fMens "$FSucss" "$MInfo05"
-		mv -f $CPPWORK/*.* $CPPIMAGEM/.
-   		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql 
-   	else
-   		fMens "$FInsu4" "$MErr24"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-   		rm -f $CPPLOG/super_temp_popular_su_docs_cidades.sql 
-   	fi
-
-	#													inserir as ocorrências de nomes de instituiçẽs presentes nos arquivos
-	#													TXT na tabela su_docs_instituicoes
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE 2>/dev/null < $CPPLOG/super_temp_popular_su_docs_instituicoes.sql
-   	if [ $? -eq 0 ]; then
-   		fMens "$FSucss" "$MInfo61"
-   		rm -f $CPPLOG/super_temp_popular_su_docs_instituicoes.sql 
-   	else
-   		fMens "$FInsu4" "$MErr52"
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-		rm -f $CPPWORK/*.*
-   		rm -f $CPPLOG/super_temp_popular_su_docs_instituicoes.sql 
-   	fi
-
-
+	#													popular a base de dados com as ocorrências encontradas no interior 
+	#													dos arquivos submetidos ao acervo
+	for i in "$CPPLOG"/*.sql; do
+		echo $i
+		mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$i"
+		if [ $? -ne 0 ];then
+			fMens	"$FInsu2"	"$MErr15"
+			fMens	"$FInsu3"	"$i"
+			fMens "$FInsu4" "$MErr14"
+			mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
+			rm -f $CPPWORK/*.*
+			rm -f $CPPLOG/*.sql 
+			return
+		fi
+	done
+	#												verifica se foi possível extrair o conteúdo do arquivo para txt
+	for i in "$CPPWORK"/*.txt
+	do
+		if [ $(wc -c $i | cut -d " " -f1) -lt 10 ]; then
+			fMens	"$FInsu2" "$MErr53"
+			fMens	"$FInsu3" "$(basename $i)"
+		fi
+	done
+	fMens "$FSucss" "$MInfo05"
+	mv -f $CPPWORK/*.* $CPPIMAGEM/.
+	rm -f $CPPLOG/*.sql
 	return
-}	# fim da rotina de inserção de dados nas tabelas do mysql
+	# fim da rotina de inserção das ocorrências nas tabelas da base de dados
+}
 #
 # --------------------------------------------------------------------------------------------------------------------------+
 #																															|
@@ -820,13 +717,13 @@ function fTrataPDF () {
 	local su_arq
 	local su_inodesList
 	local su_fileClean
-	su_quant=$(ls -l $CPPUPLOADS/*.[pP][dD][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos existentes
+	su_quant=$(ls -l $CPPUPLOADS/*.[pP][dD][fF] 2>/dev/null | grep  "^-"  -c)	# numero arquivos PDF existentes
 	if [ $su_quant -gt $((CPQPDFLOTE-su_quantTratados)) ]; then
 			su_quant=$((CPQPDFLOTE-su_quantTratados))							# limita quantidade de arquivos a transferir
     fi
 	fMens	"$FInfor" "$MInfo08"		# mensagem informando do inicio tratamento arquivos PDF
 	su_inodesList=$(ls -i $CPPUPLOADS/*.[pP][dD][fF] | awk '{print $1}' | tr '\n' ' ')
-	#									mover certa quantidade de  arquivos DOCX para pasta de trabalho
+	#									mover certa quantidade de  arquivos PDF para pasta de trabalho
 	#									Os demais, ficarão para a próxima ativação deste script via cron
 	for i in $su_inodesList				# transferir usando inode: arquivos podem ter nomes com caracteres de controle
 	do
@@ -868,6 +765,7 @@ function fTrataPDF () {
 		return							# nada a ser tratado: sem arquivos PDF novos
 	fi
 	fGarq                            	# tratar arquivos visando colocar suas informações na base de dados do acervo
+
 }
 #
 # --------------------------------------------------------------------------------------------------------------------------+
@@ -1383,28 +1281,25 @@ unset GLOBIGNORE
 #												resumo
 fMens "$FInfo2" "$MInfo31"
 fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
-fMens "$FInfo2" "$MInfo62"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_instituicoes')"
-fMens "$FInfo2" "$MInfo63"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_paises')"
-fMens "$FInfo2" "$MInfo64"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_estados')"
-fMens "$FInfo2" "$MInfo29"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_cidades") "
-fMens "$FInfo2" "$MInfo65"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'SELECT count(*) FROM su_names_brasil')"
-fMens "$FInfo2" "$MInfo66"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_tipos_logradouros")"
-fMens "$FInfo2" "$MInfo67"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_tipos_documentos")"
-fMens "$FInfo2" "$MInfo26"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_documents")"
-fMens "$FInfo2" "$MInfo27"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_signatarios") "
-fMens "$FInfo2" "$MInfo28"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_instituicoes")"
-fMens "$FInfo2" "$MInfo30"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM su_docs_cidades") "
+if	[ $CPRELATORIOTABELAS ]; then
+{
+	exec 8< super_relatoriotabelas.csv  # associa lista_arquivos ao descritor 8
+	while read arq <&8; do   # Lê uma linha de cada vez do descritor 3.
+		arq=$(echo "$arq" | sed 's/\"//g')	# retira as aspas que rodeia os conteúdos de cada célula do arquivo csv
+		fMens "$FInfo3" "$MInfo26 $arq= "
+		fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
+	done
+	exec 8<&-  # libera descritor 8
+}
+else {
+	TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
+	for arq in $TABLES
+	do
+		fMens "$FInfo3" "$MInfo26 $arq= "
+		fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
+	done
+}
+fi
 fMens "$FInfo2" "$MInfo02"
 fMens "$FInfo1" "$(ls -la $CPPQUARENTINE/ | grep -e "^-" | wc -l)"
 fMens "$FInfo2" "$MInfo45"
