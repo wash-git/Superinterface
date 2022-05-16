@@ -635,13 +635,14 @@ function fGarq () {
 	fi
 	#													Será chamado um arquivo SHELL para fazer a preparação dos INSERTs
 	#													na base de dados das informações dos arquivos submetidos ao acervo.
-	if [ ! -f $CPINSERTACERVO ]; then
+	if [ ! -f $CPPINFO/$CPINSERTACERVO ]; then
 		fMens "$FInsuc" "$MErr04"
 		exit
 	else
 		fMens "$FInfor" "$MInfo27"
 		retval=0
-	. $(dirname "$0")/super_tabelas_insert_acervo.sh
+#	. $(dirname "$0")/super_tabelas_insert_acervo.sh
+	. $CPPINFO/$CPINSERTACERVO
 	fi
 	if [ $retval -eq 0 ];then
 		fMens	"$FSucss"	"$MInfo28"
@@ -669,7 +670,6 @@ function fInse () {
 	#													popular a base de dados com as ocorrências encontradas no interior 
 	#													dos arquivos submetidos ao acervo
 	for i in "$CPPLOG"/*.sql; do
-		echo $i
 		mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$i"
 		if [ $? -ne 0 ];then
 			fMens	"$FInsu2"	"$MErr15"

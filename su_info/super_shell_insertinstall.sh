@@ -10,11 +10,11 @@
 #
 #                                               Criação de tabelas da aplicação e insert de informações a partir de 
 #												arquivo SQL previamente preparado
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "super_tabelas_aplicacao.sql"
-if [ $? -ne 0 ]; then
-	retval=1
-	return $retval
-fi
+#mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPPINFO/super_tabelas_inserts.sql"
+#if [ $? -ne 0 ]; then
+#	retval=1
+#	return $retval
+#fi
 rm -rf  $CPPADMIN/super_cidades_maiusculas.txt
 mysql --skip-column-names --raw -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'select * from su_nomes_cidades' |  sed 'y/áÁàÀãÃâÂéÉêÊíÍóÓõÕôÔúÚçÇ/aAaAaAaAeEeEiIoOoOoOuUcC/' |  tr [:lower:] [:upper:] > $CPPADMIN/super_cidades_maiusculas.txt
 if [ $? -ne 0 ]; then

@@ -105,7 +105,6 @@ h2 {
 
 }
 
-
 ul.list-circle {list-style-type: circle;}
 
 p {
@@ -114,11 +113,24 @@ p {
 	text-align: justify;
 	text-justify: inter-word;
 }
+.tablec1 {
+	width:50%;
+	text-align: center;
+}
 
+.tablec2 {
+	width: 50%;
+}
+
+.tablec3 {
+	width:80%;
+}
+
+/*
 table {
 	width: 80%;
 }
-
+*/
 table, tr, th,td {
 	border: 1px solid gray;
 	font-size: 0.9em;
@@ -145,6 +157,11 @@ table, tr, th,td {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
+}
+
+.centertext {
+	text-align: center;
+	font-weight: bold;
 }
 
 .spelling-sublinhado {

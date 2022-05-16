@@ -7,14 +7,18 @@
 CPBASE=""                                        # base de dados da aplicação
 CPBASEUSER=""                                    # usuário da base de dados
 CPBASEPASSW=""                                   # password da base de dados
-CPNUMERARPDF=1                                   # renomear arquivos PDF (0 = não; 1 = sim)
+CPNUMERARPDF=0                                   # renomear arquivos PDF (0 = não; 1 = sim)
 CPHTTPHOST=""                                    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
-									   # exemplos:
-									   # observatorio.wash.net.br/superinterface
-									   # exemplo.br
+                                       # exemplos:
+                                       # observatorio.wash.net.br/superinterface
+                                       # exemplo.br
 CPQPDFLOTE=2                           # quantidade máxima de arquivos PDF tratados a cada ativação do script do cron
 CPTAMMAX=1900000                       # tamanho max do arquivo para upload (em bytes). Não é o php.ini.
-CPRELATORIOTABELAS=0                   # 0=somente listar tabelas relacionadas; 1= listar todas tabelas 
+CPRELATORIO=0                          # 0=relatoio com tabelas relacionadas;    1=relatorio com todas tabelas
+CPRELATORIOTABELAS="super_relatoriotabelas.csv"  # arquivo que contém a lista de tabelas para emitir relatorio
+CPCRIATABELAS="super_criar_tabelas.sql"          # arquico SQL com instruções de criação das tabelas
+CPINSERTSCRIPT="super_shell_insertinstall.sh"    # arquivo SHELL opcional com inserts de informações (inserts iniciais na base dados)
+CPINSERTACERVO="super_shell_insertregime.sh"     # arquivo SHELL opcional com inserts de informações (inserts do vigilante na base dados)
 #
 #	Parte 2: variáveis do ambiente
 #	obs: tenha cuidado para alterar os parâmetros abaixo.  Só faça se estiver seguro
@@ -25,7 +29,7 @@ CPPIMAGEM="../su_imagens"              # pasta do acervo dos arquivos que foram 
 CPPRIMITIVOS="../su_primitivos"        # pasta dos arquivos originais do acerto - ODT, DOCX, RTF etc (exceto PDFs)
 CPPWORK="../su_work"                   # pasta de trabalho auxiliar para manipulação de arquivos PDF
 CPPLOG="../su_logs"                    # pasta de logs
-CPPCSV="../su_csv"                     # pasta de arquivos csv	
+CPPINFO="../su_info"                   # pasta de arquivos que trazem as informações iniciais para popular a base dados	
 CPPQUARENTINE="../su_quarentine"       # pasta para guardar novos arquivos PDF repetidos (já estavam no acervo)
 CPPRIMITIVO="../su_primitivos"         # pasta para guardar arquivos originais não PDF já tratados
 CPPAUTOPHP="../su_autophp"             # pasta para receber arquivos PHP a serem gerados automaticamente
@@ -44,9 +48,6 @@ CPPHPFILE="super_config_php.cnf"       # nome do arquivo de configuração gerad
 CPLOGSFILEGZ="super_logfile.tar"	   # nome base do arquivo compactado de logs
 CPNOMECIDADES="super_cidades_maiusculas.txt"    # nome arquivo com nomes das cidades (em letras maiúsculas, sem controle)
 CPNOMEINST="super_instituicoes_maiusculas.txt"  # nome arquivo com nomes das instituições (em letras maiúsculas, sem controle)
-CPCRIATABELAS="super_tabelas_criar.sql"         # arquico SQL de criação tabelas
-CPINSERTSCRIPT="super_tabelas_insert.sh"	    # arquivo SHELL opcional com inserts de informações (inserts iniciais na base dados)
-CPINSERTACERVO="super_tabelas_insert_acervo.sh" # arquivo SHELL opcional com inserts de informações (inserts do vigilante na base dados)
 CPTABELASCRIADAS="super_tabelascriadas.html"  # arquivo com a lista das tabelas criadas, e suas estruturas
 CPACENTO="acento"                      # extensão nome dos arquivos com conteúdo sem caracteres acentuados
 CPCONTRL="contrl"                      # extensão nome dos arquivos com conteúdo sem caracteres controles

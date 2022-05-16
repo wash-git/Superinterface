@@ -46,7 +46,7 @@ MErr30="Erro! Não foi possível preparar pasta de upload para novos arquivos"
 MErr31="Erro! Não foi possível criar pasta de uploads para novos arquivos"
 MErr32="Erro! É necessário ter instalado o aplicativo 'detox' (apt-get install detox)"
 MErr33="Erro! Não foi possível gerar o arquivo de configuração para as rotinas PHP"
-#MErr34=""
+MErr34="Erro! Não foi encontrado arquivo com a lista de arquivos a constar no relatório resumo"
 MErr35="Erro! Não foi possível criar pasta para arquivos PHP que viriam a ser automaticamente gerados"
 MErr36="Erro! Para instalar a Superinterface é obrigatório estar na pasta 'su_install'"
 #MErr37=""
@@ -65,7 +65,7 @@ MErr41="Erro! Pasta de arquivos javascript não foi encontrada"
 #MErr50=""
 #MErr51=""
 #MErr52=""
-#MErr53=""
+MErr53="Erro! Não foi possível transferir informações deste arquivo SQL para base de dados: "
 MErr54="Erro! Não foi possível transferir informações deste arquivo CSV para base de dados: "
 #
 MInfo01="Preparar as pastas"
@@ -80,15 +80,15 @@ MInfo09="Sucesso! Conexão com o banco de dados foi realizada corretamente"
 MInfo10="Aproveite e dê uma olhadinha no log da instalação da Superinterface que está no arquivo: "
 MInfo11="Aproveite e dê uma olhadinha nas estruturas das tabelas criadas através da opção 'Tabelas' da interface administrativa"
 MInfo12="Sucesso! Criado usuário/senha da interface de administração da Superinterface"
-MInfo13="Fazer inserção de dados nas tabelas a partir de arquivos CSV fornecidos"
-MInfo14="Sucesso! Arquivo opcional SHELL com comandos SQL da aplicação do usuário executado corretamente"
-#MInfo15=""
+MInfo13="Fazer inserção de dados nas tabelas a partir de arquivos CSV e arquivos SQL fornecidos"
+MInfo14="Sucesso! Arquivo opcional SHELL do usuário executado corretamente"
+MInfo15="Aviso: nenhum arquivo SQL fornecido pelo usuário foi encontrado"
 MInfo16="Sucesso! Possíveis tabelas remanescentes no banco de dados foram eliminadas"
 MInfo17="Sucesso! Tabelas do banco de dados (re)criadas corretamente"
 MInfo18="Quantidade de tabelas geradas= "
 MInfo19="Preparar tabelas do banco de dados"
-MInfo20="Aviso: arquivo opcional SHELL para inserts de informações na base de dados não foi fornecido"
-MInfo21="Aviso: arquivo opcional SHELL para inserts de informações na base de dados encontrado. Executando...."
+MInfo20="Aviso: não foi encontrado arquivo opcional SHELL para tratamento de dados"
+MInfo21="Aviso: arquivo opcional SHELL do usuário para tratamento de dados foi encontrado. Executando...."
 #MInfo22=""
 #MInfo23=""
 #MInfo24=""
@@ -119,7 +119,7 @@ MInfo48="Alerta: notamos a falta do aplicativo figlet. Ele não é obrigatório.
 #MInfo49=""
 MInfo50="Aviso: nenhum arquivo PDF será tratado nesta instalação. A incorporação de arquivos ao acervo da Superinterface ocorrerá quando o script ativado via cron for executado"
 MInfo51="Sucesso! Criada pasta para guardar os arquivos PHP gerados automaticamente nesta instalação"
-#MInfo52=""
+MInfo52="Sucesso! Arquivo SQL transferido para base de dados: "
 MInfo53="Quantidade de registros na tabela "
 MInfo54="Sucesso! Arquivo CSV transferido para base de dados: "
 #
@@ -396,8 +396,13 @@ function fInit () {
 		exit
 	fi
 	#											C13: verificar existência arquivo com comandos SQL criação de tabelas
-	if [ ! -f $CPCRIATABELAS ]; then
+	if [ ! -f $CPPINFO/$CPCRIATABELAS ]; then
 		fMens "$FInsuc" "$MErr25"
+		exit
+	fi	
+	#											Cxxx: verificar existência de arquivo com indicação das tabelas a constarem no relatório resumo
+	if [ $CPRELATORIO -eq 0 ] && [ ! -f $CPPINFO/$CPRELATORIOTABELAS ]; then
+		fMens	"$FInsuc"	"$MErr34"
 		exit
 	fi	
 	#											C22: verificar criação de pasta do acervo (imagens de arquivos PDF)
@@ -487,7 +492,6 @@ function fInit () {
 	chmod $CPPERM600 $CPPADMIN/$CPPHPFILE   # definir permissão arquivo de configuração do PHP
 	chmod $CPPERM440 super_cowsay1.txt      # definir permissão arquivo de mensagens cowsay
 	chmod $CPPERM500 ./*.sh                 # definir permissão arquivos de scripts shell da pasta de instalação
-	chmod $CPPERM440 *.[sS][qQ][lL]         # definir permissão arquivos SQL
 	# --- --- ---
 	#
 	fMens "$FSucss" "$MInfo03"					# pasta administrativa preparada
@@ -540,7 +544,7 @@ function fCriaTabelas () {
 		exit
 	fi
 	#											C34: criar e verificar a criação das tabelas da Superinterface
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPCRIATABELAS"
+	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPPINFO"/"$CPCRIATABELAS"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo17"
 	else
@@ -555,17 +559,19 @@ function fCriaTabelas () {
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
 function fInsereCsv () {
-	arquivo=$1													# recebe o nome do arquivo csv
-	arquivosem=$(basename $arquivo)								# retira o caminho: recebe apenas o nome completo do arquivo
+arquivos=$(find "$CPPINFO"/*.csv -maxdepth 1 -type f -not -iname "$CPRELATORIOTABELAS") # exceto o arquivo contendo lista de tabelas para relatorio resumo
+for file in $arquivos
+do
+	arquivosem=$(basename $file)								# retira o caminho: recebe apenas o nome completo do arquivo
 	arquivosem=${arquivosem%.*}									# nome do arquivo sem extensão
 	arquivosem=$(echo $arquivosem | sed 's/^[^_]*_//')  		# fica só com a parte após o primeiro underscore, que corresponde nome da tabela
 	tabelascsv+=($arquivosem)									# guarda os nomes das tabelas que serão manipuladas
-	nomes_col=$(head -1 $arquivo)								# nomes das colunas do arquivo csv
+	nomes_col=$(head -1 $file)									# nomes das colunas do arquivo csv
 	oldIFS=$IFS
 	IFS=','														# altera para vírgula a variável (de sistema) separadora de campo de entrada
 	jj=0
 	campos=()													# receberá o nome dos campos da tabela
-	sql="LOAD DATA LOCAL INFILE '$arquivo' INTO TABLE $arquivosem FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES ("
+	sql="LOAD DATA LOCAL INFILE '$file' INTO TABLE $arquivosem FIELDS TERMINATED by ',' ENCLOSED BY '\"' LINES TERMINATED BY '\n' IGNORE 1 LINES ("
 	for i in $nomes_col
 	do
 		campos[jj]=$(echo "$i" | sed 's/\"//g')					# retira as aspas que rodeia os conteúdos de cada célula do arquivo csv
@@ -580,12 +586,39 @@ function fInsereCsv () {
 	mysql -u  $CPBASEUSER -p$CPBASEPASSW -b $CPBASE  -e "$sql"
 	if [ $? -ne 0 ]; then
 		fMens "$FInsu2" "$MErr54"
-		fMens "$FInsu3" "$arquivo"
+		fMens "$FInsu3" "$file"
 	exit
 	else
 		fMens "$FSucs3" "$MInfo54"
-		fMens "$FSucs4" "$arquivo"
+		fMens "$FSucs4" "$file"
 	fi
+done
+}
+#
+# --------------------------------------------------------------------------------------------------------------------------+
+#											 																				|
+#                     FUNÇÃO AUXILIAR DE INSERÇÃO DE INFORMAÇÕES NA BASE A PARTIR DE ARQUIVOS SQL                           |
+#																															|
+# --------------------------------------------------------------------------------------------------------------------------+
+function fInsereSql () {
+su_quant=$(ls -l $CPPINFO/*.sql 2>/dev/null | grep  "^-"  -c)   # numero arquivos SQL existentes
+if [ $su_quant -lt 2 ]; then									# pelo menos 1 arquivo é obrigatório: o de criar tabelas
+	fMens	"$FInfor"	"$MInfo15"
+	return
+fi
+arquivos=$(find "$CPPINFO"/*.sql -maxdepth 1 -type f -not -iname "$CPCRIATABELAS") # exceto o arquivo de criação de tabelas
+for file in $arquivos
+do
+	mysql -u  $CPBASEUSER -p$CPBASEPASSW -b $CPBASE  < "$file"  
+	if [ $? -ne 0 ]; then
+		fMens "$FInsu2" "$MErr53"
+		fMens "$FInsu3" "$file"
+		exit
+	else
+		fMens "$FSucs3" "$MInfo52"
+		fMens "$FSucs4" "$file"
+	fi
+done
 }
 #
 # --------------------------------------------------------------------------------------------------------------------------+
@@ -593,15 +626,17 @@ function fInsereCsv () {
 #			   				   			FUNÇÃO DE UPDATE DAS TABELAS    													|
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
-function fInsertTabelas () {
-# 				Será chamado um arquivo opcional SHELL para fazer INSERT de dados na base de dados.
-# 				este arquivo é opcional, não obrigatório. Neste caso, o arquivo descrito na variável CPINSERTSCRIPT deve 
+function fInsertScript () {
+# 				Será chamado um arquivo opcional SHELL para manipular informações e fazer INSERT de dados adicionais na base de dados.
+# 				Este arquivo é opcional, não obrigatório. Neste caso, o arquivo mencionado na variável CPINSERTSCRIPT deve 
 #				ser retirado desta pasta de instalação.
-if [ ! -f $CPINSERTSCRIPT ]; then
+#if [ ! -f $CPINSERTSCRIPT ]; then
+if [ ! -f $CPPINFO/$CPINSERTSCRIPT ]; then
 	fMens "$FInfor" "$MInfo20"
 else
 	fMens "$FInfor" "$MInfo21"
-	. $(dirname "$0")/$CPINSERTSCRIPT
+#	. $(dirname "$0")/$CPINSERTSCRIPT
+	. $CPPINFO/$CPINSERTSCRIPT
 fi
 return 0
 }	# fim da rotina de preparação de tabelas
@@ -657,9 +692,10 @@ fResumo () {
 	#		fMens "$FInfo2" "$MInfo53 $i= "
 	#		fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $i") "
 	#	done
-	if	[ $CPRELATORIOTABELAS ]; then
+	if	[ $CPRELATORIO -ne 1 ]; then
 	{
-		exec 8< super_relatoriotabelas.csv  # associa lista_arquivos ao descritor 8
+		#									relatorio com apenas as tabelas escolhidas
+		exec 8< $CPPINFO/$CPRELATORIOTABELAS  # associa lista_arquivos ao descritor 8
 		while read arq <&8; do   # Lê uma linha de cada vez do descritor 3.
 			arq=$(echo "$arq" | sed 's/\"//g')	# retira as aspas que rodeia os conteúdos de cada célula do arquivo csv
 			fMens "$FInfo4" "$MInfo53 $arq= "
@@ -668,6 +704,7 @@ fResumo () {
 		exec 8<&-  # libera descritor 8
 	}
 	else {
+		#									relatorio com todas as tabelas
 		TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
 		for arq in $TABLES
 		do
@@ -683,12 +720,10 @@ fInit										# verificação e preparação do ambiente de instalação
 fCriaTabelas								# cria as tabelas
 fMens "$FInfor" "$MInfo13" 
 tabelascsv=()								# neste array será guardado o nome das tabelas que serão populadas pelos arquivos csv
-for file in $CPPCSV/*.csv
-do
-		fInsereCsv $file					# chama rotina para inserir no banco de dados informações dos arquivos csv existentes
-done
+fInsereCsv 									# rotina para inserir no banco de dados informações dos arquivos csv existentes
+fInsereSql									# rotina para inserir no banco de dados informações dos arquivos sql existentes
 retval=0
-fInsertTabelas								# Insert de dados
+fInsertScript								# Script de responsabilidade do usuário para manipular informações e fazer Inserts adicionais na base de dados
 if [ $retval -eq 0 ]; then
 	fMens "$FSucss" "$MInfo14"
 else

@@ -6,12 +6,7 @@ A Superinterface é destinada a dar o suporte tecnológico para criação de ace
 
 Essa reunião de documentos apoiada pela Superinterface deveria ter por base alguma característica comum definida por seus usuários, embora a solução exija poucos formalismos de classificação e proveniência dos documentos. Isso tudo para possibilitar o máximo de fluidez na gestão dos documentos por parte dos curadores.
 
-A recuperação da informação sempre foi uma questão delicada para a ciência da informação. Neste sentido, a Superinterface oferece facilidades de indexação e busca de termos na coleção de documentos, permitindo a criação de arquiteturas de acordo com as necessidades da aplicação. São muito amplas as possibilidades de indexação dos conteúdos dos arquivos presentes no acervo. No momento da instalação deste pacote, as seguintes informações estarão automaticamente disponíveis para serem buscadas nos conteúdos dos arquivos:
-
-    - instituições citadas;
-    - autoridades citadas;
-    - cidades citadas;
-    - nomes de pessoas citadas. 
+A recuperação da informação sempre foi uma questão delicada para a ciência da informação. Neste sentido, a Superinterface oferece facilidades de indexação e busca de termos na coleção de documentos, permitindo a criação de arquiteturas de acordo com as necessidades da aplicação. São muito amplas as possibilidades de indexação dos conteúdos dos arquivos presentes no acervo.
 
 
 A Superinterface é um "automated CRUD generator", fácil de instalar e com uma interface gráfica de administração que facilita todas as operações de
