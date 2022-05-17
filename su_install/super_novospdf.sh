@@ -45,16 +45,16 @@ MErr11="Erro! Pasta para guardar os arquivos do acervo não foi encontrada"
 MErr12="Não foi possível deixar os nomes dos arquivos em minúsculo.  Transferindo arquivo(s) do lote para quarentena"
 MErr13="Erro! Problemas na geração do script para criação de arquivos TXT. Transferindo arquivo(s) do lote para quarentena"
 MErr14="Transferindo arquivos para quarentena. É altamente recomendável verificar a consistência da base de dados devido esta interrupção de inserção de informações na base"
-MErr15="Erro! Problemas na inserção de informações na base de dados a partir do arquivo= "
+MErr15="Erro! Pasta de arquivos javascript não foi encontrada"
 MErr16="Erro! Problema na execução do script de geração de arquivos TXT. Transferindo arquivo(s) do lote para quarentena"
-#MErr17=""
+MErr17="Erro! Não foi encontrado arquivo com a lista de tabelas para constar no relatório resumo"
 MErr18="Erro! Não foi possível criar pasta de quarentena"
 MErr19="Erro! Pasta de logs não existe"
 MErr20="Erro! Arquivo de configuração desta aplicação não foi encontrado"
 MErr21="Erro! Problemas na cópia de arquivos da pasta de upload para a pasta emporária de tratamento destes arquivos"
-#MErr22=""
+MErr22="Erro! Pasta de arquivos com CVS, SQL e SH do usuário não foi encontrada"
 MErr23="Erro! Arquivo de logs não existe e não foi possível recriá-lo"
-#MErr24=""
+MErr24="Erro! Problema no script SHELL do usuário quando da preparação de INSERTs na base de dados. Retornou com código de erro= " 
 MErr25="Erro! É necessário instalar o aplicativo 'detox' conforme manual de instalação"
 MErr26="Erro! Não foi possível compactar arquivo de logs"
 Merr27="Erro! Script periódico de incorporação de arquivos ao acervo da Superinterface só pode ser executado a partir da pasta 'su_install'"
@@ -80,19 +80,13 @@ MErr46="Erro! Não foi possível gerar JPG da primeira página do PDF.  Transfer
 MErr47="Erro! Problemas na criação do arquivo TXT sem acento. Transferindo arquivo(s) do lote para quarentena"
 MErr48="Erro! Problemas na preparação de arquivo TXT sem caracteres de controle. Transferindo arquivo(s) do lote para quarentena"
 MErr49="Erro! É necessário instalar o aplicativo 'aha' conforme manual de instalação"
-#MErr50=""
-#MErr51=""
-#MErr52=""
-MErr53="Alerta! Não foi possível gerar o TXT para este arquivo, logo não indexando seu conteúdo. Ainda assim, seu PDF e JPG serão colocados no acervo: "
-MErr54="Erro! Pasta de arquivos javascript não foi encontrada"
-#MErr55=""
-MErr56="Erro! Script SHELL do usuário, para preparação dos INSERTs da aplicação, retornou com código de erro= "
+MErr50="Alerta! Não foi possível gerar o TXT para este arquivo, logo não indexando seu conteúdo. Ainda assim, seu PDF e JPG serão colocados no acervo: "
 #
 #	mensagens de informação
 MInfo01="Bem vindo ao script de tratamento de novos arquivos do acervo em: "
 MInfo02="Quantidade de arquivos na pasta de quarentena= "
 MInfo03="Sucesso. Criada pasta temporária para tratamento de arquivos" 
-#MInfo04=""
+MInfo04="Resumo, iniciando pelos parâmetros do ambiente:"
 MInfo05="Sucesso. Informações inseridas corretamente na tabela su_docs_cidades"
 MInfo06="Aviso: pasta de logs não estava criada.  Criação foi realizada com sucesso"
 MInfo07="Sucesso. Conexão com o banco de dados foi realizada corretamente"
@@ -149,30 +143,23 @@ MInfo57="Nenhum arquivo RTF para ser tratado neste momento"
 MInfo58="Iniciando o tratamento de um lote de arquivos RTF"
 MInfo59="Iniciando o tratamento de um lote de arquivos TXT"
 MInfo60="Cancelando o tratamento deste lote de arquivos"
-#MInfo61=""
-#MInfo62=""
-#MInfo63=""
-#MInfo64=""
-#MInfo65=""
-#MInfo66=""
-#MInfo67=""
-MInfo68="PID do processo 'unoconv (soffice)' em uso= "
-MInfo69="Processo 'unoconv (soffice)' não encontrado, e será iniciado agora"
+MInfo61="PID do processo 'unoconv (soffice)' em uso= "
 #				  códigos das mensagens
 FInfor=0        # saída normal: new line ao final, sem tratamento de cor
 FInfo1=1        # saída normal: new line ao final, sem tratamento de cor e sem ..... (sem pontinhos ilustrativos)
 FInfo2=2        # saída sem new line ao final, sem tratamento de cor
-FInfo3=3		# saída sem new line ao final, sem tratamento de cor, espaços em branco no início (     )
-FSucss=4        # saída de sucesso: new line ao final da mensagem. na cor azul. No final, muda para cor branca
-FSucs2=5        # saída de sucesso: new line antes e depois da mensagem, cor azul. No final, muda para cor branca
-FInsuc=6        # saída de erro, na cor vermelha, com mensagem de interrupção do script
-FInsu1=7        # saída de erro, na cor vermelha (apenas no screen, não enviado para arquivo de log)
-FInsu2=8		# saída de erro, na cor vermelha, sem new line ao final e sem ....
-FInsu3=9		# saída de erro, na cor vermelha, com new line ao final
-FInsu4=10		# saída de erro, na cor vermelha, com new line ao final e com ....
-FCowsa=11        # saída para aplicativo cowsay
-FFighl=12        # saída para aplicativo fighlet
-FLinha=13		# saída de uma linha separadora para novo log
+FInfo3=3		# saída normal: new line ao final, sem tratamento de cor, espaços em branco no inicio (     )
+FInfo4=4		# saída sem new line ao final, sem tratamento de cor, espaços em branco no início (     )
+FSucss=5        # saída de sucesso: new line ao final da mensagem. na cor azul. No final, muda para cor branca
+FSucs2=6        # saída de sucesso: new line antes e depois da mensagem, cor azul. No final, muda para cor branca
+FInsuc=7        # saída de erro, na cor vermelha, com mensagem de interrupção do script
+FInsu1=8        # saída de erro, na cor vermelha (apenas no screen, não enviado para arquivo de log)
+FInsu2=9		# saída de erro, na cor vermelha, sem new line ao final e sem ....
+FInsu3=10		# saída de erro, na cor vermelha, com new line ao final
+FInsu4=11		# saída de erro, na cor vermelha, com new line ao final e com ....
+FCowsa=12        # saída para aplicativo cowsay
+FFighl=13        # saída para aplicativo fighlet
+FLinha=14		# saída de uma linha separadora para novo log
 #
 MCor01="\e[97m"         # cor default (branca), quando for imprimir mensagens na tela
 MCor02="\e[33m"         # cor amarela, quando for imprimir mensagens na tela
@@ -194,6 +181,9 @@ function fMens () {								# função para enviar mensagem, das seguintes formas
 				echo -n ".....$2" | tee -a "$CPPLOG"/"$CPALOG"
 				;;
 			$FInfo3)
+				echo -e "     $2" | tee -a "$CPPLOG"/"$CPALOG"
+				;;
+			$FInfo4)
                 echo -n "     $2" | tee -a "$CPPLOG"/"$CPALOG"
                 ;;
 			$FSucs3)							# sem line feed, cor azul
@@ -253,46 +243,48 @@ Superinterface
 function fInit () {
 : '
 	Consistências iniciais (principais):
-	C1: se o usuário é root
-	C2: se o arquivo de configuração está disponível
-	C3: se a pasta corrente é a de instalação
-	C4: se pasta e arquivo de logs estão preparados
-	C5: se pasta de uploads está disponível
-	C6: verificar existência de arquivos para tratamento esperando na pasta de uploads
-	--------	--------	--------  
-	C7:  verificar se aplicativo unoconv está instalado
-	C8:  verificar se aplicativo aha     está instalado
-	C9:  verificar se aplicativo detox   está instalado
-	C10:  verificar se aplicativo figlet  está instalado
-	C11: verificar se aplicativo cowsay  está instalado
-	C12: verificar existência arquivo contendo nomes das cidades
-	C13: verificar existência de arquivo com comandos SQL para inserção dados na tabela su_cidades
-	C14: verificar pasta para arquivos do acervo
-	C15: verificar pasta de arquivos javascript
-	C16: verificar pasta de trabalho
-	C17: verificar existência da pasta de arquivos não PDF já preparados
-	C18: verificar existência de pasta de quarentena
-	C19: verificar a conexão com o banco de dados
+	C1: verificar se o usuário é root
+	C2: verificar se o arquivo de configuração está disponível
+	C3: verificar se a pasta corrente é a de instalação
+	C4: verificar se pasta e arquivo de logs estão preparados
+	C5: verificar existência da pasta de informações do usuário
+	C6: verificar existência de arquivo com indicação das tabelas a constarem no relatório resumo
+	C7: verificar existência de pasta de uploads de arquivos
+	--------	--------	-------- 
+	C8:  verificar existência de arquivos para serem tratados
+	C9:  verificar se aplicativo unoconv está instalado
+	C10: verificar se aplicativo aha     está instalado
+	C11: verificar se aplicativo detox   está instalado
+	C12: verificar se aplicativo figlet  está instalado
+	C13: verificar se aplicativo cowsay  está instalado
+	C14: verificar SHELL script do usuário
+	C15: verificar existência da pasta para arquivos do acervo
+	C16: verificar existência da pasta de arquivos javascript
+	C17: verificar pasta de trabalho
+	C18: verificar existência de pasta de arquivos originais não PDF
+	C19: verificar existência de pasta de quarentena
+	C20: verificar a conexão com o banco de dados
+	C21: verificar se deve renomear os arquivos (numerando-os)
 	--------	--------	--------  
 '
-	#										C1: verificar se é usuário root
+	#										TTT C1: verificar se é usuário root
 	if [ "$EUID" -eq $CPROOT_UID ];  then 
     	fMens "$FInsu1" "$MErr01"
         exit
 	fi
-	#										C2: verificar se arquivo de configuração está disponível
+	#										TTT C2: verificar se arquivo de configuração está disponível
 	if [ ! -f $CPCONFIG ]; then
 		fMens "$FInsu1" "$MErr20"
 		exit
 	fi
 	source	$CPCONFIG						# inserir arquivo de configuração
 	chmod	$CPPERM500 $0					# estabelecer permissão para este arquivo
-    #										C3: verificar se pasta corrente é a de instalação
+	#										TTT C3: verificar se pasta corrente é a de instalação
 	if [ "${PWD##*/}" != "$(basename $CPPINSTALL)" ]; then
 		fMens "$FInsu1" "$MErr27"
         exit
     fi
-	#										C4: verificar se pasta de logs está disponível
+	#										TTT C4: verificar se pasta de logs está disponível
 	if [ ! -d $CPPLOG ]; then
 		fMens "$FInsuc" "$MErr19"
  		exit
@@ -306,12 +298,22 @@ function fInit () {
 		fi
 		fMens	"$FInsu4" "$MInfo39"
 	fi
-	#										C5: verifica existência de pasta de uploads de arquivos
+	#										TTT C5: verificar existência da pasta de informações do usuário
+	if [ ! -d $CPPINFO ]; then
+		fMens "$FInsuc" "$MErr22"
+		exit
+	fi
+	#										TTT C6: verificar existência de arquivo com indicação das tabelas a constarem no relatório resumo
+    if [ $CPRELATORIO -eq 0 ] && [ ! -f $CPPINFO/$CPRELATORIOTABELAS ]; then
+    	fMens   "$FInsuc"   "$MErr17"
+        exit
+    fi
+	#										TTT C7: verifica existência de pasta de uploads de arquivos
 	if [ ! -d $CPPUPLOADS ]; then
 		fMens "$FInsuc" "$MErr09"
 		exit
 	fi
-	#										C6: verificar existência de arquivos para serem tratados
+	#										TTT C8: verificar existência de arquivos para serem tratados
 	if ls $CPPUPLOADS/*.*  1> /dev/null 2>&1; then
 		:
 	else
@@ -322,7 +324,7 @@ function fInit () {
 	fMens	"$FInfor" "$MInfo10"			# mensagem que existem novos arquivos para serem tratados
 	fMens	"$FInfo2" "$MInfo53"
 	fMens	"$FInfo1" "$(ls $CPPUPLOADS/* | wc -l)"
-	#										C7: verificar se aplicativo unoconv está instalado
+	#										TTT C9: verificar se aplicativo unoconv está instalado
 	#										(necessário para conversão arquivos -> .pdf)
 	if [ -n "$(dpkg --get-selections | grep unoconv | sed '/deinstall/d')" ]; then
 	:
@@ -330,7 +332,7 @@ function fInit () {
 		fMens "$FInsuc" "$MErr30"
 		exit
 	fi
-	#										C8: verificar se aplicativo aha está instalado
+	#										TTT C10: verificar se aplicativo aha está instalado
 	#										(necessário para geração html de arquivo de logs)
 	if [ -n "$(dpkg --get-selections | grep aha | sed '/deinstall/d')" ]; then
 	:
@@ -338,14 +340,14 @@ function fInit () {
 		fMens "$FInsuc" "$MErr49"
 		exit
 	fi
-	#										C9: verificar se aplicativo detox está instalado
+	#										TTT C11: verificar se aplicativo detox está instalado
 	if [ -n "$(dpkg --get-selections | grep detox | sed '/deinstall/d')" ]; then
 	:
 	else
 		fMens "$FInsuc" "$MErr25"
 		exit
 	fi
-	#										C10: verificar se aplicativo figlet está instalado
+	#										TTT C12: verificar se aplicativo figlet está instalado
 	if [ -n "$(dpkg --get-selections | grep figlet | sed '/deinstall/d')" ]; then
 		fMens "$FInfo1" "$MCor02"			# saída na cor amarela 
 		fMens "$FFighl"
@@ -357,23 +359,28 @@ function fInit () {
 	fMens "$FInfo1" "$0"
 	fMens "$FInfor" "$MInfo42:  $(date '+%d-%m-%Y as  %H:%M:%S') --- $MInfo43"
 	fMens "$FInfo1" "$MCor01"
-	#										C11: verificar se aplicativo cowsay está instalado
+	#										TTT C13: verificar se aplicativo cowsay está instalado
 	if [ -n  "$(dpkg --get-selections | grep cowsay | sed '/deinstall/d')" ]; then
 		fMens "$FCowsa"  "$CPNOMECOWSAY1"
 	else
 		fMens "$FInfor" "$MInfo40"
 	fi
-	#										C14: verificar existência da pasta para arquivos do acervo
+	#										TTT C14: verificar SHELL script do usuário
+	if [ ! -f $CPPINFO/$CPINSERTACERVO ]; then
+		fMens "$FInsuc" "$MErr04"
+		exit
+	fi
+	#										TTT C15: verificar existência da pasta para arquivos do acervo
 	if [ ! -d $CPPIMAGEM ]; then
 		fMens "$FInsuc" "$MErr11"
 		exit
 	fi
-	#										C15: verificar existência da pasta de arquivos javascript
+	#										TTT C16: verificar existência da pasta de arquivos javascript
 	if [ ! -d $CPPIMAGEM ]; then
-		fMens "$FInsuc" "$MErr54"
+		fMens "$FInsuc" "$MErr15"
 		exit
 	fi
-	#										C16: verificar pasta de trabalho (arquivos temporários)
+	#										TTT C17: verificar pasta de trabalho
 	rm -rf $CPPWORK 2>/dev/null
     if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr05"
@@ -386,7 +393,7 @@ function fInit () {
 	else
     	fMens "$FSucss" "$MInfo03"
 	fi
-	#										C17: verificar existência de pasta de arquivos originais não PDF
+	#										TTT C18: verificar existência de pasta de arquivos originais não PDF
 	if [ ! -d $CPPRIMITIVO ]; then
 		mkdir $CPPRIMITIVO
 	    if [ $? -ne 0 ]; then
@@ -396,7 +403,7 @@ function fInit () {
 			fMens	"$FInsu4"	"$MInfo52"
 		fi
 	fi
-	#										C18: verificar existência de pasta de quarentena
+	#										TTT C19: verificar existência de pasta de quarentena
 	if [ ! -d $CPPQUARENTINE ]; then
 		mkdir $CPPQUARENTINE
 	    if [ $? -ne 0 ]; then
@@ -406,7 +413,7 @@ function fInit () {
 			fMens	"$FInsu4"	"$MInfo36"
 		fi
 	fi
-	#										C19: testar conexão com o banco de dados
+	#										TTT C20: verificar a conexão com o banco de dados
     mysql -u $CPBASEUSER -b $CPBASE -p$CPBASEPASSW -e "quit" 2>/dev/null
 	if [ $? -ne 0 ]; then
     	fMens "$FInsuc" "$MErr07"
@@ -414,7 +421,7 @@ function fInit () {
     else
 			fMens "$FSucss" "$MInfo07"
 	fi
-	#											verificar se deve renomear os arquivos (numerando-os)
+	#										TTT C21: verificar se deve renomear os arquivos (numerando-os)
 	if [ $CPNUMERARPDF -ne 0 ]; then
 		fMens	"$FInfor"	"$MInfo24"			# mensagem informativa que irá renomear os arquivos
 	fi
@@ -432,8 +439,10 @@ function fInit () {
     chmod $CPPERM750 $CPPADMIN              # definir permissão pasta administrativa da Superinterface
     chmod $CPPERM750 $CPPQUARENTINE         # definir permissão pasta de quarentena
     chmod $CPPERM750 $CPPWORK               # definir permissão pasta de trabalho
+	chmod $CPPERM750 $CPPTEMP				# definir permissão pasta temporária do usuário
     chmod $CPPERM750 $CPPRIMITIVO           # definir permissão pasta de arquivos não PDF já preparados
     chmod $CPPERM750 $CPPUPLOADS            # definir permissão pasta de uploads de arquivos destinados ao acervo
+	chmod $CPPERM750 $CPPINFO				# definir permissão para pasta de SQL, CSV e SH do usuário
 	# ... ... ...
 	chmod	$CPPERM600 $CPCONFIG				# estabelecer permissão para arquivo configuração
 	chmod	$CPPERM640 $CPPLOG"/"$CPALOG		# estabelecer permissão para arquivo logs
@@ -642,16 +651,19 @@ function fGarq () {
 		fMens "$FInfor" "$MInfo27"
 		retval=0
 #	. $(dirname "$0")/super_tabelas_insert_acervo.sh
-	. $CPPINFO/$CPINSERTACERVO
+	. $CPPINFO/$CPINSERTACERVO							# executar arquivo shell do usuário
+														# fazer inserção das informações do arquivo na base de dados
+	rm -f $CPPTEMP/*
 	fi
 	if [ $retval -eq 0 ];then
 		fMens	"$FSucss"	"$MInfo28"
 	else
-		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.			# enviar os arquivos PDF para quarentena
+		mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
 		rm -f $CPPWORK/*.*
-		rm -f $CPPLOG/*.bash $CPPLOG/*.sql $CPPLOG/*.txt
-		fMens	"$FInsu2"	"$MErr56"
+		rm -f $CPPTEMP/*.bash $CPPTEMP/*.sql $CPPTEMP/*.txt 2>/dev/null
+		fMens	"$FInsu2"	"$MErr24"
 		fMens	"$FInsu3"	"$retval"
+		fMens	"$FInsu4"	"$MErr14"
 		fMens	"$FInsu4"	"$MErr10"
 		exit
 	fi
@@ -667,31 +679,19 @@ function fGarq () {
 # --------------------------------------------------------------------------------------------------------------------------+
 #
 function fInse () {
-	#													popular a base de dados com as ocorrências encontradas no interior 
-	#													dos arquivos submetidos ao acervo
-	for i in "$CPPLOG"/*.sql; do
-		mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$i"
-		if [ $? -ne 0 ];then
-			fMens	"$FInsu2"	"$MErr15"
-			fMens	"$FInsu3"	"$i"
-			fMens "$FInsu4" "$MErr14"
-			mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/.	# enviar os arquivos PDF para quarentena
-			rm -f $CPPWORK/*.*
-			rm -f $CPPLOG/*.sql 
-			return
-		fi
-	done
 	#												verifica se foi possível extrair o conteúdo do arquivo para txt
 	for i in "$CPPWORK"/*.txt
 	do
 		if [ $(wc -c $i | cut -d " " -f1) -lt 10 ]; then
-			fMens	"$FInsu2" "$MErr53"
+			#										arquivo muito pequeno. Possivelmente não extraiu nenhum conteúdo. Informar.
+			fMens	"$FInsu2" "$MErr50"
 			fMens	"$FInsu3" "$(basename $i)"
 		fi
 	done
 	fMens "$FSucss" "$MInfo05"
+	#												disponibiliza os arquivos para o Giramundonics (colocar na pasta CPPIMAGEM)
 	mv -f $CPPWORK/*.* $CPPIMAGEM/.
-	rm -f $CPPLOG/*.sql
+	rm -f $CPPTEMP/*.sql
 	return
 	# fim da rotina de inserção das ocorrências nas tabelas da base de dados
 }
@@ -1251,6 +1251,46 @@ function fTrataTXT () {
 	fGarq											# tratar arquivos visando colocar suas informações na base de dados do acervo
 }
 #
+# --------------------------------------------------------------------------------------------------------------------------+
+#											 											|
+#			   				   	                FUNÇÃO PARA INFORMAR UM RESUMO DA BASE DE DADOS							|
+#																						|
+# --------------------------------------------------------------------------------------------------------------------------+
+fResumo () {
+	#								resumo de informações da instalação realizada
+	fMens "$FInfor" "$MInfo04"
+	fMens "$FInfo3" "$($SHELL --version | head -1)"
+	fMens "$FInfo3" "$(/usr/bin/lsb_release -ds)"
+	fMens "$FInfo3" "$(printenv LANG)"
+	fMens "$FInfo3" "$(php -v | head -1)"
+	fMens "$FInfo3" "$(mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e \"select @@version\" | head -1)"
+	fMens "$FInfo3" "$(/usr/bin/id -un)"
+	fMens "$FInfo4" "$MInfo61"
+	fMens "$FInfo1"	"$(pgrep soffice)"
+	fMens "$FInfo2" "$MInfo31"
+	fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
+	if	[ $CPRELATORIO -ne 1 ]; then
+	{
+		#									relatorio com apenas as tabelas escolhidas
+		exec 8< $CPPINFO/$CPRELATORIOTABELAS  # associa lista_arquivos ao descritor 8
+		while read arq <&8; do   # Lê uma linha de cada vez do descritor 3.
+			arq=$(echo "$arq" | sed 's/\"//g')	# retira as aspas que rodeia os conteúdos de cada célula do arquivo csv
+			fMens "$FInfo4" "$MInfo26 $arq= "
+			fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
+		done
+		exec 8<&-  # libera descritor 8
+	}
+	else {
+		#									relatorio com todas as tabelas
+		TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
+		for arq in $TABLES
+		do
+			fMens "$FInfo4" "$MInfo26 $arq= "
+			fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
+		done
+	}
+	fi
+}
 #
 # --------------------------------------------------------------------------------------------------------------------------+
 #																															|
@@ -1279,36 +1319,13 @@ mv -f $CPPUPLOADS/* $CPPQUARENTINE/. 2>/dev/null
 unset GLOBIGNORE
 #
 #												resumo
-fMens "$FInfo2" "$MInfo31"
-fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$CPBASE'")"
-if	[ $CPRELATORIOTABELAS ]; then
-{
-	exec 8< super_relatoriotabelas.csv  # associa lista_arquivos ao descritor 8
-	while read arq <&8; do   # Lê uma linha de cada vez do descritor 3.
-		arq=$(echo "$arq" | sed 's/\"//g')	# retira as aspas que rodeia os conteúdos de cada célula do arquivo csv
-		fMens "$FInfo3" "$MInfo26 $arq= "
-		fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
-	done
-	exec 8<&-  # libera descritor 8
-}
-else {
-	TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
-	for arq in $TABLES
-	do
-		fMens "$FInfo3" "$MInfo26 $arq= "
-		fMens "$FInfo1" "$(mysql -N -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "SELECT count(*) FROM $arq") "
-	done
-}
-fi
+fResumo
 fMens "$FInfo2" "$MInfo02"
 fMens "$FInfo1" "$(ls -la $CPPQUARENTINE/ | grep -e "^-" | wc -l)"
 fMens "$FInfo2" "$MInfo45"
 fMens "$FInfo1" "$(ls -la $CPPUPLOADS/ | grep -e "^-" | wc -l)"
 #
 #								mensagem de fim do script com sucesso
-fMens	"$FInfo2"	"$MInfo68"
-#fMens	"$FInfo1"	"$(ps -A |grep soffice |cut -d " " -f 1,2)"
-fMens	"$FInfo1"	"$(pgrep soffice)"
 fMens	"$FSucss"	"$MInfo32"
 fMens	"$FInfor"	"$MInfo09:  $(date '+%d-%m-%Y as  %H:%M:%S')"
 #						Gerar arquivo de logs em html necessário a interface administrativa

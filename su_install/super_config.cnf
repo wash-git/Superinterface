@@ -8,11 +8,11 @@ CPBASE=""                                        # base de dados da aplicação
 CPBASEUSER=""                                    # usuário da base de dados
 CPBASEPASSW=""                                   # password da base de dados
 CPNUMERARPDF=0                                   # renomear arquivos PDF (0 = não; 1 = sim)
-CPHTTPHOST=""                                    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+CPHTTPHOST="                                "    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
                                        # exemplos:
                                        # observatorio.wash.net.br/superinterface
                                        # exemplo.br
-CPQPDFLOTE=2                           # quantidade máxima de arquivos PDF tratados a cada ativação do script do cron
+CPQPDFLOTE=2                           # quantidade máxima de arquivos (lote de arquivos) tratados a cada ativação da Superinterface pelo cron
 CPTAMMAX=1900000                       # tamanho max do arquivo para upload (em bytes). Não é o php.ini.
 CPRELATORIO=0                          # 0=relatoio com tabelas relacionadas;    1=relatorio com todas tabelas
 CPRELATORIOTABELAS="super_relatoriotabelas.csv"  # arquivo que contém a lista de tabelas para emitir relatorio
@@ -28,8 +28,9 @@ CPPUPLOADS="../su_uploads"             # pasta com os novos arquivos de uploads
 CPPIMAGEM="../su_imagens"              # pasta do acervo dos arquivos que foram colocados na base mysql
 CPPRIMITIVOS="../su_primitivos"        # pasta dos arquivos originais do acerto - ODT, DOCX, RTF etc (exceto PDFs)
 CPPWORK="../su_work"                   # pasta de trabalho auxiliar para manipulação de arquivos PDF
+CPPTEMP="../su_temp"                   # pasta para arquivos temporários
 CPPLOG="../su_logs"                    # pasta de logs
-CPPINFO="../su_info"                   # pasta de arquivos que trazem as informações iniciais para popular a base dados	
+CPPINFO="../su_info"                   # pasta de arquivos CSV, SQL e SH do usuário para popular a base dados	
 CPPQUARENTINE="../su_quarentine"       # pasta para guardar novos arquivos PDF repetidos (já estavam no acervo)
 CPPRIMITIVO="../su_primitivos"         # pasta para guardar arquivos originais não PDF já tratados
 CPPAUTOPHP="../su_autophp"             # pasta para receber arquivos PHP a serem gerados automaticamente
@@ -46,8 +47,6 @@ CPALOG="super_logshell.log"            # nome do arquivo de logs da Superinterfa
 CPALOGHTML="super_logshell.html"       # nome do arquivo de logs da Superinterface em formato html
 CPPHPFILE="super_config_php.cnf"       # nome do arquivo de configuração gerado para o PHP
 CPLOGSFILEGZ="super_logfile.tar"	   # nome base do arquivo compactado de logs
-CPNOMECIDADES="super_cidades_maiusculas.txt"    # nome arquivo com nomes das cidades (em letras maiúsculas, sem controle)
-CPNOMEINST="super_instituicoes_maiusculas.txt"  # nome arquivo com nomes das instituições (em letras maiúsculas, sem controle)
 CPTABELASCRIADAS="super_tabelascriadas.html"  # arquivo com a lista das tabelas criadas, e suas estruturas
 CPACENTO="acento"                      # extensão nome dos arquivos com conteúdo sem caracteres acentuados
 CPCONTRL="contrl"                      # extensão nome dos arquivos com conteúdo sem caracteres controles

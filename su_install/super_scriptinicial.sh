@@ -29,9 +29,9 @@ MErr13="Erro! Não foi possível criar tabelas no banco de dados"
 MErr14="Erro! Não foi possível inserir comentário na tabela de usuários"
 MErr15="Erro! Não foi possível apagar alguns arquivos antigos"
 MErr16="Erro! Não foi possível se conectar com a base de dados legada"
-MErr17="Erro! Arquivo SHELL com comandos SQL da aplicação do usuário retornou com código de erro= "
+MErr17="Erro! Arquivo SHELL do usuário retornou com código de erro= "
 MErr18="Erro! Não foi possível preparar pasta de arquivos originais não PDF: a pasta não pode ser criada"
-MErr19="Erro! Não foi possível preparar pasta de temporários: a pasta não pode ser criada"
+MErr19="Erro! Não foi possível preparar pasta de trabalho: a pasta não pode ser criada"
 MErr20="Erro! Pasta Administrativa não foi encontrada"
 MErr21="Erro! Aplicativo 'unoconv' instalado mas não respondendo. Pare o processo do 'unoconv' (via comando 'kill') para que o mesmo possa ser reiniciado"
 MErr22="Erro! Não foi possível configurar corretamente os privilégios dos usuários"
@@ -46,27 +46,14 @@ MErr30="Erro! Não foi possível preparar pasta de upload para novos arquivos"
 MErr31="Erro! Não foi possível criar pasta de uploads para novos arquivos"
 MErr32="Erro! É necessário ter instalado o aplicativo 'detox' (apt-get install detox)"
 MErr33="Erro! Não foi possível gerar o arquivo de configuração para as rotinas PHP"
-MErr34="Erro! Não foi encontrado arquivo com a lista de arquivos a constar no relatório resumo"
+MErr34="Erro! Não foi encontrado arquivo com a lista de tabelas para constar no relatório resumo"
 MErr35="Erro! Não foi possível criar pasta para arquivos PHP que viriam a ser automaticamente gerados"
 MErr36="Erro! Para instalar a Superinterface é obrigatório estar na pasta 'su_install'"
-#MErr37=""
-#MErr38=""
+MErr37="Erro! Não foi possível criar pasta de arquivos temporários"
+MErr38="Erro! Não foi possível transferir informações deste arquivo SQL para base de dados: " 
 MErr39="Erro! Não foi possível gerar arquivo auxiliar de nomes de instituições"
-#MErr40=""
+MErr40="Erro! Não foi possível transferir informações deste arquivo CSV para base de dados: "
 MErr41="Erro! Pasta de arquivos javascript não foi encontrada"
-#MErr42=""
-#MErr43=""
-#MErr44=""
-#MErr45=""
-#MErr46=""
-#MErr47=""
-#MErr48=""
-#MErr49=""
-#MErr50=""
-#MErr51=""
-#MErr52=""
-MErr53="Erro! Não foi possível transferir informações deste arquivo SQL para base de dados: "
-MErr54="Erro! Não foi possível transferir informações deste arquivo CSV para base de dados: "
 #
 MInfo01="Preparar as pastas"
 MInfo02="Sucesso! Criada pasta do acervo de arquivos PDF da Superinterface"
@@ -89,18 +76,18 @@ MInfo18="Quantidade de tabelas geradas= "
 MInfo19="Preparar tabelas do banco de dados"
 MInfo20="Aviso: não foi encontrado arquivo opcional SHELL para tratamento de dados"
 MInfo21="Aviso: arquivo opcional SHELL do usuário para tratamento de dados foi encontrado. Executando...."
-#MInfo22=""
-#MInfo23=""
-#MInfo24=""
-#MInfo25=""
-MInfo26="super_install.sh"
-MInfo27="Sucesso! Criada pasta de arquivos orginais não PDF"
+MInfo22="super_install.sh"
+MInfo23="Sucesso! Criada pasta de arquivos originais não PDF"
+MInfo24="Sucesso! Criada pasta de quarentena"
+MInfo25="Sucesso! Criada pasta de tratamento de arquivos submetidos ao acervo (work)"
+#MInfo26=""
+#MInfo27=""
 #MInfo28=""
 #MInfo29=""
 #MInfo30=""
 #MInfo31=""
-MInfo32="Sucesso! Criada pasta de quarentena"
-MInfo33="Sucesso! Criada pasta de arquivos temporários"
+#MInfo32=""
+#MInfo33=""
 #MInfo34=""
 #MInfo35=""
 #MInfo36=""
@@ -116,7 +103,7 @@ MInfo45="Data:"
 MInfo46="Script terminado em"
 MInfo47="Alerta: notamos a falta do aplicativo cowsay. Ele não é obrigatório. Dica: assim que possível, instalar o cowsay  (apt-get install cowsay)"
 MInfo48="Alerta: notamos a falta do aplicativo figlet. Ele não é obrigatório. Dica: assim que possível, instalar o figlet  (apt-get install figlet)"
-#MInfo49=""
+MInfo49="Sucesso! Criada pasta para arquivos temporários"
 MInfo50="Aviso: nenhum arquivo PDF será tratado nesta instalação. A incorporação de arquivos ao acervo da Superinterface ocorrerá quando o script ativado via cron for executado"
 MInfo51="Sucesso! Criada pasta para guardar os arquivos PHP gerados automaticamente nesta instalação"
 MInfo52="Sucesso! Arquivo SQL transferido para base de dados: "
@@ -227,55 +214,38 @@ function fInit () {
 		C10: verificar se aplicativo cowsay está instalado
 		C11: verificar se aplicativo aha    está instalado
 		C12: verificar criação de arquivo de configuração para o PHP
-		C13: verificar existência arquivo SQL para criação de tabelas e inserts iniciais
-
-
-
-		
-
-	
-
-		C22: verificar criação de pasta do acervo (imagens de arquivos PDF)
-		C23: verificar criação de pasta para uploads de arquivos
-		C24: verificar criação de pasta de trabalho temporária
-		C25: verificar criação de pasta para arquivos originais não PDF
-		C26: verificar criação de pasta de quarentena
-		C27: verificar criação de pasta arquivos PHP gerados automaticamente
-		C28: verificar existência de pasta administrativa da Superinterface
-		C29: verificar existência de pasta de arquivos javascript
-		C30: verificar criação arquivo índice numeração de nomes arquivos PDF
-		C31: definir permissões de acesso a pastas e arquivos
-		C32: verificar a conexão com o banco de dados
-		C33: verificar se base de dados está limpa
-		C34: verificar criação das tabelas da Superinterface
-		
-
-
-
-		
-
-
-
-		
-		
-		
-		C46: verificar existência arquivo SQL adicional de aplicação externa
-		C47: verifica a criação de usuário administrador
+		C13: verificar existência arquivo com comandos SQL criação de tabelas
+		C14: verificar existência de arquivo com indicação das tabelas a constarem no relatório resumo
+		C15: verificar criação de pasta do acervo (imagens de arquivos PDF)
+		C16: verificar criação de pasta para uploads de arquivos
+		C17: verificar criação de pasta de trabalho
+		C18: verificar criação de pasta para arquivos originais não PDF
+		C19: verificar criação de pasta de quarentena
+		C20: verificar criação de pasta arquivos PHP gerados automaticamente
+		C21: verificar criação de pasta arquivos temporários
+		C22: verificar existência de pasta administrativa da Superinterface
+		C23: verificar existência de pasta de arquivos javascript
+		C24: verificar criação arquivo índice numeração de nomes arquivos PDF
+		C25: definir permissões de acesso a pastas e arquivos
+		C26: verificar a conexão com o banco de dados
+		C27: verificar se base de dados está limpa e apagar possíveis tabelas existentes
+		C28: verificar criação das tabelas da Superinterface
+		C29: verificar a criação de usuário administrador
         --------        --------        --------  
 '
 #
 	clear
-	#											C01: verificar se é usuário root
+	#											TTT C01: verificar se é usuário root
 	if [ "$EUID" -eq $CPROOT_UID ];  then 
 		fMens "$FInsu1" "$MErr05"
 		exit
 	fi
-	#											C02: verificar se pasta corrente é a de instalação
+	#											TTT C02: verificar se pasta corrente é a de instalação
 	if [ "${PWD##*/}" != "$CPPINSTALL" ]; then
 		fMens "$FInsu1" "$MErr36"
 		exit
 	fi
-	#											C03: verificar se arquivo de configuração está disponível
+	#											TTT C03: verificar se arquivo de configuração está disponível
 	if [ ! -f $CPCONFIG ]; then
 		fMens "$FInsu1" "$MErr23"
 		exit
@@ -283,7 +253,7 @@ function fInit () {
 	#											limpeza do ambiente de instalação
 	#find ../ -type d -not -name su* -not -name .. -exec rm -r {} \
 	source  $CPCONFIG							# inserir arquivo de configuração
-	#											C04: limpar pasta de administração
+	#											TTT C04: limpar pasta de administração
 	#											apagar possíveis arquivos anteriores para gerar novas versões:
 	# 											configuração do PHP,bloqueio do script ativado pelo cron
 	rm	-f	{$CPPADMIN/$CPPHPFILE,$CPPADMIN/$CPNOMENOVOS".lock"}
@@ -291,14 +261,14 @@ function fInit () {
  		fMens "$FInsu1" "$MErr15"
  		exit
 	fi
-	#											C05: limpar pasta de logs, do acervo, de uploads,				
+	#											TTT C05: limpar pasta de logs, do acervo, de uploads,				
 	# 											de rascunho, quarentena, primitivo, autoPHP
 	rm -rf {$CPPLOG,$CPPIMAGEM,$CPPUPLOADS,$CPPWORK,$CPPQUARENTINE,$CPPRIMITIVO,$CPPAUTOPHP}  2>/dev/null
 	if [ $? -ne 0 ]; then
  		fMens "$FInsu1" "$MErr26"
  		exit
 	fi
-	#											C06: verificar criação de pasta de logs
+	#											TTT C06: verificar criação de pasta de logs
 	mkdir $CPPLOG					
 	if [ $? -ne 0 ]; then
  		fMens "$FInsu1" "$MErr27"
@@ -307,7 +277,7 @@ function fInit () {
 	fMens "$FSucss" "$MInfo44"					# sucesso na criação de pasta de logs
 	#											veriricar criação de arquivo de logs
 	echo "--- Arquivo de LOG criado ---" > $CPPLOG/$CPALOG
-	#											C07: verificar se aplicativo unoconv está instalado
+	#											TTT C07: verificar se aplicativo unoconv está instalado
 	#                                       	(necessário para conversão .docx -> .pdf)
 	if [ -n "$(dpkg --get-selections | grep unoconv | sed '/deinstall/d')" ]; then
 		pidsoffice="$(pgrep soffice)" 
@@ -320,14 +290,14 @@ function fInit () {
 		exit
 	fi
 	#         
-	#											C08: verificar se aplicativo detox está instalado
+	#											TTT C08: verificar se aplicativo detox está instalado
 	if [ -n "$(dpkg --get-selections | grep detox | sed '/deinstall/d')" ]; then
 		:
 	else
 		fMens "$FInsuc" "$MErr32"
 		exit
 	fi
-	#											C09: verificar se aplicativo figlet está instalado
+	#											TTT C09: verificar se aplicativo figlet está instalado
 	if [ -n "$(dpkg --get-selections | grep figlet | sed '/deinstall/d')" ]; then
 		fMens "$FInfo1" "$MCor02"				# saída na cor amarela 
 		fMens "$FFighl"
@@ -336,16 +306,16 @@ function fInit () {
 	fi
 	fMens "$FInfo1" "$MCor02"					# saída na cor amarela 
 	fMens "$FInfo2"	"$MInfo41"					# enviar mensagem de boas vindas
-	fMens "$FInfo1"	"$MInfo26"					# $0
+	fMens "$FInfo1"	"$MInfo22"					# $0
 	fMens "$FInfor" "$MInfo45:  $(date '+%d-%m-%Y as  %H:%M:%S') --- $MInfo08"
 	fMens "$FInfo1" "$MCor01"
-	#											C10: verificar se aplicativo cowsay está instalado
+	#											TTT C10: verificar se aplicativo cowsay está instalado
 	if [ -n  "$(dpkg --get-selections | grep cowsay | sed '/deinstall/d')" ]; then
 		fMens "$FCowsa"  "$CPNOMECOWSAY1"
 	else
 		fMens "$FInfor" "$MInfo47"
 	fi
-	#											C11: verificar se aplicativo aha está instalado
+	#											TTT C11: verificar se aplicativo aha está instalado
 	#											(necessário para geração html de arquivo de logs)
 	if [ -n "$(dpkg --get-selections | grep aha | sed '/deinstall/d')" ]; then
 			:
@@ -390,22 +360,22 @@ function fInit () {
 	a=$a\)
 	echo -e "\$extensoes_validas = $a;" >> $CPPADMIN/$CPPHPFILE
 	echo -e "?>\n" >> $CPPADMIN/$CPPHPFILE
-	#											C12: verificar criação do arquivo de configuração para o PHP
+	#											TTT C12: verificar criação do arquivo de configuração para o PHP
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr33"
 		exit
 	fi
-	#											C13: verificar existência arquivo com comandos SQL criação de tabelas
+	#											TTT C13: verificar existência arquivo com comandos SQL criação de tabelas
 	if [ ! -f $CPPINFO/$CPCRIATABELAS ]; then
 		fMens "$FInsuc" "$MErr25"
 		exit
 	fi	
-	#											Cxxx: verificar existência de arquivo com indicação das tabelas a constarem no relatório resumo
+	#											TTT C14: verificar existência de arquivo com indicação das tabelas a constarem no relatório resumo
 	if [ $CPRELATORIO -eq 0 ] && [ ! -f $CPPINFO/$CPRELATORIOTABELAS ]; then
 		fMens	"$FInsuc"	"$MErr34"
 		exit
 	fi	
-	#											C22: verificar criação de pasta do acervo (imagens de arquivos PDF)
+	#											TTT C15: verificar criação de pasta do acervo (imagens de arquivos PDF)
 	fMens "$FInfor" "$MInfo01" 
 	rm -rf $CPPIMAGEM 2>/dev/null
 	if [ $? -ne 0 ]; then
@@ -419,7 +389,7 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo02"
 	fi
-	#											C23: verificar criação de pasta para uploads de arquivos
+	#											TTT C16: verificar criação de pasta para uploads de arquivos
 	rm -rf $CPPUPLOADS 2>/dev/null
 	if [ $? -ne 0 ]; then
  		fMens "$FInsuc" "$MErr30"
@@ -432,34 +402,34 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo06"
 	fi
-	#											C24: verificar criação de pasta de trabalho temporária
+	#											TTT C17: verificar criação de pasta de trabalho
 	rm -rf $CPPWORK 2>/dev/null
 	mkdir $CPPWORK
 	if [ $? -ne 0 ]; then
  		fMens "$FInsuc" "$MErr19"
  		exit
 	else
-		fMens "$FSucss" "$MInfo33"
+		fMens "$FSucss" "$MInfo25"
 	fi
-	#											C25: verificar criação de pasta para arquivos originais não PDF
+	#											TTT C18: verificar criação de pasta para arquivos originais não PDF
 	rm -rf $CPPRIMITIVO
 	mkdir $CPPRIMITIVO
 	if [ $? -ne 0 ]; then
  		fMens "$FInsuc" "$MErr18"
  		exit
 	else
-		fMens "$FSucss" "$MInfo27"
+		fMens "$FSucss" "$MInfo23"
 	fi
-	#											C26: verificar criação de pasta de quarentena
+	#											TTT C19: verificar criação de pasta de quarentena
 	rm -rf $CPPQUARENTINE
 	mkdir $CPPQUARENTINE
 	if [ $? -ne 0 ]; then
  		fMens "$FInsuc" "$MErr29"
  		exit
 	else
-		fMens "$FSucss" "$MInfo32"
+		fMens "$FSucss" "$MInfo24"
 	fi
-	#											C27: verificar criação de pasta arquivos PHP gerados automaticamente
+	#											TTT C20: verificar criação de pasta arquivos PHP gerados automaticamente
 	rm -rf $CPPAUTOPHP	
 	mkdir $CPPAUTOPHP
 	if [ $? -ne 0 ]; then
@@ -468,23 +438,32 @@ function fInit () {
 	else
 		fMens "$FSucss" "$MInfo51"
 	fi
-	# 											C28: verificar existência de pasta administrativa da Superinterface
+	#											TTT C21: verificar criação de pasta arquivos temporários
+	rm -rf $CPPTEMP
+	mkdir $CPPTEMP
+	if [ $? -ne 0 ]; then
+ 		fMens "$FInsuc" "$MErr37"
+ 		exit
+	else
+		fMens "$FSucss" "$MInfo49"
+	fi
+	# 											TTT C22: verificar existência de pasta administrativa da Superinterface
 	if [ ! -d $CPPADMIN ]; then
 		fMens "$FInsuc" "$MErr20"
 		exit
 	fi
-	# 											C29: verificar existência de pasta de javascript da Superinterface
+	# 											TTT C23: verificar existência de pasta de javascript da Superinterface
 	if [ ! -d $CPPJS ]; then
 		fMens "$FInsuc" "$MErr41"
 		exit
 	fi
-	#											C30: verificar criação arquivo índice numeração de nomes arquivos PDF
+	#											TTT C24: verificar criação arquivo índice numeração de nomes arquivos PDF
 	echo 100 > $CPPADMIN/$CPINDICEPDF
 	if [ $? -ne 0 ]; then
 		fMens "$FInsuc" "$MErr07"
 		exit
 	fi
-	#											C31: definir permissões de acesso a pastas e arquivos
+	#											TTT C25: definir permissões de acesso a pastas e arquivos
 	#											Deixar inicialmente os diretorios e pastas com uma permissão padrão
 	find ../ -type d -exec chmod $CPPERM750 {} \;
 	find ../ -type f -exec chmod $CPPERM640 {} \;
@@ -495,7 +474,7 @@ function fInit () {
 	# --- --- ---
 	#
 	fMens "$FSucss" "$MInfo03"					# pasta administrativa preparada
-	#											C32: testar conexão com o banco de dados
+	#											TTT C26: testar conexão com o banco de dados
 	fMens "$FInfor" "$MInfo19"
 	mysql -u $CPBASEUSER -b $CPBASE -p$CPBASEPASSW -e "quit" 2>/dev/null
 	if [ $? -ne 0 ]; then
@@ -513,7 +492,7 @@ function fInit () {
 #																															|
 # --------------------------------------------------------------------------------------------------------------------------+
 function fCriaTabelas () { 
-	#											C33: apagar possíveis tabelas e verificar se base de dados está limpa
+	#											TTT C27: apagar possíveis tabelas e verificar se base de dados está limpa
 	TABLES=$(mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e 'show tables' | awk '{ print $1}' | grep -v '^Tables' );
 	for t in $TABLES
 	do
@@ -543,7 +522,7 @@ function fCriaTabelas () {
 		fMens "$FInsuc" "$MErr14"
 		exit
 	fi
-	#											C34: criar e verificar a criação das tabelas da Superinterface
+	#											TTT C28: criar e verificar a criação das tabelas da Superinterface
 	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPPINFO"/"$CPCRIATABELAS"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo17"
@@ -585,7 +564,7 @@ do
 	sql="$sql"")"
 	mysql -u  $CPBASEUSER -p$CPBASEPASSW -b $CPBASE  -e "$sql"
 	if [ $? -ne 0 ]; then
-		fMens "$FInsu2" "$MErr54"
+		fMens "$FInsu2" "$MErr40"
 		fMens "$FInsu3" "$file"
 	exit
 	else
@@ -611,7 +590,7 @@ for file in $arquivos
 do
 	mysql -u  $CPBASEUSER -p$CPBASEPASSW -b $CPBASE  < "$file"  
 	if [ $? -ne 0 ]; then
-		fMens "$FInsu2" "$MErr53"
+		fMens "$FInsu2" "$MErr38"
 		fMens "$FInsu3" "$file"
 		exit
 	else
@@ -630,15 +609,16 @@ function fInsertScript () {
 # 				Será chamado um arquivo opcional SHELL para manipular informações e fazer INSERT de dados adicionais na base de dados.
 # 				Este arquivo é opcional, não obrigatório. Neste caso, o arquivo mencionado na variável CPINSERTSCRIPT deve 
 #				ser retirado desta pasta de instalação.
-#if [ ! -f $CPINSERTSCRIPT ]; then
+retval=0
 if [ ! -f $CPPINFO/$CPINSERTSCRIPT ]; then
 	fMens "$FInfor" "$MInfo20"
 else
 	fMens "$FInfor" "$MInfo21"
-#	. $(dirname "$0")/$CPINSERTSCRIPT
-	. $CPPINFO/$CPINSERTSCRIPT
+	#	. $(dirname "$0")/$CPINSERTSCRIPT
+	. $CPPINFO/$CPINSERTSCRIPT							# executa o script do usuário
+	rm -f $CPPTEMP/*									# limpa pasta de arquivos temporários
 fi
-return 0
+return
 }	# fim da rotina de preparação de tabelas
 #
 # --------------------------------------------------------------------------------------------------------------------------+
@@ -651,7 +631,7 @@ function fUserAdmin () {
 	var="admin"
 	hash="$(echo -n "$var" | sha1sum | awk '{print $1}')"
 	sql="INSERT INTO su_usuarios (username, senha , nome_usuario , email , cidade , estado, privilegio , ativo ) VALUES ('admin','${hash}','Administrador','admin@exemplo.com','Campinas','SP',0,TRUE)"						# Administrador tem privilégio = 0 (máximo privilégio)
-	#												  C47: verifica a criação de usuário administrador
+	#											TTT C29: verifica a criação de usuário administrador
 	mysql  -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "$sql"
 	if [ $? -eq 0 ]; then
 		fMens "$FSucss" "$MInfo12"
