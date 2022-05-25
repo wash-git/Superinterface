@@ -7,12 +7,12 @@
 CPBASE=""                                        # base de dados da aplicação
 CPBASEUSER=""                                    # usuário da base de dados
 CPBASEPASSW=""                                   # password da base de dados
-CPNUMERARPDF=0                                   # renomear arquivos PDF (0 = não; 1 = sim)
-CPHTTPHOST="                                "    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+CPNUMERARPDF=1                                   # renomear arquivos PDF (0 = não; 1 = sim)
+CPHTTPHOST=""                                    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
                                        # exemplos:
                                        # observatorio.wash.net.br/superinterface
                                        # exemplo.br
-CPQPDFLOTE=2                           # quantidade máxima de arquivos (lote de arquivos) tratados a cada ativação da Superinterface pelo cron
+CPQPDFLOTE=6                           # quantidade máxima de arquivos (lote de arquivos) tratados a cada ativação da Superinterface pelo cron
 CPTAMMAX=1900000                       # tamanho max do arquivo para upload (em bytes). Não é o php.ini.
 CPRELATORIO=0                          # 0=relatoio com tabelas relacionadas;    1=relatorio com todas tabelas
 CPRELATORIOTABELAS="super_relatoriotabelas.csv"  # arquivo que contém a lista de tabelas para emitir relatorio
@@ -46,6 +46,8 @@ CPINDICEPDF="super_indicepdf.txt"      # nome do arquivo para guardar último n�
 CPALOG="super_logshell.log"            # nome do arquivo de logs da Superinterface em formato texto
 CPALOGHTML="super_logshell.html"       # nome do arquivo de logs da Superinterface em formato html
 CPPHPFILE="super_config_php.cnf"       # nome do arquivo de configuração gerado para o PHP
+CPTABACERVOTOKEN="su_acervotokens"	   # nome da tabela da base de dados com os tokens do acervo
+CPTABDOCTOKEN="su_documentstokens"     # nome da tabela da base de dados com referencias tokens-documentos
 CPLOGSFILEGZ="super_logfile.tar"	   # nome base do arquivo compactado de logs
 CPTABELASCRIADAS="super_tabelascriadas.html"  # arquivo com a lista das tabelas criadas, e suas estruturas
 CPACENTO="acento"                      # extensão nome dos arquivos com conteúdo sem caracteres acentuados
