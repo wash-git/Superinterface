@@ -4,11 +4,11 @@
 #                                                                                                                           |
 # --------------------------------------------------------------------------------------------------------------------------+
 #	Parte 1: parametrizações
-CPBASE="baseportlet"                             # base de dados da aplicação
-CPBASEUSER="portlet"                             # usuário da base de dados
-CPBASEPASSW="Port2021#super"                     # password da base de dados
+CPBASE=""                                        # base de dados da aplicação
+CPBASEUSER=""                                    # usuário da base de dados
+CPBASEPASSW=""                                   # password da base de dados
 CPNUMERARPDF=1                                   # renomear arquivos PDF (0 = não; 1 = sim)
-CPHTTPHOST="observatorio.wash.net.br/espaco3"    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
+CPHTTPHOST=""                                    # Host name $_SERVER['HTTP_HOST'] + pasta raiz
                                        # exemplos:
                                        # observatorio.wash.net.br/superinterface
                                        # exemplo.br
