@@ -80,18 +80,14 @@ MErr46="Erro! Não foi possível gerar JPG da primeira página do PDF.  Transfer
 MErr47="Erro! Problemas na criação do arquivo TXT sem acento. Transferindo arquivo(s) do lote para quarentena"
 MErr48="Erro! Problemas na preparação de arquivo TXT sem caracteres de controle. Transferindo arquivo(s) do lote para quarentena"
 MErr49="Erro! É necessário instalar o aplicativo 'aha' conforme manual de instalação"
-MErr50="Alerta! Não foi possível gerar o TXT para este arquivo, logo não indexando seu conteúdo. Ainda assim, seu PDF e JPG serão colocados no acervo: "
-MErr51="Erro! Problemas na preparação de arquivos textos para gerar tokens - bloco1. Transferindo arquivo(s) do lote para quarentena"
-MErr52="Erro! Problemas na preparação de arquivos textos para gerar tokens - bloco2. Transferindo arquivo(s) do lote para quarentena"
-MErr53="Erro! Problemas nos procedimentos de criação das tabelas de tokens. Código de erro="
-MErr54="Erro! Problemas nos procedimentos de inserção de tokens na base de dados. Código de erro="
+MErr50="Alerta! Não foi possível gerar o TXT para este arquivo, logo não indexado seu conteúdo. Mas seu PDF e JPG irão para o acervo: "
 #
 #	mensagens de informação
 MInfo01="Bem vindo ao script de tratamento de novos arquivos do acervo em: "
 MInfo02="Quantidade de arquivos na pasta de quarentena= "
 MInfo03="Sucesso. Criada pasta temporária para tratamento de arquivos" 
 MInfo04="Resumo, iniciando pelos parâmetros do ambiente:"
-MInfo05="Sucesso. Arquivos incorporados ao acervo da Superinterface"
+MInfo05="Sucesso. Informações inseridas corretamente na tabela su_docs_cidades"
 MInfo06="Aviso: pasta de logs não estava criada.  Criação foi realizada com sucesso"
 MInfo07="Sucesso. Conexão com o banco de dados foi realizada corretamente"
 MInfo08="Iniciando o tratamento de um lote de arquivos PDF"
@@ -99,10 +95,10 @@ MInfo09="Script terminado as"
 MInfo10="Existe(m) arquivo(s) novos para ser(em) tratado(s)"
 MInfo11="Renomeando os arquivos PDF e fazendo sua numeração"
 MInfo12="Sucesso. Numerado os nomes dos arquivos PDF"
-MInfo13="Sucesso. Geração de arquivos TOKENS realizada corretamente"
+#MInfo13=""
 MInfo14="Sucesso. Geração de arquivos TXT realizada corretamente"
-MInfo15="Aviso: deve ser verificado os arquivos de tokens do sistema. Este erro coloca a Superinterface com limitação de funcionamento"
-MInfo16="Sucesso. Inserção das informações de tokens na base de dados realizada corretamente"
+#MInfo15=""
+#MInfo16=""
 #MInfo17=""
 #MInfo18=""
 MInfo19="Sucesso. Geração de arquivos JPG realizada corretamente"
@@ -113,7 +109,7 @@ MInfo23="Nenhum arquivo TXT para ser tratado neste momento"
 MInfo24="Sistema configurado para renomear e numerar os arquivos. Atenção: isso fará parar a verificação de arquivos duplicados no acervo"
 #MInfo25=""
 MInfo26="Quantidade de registros na tabela "
-MInfo27="Encontrado o script SHELL do usuário para preparação dos INSERTs na base de dados. Executando o script, mas pode demorar um pouco..."
+MInfo27="Aviso: script SHELL do usuário, para preparação dos INSERTs na base de dados, foi encontrado. Executando, mas pode demorar um pouco..."
 MInfo28="Sucesso! Script SHELL do usuário, de preparação dos INSERTs da aplicação, foi executado corretamente"
 #MInfo29=""
 #MInfo30=""
@@ -599,123 +595,6 @@ function fGarq () {
 		return
 	fi
 	rm -f $CPPLOG/super_temp_gera_txt.bash
-#
-#												Gerar tokens: palavras que aparecem nos conteúdos dos arquivos
-	substituir1=( 								# bloco1: caracteres únicos
-	"º" #    1
-	"°" #    2
-	"\"" #   3
-	"“" #    4
-	"”" #    5
-	"±" #    6
-	"ª" #    7
-	"●" #    8
-	"" #    9
-	"•" #    10
-	"→" #    11
-	"−" #    12
-	"–" #    13
-	"‘’" #   14
-	)
-	#
-	substituir2=( 								# bloco2: caracteres rodeados por espaços
-	" a "
-	" e "
-	" i "
-	" o "
-	" u "
-	" é "
-	" al " #  1
-	" as " #  2
-	" às " #  3
-	" ao " #  4
-	" aos " # 5
-	" cm " #  6
-	" com " # 7
-	" da " #  8
-	" das " # 9
-	" de " # 10
-	" do " # 11
-	" dos " #12
-	" et " # 13
-	" em " # 14
-	" no " # 15
-	" na " # 16
-	" nas " #17
-	" um " # 18
-	" www " #19
-	" ou " # 20
-	" os " # 21
-	" on " # 22
-	" se " # 23
-	)
-	#
-	for ((j=0; j<${#substituir1[@]}; j++));do	# gerar array com caracteres que serão inseridos: no caso, a substituição será por um espaço
-		substituto1[$j]=" "						# bloco-1 de caracteres
-	done
-	#
-	for ((j=0; j<${#substituir2[@]}; j++));do	# gerar array com caracteres que serão inseridos: no caso, a substituição será por um espaço
-		substituto2[$j]=" "						# bloco-2 de caracteres
-	done
-	for i in  "$CPPWORK"/*.txt
-	do
-		#										Lista de filtragens (nesta ordem):
-		#										1) retirar caracteres/palavras que constam na lista do array "substituir" - bloco 1
-		#										2) mascara provisoriamente fim de linha (já que irá ser retirado caracteres de controle)
-		#										3) deixa todo conteúdo do arquivo em minuscula
-		#										4) deixa caracteres acentuados e cedilha em minusculo
-		#										5) retirar caracteres de controle, digitos e pontuação (.,?: ...)
-		#										6) volta a colocar marcação original de fim de linha
-		#										7) retira ctrl-L
-		#										8) insere um espaço no início de cada linha (para capturar possíveis caracteres isolados)
-		#										9) insere um espaço no final de cada linha  (para capturar possíveis caracteres isolados)
-		#										10) retirar caracteres isolados
-		#										11) retirar caracteres/palavras que constam na lista do array "substituir" - bloco 2
-		cp -f $i "$CPPWORK"/$i".token"
-		for ((j=0; j<${#substituir1[@]}; j++));do	# substituições relativas ao bloco-1
-			mv -f $i".token" "$CPPWORK"/su_arq_temporariotoken.txt
-			sed -e "s/${substituir1[$j]}/${substituto1[$j]}/g" < "$CPPWORK"/su_arq_temporariotoken.txt > $i".token"
-			if [ $? -ne 0 ]; then
-				mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-				rm -f $CPPWORK/*.*
-				fMens "$FInsu4" "$MErr51"
-				fMens "$FInfor" "$MInfo38"
-				return
-			fi
-		done
-		#
-		mv -f $i".token" "$CPPWORK"/su_arq_temporariotoken.txt
-		tr '\r\n' '\275\276' < "$CPPWORK"/su_arq_temporariotoken.txt | tr [:upper:] [:lower:] | sed  'y/ÁÀÃÉÊÍÓÕÇ/áàãéêíóõç/' | tr [:cntrl:][:digit:][:punct:] ' ' | tr "\275\276" "\r\n" | sed 's/^L/ /g' | sed 's/^/ /g' | sed 's/$/ /g'  | sed -e "s/[[:space:]][a-zA-Z][[:space:]]/ /g"  > $i".token"
-		if [ $? -ne 0 ]; then
-			mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-			rm -f $CPPWORK/*.*
-			fMens "$FInsu4" "$MErr51"
-			fMens "$FInfor" "$MInfo38"
-			return
-		fi
-		#
-		for ((j=0; j<${#substituir2[@]}; j++));do	# substituições relativas ao bloco-2
-			mv -f $i".token" "$CPPWORK"/su_arq_temporariotoken.txt
-			if [ $? -ne 0 ]; then
-				mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-				rm -f $CPPWORK/*.*
-				fMens "$FInsu4" "$MErr52"
-				fMens "$FInfor" "$MInfo38"
-				return
-			fi
-			sed -e "s/${substituir2[$j]}/${substituto2[$j]}/g" < "$CPPWORK"/su_arq_temporariotoken.txt > $i".token"
-			if [ $? -ne 0 ]; then
-				mv -f $CPPWORK/*.[pP][dD][fF] $CPPQUARENTINE/. 2>/dev/null	# enviar os arquivos PDF para quarentena
-				rm -f $CPPWORK/*.*
-				fMens "$FInsu4" "$MErr52"
-				fMens "$FInfor" "$MInfo38"
-				return
-			fi
-		done
-	done
-	rm -f $CPPWORK/su_arq_temporariotoken.txt
-	fMens "$FSucss" "$MInfo13"						# sucesso na geração de tokens
-	#
 	#							gerar nomes dos arquivos TXT: sem acentuação, letras maiúsculas e sem caracteres controle
 	for i in "$CPPWORK"/*.txt
 	do
@@ -772,7 +651,7 @@ function fGarq () {
 		fMens "$FInfor" "$MInfo27"
 		retval=0
 #	. $(dirname "$0")/super_tabelas_insert_acervo.sh
-	. $CPPINFO/$CPINSERTACERVO							# executar arquivo shell do usuário para INSERTs na base de dados
+	. $CPPINFO/$CPINSERTACERVO							# executar arquivo shell do usuário
 														# fazer inserção das informações do arquivo na base de dados
 	rm -f $CPPTEMP/*
 	fi
@@ -789,7 +668,7 @@ function fGarq () {
 		exit
 	fi
 	if ls $CPPWORK/*.[pP][dD][fF]  1> /dev/null 2>&1; then		# ainda existem arquivos PDF?
-		fInse										# disponibiliza os arquivos ao Giramundonics
+		fInse										# insere as informações dos arquivos no acervo arquivístico
 	fi
 }	# fim da função fGarq
 #
@@ -814,7 +693,7 @@ function fInse () {
 	mv -f $CPPWORK/*.* $CPPIMAGEM/.
 	rm -f $CPPTEMP/*.sql
 	return
-	# fim da rotina de inserção dos arquivos no acervo da Superinterface
+	# fim da rotina de inserção das ocorrências nas tabelas da base de dados
 }
 #
 # --------------------------------------------------------------------------------------------------------------------------+
@@ -1413,114 +1292,6 @@ fResumo () {
 	fi
 }
 #
-#
-# --------------------------------------------------------------------------------------------------------------------------+
-#											 																				|
-#			   				   	                FUNÇÃO CRIAR TABELAS RESERVADAS	DE TOKENS									|
-#																															|
-# --------------------------------------------------------------------------------------------------------------------------+
-fCriarTabsTokens () {
-
-fExitOnError () {
-	sql="DELETE FROM $CPTABDOCTOKEN"
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql"
-	sql="DELETE FROM $CPTABACERVOTOKEN"
-	mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql"
-	resultado="false"
-	cod_error=$1
-}
-#
-cod_error=0
-resultado=""							# esta variável vazia indica inexistência de erro.
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e "drop table IF EXISTS $CPTABDOCTOKEN;drop table IF EXISTS $CPTABACERVOTOKEN" || fExitOnError "1"
-test $resultado && return $cod_error
-
-sql="CREATE TABLE su_acervotokens (id_chave_token int not null auto_increment, nome_token varbinary(100), funcao varchar(100), ocorrencias int, primary key(id_chave_token),unique(nome_token))"
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql" || fExitOnError "2"
-test $resultado && return $cod_error
-
-sql="ALTER TABLE su_acervotokens comment='Lista de (quase) todas as palavras que estão presentes nos arquivos do acervo, exceto números e outros caracteres especiais. Contém também a quantidade de ocorrências de cada palavra no acervo.'"
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql" || fExitOnError "3"
-test $resultado && return $cod_error
-
-sql="CREATE TABLE su_documentstokens (id_chave_docstoken int not null auto_increment, id_documento int, id_token int, linha_ocorrencia int, primary key(id_chave_docstoken))"
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql"  || fExitOnError "4"
-test $resultado && return $cod_error
-
-sql="ALTER TABLE su_documentstokens ADD CONSTRAINT FK_tokens_acervo FOREIGN KEY (id_token) REFERENCES su_acervotokens(id_chave_token)"
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql" || fExitOnError "5"
-test $resultado && return $cod_error
-
-sql="ALTER TABLE su_documentstokens ADD CONSTRAINT FK_tokens_documents FOREIGN KEY (id_documento) REFERENCES su_documents(id_chave_documento)"
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql" || fExitOnError "6"
-test $resultado && return $cod_error
-
-sql="ALTER TABLE su_documentstokens comment='Tabela de ligação entre cada palavra presente nos arquivos do acervo e os documentos.'"
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE -e " $sql" || fExitOnError "7"
-test $resultado && return $cod_error
-
-return 0
-}
-#
-#
-# --------------------------------------------------------------------------------------------------------------------------+
-#											 																				|
-#			   				   	                FUNÇÃO PARA GERAR TOKENS													|
-#																															|
-# --------------------------------------------------------------------------------------------------------------------------+
-fGerarTokens () {
-fTratarErro() {
-	cod_err=$1
-	fCriarTabsTokens
-	fMens	"$FInsu4"	"$MErr54$cod_err"
-	fMens	"$FInfor"	"$MInfo15"
-	resultado="false"						# saída de erro
-}
-
-fCriarTabsTokens							# criar as tabelas de tokens
-codretorno=$?
-if [ $codretorno -eq 0 ]; then
-	fMens	"$FSucss"	"$MInfo16"
-else
-	fMens	"$FInsu4"	"$MErr53$codretorno"
-	fMens	"$FInfor"	"$MInfo15"
-	return
-fi
-resultado=""							# esta variável vazia indica inexistência de erro.
-cat $CPPIMAGEM/*.token | tr [:punct:] ' ' | tr '\n' ' ' | sed 's/  / /g' | sed 's/\f//g' | sed 's/ /\n/g' | sed '/^[[:space:]]*$/d' | sed 's/\s//g' | sort | uniq -c > $CPPTEMP/tokens_unicos_com_contagem.csv || fTratarErro "1"
-test $resultado && return
-
-#											abaixo um filtro adicional para evitar possíveis letras sozinhas como token
-cat $CPPTEMP/tokens_unicos_com_contagem.csv |sed '/\ [a-z]$/d' > $CPPTEMP/tokens_unicos_com_contagem_filtrados.csv  || fTratarErro "2"
-test $resultado && return
-
-cat $CPPTEMP/tokens_unicos_com_contagem_filtrados.csv | awk '{print "insert into su_acervotokens (nome_token, ocorrencias) values (\""$2"\",\""$1"\");";}' > $CPPTEMP/meus_inserts.sql  || fTratarErro "3"
-test $resultado && return
-
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPPTEMP/meus_inserts.sql"  || fTratarErro "4"
-test $resultado && return
-
-ls -1 $CPPIMAGEM/*.token |  awk '{print "cat "$1" | tr [:punct:] \" \" |  tr \"\\n\" \" \" | sed \"s/  / /g\" | sed \"s/^L/ /g\" | sed \"s/\\f//g\" | sed \"s/ /\\n/g\" | sed \"/^[[:space:]]*$/d\" > "$1".com_new_line";}' > $CPPTEMP/gerar_arquivos_com_new_line.bash  || fTratarErro "5"
-test $resultado && return
-
-chmod +x $CPPTEMP/gerar_arquivos_com_new_line.bash
-./$CPPTEMP/gerar_arquivos_com_new_line.bash  || fTratarErro "6"
-test $resultado && return
-
-cat $CPPTEMP/tokens_unicos_com_contagem_filtrados.csv | awk '{print "grep -Hoxn \""$2"\" ../su_imagens/*.txt.token.com_new_line"}' > $CPPTEMP/executa_ocorrencias_de_palavras.bash  || fTratarErro "7"
-test $resultado && return
-
-chmod +x $CPPTEMP/executa_ocorrencias_de_palavras.bash
-./$CPPTEMP/executa_ocorrencias_de_palavras.bash > $CPPTEMP/ocorrencias_de_palavras_em_txt_com_dash.csv  || fTratarErro "8"
-test $resultado && return
-
-cat $CPPTEMP/ocorrencias_de_palavras_em_txt_com_dash.csv | awk 'BEGIN{FS=":"}{gsub(/\.txt.token\.com_new_line/,".pdf",$1);print "insert into su_documentstokens (id_documento, linha_ocorrencia, id_token) values ((select id_chave_documento from su_documents where photo_filename_documento=\""$1"\"),"$2",(select id_chave_token from su_acervotokens where nome_token=\""$3"\"));"}' > $CPPTEMP/executa_inserts_de_ocorrencias_de_palavras_em_txt.sql  || fTratarErro "9"
-test $resultado && return
-
-mysql -u $CPBASEUSER -p$CPBASEPASSW -b $CPBASE < "$CPPTEMP/executa_inserts_de_ocorrencias_de_palavras_em_txt.sql"  || fTratarErro "10"
-
-}
-#
 # --------------------------------------------------------------------------------------------------------------------------+
 #																															|
 #							              CONTROLE E CORPO PRINCIPAL DO SCRIPT												|
@@ -1541,11 +1312,6 @@ while [ ${#su_Funcoes[*]} -gt $su_pontFuncoes ]; do
 	fi
 	let su_pontFuncoes=$su_pontFuncoes+1;
 done
-#
-#													verificar gerar tokens (se pasta de uploads estiver vazia)
-if [ $(ls -la $CPPUPLOADS/ | grep -e "^-" | wc -l) -eq 0 ];then
-	fGerarTokens
-fi
 #													retirar, por segurança,  possíveis arquivos estranhos da pasta upload
 for i in "${CPEXTAMPLAS[@]}";do su_globi=$su_globi:$CPPUPLOADS/*$i;done
 GLOBIGNORE=$su_globi
